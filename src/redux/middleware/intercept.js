@@ -25,10 +25,9 @@ const interceptorMiddleware = store => next => async action => {
       intercept: undefined
     })
 
-    const interceptedAction = await action.intercept(resolvedAction, store)
-    store.dispatch(interceptedAction)
-
-    return clean(interceptedAction)
+    const interceptedAction = await action.intercept(resolvedAction, store.dispatch)
+    store.dispatch(interceptedAction || resolvedAction)
+    return clean(interceptedAction || resolvedAction)
 
   } catch (err) {
     const rejectedAction = clean({
@@ -40,7 +39,7 @@ const interceptorMiddleware = store => next => async action => {
 
     store.dispatch(rejectedAction)
 
-    return rejectedAction
+    throw rejectedAction
   }
 }
 

@@ -37,7 +37,7 @@ const promiseMiddleware = store => next => async action => {
 
     store.dispatch(rejectedAction)
 
-    return rejectedAction
+    throw rejectedAction
   }
 }
 

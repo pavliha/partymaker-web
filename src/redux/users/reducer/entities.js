@@ -1,9 +1,18 @@
-import { SET_USER, SET_USERS, SET_USER_ONLINE, SET_USER_OFFLINE } from '../action'
+import {
+  SET_USER,
+  SET_USERS,
+  SET_USER_ONLINE,
+  SET_USER_OFFLINE,
+  UPDATE_USER_FULFILLED,
+  LOAD_USER_FULFILLED
+} from '../action'
 import arrayToObject from 'utils/arrayToObject'
 
 const usersReducer = (state = {}, { type, payload }) => {
   switch (type) {
 
+    case LOAD_USER_FULFILLED:
+    case UPDATE_USER_FULFILLED:
     case SET_USER:
       return {
         ...state,

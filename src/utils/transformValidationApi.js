@@ -1,4 +1,5 @@
-const transformValidationApi = errors => {
+const transformValidationApi = action => {
+  const errors = action.payload
 
   if (errors?.error?.status === 500) {
     console.error(errors)
