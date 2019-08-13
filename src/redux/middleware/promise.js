@@ -1,5 +1,4 @@
 import isPromise from 'utils/isPromise'
-import clean from 'clean-object'
 
 const promiseMiddleware = store => next => async action => {
 
@@ -8,13 +7,13 @@ const promiseMiddleware = store => next => async action => {
     return action
   }
 
-  const pendingAction = clean({
-    ...action,
-    type: action.type + '_PENDING',
-    payload: undefined,
-  })
-
-  store.dispatch(pendingAction)
+  // const pendingAction = clean({
+  //   ...action,
+  //   type: action.type + '_PENDING',
+  //   payload: undefined,
+  // })
+  //
+  // store.dispatch(pendingAction)
 
   try {
     const resolvedAction = {
@@ -28,7 +27,6 @@ const promiseMiddleware = store => next => async action => {
     return resolvedAction
 
   } catch (err) {
-
     const rejectedAction = {
       ...action,
       type: action.type + '_REJECTED',

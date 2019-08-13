@@ -1,21 +1,21 @@
 import clean from 'clean-object'
-import isPromise from 'utils/isPromise'
+import isPromise from 'src/utils/isPromise'
 
 const interceptorMiddleware = store => next => async action => {
 
-  if (!isPromise(action.payload) && !action.intercept) {
+  if (!isPromise(action.payload) || !action.intercept) {
     next(action)
     return action
   }
 
-  const pendingAction = clean({
-    ...action,
-    type: action.type + '_PENDING',
-    payload: undefined,
-    intercept: undefined,
-  })
-
-  store.dispatch(pendingAction)
+  // const pendingAction = clean({
+  //   ...action,
+  //   type: action.type + '_PENDING',
+  //   payload: undefined,
+  //   intercept: undefined,
+  // })
+  //
+  // store.dispatch(pendingAction)
 
   try {
     const resolvedAction = clean({

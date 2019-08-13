@@ -1,7 +1,9 @@
 import auth from './auth/action'
-import users from 'src/redux/users/action'
+import users from './users/action'
+import rooms from './rooms/action'
 
 export default {
   auth,
   users,
+  rooms,
 }

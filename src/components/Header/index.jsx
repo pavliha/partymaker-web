@@ -33,7 +33,7 @@ const Header = ({ classes, className, user, isTransparent }) =>
     <Toolbar>
       <Link to="/"><Logo /></Link>
       <Navigation>
-        {user && <Link to="/home"><Button>мои события</Button></Link>}
+        {user && <Link to="/rooms"><Button>мои события</Button></Link>}
       </Navigation>
       {user
         ? <UserMenu user={user} />

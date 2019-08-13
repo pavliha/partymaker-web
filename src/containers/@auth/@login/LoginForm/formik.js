@@ -20,13 +20,9 @@ const formik = withFormik({
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
-
     setSubmitting(true)
-
-    const [err] = await to(props.onSubmit(form))
-
-    if (err) setErrors(transformValidationApi(err))
-
+    const [rejectedAction] = await to(props.onSubmit(form))
+    if (rejectedAction) setErrors(transformValidationApi(rejectedAction))
     setSubmitting(false)
   },
   displayName: 'LoginForm',

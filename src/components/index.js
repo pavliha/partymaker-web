@@ -1,11 +1,5 @@
-import Header from './Header'
-import UserAvatar from './UserAvatar'
-import PictureDialog from './PictureDialog'
-import Loading from './Loading'
-
-export {
-  Header,
-  UserAvatar,
-  PictureDialog,
-  Loading,
-}
+export Header from './Header'
+export UserAvatar from './UserAvatar'
+export PictureDialog from './PictureDialog'
+export Loading from './Loading'
+export Load from './Load'
