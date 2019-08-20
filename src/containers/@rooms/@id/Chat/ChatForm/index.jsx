@@ -1,11 +1,12 @@
 import React from 'react'
 import { Form, Field } from 'formik'
 import { object, shape, string } from 'prop-types'
-import { Typography, IconButton, withStyles } from '@material-ui/core'
+import { Button, IconButton, withStyles } from '@material-ui/core'
 import FormikMessageField from './controls/FormikMessageField'
 import AssetField from './controls/FormikAssetField'
 import formik from './formik'
 import SendIcon from 'mdi-react/SendIcon'
+import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 
 const styles = {
   root: {
@@ -30,7 +31,10 @@ const styles = {
   },
   actionLabel: {
     paddingLeft: 5,
-    marginTop: 4,
+    marginTop: 1,
+  },
+  arrow: {
+    color:'rgba(0, 0, 0, 0.12)'
   }
 }
 
@@ -44,14 +48,17 @@ const ChatForm = ({ classes, values }) =>
       }
     </div>
     <div className={classes.actions}>
-      <Typography
-        color="textSecondary"
-        className={classes.actionLabel}
-        variant="subtitle1"
-        gutterBottom
-      >
-        Предложить:
-      </Typography>
+      <Button color="primary" className={classes.actionLabel}>
+        Пригласить друзей
+      </Button>
+      <KeyboardArrowRightIcon className={classes.arrow} />
+      <Button color="primary" disabled className={classes.actionLabel}>
+        Выбрать время
+      </Button>
+      <KeyboardArrowRightIcon className={classes.arrow} />
+      <Button color="primary" disabled className={classes.actionLabel}>
+        Заказать
+      </Button>
     </div>
   </Form>
 
