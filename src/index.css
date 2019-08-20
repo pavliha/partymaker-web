@@ -12,3 +12,9 @@ a {
     text-decoration: none;
     cursor: pointer;
 }
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}

@@ -6,21 +6,24 @@ import ErrorIcon from 'mdi-react/ErrorIcon'
 
 const styles = {
   root: {},
+  loading: {
+    flex: 1,
+  }
 }
 
 class Load extends Component {
 
   state = {
-    isLoading: false,
+    isLoaded: false,
     isError: false,
   }
 
   async componentDidMount() {
     const { promise, onError, onLoad } = this.props
     try {
-      this.setState({ isLoading: true, isError: false })
+      this.setState({ isError: false })
       await promise()
-      this.setState({ isLoading: false })
+      this.setState({ isLoaded: true })
       onLoad()
     } catch (err) {
       this.setState({ isError: true })
@@ -29,10 +32,9 @@ class Load extends Component {
   }
 
   render() {
-    const { children } = this.props
-    const { isLoading, isError } = this.state
-
-    if (isLoading) return <Loading />
+    const { classes, children } = this.props
+    const { isLoaded, isError } = this.state
+    if (!isLoaded) return <Loading className={classes.loading} />
     if (isError) return <ErrorIcon />
 
     return children

@@ -1,13 +1,13 @@
-import { LOAD_ROOMS_FULFILLED } from '../action'
+import { SET_ROOMS } from '../action'
 import arrayToObject from 'utils/arrayToObject'
 
 export default (state = {}, { type, payload }) => {
   switch (type) {
 
-    case LOAD_ROOMS_FULFILLED:
+    case SET_ROOMS:
       return {
         ...state,
-        ...arrayToObject(payload.data)
+        ...arrayToObject(payload)
       }
 
     default:
