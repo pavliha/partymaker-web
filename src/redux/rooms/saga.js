@@ -2,7 +2,14 @@ import { all, put, takeEvery, fork } from 'redux-saga/effects'
 import actions from 'src/redux/action'
 import messages from './messages/saga'
 
-import { LOAD_ROOMS_FULFILLED, LOAD_ROOM_FULFILLED } from './action'
+import {
+  LOAD_ROOMS_FULFILLED,
+  LOAD_ROOM_FULFILLED,
+  CREATE_ROOM_FULFILLED,
+  UPDATE_ROOM_FULFILLED,
+  LEAVE_ROOM_FULFILLED,
+} from './action'
+
 import { normalize, putRelationsToStore } from 'utils'
 
 const defineRelationsFrom = (models) => ([
@@ -32,5 +39,8 @@ export default function* saga() {
     fork(messages),
     takeEvery(LOAD_ROOMS_FULFILLED, setRooms),
     takeEvery(LOAD_ROOM_FULFILLED, setRoom),
+    takeEvery(CREATE_ROOM_FULFILLED, setRoom),
+    takeEvery(UPDATE_ROOM_FULFILLED, setRoom),
+    takeEvery(LEAVE_ROOM_FULFILLED, removeRoom),
   ])
 }

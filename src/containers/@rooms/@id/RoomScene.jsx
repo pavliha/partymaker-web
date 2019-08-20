@@ -6,6 +6,7 @@ import RoomTitle from './RoomTitle'
 import { InviteButton, Load } from 'components'
 import Guests from './Guests'
 import Chat from './Chat'
+import ChatHeader from './Header'
 
 const styles = {
   root: {
@@ -14,7 +15,7 @@ const styles = {
     flexGrow: 1,
   },
   guests: {
-    width: 400,
+    width: 380,
     display: 'flex',
     flexDirection: 'column',
     borderRight: 'solid 1px rgba(0, 0, 0, 0.12)',
@@ -23,7 +24,7 @@ const styles = {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: 'calc(100vh - 65px)',
+    //maxHeight: 'calc(100vh - 65px)',
   }
 }
 
@@ -44,7 +45,7 @@ class RoomScene extends Component {
   }
 
   render() {
-    const { classes, redux: { room } } = this.props
+    const { classes, redux: { room, leaveRoom } } = this.props
 
     return (
       <Load promise={this.loadRoom}>
@@ -53,12 +54,15 @@ class RoomScene extends Component {
             <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />
             {room?.guests && <Guests guests={room.guests} onKick={() => {}} />}
           </div>
-          <Chat
-            messages={room?.messages}
-            totalMessages={room?.totalMessages}
-            onLoad={this.loadMessages}
-            onSend={this.sendMessage}
-          />
+          <div className={classes.chat}>
+            {room && <ChatHeader room={room} onLeave={leaveRoom} />}
+            <Chat
+              messages={room?.messages}
+              totalMessages={room?.totalMessages}
+              onLoad={this.loadMessages}
+              onSend={this.sendMessage}
+            />
+          </div>
         </section>
       </Load>
     )
@@ -71,6 +75,7 @@ RoomScene.propTypes = {
   redux: shape({
     loadRoom: func.isRequired,
     loadMessages: func.isRequired,
+    leaveRoom: func.isRequired,
   })
 }
 
@@ -78,6 +83,7 @@ const redux = (state, { match }) => ({
   room: select.rooms.current(state, match.params.id),
   loadRoom: actions.rooms.load,
   loadMessages: actions.rooms.messages.loadMany,
+  leaveRoom: actions.rooms.leave,
 })
 
 export default withStyles(styles)(connect(redux)(RoomScene))
