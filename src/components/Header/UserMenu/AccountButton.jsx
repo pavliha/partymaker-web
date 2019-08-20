@@ -1,8 +1,7 @@
 import React from 'react'
 import { object, shape, string, oneOfType, bool, number } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
-import { IconButton } from '@material-ui/core'
-import { UserAvatar } from 'src/components'
+import { IconButton, withStyles } from '@material-ui/core'
+import { UserAvatar } from 'components'
 
 const styles = (theme) => ({
   icon: {

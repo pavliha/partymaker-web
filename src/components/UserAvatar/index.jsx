@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { bool, object, oneOfType, number, shape, string } from 'prop-types'
-import { Avatar } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import initialsFromUserName from 'utils/initialsFromUserName'
 import GreenDot from './GreenDot'

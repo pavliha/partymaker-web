@@ -1,9 +1,9 @@
+import 'core-js/stable'
+import 'regenerator-runtime/runtime'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { hot } from 'react-hot-loader/root'
 import { BrowserRouter } from 'react-router-dom'
-import { Provider } from 'react-redux'
-import { store } from 'src/redux'
 import 'moment/locale/es.js'
 import 'moment/locale/en-gb.js'
 import Layout from './containers/Layout'
@@ -14,11 +14,9 @@ import './index.css'
 
 const App = () =>
   <ThemeProvider theme={createMuiTheme(theme)}>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   </ThemeProvider>
 
 const HotApp = hot(App)

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { object, shape, string } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
-import { Typography } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import AccountButton from './AccountButton'
 
@@ -20,8 +19,7 @@ class UserMenu extends Component {
     return (
       <Link to="/profile">
         <div className={classes.root}>
-          <Typography variant="subtitle1" color="secondary">{user.name}</Typography>
-          <AccountButton user={user} />
+          <Typography variant="subtitle1" color="secondary">{user.name}</Typography><AccountButton user={user} />
         </div>
       </Link>
     )

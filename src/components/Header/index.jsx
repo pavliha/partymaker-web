@@ -1,8 +1,7 @@
 import React from 'react'
 import { object, bool, string } from 'prop-types'
-import userShape from 'src/shapes/user'
-import { withStyles } from '@material-ui/styles'
-import { AppBar, Toolbar, Button } from '@material-ui/core'
+import userShape from 'shapes/user'
+import { AppBar, Toolbar, Button, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 import Navigation from './Navigation'
@@ -33,7 +32,7 @@ const Header = ({ classes, className, user, isTransparent }) =>
     <Toolbar>
       <Link to="/"><Logo /></Link>
       <Navigation>
-        {user && <Link to="/rooms"><Button>мои события</Button></Link>}
+        {user && <Link to="/home"><Button color="inherit">мои события</Button></Link>}
       </Navigation>
       {user
         ? <UserMenu user={user} />

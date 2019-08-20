@@ -1,7 +1,6 @@
 import React from 'react'
 import { object, func, bool, string } from 'prop-types'
-import { Dialog } from '@material-ui/core'
-import { withStyles } from '@material-ui/styles'
+import { withStyles, Dialog } from '@material-ui/core'
 
 const styles = {
   root: {

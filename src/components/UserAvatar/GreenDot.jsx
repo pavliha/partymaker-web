@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, bool, oneOfType, number } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
+import { withStyles } from '@material-ui/core'
 
 const styles = () => ({
   root: {
