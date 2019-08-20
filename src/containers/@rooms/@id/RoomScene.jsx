@@ -29,29 +29,15 @@ const styles = {
 }
 
 class RoomScene extends Component {
-
-  loadRoom = () => {
-    const { redux: { loadRoom }, match } = this.props
-    return loadRoom(match.params.id)
-  }
-
-  loadMessages = () => {
-    const { redux: { loadMessages }, match } = this.props
-    return loadMessages(match.params.id)
-  }
-
-  sendMessage = () => {
-
-  }
-
   render() {
-    const { classes, redux: { room, leaveRoom } } = this.props
+    const { classes, redux } = this.props
+    const { room, leaveRoom, loadMessages, loadRoom, sendMessage } = redux
 
     return (
-      <Load promise={this.loadRoom}>
+      <Load promise={loadRoom}>
         <section className={classes.root}>
           <div className={classes.guests}>
-            <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />
+            {room && <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />}
             {room?.guests && <Guests guests={room.guests} onKick={() => {}} />}
           </div>
           <div className={classes.chat}>
@@ -59,8 +45,8 @@ class RoomScene extends Component {
             <Chat
               messages={room?.messages}
               totalMessages={room?.totalMessages}
-              onLoad={this.loadMessages}
-              onSend={this.sendMessage}
+              onLoad={loadMessages}
+              onSend={sendMessage}
             />
           </div>
         </section>
@@ -79,11 +65,12 @@ RoomScene.propTypes = {
   })
 }
 
-const redux = (state, { match }) => ({
-  room: select.rooms.current(state, match.params.id),
-  loadRoom: actions.rooms.load,
-  loadMessages: actions.rooms.messages.loadMany,
+const redux = (state, { match: { params: { id } } }) => ({
+  room: select.rooms.current(state, id),
+  loadRoom: () => actions.rooms.load(id),
+  loadMessages: (params) => actions.rooms.messages.loadMany(id, params),
   leaveRoom: actions.rooms.leave,
+  sendMessage: (form) => actions.rooms.messages.create(id, form)
 })
 
 export default withStyles(styles)(connect(redux)(RoomScene))
