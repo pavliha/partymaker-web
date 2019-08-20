@@ -8,12 +8,17 @@ import { actions, connect, select } from 'src/redux'
 import { Load } from 'components'
 
 const styles = {
+
   root: {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  container: {
     maxWidth: 700,
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto'
   },
   actions: {
     display: 'flex',
@@ -25,24 +30,26 @@ const styles = {
 }
 
 const RoomsScene = ({ classes, redux }) =>
-  <Load promise={redux.loadRooms}>
-    <div className={classes.root}>
-      <div className={classes.actions}>
-        <Typography gutterBottom variant="h5">
-          Мои компании
-        </Typography>
-        <Button
-          color="primary"
-          variant="contained"
-        >
-          собрать компанию
-        </Button>
+  <div className={classes.root}>
+    <Load promise={redux.loadRooms}>
+      <div className={classes.container}>
+        <div className={classes.actions}>
+          <Typography gutterBottom variant="h5">
+            Мои компании
+          </Typography>
+          <Button
+            color="primary"
+            variant="contained"
+          >
+            собрать компанию
+          </Button>
+        </div>
+        {redux.rooms.map(room =>
+          <RoomCard key={room.id} room={room} />
+        )}
       </div>
-      {redux.rooms.map(room =>
-        <RoomCard key={room.id} room={room} />
-      )}
-    </div>
-  </Load>
+    </Load>
+  </div>
 
 RoomsScene.propTypes = {
   classes: object.isRequired,
