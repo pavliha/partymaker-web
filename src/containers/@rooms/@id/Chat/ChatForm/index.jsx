@@ -7,6 +7,7 @@ import AssetField from './controls/FormikAssetField'
 import formik from './formik'
 import SendIcon from 'mdi-react/SendIcon'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
+import { connect } from 'src/redux'
 
 const styles = {
   root: {
@@ -34,7 +35,7 @@ const styles = {
     marginTop: 1,
   },
   arrow: {
-    color:'rgba(0, 0, 0, 0.12)'
+    color: 'rgba(0, 0, 0, 0.12)'
   }
 }
 
@@ -69,4 +70,8 @@ ChatForm.propTypes = {
   })
 }
 
-export default withStyles(styles)(formik(ChatForm))
+const redux = state => ({
+  auth_id: state.auth.user_id,
+})
+
+export default withStyles(styles)(connect(redux)(formik(ChatForm)))
