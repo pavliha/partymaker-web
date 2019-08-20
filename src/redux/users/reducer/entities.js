@@ -1,12 +1,16 @@
+import { arrayToObject, fromJWT } from 'utils'
+import Storage from 'services/Storage'
 import {
   SET_USER,
   SET_USERS,
   UPDATE_USER_FULFILLED,
   LOAD_USER_FULFILLED
 } from '../action'
-import { arrayToObject } from 'utils'
 
-const usersReducer = (state = {}, { type, payload }) => {
+const user = fromJWT(Storage.get('token'))
+const initialState = user ? { [user.id]: user } : {}
+
+const usersReducer = (state = initialState, { type, payload }) => {
   switch (type) {
 
     case LOAD_USER_FULFILLED:

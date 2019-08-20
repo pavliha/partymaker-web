@@ -1,4 +1,5 @@
 const transformValidationApi = errors => {
+  console.error(errors)
 
   if (errors?.error?.status === 500) {
     console.error(errors)

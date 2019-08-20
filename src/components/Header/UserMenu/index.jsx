@@ -19,7 +19,7 @@ class UserMenu extends Component {
     return (
       <Link to="/profile">
         <div className={classes.root}>
-          <Typography variant="subtitle1" color="secondary">{user.name}</Typography><AccountButton user={user} />
+          <Typography variant="subtitle1" color="inherit">{user.name}</Typography><AccountButton user={user} />
         </div>
       </Link>
     )

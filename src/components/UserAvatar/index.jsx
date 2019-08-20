@@ -17,9 +17,9 @@ const styles = () => ({
     cursor: 'pointer',
   },
   small: {
-    width: 40,
+    width: 36,
     fontSize: 14,
-    height: 40,
+    height: 36,
   },
 })
 

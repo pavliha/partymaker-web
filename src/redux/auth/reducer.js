@@ -1,9 +1,12 @@
 import { LOGIN_USER_FULFILLED, LOGOUT_USER, REGISTER_USER_FULFILLED } from './action'
 import { fromJWT } from 'utils'
+import Storage from 'services/Storage'
+
+const token = Storage.get('token')
 
 const initialState = {
-  user_id: null,
-  token: null,
+  user_id: fromJWT(token)?.id,
+  token,
 }
 
 const authReducer = (state = initialState, { type, payload }) => {
