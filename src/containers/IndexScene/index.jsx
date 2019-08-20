@@ -5,6 +5,7 @@ import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { select, connect } from 'src/redux'
 
 const styles = {
   root: {
@@ -45,10 +46,10 @@ const styles = {
   },
 }
 
-const IndexScene = ({ classes }) =>
+const IndexScene = ({ classes, redux: { user } }) =>
   <main className={classes.root}>
     <section className={classes.background}>
-      <Header isTransparent />
+      <Header isTransparent user={user} />
       <div className={classes.container}>
         <div className={classes.title}>
           <Typography gutterBottom variant="h2">Partymaker</Typography>
@@ -73,4 +74,8 @@ const IndexScene = ({ classes }) =>
     </section>
   </main>
 
-export default withStyles(styles)(IndexScene)
+const redux = state => ({
+  user: select.auth.user(state)
+})
+
+export default withStyles(styles)(connect(redux)(IndexScene))

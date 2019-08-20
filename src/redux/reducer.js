@@ -3,10 +3,14 @@ import auth from './auth/reducer'
 import users from './users/reducer'
 import rooms from './rooms/reducer'
 import places from './places/reducer'
+import messages from './messages/reducer'
+import assets from './assets/reducers'
 
 export default combineReducers({
   auth,
   users,
   rooms,
   places,
+  messages,
+  assets,
 })

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { object, shape, string } from 'prop-types'
+import { object, shape, string, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import RoomTitle from './RoomTitle'
 import { InviteButton, Load } from 'components'
 import Guests from './Guests'
+import Chat from './Chat'
 
 const styles = {
   root: {
@@ -33,6 +34,15 @@ class RoomScene extends Component {
     return loadRoom(match.params.id)
   }
 
+  loadMessages = () => {
+    const { redux: { loadMessages }, match } = this.props
+    return loadMessages(match.params.id)
+  }
+
+  sendMessage = () => {
+
+  }
+
   render() {
     const { classes, redux: { room } } = this.props
 
@@ -41,8 +51,14 @@ class RoomScene extends Component {
         <section className={classes.root}>
           <div className={classes.guests}>
             <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />
-            {room?.guests && <Guests guests={room.guests} />}
+            {room?.guests && <Guests guests={room.guests} onKick={() => {}} />}
           </div>
+          <Chat
+            messages={room?.messages}
+            totalMessages={room?.totalMessages}
+            onLoad={this.loadMessages}
+            onSend={this.sendMessage}
+          />
         </section>
       </Load>
     )
@@ -52,11 +68,16 @@ class RoomScene extends Component {
 RoomScene.propTypes = {
   classes: object.isRequired,
   match: shape({ params: shape({ id: string.isRequired, }), }),
+  redux: shape({
+    loadRoom: func.isRequired,
+    loadMessages: func.isRequired,
+  })
 }
 
 const redux = (state, { match }) => ({
   room: select.rooms.current(state, match.params.id),
   loadRoom: actions.rooms.load,
+  loadMessages: actions.rooms.messages.loadMany,
 })
 
 export default withStyles(styles)(connect(redux)(RoomScene))

@@ -1,5 +1,6 @@
-import { all, put, takeEvery } from 'redux-saga/effects'
+import { all, put, takeEvery, fork } from 'redux-saga/effects'
 import actions from 'src/redux/action'
+import messages from './messages/saga'
 
 import { LOAD_ROOMS_FULFILLED, LOAD_ROOM_FULFILLED } from './action'
 import { normalize, putRelationsToStore } from 'utils'
@@ -28,6 +29,7 @@ function* removeRoom({ meta: { room_id } }) {
 
 export default function* saga() {
   yield all([
+    fork(messages),
     takeEvery(LOAD_ROOMS_FULFILLED, setRooms),
     takeEvery(LOAD_ROOM_FULFILLED, setRoom),
   ])

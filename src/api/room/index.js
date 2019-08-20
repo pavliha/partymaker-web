@@ -1,6 +1,10 @@
 import Http from 'services/Http'
+import messages from './messages'
 
 const room = {
+
+  messages,
+
   loadMany() {
     return Http.get('/rooms')
   },
