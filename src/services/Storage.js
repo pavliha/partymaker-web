@@ -16,6 +16,10 @@ class Storage {
     })
   }
 
+  clear() {
+    localStorage.clear()
+  }
+
 }
 
 const storage = new Storage()

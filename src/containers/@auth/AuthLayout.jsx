@@ -5,6 +5,11 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { Header } from 'components'
 import sparks from '../IndexScene/nightZP.png'
 import LoginScene from './@login/LoginScene'
+import LogoutScene from './@logout/LogoutScene'
+import RegisterScene from './@register/RegisterScene'
+import ActivateScene from './@activate/ActivateScene'
+import PasswordLayout from './@password/PasswordLayout'
+
 
 const styles = () => ({
   root: {
@@ -44,7 +49,11 @@ const AuthLayout = ({ classes }) =>
       <div className={classes.scene}>
         <div>
           <Switch>
+            <Route exact path="/auth/register" component={RegisterScene} />
             <Route exact path="/auth/login" component={LoginScene} />
+            <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+            <Route exact path="/auth/logout" component={LogoutScene} />
+            <Route path="/auth/password" component={PasswordLayout} />
             <Redirect to="/auth/login" />
           </Switch>
         </div>
