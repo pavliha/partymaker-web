@@ -1,4 +1,6 @@
 import auth from 'api/auth'
+import user from './user/action'
+import password from './password/action'
 
 export const REGISTER_USER = 'REGISTER_USER'
 export const REGISTER_USER_FULFILLED = 'REGISTER_USER_FULFILLED'
@@ -28,6 +30,9 @@ const logout = () => ({
 })
 
 export default {
+  user,
+  password,
+
   register,
   login,
   logout,

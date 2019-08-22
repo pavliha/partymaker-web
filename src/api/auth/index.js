@@ -1,9 +1,12 @@
 import Http from 'services/Http'
 import user from './user'
+import password from './password'
 
 const auth = {
 
   user,
+
+  password,
 
   register(credentials) {
     return Http.post('/auth/register', credentials)

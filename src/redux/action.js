@@ -4,6 +4,7 @@ import rooms from './rooms/action'
 import places from './places/action'
 import messages from './messages/action'
 import assets from './assets/action'
+import accounts from './accounts/action'
 
 export default {
   auth,
@@ -12,4 +13,5 @@ export default {
   places,
   messages,
   assets,
+  accounts,
 }

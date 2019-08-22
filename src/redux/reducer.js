@@ -5,6 +5,7 @@ import rooms from './rooms/reducer'
 import places from './places/reducer'
 import messages from './messages/reducer'
 import assets from './assets/reducers'
+import accounts from './accounts/reducers'
 
 export default combineReducers({
   auth,
@@ -13,4 +14,5 @@ export default combineReducers({
   places,
   messages,
   assets,
+  accounts,
 })
