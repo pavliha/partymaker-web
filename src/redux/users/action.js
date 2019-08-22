@@ -3,8 +3,7 @@ import auth from 'api/auth'
 export const SET_USER = 'SET_USER'
 export const SET_USERS = 'SET_USERS'
 export const REMOVE_USER = 'REMOVE_USER'
-export const SET_USER_ONLINE = 'SET_USER_ONLINE'
-export const SET_USER_OFFLINE = 'SET_USER_OFFLINE'
+export const SET_USERS_ONLINE = 'SET_USERS_ONLINE'
 
 export const LOAD_USER = 'LOAD_USER'
 export const LOAD_USER_FULFILLED = 'LOAD_USER_FULFILLED'
@@ -45,15 +44,11 @@ const remove = user_id => ({
   payload: user_id,
 })
 
-const online = (user_id) => ({
-  type: SET_USER_ONLINE,
-  payload: user_id,
+const online = (users_ids) => ({
+  type: SET_USERS_ONLINE,
+  payload: users_ids,
 })
 
-const offline = (user_id) => ({
-  type: SET_USER_OFFLINE,
-  payload: user_id,
-})
 
 export default {
   load,
@@ -62,5 +57,4 @@ export default {
   setMany,
   remove,
   online,
-  offline
 }

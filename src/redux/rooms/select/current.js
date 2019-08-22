@@ -25,7 +25,7 @@ export default (state, room_id) =>
   createSelector(
     state => state.rooms.entities,
     state => state.places.entities,
-    state => Object.values(state.users.entities),
+    state => select.users.all(state),
     state => select.messages.all(state),
     state => state.rooms.status.messages.total,
     current(parseInt(room_id)),

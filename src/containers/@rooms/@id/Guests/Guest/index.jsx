@@ -45,7 +45,7 @@ class Guest extends Component {
     const { isKickGuestDialogOpen } = this.state
     return (
       <ListItem className={classes.root}>
-        <UserAvatar is_online={guest?.pivot?.is_online} user={guest} />
+        <UserAvatar is_online={guest.is_online} user={guest} />
         <GuestItemText
           guest={guest}
           onClose={this.openKickGuestDialog}

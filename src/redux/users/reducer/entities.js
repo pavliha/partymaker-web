@@ -1,4 +1,4 @@
-import { SET_USER, SET_USERS, SET_USER_ONLINE, SET_USER_OFFLINE } from '../action'
+import { SET_USER, SET_USERS } from '../action'
 import { arrayToObject, fromJWT } from 'utils'
 import Storage from 'services/Storage'
 
@@ -22,31 +22,6 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         ...arrayToObject(payload),
       }
-
-    case SET_USER_ONLINE:
-      return {
-        ...state,
-        [payload]: {
-          ...state[payload],
-          pivot: {
-            ...state[payload]?.pivot,
-            is_online: true,
-          },
-        },
-      }
-
-    case SET_USER_OFFLINE: {
-      return {
-        ...state,
-        [payload]: {
-          ...state[payload],
-          pivot: {
-            ...state[payload]?.pivot,
-            is_online: false,
-          },
-        },
-      }
-    }
 
     default:
       return state

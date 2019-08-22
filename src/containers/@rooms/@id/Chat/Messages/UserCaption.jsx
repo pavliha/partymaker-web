@@ -4,7 +4,7 @@ import { Typography, withStyles } from '@material-ui/core'
 
 const styles = {
   root: {
-    marginBottom: -5,
+    marginBottom: -7,
     padding: '0 80px'
   },
 }
@@ -17,6 +17,7 @@ const UserCaption = ({ classes, isMine, children }) => {
 
   return (
     <Typography
+      component="div"
       className={classes.root}
       align={isMine ? 'right' : 'left'}
       variant="caption"
