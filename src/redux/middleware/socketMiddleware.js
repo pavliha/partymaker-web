@@ -1,11 +1,9 @@
-import io from 'socket.io-client'
-
-let socket
+import Socket from 'services/Socket'
 
 const socketMiddleware = (listeners) => ({ dispatch, getState }) => next => async action => {
 
   if (action.disconnect_socket) {
-    if (socket) socket.close()
+    if (Socket.socket) Socket.close()
     next(action)
     return action
   }
@@ -15,30 +13,13 @@ const socketMiddleware = (listeners) => ({ dispatch, getState }) => next => asyn
     return action
   }
 
-  const createSocketConnection = (url) => {
-    const socket = io.connect(url, {
-      transports: ['websocket'],
-      upgrade: false,
-      query: {
-        token: getState().auth.token
-      }
-    })
+  const socket = Socket.connect(action.connect_socket)
 
-    socket.on('connect', () => console.log(`connected to ${url}`))
+  Object.entries(listeners).forEach(([eventName, action]) => {
+    socket.on(eventName, (data) => dispatch(action(data)))
+  })
 
-    Object.entries(listeners).forEach(([eventName, action]) => {
-      socket.on(eventName, (data) => {
-        console.log(`ON:${eventName}`, data)
-        dispatch(action(data))
-      })
-    })
-
-    return socket
-  }
-
-  const url = action.connect_socket
-
-  socket = createSocketConnection(url)
+  return socket
 }
 
 export default socketMiddleware

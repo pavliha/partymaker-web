@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, number, arrayOf } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+import Socket from 'services/Socket'
 import messageShape from 'shapes/message'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
@@ -32,6 +33,10 @@ class Chat extends Component {
   async componentDidMount() {
     await this.load()
     this.forceScrollBottom()
+
+    if (!Socket.socket) return
+
+    Socket.on('message', this.scrollBottom)
   }
 
   load = async (page = 1) => {
