@@ -33,15 +33,16 @@ class AssetField extends Component {
   }
 
   upload = async (e) => {
-    const { actions, name, onChange } = this.props
+    const { redux: { createAsset }, name, onChange } = this.props
     this.setState({ isLoading: true })
 
     try {
-      const response = await actions.asset.create(e.target.files[0])
+      const response = await createAsset(e.target.files[0])
       this.setState({ isLoading: false })
 
       onChange(name, response.value)
-    } catch (e) {
+    } catch (err) {
+      console.error(err)
       this.setState({
         isError: true,
         isLoading: false
@@ -76,13 +77,11 @@ class AssetField extends Component {
 
 AssetField.propTypes = {
   classes: object.isRequired,
-  actions: shape({
-    asset: shape({
-      create: func.isRequired,
-    })
-  }),
   name: string.isRequired,
   onChange: func.isRequired,
+  redux: shape({
+    createAsset: func.isRequired,
+  }),
 }
 
 const redux = () => ({

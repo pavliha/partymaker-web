@@ -9,7 +9,7 @@ const styles = {
 
   root: {
     boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
-    width: 300,
+    width: 330,
     height: 300,
     backgroundImage: `url(/images/transparent-background.svg)`,
     backgroundSize: 'cover',
@@ -18,11 +18,14 @@ const styles = {
 
   picture: {
     padding: 15,
-    width: '100%',
     height: '100%',
     backgroundSize: 'cover',
     borderRadius: 20,
   },
+  caption: {
+    marginTop: 35,
+    marginRight: 10,
+  }
 }
 
 class PictureMessage extends Component {
@@ -57,7 +60,7 @@ class PictureMessage extends Component {
           />
 
         </div>
-        <StatusCaption message={message} />
+        <StatusCaption className={classes.caption} message={message} />
       </>
 
     )

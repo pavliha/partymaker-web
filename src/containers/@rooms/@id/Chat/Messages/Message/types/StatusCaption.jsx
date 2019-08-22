@@ -25,8 +25,13 @@ const styles = theme => ({
   }
 })
 
-const StatusCaption = ({ classes, message }) =>
-  <div className={classNames({ [classes.root]: true, [classes.isMine]: message.isMine })}>
+const StatusCaption = ({ className, classes, message }) =>
+  <div
+    className={classNames({
+      [classes.root]: true,
+      [classes.isMine]: message.isMine,
+      [className]: true,
+    })}>
     <Typography color="textSecondary" component="div" variant="caption">
       {moment(message.created_at, 'YYYY-MM-DD HH:mm:ss').format('HH:mm')}
     </Typography>
