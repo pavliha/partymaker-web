@@ -3,8 +3,8 @@ import { func, object, shape } from 'prop-types'
 import userShape from 'shapes/user'
 import { Button, Typography, withStyles } from '@material-ui/core'
 import { UserAvatar } from 'components'
-import connector from './connector'
 import { Link } from 'react-router-dom'
+import { select, connect, actions } from 'src/redux'
 
 const styles = {
   root: {
@@ -31,13 +31,13 @@ const styles = {
 class ProfileScene extends Component {
   constructor(props) {
     super(props)
-    const { actions } = props
+    const { redux: { loadAccount } } = props
 
-    actions.auth.user.account.load()
+    loadAccount()
   }
 
   render() {
-    const { classes, user, } = this.props
+    const { classes, redux: { user } } = this.props
     return (
       <div className={classes.root}>
         <UserAvatar clickable className={classes.avatar} user={user} />
@@ -62,17 +62,16 @@ class ProfileScene extends Component {
 }
 
 ProfileScene.propTypes = {
-  user: userShape.isRequired,
   classes: object.isRequired,
-  actions: shape({
-    auth: shape({
-      user: shape({
-        account: shape({
-          load: func.isRequired,
-        }),
-      }),
-    })
-  })
+  redux: shape({
+    user: userShape.isRequired,
+    loadAccount: func.isRequired,
+  }),
 }
 
-export default withStyles(styles)(connector(ProfileScene))
+const redux = (state) => ({
+  user: select.auth.user(state),
+  loadAccount: actions.auth.user.account.load
+})
+
+export default withStyles(styles)(connect(redux)(ProfileScene))

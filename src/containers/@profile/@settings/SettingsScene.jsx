@@ -7,7 +7,7 @@ import ContactForm from './ContactForm'
 import UserForm from './UserForm'
 import PasswordForm from './PasswordForm'
 import AvatarForm from './AvatarForm'
-import connector from './connector'
+import { select, connect, actions } from 'src/redux'
 
 const styles = {
   root: {
@@ -31,25 +31,26 @@ const styles = {
 class SettingsScene extends Component {
 
   componentDidMount() {
-    const { actions } = this.props
-
-    actions.auth.user.account.load()
+    const { redux } = this.props
+    redux.loadAccount()
   }
 
   render() {
-    const { classes, user, actions } = this.props
+    const { classes, redux } = this.props
+    const { user, updateUser, updateAccount, updatePassword } = redux
+
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <AvatarForm user={user} onSubmit={actions.auth.user.update} />
+          <AvatarForm user={user} onSubmit={updateUser} />
           <OutlineCard className={classes.card} title="Общее">
-            <UserForm user={user} onSubmit={actions.auth.user.update} />
+            <UserForm user={user} onSubmit={updateUser} />
           </OutlineCard>
           <OutlineCard className={classes.card} title="Контакты">
-            <ContactForm account={user.account} onSubmit={actions.auth.user.account.update} />
+            <ContactForm account={user.account} onSubmit={updateAccount} />
           </OutlineCard>
           <OutlineCard className={classes.card} title="Пароль">
-            <PasswordForm onSubmit={actions.auth.password.update} />
+            <PasswordForm onSubmit={updatePassword} />
           </OutlineCard>
         </div>
       </div>
@@ -59,21 +60,21 @@ class SettingsScene extends Component {
 
 SettingsScene.propTypes = {
   classes: object.isRequired,
-  user: userShape.isRequired,
-  actions: shape({
-    auth: shape({
-      user: shape({
-        account: shape({
-          load: func.isRequired,
-          update: func.isRequired,
-        }),
-        update: func.isRequired,
-      }),
-      password: shape({
-        update: func.isRequired,
-      }),
-    }),
+  redux: shape({
+    user: userShape.isRequired,
+    updateUser: func.isRequired,
+    loadAccount: func.isRequired,
+    updateAccount: func.isRequired,
+    updatePassword: func.isRequired,
   }),
 }
 
-export default withStyles(styles)(connector(SettingsScene))
+const redux = (state) => ({
+  user: select.auth.user(state),
+  updateUser: actions.auth.user.update,
+  loadAccount: actions.auth.user.account.load,
+  updateAccount: actions.auth.user.account.update,
+  updatePassword: actions.auth.password.update,
+})
+
+export default withStyles(styles)(connect(redux)(SettingsScene))

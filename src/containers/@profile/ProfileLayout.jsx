@@ -1,12 +1,12 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, shape } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
 import { Header } from 'components'
 import { Switch, Route } from 'react-router-dom'
 import ProfileScene from './ProfileScene'
 import SettingsScene from './@settings/SettingsScene'
-import connector from './connector'
+import { select, connect } from 'src/redux'
 
 const styles = {
   root: {
@@ -16,7 +16,7 @@ const styles = {
   },
 }
 
-const ProfileLayout = ({ classes, user, }) =>
+const ProfileLayout = ({ classes, redux: { user }, }) =>
   <div className={classes.root}>
     <Header user={user} />
     <Switch>
@@ -26,8 +26,12 @@ const ProfileLayout = ({ classes, user, }) =>
   </div>
 
 ProfileLayout.propTypes = {
-  user: userShape,
   classes: object.isRequired,
+  redux: shape({ user: userShape, })
 }
 
-export default withStyles(styles)(connector(ProfileLayout))
+const redux = (state) => ({
+  user: select.auth.user(state),
+})
+
+export default withStyles(styles)(connect(redux)(ProfileLayout))
