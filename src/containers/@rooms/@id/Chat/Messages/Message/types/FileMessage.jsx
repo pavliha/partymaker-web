@@ -6,12 +6,12 @@ import DownloadIcon from 'mdi-react/DownloadIcon'
 import isPicture from 'utils/isPicture'
 import StatusCaption from './StatusCaption'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     padding: '5px 20px 5px 5px',
     borderRadius: 20,
     boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
-    background: theme.palette.secondary.main,
+    background: 'white',
     display: 'flex',
   },
   download: {
@@ -23,7 +23,7 @@ const styles = theme => ({
   }
 })
 
-const PictureMessage = ({ classes, message }) => {
+const FileMessage = ({ classes, message }) => {
   if (isPicture(message.asset?.url)) return null
 
   if (!message.asset) return null
@@ -31,23 +31,25 @@ const PictureMessage = ({ classes, message }) => {
 
   return (
     <div className={classes.root}>
-      <a download={message.asset.title} href={message.asset.url}>
-        <div className={classes.download}>
+
+      <div className={classes.download}>
+        <a download={message.asset.title} href={message.asset.url}>
           <IconButton className={classes.button}>
             <DownloadIcon />
           </IconButton>
-          <Typography>
-            {message.asset.title}
-          </Typography>
-        </div>
-      </a>
+        </a>
+        <Typography color="textSecondary">
+          {message.asset.title}
+        </Typography>
+      </div>
+
       <StatusCaption message={message} />
     </div>
   )
 }
-PictureMessage.propTypes = {
+FileMessage.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired
 }
 
-export default withStyles(styles)(PictureMessage)
+export default withStyles(styles)(FileMessage)
