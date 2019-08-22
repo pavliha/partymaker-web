@@ -1,11 +1,6 @@
+import { SET_USER, SET_USERS, SET_USER_ONLINE, SET_USER_OFFLINE } from '../action'
 import { arrayToObject, fromJWT } from 'utils'
 import Storage from 'services/Storage'
-import {
-  SET_USER,
-  SET_USERS,
-  UPDATE_USER_FULFILLED,
-  LOAD_USER_FULFILLED
-} from '../action'
 
 const user = fromJWT(Storage.get('token'))
 const initialState = user ? { [user.id]: user } : {}
@@ -13,13 +8,12 @@ const initialState = user ? { [user.id]: user } : {}
 const usersReducer = (state = initialState, { type, payload }) => {
   switch (type) {
 
-    case LOAD_USER_FULFILLED:
-    case UPDATE_USER_FULFILLED:
     case SET_USER:
       return {
         ...state,
         [payload.id]: {
           ...payload,
+          pivot: payload?.pivot || state[payload.id]?.pivot,
         },
       }
 
@@ -28,6 +22,31 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         ...arrayToObject(payload),
       }
+
+    case SET_USER_ONLINE:
+      return {
+        ...state,
+        [payload]: {
+          ...state[payload],
+          pivot: {
+            ...state[payload]?.pivot,
+            is_online: true,
+          },
+        },
+      }
+
+    case SET_USER_OFFLINE: {
+      return {
+        ...state,
+        [payload]: {
+          ...state[payload],
+          pivot: {
+            ...state[payload]?.pivot,
+            is_online: false,
+          },
+        },
+      }
+    }
 
     default:
       return state

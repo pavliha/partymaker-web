@@ -29,6 +29,18 @@ const styles = {
 }
 
 class RoomScene extends Component {
+
+  constructor(props) {
+    super(props)
+    const { redux: { subscribe }, match } = props
+    subscribe(match.params.id)
+  }
+
+  componentWillUnmount() {
+    const { redux: { unsubscribe }, match } = this.props
+    unsubscribe(match.params.id)
+  }
+
   render() {
     const { classes, redux } = this.props
     const { room, leaveRoom, loadMessages, loadRoom, sendMessage } = redux
@@ -62,15 +74,19 @@ RoomScene.propTypes = {
     loadRoom: func.isRequired,
     loadMessages: func.isRequired,
     leaveRoom: func.isRequired,
+    subscribe: func.isRequired,
+    unsubscribe: func.isRequired,
   })
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
   room: select.rooms.current(state, id),
   loadRoom: () => actions.rooms.load(id),
-  loadMessages: (params) => actions.rooms.messages.loadMany(id, params),
+  loadMessages: params => actions.rooms.messages.loadMany(id, params),
   leaveRoom: actions.rooms.leave,
-  sendMessage: (form) => actions.rooms.messages.create(id, form)
+  sendMessage: form => actions.rooms.messages.create(id, form),
+  subscribe: actions.rooms.subscribe,
+  unsubscribe: actions.rooms.unsubscribe,
 })
 
 export default withStyles(styles)(connect(redux)(RoomScene))

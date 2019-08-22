@@ -102,7 +102,6 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
-  socket: object,
   messages: arrayOf(messageShape).isRequired,
   totalMessages: number.isRequired,
   onLoad: func.isRequired,

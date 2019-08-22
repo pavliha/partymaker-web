@@ -1,5 +1,6 @@
 import room from 'api/room'
 import messages from './messages/action'
+import guests from './guests/action'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
 export const LOAD_ROOMS_FULFILLED = 'LOAD_ROOMS_FULFILLED'
@@ -14,6 +15,18 @@ export const LEAVE_ROOM_FULFILLED = 'LEAVE_ROOM_FULFILLED'
 export const SET_ROOMS = 'SET_ROOMS'
 export const SET_ROOM = 'SET_ROOM'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
+export const SUBSCRIBE = 'SUBSCRIBE'
+export const UNSUBSCRIBE = 'UNSUBSCRIBE'
+
+const subscribe = (room_id) => ({
+  type: SUBSCRIBE,
+  connect_socket: `ws://localhost:3333/rooms/${room_id}`
+})
+
+const unsubscribe = () => ({
+  type: UNSUBSCRIBE,
+  disconnect_socket: true,
+})
 
 const loadMany = () => ({
   type: LOAD_ROOMS,
@@ -57,7 +70,10 @@ const remove = room_id => ({
 })
 
 export default {
+  guests,
   messages,
+  subscribe,
+  unsubscribe,
   loadMany,
   load,
   create,

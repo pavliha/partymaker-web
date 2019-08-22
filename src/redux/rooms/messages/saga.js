@@ -6,7 +6,7 @@ import {
   LOAD_ROOM_MESSAGES_FULFILLED,
   CREATE_ROOM_MESSAGE_PENDING,
   CREATE_ROOM_MESSAGE_FULFILLED,
-  RECEIVE_ROOM_MESSAGE, READ_ROOM_MESSAGES_FULFILLED,
+  RECEIVE_ROOM_MESSAGE,
 } from './action'
 
 /*
@@ -67,19 +67,11 @@ function* addMessages({ payload: { data } }) {
 }
 
 /*
- *  Read all messages for current room
- */
-function* readMessages({ meta: { room_id } }) {
-  yield put(actions.messages.read(room_id))
-}
-
-/*
  *  Listen to all API and Websocket actions
  */
 export default function* saga() {
   yield all([
     takeEvery(LOAD_ROOM_MESSAGES_FULFILLED, addMessages),
-    takeEvery(READ_ROOM_MESSAGES_FULFILLED, readMessages),
     takeEvery(CREATE_ROOM_MESSAGE_PENDING, setTempMessage),
     takeEvery(CREATE_ROOM_MESSAGE_FULFILLED, setMessage),
     takeEvery(RECEIVE_ROOM_MESSAGE, setMessage)

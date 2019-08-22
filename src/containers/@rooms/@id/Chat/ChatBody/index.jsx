@@ -18,7 +18,7 @@ class ChatBody extends Component {
 
   chatBody = React.createRef()
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.isScrollingBottom) {
       this.scrollToBottom()
     }

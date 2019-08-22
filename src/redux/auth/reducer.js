@@ -4,10 +4,10 @@ import Storage from 'services/Storage'
 
 const token = Storage.get('token')
 
-const initialState = {
-  user_id: fromJWT(token)?.id,
-  token,
-}
+
+const user_id = fromJWT(token)?.id
+
+const initialState = { user_id, token, }
 
 const authReducer = (state = initialState, { type, payload }) => {
   switch (type) {

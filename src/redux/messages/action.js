@@ -22,14 +22,9 @@ const remove = message_id => ({
   payload: message_id,
 })
 
-const read = room_id => ({
-  type: READ_MESSAGES,
-  payload: room_id,
-})
 
 export default {
   set,
   setMany,
   remove,
-  read,
 }

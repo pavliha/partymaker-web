@@ -1,6 +1,7 @@
 import { all, put, takeEvery, fork } from 'redux-saga/effects'
 import actions from 'src/redux/action'
 import messages from './messages/saga'
+import guests from './guests/saga'
 
 import {
   LOAD_ROOMS_FULFILLED,
@@ -36,6 +37,7 @@ function* removeRoom({ meta: { room_id } }) {
 
 export default function* saga() {
   yield all([
+    fork(guests),
     fork(messages),
     takeEvery(LOAD_ROOMS_FULFILLED, setRooms),
     takeEvery(LOAD_ROOM_FULFILLED, setRoom),

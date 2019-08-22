@@ -11,10 +11,6 @@ const messages = {
     return Http.post(`/rooms/${room_id}/messages`, form)
   },
 
-  read(room_id) {
-    return Http.put(`/rooms/${room_id}/messages/read`)
-  },
-
   update(room_id, id, form) {
     return Http.put(`/rooms/${room_id}/messages/${id}`, form)
   },
