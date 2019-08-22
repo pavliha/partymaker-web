@@ -52,15 +52,18 @@ class RoomScene extends Component {
             {room && <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />}
             {room?.guests && <Guests guests={room.guests} onKick={() => {}} />}
           </div>
-          <div className={classes.chat}>
-            {room && <ChatHeader room={room} onLeave={leaveRoom} />}
-            <Chat
-              messages={room?.messages}
-              totalMessages={room?.totalMessages}
-              onLoad={loadMessages}
-              onSend={sendMessage}
-            />
-          </div>
+          {room && (
+            <div className={classes.chat}>
+              <ChatHeader room={room} onLeave={leaveRoom} />
+              <Chat
+                messages={room.messages}
+                invite_token={room.invite_token}
+                totalMessages={room.totalMessages}
+                onLoad={loadMessages}
+                onSend={sendMessage}
+              />
+            </div>
+          )}
         </section>
       </Load>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func, number, arrayOf } from 'prop-types'
+import { object, func, number, arrayOf, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import Socket from 'services/Socket'
 import messageShape from 'shapes/message'
@@ -85,7 +85,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { classes, messages } = this.props
+    const { classes, messages, invite_token } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
@@ -99,7 +99,7 @@ class Chat extends Component {
         >
           <Messages isLoading={isLoading} messages={messages || []} />
         </ChatBody>
-        <ChatForm onSubmit={this.sendMessage} />
+        <ChatForm invite_token={invite_token} onSubmit={this.sendMessage} />
       </div>
     )
   }
@@ -109,6 +109,7 @@ Chat.propTypes = {
   classes: object.isRequired,
   messages: arrayOf(messageShape).isRequired,
   totalMessages: number.isRequired,
+  invite_token: string.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Form, Field } from 'formik'
 import { object, shape, string } from 'prop-types'
 import { Button, IconButton, withStyles } from '@material-ui/core'
@@ -8,6 +8,7 @@ import formik from './formik'
 import SendIcon from 'mdi-react/SendIcon'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 import { connect } from 'src/redux'
+import InviteOverlay from './InviteOverlay'
 
 const styles = {
   root: {
@@ -39,35 +40,60 @@ const styles = {
   }
 }
 
-const ChatForm = ({ classes, values }) =>
-  <Form className={classes.root}>
-    <div className={classes.send}>
-      <Field name="text" className={classes.sendField} component={FormikMessageField} />
-      {values.text
-        ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
-        : <Field name="asset_id" component={AssetField} />
-      }
-    </div>
-    <div className={classes.actions}>
-      <Button color="primary" className={classes.actionLabel}>
-        Пригласить друзей
-      </Button>
-      <KeyboardArrowRightIcon className={classes.arrow} />
-      <Button color="primary" disabled className={classes.actionLabel}>
-        Выбрать время
-      </Button>
-      <KeyboardArrowRightIcon className={classes.arrow} />
-      <Button color="primary" disabled className={classes.actionLabel}>
-        Заказать
-      </Button>
-    </div>
-  </Form>
+class ChatForm extends Component {
+
+  state = {
+    isInviteOpen: false,
+  }
+
+  toggleInvite = () =>
+    this.setState(state => ({ isInviteOpen: !state.isInviteOpen }))
+
+  closeInvite = () =>
+    this.setState({ isInviteOpen: false })
+
+  render() {
+    const { classes, values, invite_token } = this.props
+    const { isInviteOpen } = this.state
+    return (
+      <Form className={classes.root}>
+        {isInviteOpen
+          ? <InviteOverlay invite_token={invite_token} onClose={this.closeInvite} />
+          : (
+            <div className={classes.send}>
+              <Field name="text" className={classes.sendField} component={FormikMessageField} />
+              {values.text
+                ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
+                : <Field name="asset_id" component={AssetField} />
+              }
+            </div>
+          )
+        }
+
+        <div className={classes.actions}>
+          <Button color="primary" className={classes.actionLabel} onClick={this.toggleInvite}>
+            Пригласить друзей
+          </Button>
+          <KeyboardArrowRightIcon className={classes.arrow} />
+          <Button color="primary" disabled className={classes.actionLabel}>
+            Выбрать время
+          </Button>
+          <KeyboardArrowRightIcon className={classes.arrow} />
+          <Button color="primary" disabled className={classes.actionLabel}>
+            Заказать
+          </Button>
+        </div>
+      </Form>
+    )
+  }
+}
 
 ChatForm.propTypes = {
   classes: object.isRequired,
   values: shape({
     text: string.isRequired,
-  })
+  }),
+  invite_token: string.isRequired,
 }
 
 const redux = state => ({
