@@ -1,4 +1,4 @@
-import { SET_ROOMS } from '../action'
+import { SET_ROOMS, REMOVE_ROOM } from '../action'
 import arrayToObject from 'utils/arrayToObject'
 
 export default (state = {}, { type, payload }) => {
@@ -9,6 +9,13 @@ export default (state = {}, { type, payload }) => {
         ...state,
         ...arrayToObject(payload)
       }
+
+    case REMOVE_ROOM: {
+      const rooms = { ...state }
+      delete rooms[payload]
+
+      return rooms
+    }
 
     default:
       return state

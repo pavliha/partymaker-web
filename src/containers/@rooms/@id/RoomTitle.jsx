@@ -23,9 +23,10 @@ const RoomTitle = ({ classes, room, action }) => {
 
   return <div className={classes.root}>
     <div>
-      <Typography variant="h5">
-        {room.title}
-      </Typography>
+      {room.title
+        ? <Typography variant="h5">{room.title}</Typography>
+        : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
+      }
       <Typography color="textSecondary" variant="caption">
         {count} {format(count)}
       </Typography>

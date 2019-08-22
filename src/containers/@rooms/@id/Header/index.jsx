@@ -6,6 +6,7 @@ import PlaceTitle from './PlaceTitle'
 import Time from './Time'
 import { withRouter } from 'react-router-dom'
 import { LeaveRoomDialog } from 'components'
+import ChoosePlaceTitle from './ChoosePlaceTitle'
 
 const styles = theme => ({
   root: {
@@ -43,7 +44,7 @@ class Header extends Component {
     const { room, history, onLeave } = this.props
     this.closeLeaveRoomDialog()
     await onLeave(room.id)
-    history.push('/home')
+    history.push('/rooms')
   }
 
   render() {
@@ -52,7 +53,10 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        {room?.place && <PlaceTitle place={room.place} />}
+        {room?.place
+          ? <PlaceTitle place={room.place} />
+          : <ChoosePlaceTitle />
+        }
         <div className={classes.aside}>
           <Time>{room?.time}</Time>
           <Button

@@ -47,9 +47,12 @@ const RoomCard = ({ classes, room }) =>
     </Link>
     <div className={classes.container}>
       <Link to={`/rooms/${room.id}`}>
-        <Typography className={classes.title}>{room.title}</Typography>
+        {room.title
+          ? <Typography className={classes.title}>{room.title}</Typography>
+          : <Typography color="textSecondary" className={classes.title}>Что будем делать?</Typography>
+        }
       </Link>
-      <Typography className={classes.subtitle}>{room.place.title}</Typography>
+      <Typography className={classes.subtitle}>{room.place?.title || 'Место еще не выбрано'}</Typography>
     </div>
     <div className={classes.actions}>
       <Link to={`/rooms/${room.id}`}><Button>открыть</Button></Link>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { object, func, arrayOf, shape } from 'prop-types'
 import roomShape from 'shapes/room'
 import { withStyles } from '@material-ui/styles'
@@ -29,27 +29,40 @@ const styles = {
   }
 }
 
-const RoomsScene = ({ classes, redux }) =>
-  <div className={classes.root}>
-    <Load promise={redux.loadRooms}>
-      <div className={classes.container}>
-        <div className={classes.actions}>
-          <Typography gutterBottom variant="h5">
-            Мои компании
-          </Typography>
-          <Button
-            color="primary"
-            variant="contained"
-          >
-            собрать компанию
-          </Button>
-        </div>
-        {redux.rooms.map(room =>
-          <RoomCard key={room.id} room={room} />
-        )}
+class RoomsScene extends Component {
+
+  createRoom = async () => {
+    const { redux: { createRoom } } = this.props
+    await createRoom()
+  }
+
+  render() {
+    const { classes, redux } = this.props
+    return (
+      <div className={classes.root}>
+        <Load promise={redux.loadRooms}>
+          <div className={classes.container}>
+            <div className={classes.actions}>
+              <Typography gutterBottom variant="h5">
+                Мои компании
+              </Typography>
+              <Button
+                color="primary"
+                variant="contained"
+                onClick={this.createRoom}
+              >
+                собрать компанию
+              </Button>
+            </div>
+            {redux.rooms.map(room =>
+              <RoomCard key={room.id} room={room} />
+            )}
+          </div>
+        </Load>
       </div>
-    </Load>
-  </div>
+    )
+  }
+}
 
 RoomsScene.propTypes = {
   classes: object.isRequired,
@@ -61,7 +74,8 @@ RoomsScene.propTypes = {
 
 const redux = state => ({
   rooms: select.rooms.all(state),
-  loadRooms: actions.rooms.loadMany
+  loadRooms: actions.rooms.loadMany,
+  createRoom: actions.rooms.create,
 })
 
 export default withStyles(styles)(connect(redux)(RoomsScene))
