@@ -16,7 +16,8 @@ const styles = {
   picture: {
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundImage: (p) => `url(${p.room?.place?.picture_url})`,
-    backgroundSize: '100%',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
     width: 182,
     height: 94,
   },

@@ -5,7 +5,7 @@ export default shape({
   title: string.isRequired,
   picture_url: string.isRequired,
   price: string.isRequired,
-  phone: string.isRequired,
+  phone: string,
   map_url: string.isRequired,
   website_url: string.isRequired,
   working_hours: string.isRequired,

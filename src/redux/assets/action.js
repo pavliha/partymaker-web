@@ -23,12 +23,12 @@ export const SET_CURRENT_ASSET = 'SET_CURRENT_ASSET'
 
 const list = () => ({
   type: LOAD_ASSETS,
-  payload: Asset.list()
+  payload: Asset.loadMany()
 })
 
 const find = (asset_id) => ({
   type: LOAD_ASSET,
-  payload: Asset.find(asset_id),
+  payload: Asset.load(asset_id),
   meta: { asset_id }
 })
 

@@ -5,6 +5,7 @@ import places from './places/action'
 import messages from './messages/action'
 import assets from './assets/action'
 import accounts from './accounts/action'
+import entertainments from './entertainments/action'
 
 export default {
   auth,
@@ -14,4 +15,5 @@ export default {
   messages,
   assets,
   accounts,
+  entertainments,
 }

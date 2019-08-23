@@ -93,6 +93,18 @@ module.exports = () => ({
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: [{ loader: 'react-icon-loader', options: { limit: 10000, mimetype: 'image/svg+xml' } }],
       },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
+      }
     ],
   },
 
@@ -115,7 +127,7 @@ module.exports = () => ({
     new Clean('./dist', { root: path.resolve(__dirname, './') }),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
+      filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css',
     }),
     new webpack.NoEmitOnErrorsPlugin(),

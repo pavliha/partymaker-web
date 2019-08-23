@@ -2,11 +2,11 @@ import Http from 'src/services/Http'
 
 const asset = {
 
-  list() {
+  loadMany() {
     return Http.get('/assets')
   },
 
-  find(id) {
+  load(id) {
     return Http.get(`/assets/${id}`)
   },
 
