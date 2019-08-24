@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
-import AvatarField from './AvatarField'
+import {AvatarField} from 'components'
 
 const styles = {
   root: {},

@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { object, func, arrayOf, shape } from 'prop-types'
 import roomShape from 'shapes/room'
-import { withStyles } from '@material-ui/styles'
-import { Typography, Button } from '@material-ui/core'
-import RoomCard from './RoomCard'
+import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
-import { Load } from 'components'
+import { Load, RoomCard } from 'components'
 
 const styles = {
 

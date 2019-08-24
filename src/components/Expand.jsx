@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { object, string, node } from 'prop-types'
 import { Typography, withStyles, IconButton } from '@material-ui/core'
-import ExpandMoreIcon from 'mdi-react/ExpandMoreIcon'
+import ExpandMoreIcon from 'mdi-react/KeyboardArrowUpIcon'
+import CollapseIcon from 'mdi-react/KeyboardArrowDownIcon'
 
 const styles = {
   root: {},
@@ -21,16 +22,37 @@ const styles = {
 
 }
 
-const Expand = ({ classes, title, children }) =>
-  <div className={classes.root}>
-    <div className={classes.expand}>
-      <IconButton><ExpandMoreIcon /></IconButton>
-      <Typography className={classes.title}>
-        {title}
-      </Typography>
-    </div>
-    {children}
-  </div>
+class Expand extends Component {
+  state = {
+    isExpanded: true,
+  }
+
+  expand = () =>
+    this.setState({ isExpanded: true })
+
+  collapse = () =>
+    this.setState({ isExpanded: false })
+
+  render() {
+    const { classes, title, children } = this.props
+    const { isExpanded } = this.state
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.expand}>
+          {isExpanded
+            ? <IconButton onClick={this.collapse}><CollapseIcon /></IconButton>
+            : <IconButton onClick={this.expand}><ExpandMoreIcon /></IconButton>
+          }
+          <Typography className={classes.title}>
+            {title}
+          </Typography>
+        </div>
+        {isExpanded && children}
+      </div>
+    )
+  }
+}
 
 Expand.propTypes = {
   classes: object.isRequired,

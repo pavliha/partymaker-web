@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Button, withStyles } from '@material-ui/core'
-import PlaceTitle from './PlaceTitle'
 import Time from './Time'
 import { withRouter } from 'react-router-dom'
-import { LeaveRoomDialog } from 'components'
-import ChoosePlaceTitle from './ChoosePlaceTitle'
+import { LeaveRoomDialog, PlaceTitle } from 'components'
 
 const styles = theme => ({
   root: {
@@ -53,10 +51,7 @@ class Header extends Component {
 
     return (
       <div className={classes.root}>
-        {room?.place
-          ? <PlaceTitle place={room.place} />
-          : <ChoosePlaceTitle />
-        }
+        <PlaceTitle place={room.place} />
         <div className={classes.aside}>
           <Time>{room?.time}</Time>
           <Button
