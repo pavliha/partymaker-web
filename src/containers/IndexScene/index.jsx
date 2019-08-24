@@ -14,7 +14,7 @@ const styles = {
     flexGrow: 1,
   },
 
-  container: {
+  banner: {
     flexGrow: 1,
     display: 'flex',
     justifyContent: 'space-around',
@@ -46,6 +46,10 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  container: {
+    maxWidth: 1130,
+    margin: '0 auto',
+  }
 }
 
 class IndexScene extends Component {
@@ -62,7 +66,7 @@ class IndexScene extends Component {
       <main className={classes.root}>
         <section className={classes.background}>
           <Header isTransparent user={user} />
-          <div className={classes.container}>
+          <div className={classes.banner}>
             <div className={classes.title}>
               <Typography gutterBottom variant="h2">Partymaker</Typography>
               <Typography variant="h5">Здесь можно собрать друзей и найти куда сходить</Typography>
@@ -84,7 +88,9 @@ class IndexScene extends Component {
             </div>
           </div>
         </section>
-        <Entertainments onCreated={this.redirectToRoom} />
+        <section className={classes.container}>
+          <Entertainments onCreated={this.redirectToRoom} />
+        </section>
       </main>
     )
   }

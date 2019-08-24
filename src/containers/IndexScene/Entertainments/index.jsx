@@ -12,9 +12,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
   },
-  container: {
-    maxWidth: 1100,
-  },
+  container: {},
   title: {
     fontFamily: 'Google Sans,sans-serf',
     fontSize: 24,
