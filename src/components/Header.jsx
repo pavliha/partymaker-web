@@ -3,9 +3,7 @@ import { object, bool, string } from 'prop-types'
 import userShape from 'shapes/user'
 import { AppBar, Toolbar, Button, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import Logo from './Logo'
-import Navigation from './Navigation'
-import UserMenu from './UserMenu'
+import { UserMenu, Logo } from 'components'
 import classNames from 'classnames'
 
 const styles = {
@@ -17,6 +15,10 @@ const styles = {
     boxShadow: 'none',
     top: 0,
   },
+  navigation: {
+    flex: 1,
+    marginLeft: 60,
+  }
 }
 
 const Header = ({ classes, className, user, isTransparent }) =>
@@ -31,9 +33,9 @@ const Header = ({ classes, className, user, isTransparent }) =>
   >
     <Toolbar>
       <Link to="/"><Logo /></Link>
-      <Navigation>
+      <div className={classes.navigation}>
         {user && <Link to="/rooms"><Button color="inherit">мои компани</Button></Link>}
-      </Navigation>
+      </div>
       {user
         ? <UserMenu user={user} />
         : <>

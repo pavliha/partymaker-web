@@ -11,7 +11,7 @@ const styles = {
   }
 }
 
-class Entertainment extends Component {
+class EntertainmentGroup extends Component {
 
   wantThis = (place) => {
     const { entertainment, onIWantThis } = this.props
@@ -34,9 +34,9 @@ class Entertainment extends Component {
   }
 }
 
-Entertainment.propTypes = {
+EntertainmentGroup.propTypes = {
   classes: object.isRequired,
   onIWantThis: func.isRequired,
 }
 
-export default withStyles(styles)(Entertainment)
+export default withStyles(styles)(EntertainmentGroup)

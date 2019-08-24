@@ -1,8 +1,7 @@
 import React from 'react'
 import { bool, string, func, shape } from 'prop-types'
 import { Typography } from '@material-ui/core'
-import AuthCard from 'src/containers/@auth/AuthCard'
-import { Loading } from 'components'
+import { Loading, AuthCard } from 'components'
 import { connect, actions } from 'src/redux'
 
 class ActivateScene extends React.Component {

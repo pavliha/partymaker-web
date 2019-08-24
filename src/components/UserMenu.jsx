@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import AccountButton from './AccountButton'
+import { AccountButton } from 'components'
 
 const styles = () => ({
   root: {
@@ -19,7 +19,8 @@ class UserMenu extends Component {
     return (
       <Link to="/profile">
         <div className={classes.root}>
-          <Typography variant="subtitle1" color="inherit">{user.name}</Typography><AccountButton user={user} />
+          <Typography variant="subtitle1" color="inherit">{user.name}</Typography>
+          <AccountButton user={user} />
         </div>
       </Link>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AuthCard from '../AuthCard'
+import { AuthCard } from 'components'
 import { Helmet } from 'react-helmet'
 import LoginForm from './LoginForm'
 import { func, shape } from 'prop-types'

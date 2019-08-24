@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, string, func } from 'prop-types'
-import AuthCard from 'src/containers/@auth/AuthCard'
+import { AuthCard } from 'components'
 import ResetForm from './ResetForm'
 import { actions, connect } from 'src/redux'
 

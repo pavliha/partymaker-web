@@ -15,16 +15,16 @@ const styles = () => ({
   },
 })
 
-const GreenDot = ({ classes, is_online }) => {
+const OnlineIndicator = ({ classes, isVisible }) => {
 
-  if (!is_online) return null
+  if (!isVisible) return null
 
   return <div className={classes.root} />
 }
 
-GreenDot.propTypes = {
+OnlineIndicator.propTypes = {
   classes: object.isRequired,
-  is_online: oneOfType([bool, number]),
+  isVisible: oneOfType([bool, number]),
 }
 
-export default withStyles(styles)(GreenDot)
+export default withStyles(styles)(OnlineIndicator)

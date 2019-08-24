@@ -3,8 +3,7 @@ import { bool, object, oneOfType, number, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
 import { initialsFromUserName } from 'utils'
-import GreenDot from './GreenDot'
-import { PictureDialog } from 'components'
+import { PictureDialog, OnlineIndicator } from 'components'
 
 const styles = () => ({
   avatar: {
@@ -62,7 +61,7 @@ class UserAvatar extends Component {
         >
           {user.avatar_url ? null : initialsFromUserName(user.name)}
         </Avatar>
-        <GreenDot is_online={is_online} />
+        <OnlineIndicator isVisible={is_online} />
         <PictureDialog
           url={user.avatar_url}
           isOpen={isModalOpen}

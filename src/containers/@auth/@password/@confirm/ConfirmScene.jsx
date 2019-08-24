@@ -2,8 +2,7 @@ import React from 'react'
 import { object, string, shape } from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Button, withStyles } from '@material-ui/core'
-import AuthCard from 'src/containers/@auth/AuthCard'
-import AndDevider from 'src/containers/@auth/AndDevider'
+import { AuthCard, AndDevider } from 'components'
 import { connect } from 'src/redux'
 
 const styles = {

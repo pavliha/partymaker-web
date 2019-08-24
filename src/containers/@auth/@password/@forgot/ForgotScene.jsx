@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import AuthCard from 'src/containers/@auth/AuthCard'
+import { AuthCard } from 'components'
 import ForgotForm from './ForgotForm'
 import { actions, connect } from 'src/redux'
 
@@ -33,7 +33,7 @@ ForgotScene.propTypes = {
   })
 }
 
-const redux = ()=>({
+const redux = () => ({
   forgotPassword: actions.auth.password.forgot
 })
 

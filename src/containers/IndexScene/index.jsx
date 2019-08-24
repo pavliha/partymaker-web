@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { shape, object, func } from 'prop-types'
-import { Header } from 'components'
+import { Header ,Entertainments} from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { select, connect } from 'src/redux'
-import Entertainments from './Entertainments'
 import userShape from 'shapes/user'
 
 const styles = {

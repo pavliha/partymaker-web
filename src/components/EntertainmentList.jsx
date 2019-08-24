@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { object, func, array, shape } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { connect, actions, select } from 'src/redux'
-import { Load } from 'components'
-import Entertainment from './Entertainment'
+import { Load, EntertainmentGroup } from 'components'
 
 const styles = {
   root: {
@@ -19,7 +18,7 @@ const styles = {
   }
 }
 
-class Entertainments extends Component {
+class EntertainmentList extends Component {
 
   newRoom = async (entertainment, place) => {
     const { redux: { createRoom }, onCreated } = this.props
@@ -44,7 +43,7 @@ class Entertainments extends Component {
             </Typography>
 
             {entertainments.map(entertainment =>
-              <Entertainment
+              <EntertainmentGroup
                 key={entertainment.id}
                 entertainment={entertainment}
                 onIWantThis={this.newRoom}
@@ -58,7 +57,7 @@ class Entertainments extends Component {
   }
 }
 
-Entertainments.propTypes = {
+EntertainmentList.propTypes = {
   classes: object.isRequired,
   onCreated: func.isRequired,
   redux: shape({
@@ -72,4 +71,4 @@ const redux = state => ({
   createRoom: actions.rooms.create
 })
 
-export default withStyles(styles)(connect(redux)(Entertainments))
+export default withStyles(styles)(connect(redux)(EntertainmentList))

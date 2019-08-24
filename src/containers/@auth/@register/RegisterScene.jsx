@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import AuthCard from 'containers/@auth/AuthCard'
+import { AuthCard } from 'components'
 import RegisterForm from './RegisterForm'
 import { Helmet } from 'react-helmet'
 import Storage from 'services/Storage'
