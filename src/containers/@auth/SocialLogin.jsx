@@ -24,7 +24,6 @@ const styles = {
       backgroundColor: 'rgba(255,255,255,0.1)'
     }
   },
-
   text: {
     flexGrow: 1,
     textAlign: 'center',

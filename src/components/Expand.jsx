@@ -27,11 +27,8 @@ class Expand extends Component {
     isExpanded: true,
   }
 
-  expand = () =>
-    this.setState({ isExpanded: true })
-
-  collapse = () =>
-    this.setState({ isExpanded: false })
+  toggle = () =>
+    this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }))
 
   render() {
     const { classes, title, children } = this.props
@@ -39,11 +36,10 @@ class Expand extends Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.expand}>
-          {isExpanded
-            ? <IconButton onClick={this.collapse}><CollapseIcon /></IconButton>
-            : <IconButton onClick={this.expand}><ExpandMoreIcon /></IconButton>
-          }
+        <div className={classes.expand} onClick={this.toggle}>
+          <IconButton>
+            {isExpanded ? <CollapseIcon /> : <ExpandMoreIcon />}
+          </IconButton>
           <Typography className={classes.title}>
             {title}
           </Typography>
