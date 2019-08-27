@@ -10,12 +10,9 @@ class RegisterScene extends Component {
 
   register = async credentials => {
     const { history, redux } = this.props
-
     await redux.register(credentials)
-
     const previous_user_location = Storage.get('previous_user_location')
-
-    history.push(previous_user_location || '/home')
+    history.push(previous_user_location || '/rooms')
   }
 
   render() {

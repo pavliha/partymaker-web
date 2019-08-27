@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Redirect, Route, Switch } from 'react-router-dom'
@@ -9,7 +9,9 @@ import LogoutScene from './@logout/LogoutScene'
 import RegisterScene from './@register/RegisterScene'
 import ActivateScene from './@activate/ActivateScene'
 import PasswordLayout from './@password/PasswordLayout'
-
+import AuthDivider from './AuthDivider'
+import SocialLogin from './SocialLogin'
+import Storage from 'services/Storage'
 
 const styles = () => ({
   root: {
@@ -19,10 +21,9 @@ const styles = () => ({
     backgroundPosition: 'center',
   },
   container: {
-    maxWidth: 400,
     height: '100%',
-    margin: '0 auto',
     display: 'flex',
+    alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
   },
@@ -42,24 +43,39 @@ const styles = () => ({
   },
 })
 
-const AuthLayout = ({ classes }) =>
-  <div className={classes.root}>
-    <Header classes={{ root: classes.headerRoot }} />
-    <div className={classes.container}>
-      <div className={classes.scene}>
-        <div>
-          <Switch>
-            <Route exact path="/auth/register" component={RegisterScene} />
-            <Route exact path="/auth/login" component={LoginScene} />
-            <Route exact path="/auth/activate/:hash" component={ActivateScene} />
-            <Route exact path="/auth/logout" component={LogoutScene} />
-            <Route path="/auth/password" component={PasswordLayout} />
-            <Redirect to="/auth/login" />
-          </Switch>
+class AuthLayout extends Component {
+
+  loginWithSocial = () => {
+    const { history } = this.props
+    const previous_user_location = Storage.get('previous_user_location')
+    history.push(previous_user_location || '/rooms')
+  }
+
+  render() {
+    const { classes } = this.props
+    return <div className={classes.root}>
+      <Header classes={{ root: classes.headerRoot }} />
+      <div className={classes.container}>
+        <div className={classes.scene}>
+          <div>
+            <Switch>
+              <Route exact path="/auth/register" component={RegisterScene} />
+              <Route exact path="/auth/login" component={LoginScene} />
+              <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+              <Route exact path="/auth/logout" component={LogoutScene} />
+              <Route path="/auth/password" component={PasswordLayout} />
+              <Redirect to="/auth/login" />
+            </Switch>
+          </div>
+          <div className={classes.divider}>
+            <AuthDivider />
+          </div>
+          <SocialLogin onLogin={this.loginWithSocial} />
         </div>
       </div>
     </div>
-  </div>
+  }
+}
 
 AuthLayout.propTypes = {
   classes: object.isRequired,
