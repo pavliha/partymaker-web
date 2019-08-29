@@ -4,6 +4,7 @@ import { withStyles, IconButton, Tooltip } from '@material-ui/core'
 import CopyIcon from 'mdi-react/ContentCopyIcon'
 import wait from 'utils/wait'
 import CloseButton from 'components/CloseButton'
+import { FRONTEND_URL } from 'src/config/app'
 
 const styles = (theme) => ({
   root: {
@@ -55,9 +56,7 @@ class InviteOverlay extends Component {
           <Tooltip title="Скопировать сслыку">
             <IconButton onClick={this.copy} className={classes.icon}><CopyIcon /></IconButton>
           </Tooltip>
-          <span>
-          {isCopied ? 'Пригласительная сслыка скопирована' : `http://partymaker.zp.ua/${invite_token}`}
-          </span>
+          <span>{isCopied ? 'Пригласительная сслыка скопирована' : `${FRONTEND_URL}/invite/${invite_token}`}</span>
         </div>
         <CloseButton onClick={onClose} />
       </div>

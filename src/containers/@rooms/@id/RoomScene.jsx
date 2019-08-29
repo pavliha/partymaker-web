@@ -5,7 +5,7 @@ import { actions, select, connect } from 'src/redux'
 import { InviteButton, Load, RoomTitle } from 'components'
 import Guests from './Guests'
 import Chat from './Chat'
-import ChatHeader from './Header'
+import Socket from 'services/Socket'
 
 const styles = {
   root: {
@@ -19,12 +19,6 @@ const styles = {
     flexDirection: 'column',
     borderRight: 'solid 1px rgba(0, 0, 0, 0.12)',
   },
-  chat: {
-    flexGrow: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    //maxHeight: 'calc(100vh - 65px)',
-  }
 }
 
 class RoomScene extends Component {
@@ -40,30 +34,38 @@ class RoomScene extends Component {
     unsubscribe(match.params.id)
   }
 
+  leaveRoom = async (room) => {
+    const { redux: { leaveRoom }, history } = this.props
+    await leaveRoom(room.id)
+    history.push('/rooms')
+  }
+
+  receiveMessage = (scrollBottom) => {
+    if (!Socket.socket) return
+    Socket.on('message', scrollBottom)
+  }
+
   render() {
     const { classes, redux } = this.props
-    const { room, leaveRoom, loadMessages, loadRoom, sendMessage } = redux
+    const { room, loadMessages, loadRoom, sendMessage } = redux
 
     return (
       <Load promise={loadRoom}>
-        <section className={classes.root}>
-          <div className={classes.guests}>
-            {room && <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />}
-            {room?.guests && <Guests guests={room.guests} onKick={() => {}} />}
-          </div>
-          {room && (
-            <div className={classes.chat}>
-              <ChatHeader room={room} onLeave={leaveRoom} />
-              <Chat
-                messages={room.messages}
-                invite_token={room.invite_token}
-                totalMessages={room.totalMessages}
-                onLoad={loadMessages}
-                onSend={sendMessage}
-              />
+        {room && (
+          <section className={classes.root}>
+            <div className={classes.guests}>
+              <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />
+              <Guests guests={room.guests} onKick={() => {}} />
             </div>
-          )}
-        </section>
+            <Chat
+              room={room}
+              onLoad={loadMessages}
+              onSend={sendMessage}
+              onLeave={this.leaveRoom}
+              onMount={this.receiveMessage}
+            />
+          </section>
+        )}
       </Load>
     )
   }
@@ -71,6 +73,7 @@ class RoomScene extends Component {
 
 RoomScene.propTypes = {
   classes: object.isRequired,
+  history: shape({ push: func.isRequired, }),
   match: shape({ params: shape({ id: string.isRequired, }), }),
   redux: shape({
     loadRoom: func.isRequired,

@@ -22,7 +22,6 @@ const remove = message_id => ({
   payload: message_id,
 })
 
-
 export default {
   set,
   setMany,

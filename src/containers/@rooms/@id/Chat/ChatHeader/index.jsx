@@ -3,7 +3,6 @@ import { object, func } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Button, withStyles } from '@material-ui/core'
 import Time from './Time'
-import { withRouter } from 'react-router-dom'
 import { LeaveRoomDialog, PlaceTitle } from 'components'
 
 const styles = theme => ({
@@ -24,7 +23,7 @@ const styles = theme => ({
   }
 })
 
-class Header extends Component {
+class ChatHeader extends Component {
 
   state = {
     isLeaveRoomDialogOpen: false
@@ -39,10 +38,9 @@ class Header extends Component {
   }
 
   leaveRoom = async () => {
-    const { room, history, onLeave } = this.props
+    const { room, onLeave } = this.props
     this.closeLeaveRoomDialog()
-    await onLeave(room.id)
-    history.push('/rooms')
+    await onLeave(room)
   }
 
   render() {
@@ -73,10 +71,10 @@ class Header extends Component {
   }
 }
 
-Header.propTypes = {
+ChatHeader.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
   onLeave: func.isRequired,
 }
 
-export default withStyles(styles)(withRouter(Header))
+export default withStyles(styles)(ChatHeader)

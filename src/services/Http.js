@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { store, actions } from 'src/redux'
+import { BACKEND_URL } from 'src/config/app'
 
 class Http {
   constructor() {
     this.instance = axios.create({
-      baseURL: process.env.BACKEND_URL,
+      baseURL: BACKEND_URL,
       timeout: 20000,
     })
   }

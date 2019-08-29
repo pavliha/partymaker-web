@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { func, node } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
+import { func, node, object } from 'prop-types'
+import { withStyles } from '@material-ui/core'
 import Loading from 'components/Loading'
 import ErrorIcon from 'mdi-react/ErrorIcon'
 
@@ -42,6 +42,7 @@ class Load extends Component {
 }
 
 Load.propTypes = {
+  classes: object.isRequired,
   promise: func.isRequired,
   children: node.isRequired,
   onLoad: func.isRequired,

@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
-import { object, func, number, arrayOf, string } from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import Socket from 'services/Socket'
-import messageShape from 'shapes/message'
+import roomShape from 'shapes/room'
 import ChatBody from './ChatBody'
 import Messages from './Messages'
 import ChatForm from './ChatForm'
 import wait from 'src/utils/wait'
+import ChatHeader from './ChatHeader'
 
 const styles = {
   root: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  body: {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
@@ -17,7 +22,7 @@ const styles = {
   },
   titles: {
     paddingLeft: 13,
-  }
+  },
 }
 
 class Chat extends Component {
@@ -31,12 +36,10 @@ class Chat extends Component {
   }
 
   async componentDidMount() {
+    const { onMount } = this.props
     await this.load()
     this.forceScrollBottom()
-
-    if (!Socket.socket) return
-
-    Socket.on('message', this.scrollBottom)
+    onMount(this.scrollBottom)
   }
 
   load = async (page = 1) => {
@@ -52,54 +55,51 @@ class Chat extends Component {
 
   sendMessage = (form) => {
     const { onSend } = this.props
-    const promise = onSend(form)
+    const action = onSend(form)
     this.scrollBottom()
-
-    return promise
+    return action
   }
 
   loadMoreMessages = () => {
-    const { totalMessages } = this.props
+    const { room } = this.props
     const { page, limit } = this.state
-
-    if (totalMessages <= page * limit) return null
-
+    if (room.totalMessages <= page * limit) return null
     return this.load(page + 1)
   }
 
-  scrollBottom = () => {
+  scrollBottom = () =>
     this.setState({ isScrollingBottom: true })
-  }
 
-  forceScrollBottom = () => {
+  forceScrollBottom = () =>
     this.setState({ isForceScrollingBottom: true })
-  }
 
   disableScrolling = async () => {
     await wait(500)
     this.setState({ isScrollingBottom: false })
   }
 
-  disableForceScrolling = () => {
+  disableForceScrolling = () =>
     this.setState({ isForceScrollingBottom: false })
-  }
 
   render() {
-    const { classes, messages, invite_token } = this.props
+    const { classes, room, onLeave } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
       <div className={classes.root}>
-        <ChatBody
-          isScrollingBottom={isScrollingBottom}
-          isForceScrollingBottom={isForceScrollingBottom}
-          onScrollBottom={this.disableScrolling}
-          onScrollTop={this.loadMoreMessages}
-          onForceScrollBottom={this.disableForceScrolling}
-        >
-          <Messages isLoading={isLoading} messages={messages || []} />
-        </ChatBody>
-        <ChatForm invite_token={invite_token} onSubmit={this.sendMessage} />
+        <ChatHeader room={room} onLeave={onLeave} />
+        <div className={classes.body}>
+          <ChatBody
+            isScrollingBottom={isScrollingBottom}
+            isForceScrollingBottom={isForceScrollingBottom}
+            onScrollBottom={this.disableScrolling}
+            onScrollTop={this.loadMoreMessages}
+            onForceScrollBottom={this.disableForceScrolling}
+          >
+            <Messages isLoading={isLoading} messages={room.messages || []} />
+          </ChatBody>
+          <ChatForm invite_token={room.invite_token} onSubmit={this.sendMessage} />
+        </div>
       </div>
     )
   }
@@ -107,11 +107,11 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
-  messages: arrayOf(messageShape).isRequired,
-  totalMessages: number.isRequired,
-  invite_token: string.isRequired,
+  room: roomShape.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
+  onMount: func.isRequired,
+  onLeave: func.isRequired,
 }
 
 export default withStyles(styles)(Chat)
