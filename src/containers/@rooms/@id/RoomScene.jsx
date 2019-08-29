@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, shape, string, func } from 'prop-types'
+import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import { InviteButton, Load, RoomTitle } from 'components'
@@ -47,7 +47,7 @@ class RoomScene extends Component {
 
   render() {
     const { classes, redux } = this.props
-    const { room, loadMessages, loadRoom, sendMessage } = redux
+    const { room, isGuest, loadMessages, loadRoom, sendMessage, joinRoom } = redux
 
     return (
       <Load promise={loadRoom}>
@@ -59,10 +59,12 @@ class RoomScene extends Component {
             </div>
             <Chat
               room={room}
+              isGuest={isGuest}
               onLoad={loadMessages}
               onSend={sendMessage}
               onLeave={this.leaveRoom}
               onMount={this.receiveMessage}
+              onJoin={joinRoom}
             />
           </section>
         )}
@@ -76,20 +78,24 @@ RoomScene.propTypes = {
   history: shape({ push: func.isRequired, }),
   match: shape({ params: shape({ id: string.isRequired, }), }),
   redux: shape({
+    isGuest: bool.isRequired,
     loadRoom: func.isRequired,
     loadMessages: func.isRequired,
     leaveRoom: func.isRequired,
+    joinRoom: func.isRequired,
     subscribe: func.isRequired,
     unsubscribe: func.isRequired,
   })
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
+  isGuest: !select.rooms.guests.exist(state, id),
   room: select.rooms.current(state, id),
   loadRoom: () => actions.rooms.load(id),
   loadMessages: params => actions.rooms.messages.loadMany(id, params),
   leaveRoom: actions.rooms.leave,
-  sendMessage: form => actions.rooms.messages.create(id, form),
+  joinRoom: actions.rooms.join,
+  sendMessage: form => actions.rooms.messages.create(id, { ...form, user_id: state.auth.user_id }),
   subscribe: actions.rooms.subscribe,
   unsubscribe: actions.rooms.unsubscribe,
 })

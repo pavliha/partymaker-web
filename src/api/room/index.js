@@ -24,6 +24,10 @@ const room = {
   leave(id) {
     return Http.delete(`/rooms/${id}`)
   },
+
+  join(room) {
+    return Http.post(`/invite/accept/${room.id}`)
+  }
 }
 
 export default room

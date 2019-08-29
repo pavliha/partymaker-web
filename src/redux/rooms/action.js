@@ -17,6 +17,8 @@ export const SET_ROOM = 'SET_ROOM'
 export const REMOVE_ROOM = 'REMOVE_ROOM'
 export const SUBSCRIBE = 'SUBSCRIBE'
 export const UNSUBSCRIBE = 'UNSUBSCRIBE'
+export const JOIN_ROOM = 'JOIN_ROOM'
+export const JOIN_ROOM_FULFILLED = 'JOIN_ROOM_FULFILLED'
 
 const subscribe = (room_id) => ({
   type: SUBSCRIBE,
@@ -46,6 +48,12 @@ const create = (form) => ({
 const update = (id, form) => ({
   type: UPDATE_ROOM,
   payload: room.update(id, form)
+})
+
+const join = (room_id) => ({
+  type: JOIN_ROOM,
+  payload: room.join(room_id),
+  meta: { room_id }
 })
 
 const leave = (room_id) => ({
@@ -78,6 +86,7 @@ export default {
   load,
   create,
   update,
+  join,
   leave,
   set,
   setMany,

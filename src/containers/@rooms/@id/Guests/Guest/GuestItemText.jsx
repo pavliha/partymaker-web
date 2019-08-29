@@ -44,7 +44,7 @@ class GuestItemText extends Component {
           </Typography>
         </div>
 
-        {guest.id !== user?.id && (
+        {user && (guest.id !== user.id) && (
           <aside className={classes.actions}>
             <CloseButton onClick={onClose} />
           </aside>

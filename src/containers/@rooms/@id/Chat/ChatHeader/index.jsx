@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import { object, func, bool } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Button, withStyles } from '@material-ui/core'
 import Time from './Time'
@@ -18,7 +18,10 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center'
   },
-  button: {
+  joinButton: {
+    color: theme.palette.primary.main,
+  },
+  leaveButton: {
     color: theme.palette.error.main,
   }
 })
@@ -43,8 +46,13 @@ class ChatHeader extends Component {
     await onLeave(room)
   }
 
+  joinRoom = () => {
+    const { room, onJoin } = this.props
+    onJoin(room)
+  }
+
   render() {
-    const { classes, room } = this.props
+    const { classes, room, isGuest } = this.props
     const { isLeaveRoomDialogOpen } = this.state
 
     return (
@@ -52,14 +60,28 @@ class ChatHeader extends Component {
         <PlaceTitle place={room.place} />
         <div className={classes.aside}>
           <Time>{room?.time}</Time>
-          <Button
-            className={classes.button}
-            color="inherit"
-            variant="outlined"
-            onClick={this.openLeaveRoomDialog}
-          >
-            Покинуть компанию
-          </Button>
+          {isGuest
+            ? (
+              <Button
+                className={classes.joinButton}
+                color="inherit"
+                variant="outlined"
+                onClick={this.joinRoom}
+              >
+                Присоеденится
+              </Button>
+            )
+            : (
+              <Button
+                className={classes.leaveButton}
+                color="inherit"
+                variant="outlined"
+                onClick={this.openLeaveRoomDialog}
+              >
+                Покинуть компанию
+              </Button>
+            )
+          }
         </div>
         <LeaveRoomDialog
           isOpen={isLeaveRoomDialogOpen}
@@ -74,6 +96,8 @@ class ChatHeader extends Component {
 ChatHeader.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
+  isGuest: bool,
+  onJoin: func.isRequired,
   onLeave: func.isRequired,
 }
 

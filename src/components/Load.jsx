@@ -44,7 +44,7 @@ class Load extends Component {
 Load.propTypes = {
   classes: object.isRequired,
   promise: func.isRequired,
-  children: node.isRequired,
+  children: node,
   onLoad: func.isRequired,
   onError: func.isRequired,
 }

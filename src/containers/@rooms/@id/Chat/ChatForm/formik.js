@@ -4,14 +4,13 @@ import to from 'util-to'
 import transformValidationApi from 'utils/transformValidationApi'
 import uniqId from 'uniqid'
 
-const initialValues = ({ redux: { auth_id } }) => ({
-    text: '',
-    asset_id: null,
-    place_id: null,
-    token: `temp-${uniqId()}`,
-    user_id: auth_id,
-    date: '',
-  })
+const initialValues = () => ({
+  text: '',
+  asset_id: null,
+  place_id: null,
+  token: `temp-${uniqId()}`,
+  date: '',
+})
 
 const formik = withFormik({
   validationSchema: Yup.object().shape({}),
