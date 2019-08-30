@@ -11,6 +11,7 @@ const styles = () => ({
   picture: {
     backgroundImage: (p) => `url(${p.place?.picture_url})`,
     backgroundColor: 'rgba(0,0,0,0.12)',
+    backgroundSize: 'cover',
     width: '90px',
     height: 50,
     borderRadius: 3,
