@@ -44,10 +44,11 @@ class RoomScene extends Component {
   closeAuthDialog = () =>
     this.setState({ isAuthDialogOpen: false })
 
-  joinRoom = async (room) => {
-    const { redux: { auth_id, joinRoom } } = this.props
+  joinRoom = async () => {
+    const { redux: { auth_id, joinRoom, room } } = this.props
     if (!auth_id) return this.showAuthDialog()
-    joinRoom(room.id)
+    await joinRoom(room.id)
+    this.closeAuthDialog()
   }
 
   leaveRoom = async (room) => {
@@ -88,7 +89,7 @@ class RoomScene extends Component {
         <AuthDialog
           isOpen={isAuthDialogOpen}
           onClose={this.closeAuthDialog}
-          onAuth={this.closeAuthDialog}
+          onAuth={this.joinRoom}
         />
       </Load>
     )
