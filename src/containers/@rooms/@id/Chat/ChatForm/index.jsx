@@ -3,15 +3,14 @@ import React, { Component } from 'react'
 import { Form, Field } from 'formik'
 import { bool, object, shape, string, func } from 'prop-types'
 import { IconButton, withStyles } from '@material-ui/core'
-import FormikMessageField from 'components/formik/MessageField'
-import AssetField from 'components/formik/AssetField'
+import { AssetField, MessageField } from 'components/formik'
 import formik from './formik'
 import SendIcon from 'mdi-react/SendIcon'
-import InviteOverlay from 'components/InviteOverlay'
-import FormActions from 'components/ChatFormActions'
-import OverlayManager from 'components/OverlayManager'
-import GuestOverlay from 'components/GuestOverlay'
-import DatetimeOverlay from 'components/DatetimeOverlay'
+import InviteOverlay from './InviteOverlay'
+import { ChatFormActions } from 'components'
+import OverlayManager from './OverlayManager'
+import GuestOverlay from './GuestOverlay'
+import DatetimeOverlay from './DatetimeOverlay'
 
 const styles = {
   root: {
@@ -52,12 +51,20 @@ class ChatForm extends Component {
   toggleDatetime = () =>
     this.setState(state => ({ isDatetimeOpen: !state.isDatetimeOpen }))
 
+  sendDateTimeMessage = ({ date, time }) => {
+    const { setFieldValue, submitForm } = this.props
+    setFieldValue('date', date)
+    setFieldValue('time', time)
+    submitForm()
+    this.toggleDatetime()
+  }
+
   render() {
     const { classes, values, invite_token, isGuest, onJoin, isMultipleGuests, isTimeSelected } = this.props
     const { isInviteOpen, isDatetimeOpen } = this.state
 
     const overlays = [
-      isDatetimeOpen && <DatetimeOverlay onChange={() => {}} onClose={this.toggleDatetime} />,
+      isDatetimeOpen && <DatetimeOverlay onSubmit={this.sendDateTimeMessage} onClose={this.toggleDatetime} />,
       isInviteOpen && <InviteOverlay invite_token={invite_token} onClose={this.toggleInvite} />,
       isGuest && <GuestOverlay onJoin={onJoin} />
     ]
@@ -65,13 +72,13 @@ class ChatForm extends Component {
     return (
       <Form className={classes.root}>
         <OverlayManager overlays={overlays}>
-          <Field name="text" className={classes.sendField} component={FormikMessageField} />
+          <Field name="text" className={classes.sendField} component={MessageField} />
           {values.text
             ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
             : <Field name="asset_id" component={AssetField} />
           }
         </OverlayManager>
-        <FormActions
+        <ChatFormActions
           isMultipleGuests={isMultipleGuests}
           isTimeSelected={isTimeSelected}
           onInvite={this.toggleInvite}
@@ -92,6 +99,8 @@ ChatForm.propTypes = {
   isTimeSelected: bool,
   onSubmit: func.isRequired,
   onJoin: func.isRequired,
+  setFieldValue: func.isRequired,
+  submitForm: func.isRequired,
 }
 
 export default withStyles(styles)(formik(ChatForm))

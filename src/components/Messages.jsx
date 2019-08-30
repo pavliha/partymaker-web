@@ -2,7 +2,7 @@ import React from 'react'
 import { arrayOf, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-import { Message, UserCaption } from 'components'
+import { Message, MessageUserCaption } from 'components'
 
 const styles = {
   message: {
@@ -23,9 +23,9 @@ const displayUserName = (message) => {
 const Messages = ({ classes, messages }) =>
   messages.map(message => (
     <div className={classes.message} key={message.id}>
-      <UserCaption isMine={message.isMine}>
+      <MessageUserCaption isMine={message.isMine}>
         {Boolean(message.user_id) && displayUserName(message)}
-      </UserCaption>
+      </MessageUserCaption>
       <Message message={message} />
     </div>
   ))

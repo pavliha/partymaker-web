@@ -3,8 +3,16 @@ import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import classNames from 'classnames'
-import { UserAvatar, MessageBubble, TextMessage, PictureMessage, FileMessage, NotificationMessage } from 'components'
 import isPicture from 'utils/isPicture'
+import {
+  UserAvatar,
+  MessageBubble,
+  TextMessage,
+  PictureMessage,
+  FileMessage,
+  NotificationMessage,
+  DateMessage
+} from 'components'
 
 const styles = {
   root: {
@@ -37,6 +45,10 @@ class Message extends Component {
           {(() => {
             if (!message.user_id) {
               return <NotificationMessage message={message} />
+            }
+
+            if (message.date) {
+              return <DateMessage message={message} />
             }
 
             if (isPicture(message.asset?.url)) {

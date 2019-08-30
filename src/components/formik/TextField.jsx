@@ -1,5 +1,5 @@
 import React from 'react'
-import { func, number, object, shape, string } from 'prop-types'
+import { func, number, object, shape, string, any } from 'prop-types'
 import { TextField } from '@material-ui/core'
 
 const FormikTextField = ({ field: { value, name, onChange, onBlur }, form, ...props }) =>
@@ -18,7 +18,7 @@ const FormikTextField = ({ field: { value, name, onChange, onBlur }, form, ...pr
 FormikTextField.propTypes = {
   field: shape({
     name: string,
-    value: string,
+    value: any,
     onChange: func,
     onBlur: func,
   }).isRequired,

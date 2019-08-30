@@ -6,14 +6,14 @@ const formik = withFormik({
   validationSchema: Yup.object().shape({}),
 
   mapPropsToValues: () => ({
-    date: new Date(),
+    date: '2019-08-29',
     time: '18:00'
   }),
 
-  handleSubmit: async (form, { props: { onSubmit }, setErrors, setSubmitting }) => {
+  handleSubmit: ({ date, time }, { props: { onSubmit }, setErrors, setSubmitting }) => {
     try {
       setSubmitting(true)
-      await onSubmit()
+      onSubmit({ date, time: time.substring(0, 5) })
     } catch (error) {
       setErrors(transformValidationApi(error))
     } finally {

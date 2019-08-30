@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Button, withStyles } from '@material-ui/core'
-import Time from 'components/TimeStatus'
-import { LeaveRoomDialog, PlaceTitle } from 'components'
+import { LeaveRoomDialog, PlaceTitle, DateTimeStatus } from 'components'
 
 const styles = theme => ({
   root: {
@@ -59,7 +58,7 @@ class ChatHeader extends Component {
       <div className={classes.root}>
         <PlaceTitle room_id={room.id} place={room.place} />
         <div className={classes.aside}>
-          <Time>{room?.time}</Time>
+          <DateTimeStatus date={room.date} time={room.time} />
           {isGuest
             ? (
               <Button

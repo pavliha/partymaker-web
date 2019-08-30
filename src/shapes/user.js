@@ -6,7 +6,7 @@ export default shape({
   email: string.isRequired,
   phone: string,
   pivot: shape({
-    is_online: oneOfType([bool, number]).isRequired,
+    is_online: oneOfType([bool, number]),
     last_seen: string,
   })
 })

@@ -9,7 +9,7 @@ const styles = {
   },
 }
 
-const UserCaption = ({ classes, isMine, children }) => {
+const MessageUserCaption = ({ classes, isMine, children }) => {
 
   if (!children) return null
 
@@ -28,10 +28,10 @@ const UserCaption = ({ classes, isMine, children }) => {
   )
 }
 
-UserCaption.propTypes = {
+MessageUserCaption.propTypes = {
   classes: object.isRequired,
   isMine: bool.isRequired,
   children: node
 }
 
-export default withStyles(styles)(UserCaption)
+export default withStyles(styles)(MessageUserCaption)
