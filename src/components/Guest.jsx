@@ -3,8 +3,8 @@ import { object, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, withStyles } from '@material-ui/core'
 import { UserAvatar } from 'components'
-import KickGuestDialog from './KickGuestDialog'
-import GuestItemText from './GuestItemText'
+import KickGuestDialog from 'components/KickGuestDialog'
+import GuestItemText from 'components/GuestItemText'
 
 const styles = {
   root: {

@@ -28,12 +28,10 @@ const NotificationMessage = ({ classes, message }) => {
     </div>
   )
 }
+
 NotificationMessage.propTypes = {
   classes: object.isRequired,
   message: messageShape.isRequired
 }
-// const isEqual = (prev, next) => {
-//   return prev.message.text === next.message.text
-// }
 
 export default withStyles(styles)(NotificationMessage)

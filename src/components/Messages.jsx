@@ -2,8 +2,7 @@ import React from 'react'
 import { arrayOf, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-import Message from './Message'
-import UserCaption from './UserCaption'
+import { Message, UserCaption } from 'components'
 
 const styles = {
   message: {

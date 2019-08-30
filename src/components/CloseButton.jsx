@@ -10,9 +10,9 @@ const styles = {
   },
 }
 
-const CloseButton = ({ classes, onClick, className }) =>
+const CloseButton = ({ classes, color, onClick, className }) =>
   <div className={classNames(classes.root, className)}>
-    <IconButton color="primary" onClick={onClick}>
+    <IconButton color={color} onClick={onClick}>
       <CloseIcon />
     </IconButton>
   </div>
@@ -20,7 +20,12 @@ const CloseButton = ({ classes, onClick, className }) =>
 CloseButton.propTypes = {
   classes: object.isRequired,
   className: string,
-  onClick: func.isRequired
+  onClick: func.isRequired,
+  color: string,
+}
+
+CloseButton.defaultProps = {
+  color: 'primary'
 }
 
 export default withStyles(styles)(CloseButton)

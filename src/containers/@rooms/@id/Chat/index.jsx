@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
+import wait from 'utils/wait'
 import roomShape from 'shapes/room'
+import { Loading, Messages } from 'components'
 import ChatBody from './ChatBody'
-import Messages from './Messages'
 import ChatForm from './ChatForm'
-import wait from 'src/utils/wait'
 import ChatHeader from './ChatHeader'
-import { Loading } from 'components/index'
 
 const styles = {
   root: {
@@ -117,6 +116,8 @@ class Chat extends Component {
           </ChatBody>
           <ChatForm
             isGuest={isGuest}
+            isTimeSelected={!!room.time}
+            isMultipleGuests={room.guests.length > 1}
             invite_token={room.invite_token}
             onJoin={this.join}
             onSubmit={this.sendMessage}

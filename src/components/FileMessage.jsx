@@ -4,7 +4,7 @@ import { IconButton, Typography, withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import DownloadIcon from 'mdi-react/DownloadIcon'
 import isPicture from 'utils/isPicture'
-import StatusCaption from './StatusCaption'
+import StatusCaption from './MessageStatus'
 
 const styles = () => ({
   root: {

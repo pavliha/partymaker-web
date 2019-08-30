@@ -9,7 +9,7 @@ const styles = {
   },
 }
 
-const Time = ({ classes, children }) =>
+const TimeStatus = ({ classes, children }) =>
   <Typography
     color="textSecondary"
     variant="body2"
@@ -18,9 +18,9 @@ const Time = ({ classes, children }) =>
     {children || 'время еще не выбрано'}
   </Typography>
 
-Time.propTypes = {
+TimeStatus.propTypes = {
   classes: object.isRequired,
   children: node,
 }
 
-export default withStyles(styles)(Time)
+export default withStyles(styles)(TimeStatus)

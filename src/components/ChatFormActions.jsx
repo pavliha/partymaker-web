@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object, func, bool } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 
@@ -22,26 +22,41 @@ const styles = {
   }
 }
 
-const FormActions = ({ classes, onInvite, onTime, onOrder }) =>
+const ChatFormActions = ({ classes, isMultipleGuests, isTimeSelected, onInvite, onTime, onOrder }) =>
   <div className={classes.root}>
-    <Button color="primary" className={classes.actionLabel} onClick={onInvite}>
+    <Button
+      color="primary"
+      className={classes.actionLabel}
+      onClick={onInvite}
+    >
       Пригласить друзей
     </Button>
     <KeyboardArrowRightIcon className={classes.arrow} />
-    <Button color="primary" disabled className={classes.actionLabel} onClick={onTime}>
+    <Button
+      color="primary" disabled={!isMultipleGuests}
+      className={classes.actionLabel}
+      onClick={onTime}
+    >
       Выбрать время
     </Button>
     <KeyboardArrowRightIcon className={classes.arrow} />
-    <Button color="primary" disabled className={classes.actionLabel} onClick={onOrder}>
+    <Button
+      color="primary"
+      disabled={!isTimeSelected}
+      className={classes.actionLabel}
+      onClick={onOrder}
+    >
       Заказать
     </Button>
   </div>
-FormActions.propTypes = {
+ChatFormActions.propTypes = {
   classes: object.isRequired,
+  isMultipleGuests: bool,
+  isTimeSelected: bool,
   onInvite: func.isRequired,
   onTime: func.isRequired,
   onOrder: func.isRequired,
 
 }
 
-export default withStyles(styles)(FormActions)
+export default withStyles(styles)(ChatFormActions)

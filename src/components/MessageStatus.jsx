@@ -25,7 +25,7 @@ const styles = theme => ({
   }
 })
 
-const StatusCaption = ({ className, classes, message }) =>
+const MessageStatus = ({ className, classes, message }) =>
   <div
     className={classNames({
       [classes.root]: true,
@@ -44,8 +44,9 @@ const StatusCaption = ({ className, classes, message }) =>
     )}
   </div>
 
-StatusCaption.propTypes = {
+MessageStatus.propTypes = {
   classes: object.isRequired,
+  className: string,
   message: shape({
     isMine: bool,
     is_read: oneOfType([number, bool]),
@@ -54,14 +55,4 @@ StatusCaption.propTypes = {
   }).isRequired,
 }
 
-// const isEqual = (prev, next) => {
-//   if (prev.message.isMine !== next.message.isMine) return false
-//   if (prev.message.is_read !== next.message.is_read) return false
-//   if (prev.message.isLoading !== next.message.isLoading) return false
-//   if (JSON.stringify(prev.classes) !== JSON.stringify(next.classes)) return false
-//
-//   return prev.message.created_at === next.message.created_at
-//
-// }
-
-export default withStyles(styles)(StatusCaption)
+export default withStyles(styles)(MessageStatus)

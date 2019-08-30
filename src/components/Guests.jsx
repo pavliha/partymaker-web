@@ -2,7 +2,7 @@ import React from 'react'
 import { object, arrayOf, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles, List } from '@material-ui/core'
-import Guest from './Guest'
+import Guest from 'components/Guest'
 
 const styles = {
   root: {

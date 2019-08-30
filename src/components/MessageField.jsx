@@ -2,8 +2,7 @@
 import { withStyles } from '@material-ui/core'
 import { string, func, object } from 'prop-types'
 import React, { Component } from 'react'
-import MessageInput from './MessageInput'
-import EmojiPicker from './EmojiPicker'
+import { MessageInput, EmojiPicker } from 'components'
 
 const styles = {
   root: {

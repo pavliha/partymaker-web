@@ -15,15 +15,15 @@ const styles = theme => ({
   }
 })
 
-const Bubble = ({ classes, children, isMine }) =>
+const MessageBubble = ({ classes, children, isMine }) =>
   <div className={classNames({ [classes.root]: true, isMine: isMine })}>
     {children}
   </div>
 
-Bubble.propTypes = {
+MessageBubble.propTypes = {
   classes: object.isRequired,
   children: node.isRequired,
   isMine: bool.isRequired,
 }
 
-export default withStyles(styles)(Bubble)
+export default withStyles(styles)(MessageBubble)

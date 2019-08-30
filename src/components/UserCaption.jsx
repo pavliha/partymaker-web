@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { object, bool, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 

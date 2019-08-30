@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { object } from 'prop-types'
-import AssetField from './AssetField'
+import AssetField from 'components/AssetField'
 
 class FormikAssetField extends Component {
 

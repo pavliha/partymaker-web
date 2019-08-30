@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { object } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
-import { DialogContent } from '@material-ui/core'
+import { DialogContent, withStyles } from '@material-ui/core'
 import { Loading } from 'components'
 
 const styles = {

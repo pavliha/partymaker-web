@@ -1,7 +1,8 @@
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component } from 'react'
 import { object, node, bool, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import background from './Background.max-300x300.jpg'
+import background from 'assets/images/chat-background.jpg'
 
 const styles = {
   root: {

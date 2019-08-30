@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Button, withStyles } from '@material-ui/core'
-import Time from './Time'
+import Time from 'components/TimeStatus'
 import { LeaveRoomDialog, PlaceTitle } from 'components'
 
 const styles = theme => ({

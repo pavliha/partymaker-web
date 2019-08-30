@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import { bool, object, func } from 'prop-types'
-import { Dialog, DialogActions, withStyles } from '@material-ui/core'
+import { Button, CircularProgress, Dialog, DialogActions, withStyles } from '@material-ui/core'
 import Asset from 'api/asset'
-import CancelButton from './CancelButton'
-import ConfirmButton from './ConfirmButton'
-import DialogPicture from './DialogPicture'
+import { DialogPicture } from 'components'
 
 const styles = {
   dialog: {
     maxWidth: 400,
-  }
+  },
+  confirmButton: {
+    marginLeft: 8,
+    marginRight: 5,
+  },
+  loading: {
+    marginRight: 3,
+  },
 }
 
 class ClipboardImageDialog extends Component {
@@ -48,11 +53,24 @@ class ClipboardImageDialog extends Component {
       >
         <DialogPicture file={file} />
         <DialogActions>
-          <CancelButton onClick={onClose} />
-          <ConfirmButton
-            isLoading={isLoading}
+          <Button onClick={onClose}>Отменить</Button>
+          <Button
+            className={classes.confirmButton}
             onClick={this.uploadAttachment}
-          />
+            variant="outlined"
+            color="primary"
+            autoFocus
+          >
+            {isLoading && (
+              <CircularProgress
+                className={classes.loading}
+                color="inherit"
+                debounce={0}
+                size={15}
+              />
+            )}
+            Отправить
+          </Button>
         </DialogActions>
       </Dialog>
     )

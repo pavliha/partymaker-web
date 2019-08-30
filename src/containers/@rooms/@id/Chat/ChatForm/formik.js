@@ -26,7 +26,7 @@ const formik = withFormik({
 
     setSubmitting(false)
   },
-  displayName: 'ChatForm',
+  displayName: 'DatetimeForm',
 })
 
 export default formik

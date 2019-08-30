@@ -3,7 +3,7 @@ import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
 import emojiRegex from 'emoji-regex'
-import StatusCaption from './StatusCaption'
+import { MessageStatus } from 'components'
 import replace from 'string-replace-to-array'
 
 const styles = () => ({
@@ -42,7 +42,7 @@ class TextMessage extends Component {
     return (
       <div className={classes.root}>
         <Typography className={classes.text}>{this.formatEmoji(message.text)}</Typography> {' '}
-        <StatusCaption message={message} />
+        <MessageStatus message={message} />
       </div>
     )
   }

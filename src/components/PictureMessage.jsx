@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-import { PictureDialog } from 'components'
-import StatusCaption from '../StatusCaption'
+import { PictureDialog, MessageStatus } from 'components'
 
 const styles = {
 
@@ -58,9 +57,8 @@ class PictureMessage extends Component {
             isOpen={isPictureModalOpen}
             onClose={this.closePictureModal}
           />
-
         </div>
-        <StatusCaption className={classes.caption} message={message} />
+        <MessageStatus className={classes.caption} message={message} />
       </>
 
     )

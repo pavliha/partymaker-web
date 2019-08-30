@@ -3,8 +3,8 @@ import { object, func, string } from 'prop-types'
 import { withStyles, IconButton, Tooltip, Typography } from '@material-ui/core'
 import CopyIcon from 'mdi-react/ContentCopyIcon'
 import wait from 'utils/wait'
-import CloseButton from 'components/CloseButton'
-import { FRONTEND_URL } from 'src/config/app'
+import { CloseButton } from 'components'
+import { FRONTEND_URL } from 'config/app'
 
 const styles = (theme) => ({
   root: {
@@ -44,7 +44,7 @@ class InviteOverlay extends Component {
     const { invite_token } = this.props
     const { clipboard } = navigator
     try {
-      await clipboard.writeText(`http://partymaker.zp.ua/${invite_token}`)
+      await clipboard.writeText(`${FRONTEND_URL}/${invite_token}`)
       this.setState({ isCopied: true })
       await wait(2000)
       this.setState({ isCopied: false })

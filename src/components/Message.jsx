@@ -2,13 +2,8 @@ import React, { Component } from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import messageShape from 'shapes/message'
-import { UserAvatar } from 'components'
 import classNames from 'classnames'
-import Bubble from './Bubble'
-import TextMessage from './types/TextMessage'
-import PictureMessage from './types/PictureMessage'
-import FileMessage from './types/FileMessage'
-import NotificationMessage from './types/NotificationMessage'
+import { UserAvatar, MessageBubble, TextMessage, PictureMessage, FileMessage, NotificationMessage } from 'components'
 import isPicture from 'utils/isPicture'
 
 const styles = {
@@ -38,7 +33,7 @@ class Message extends Component {
         [classes.center]: !message.user_id
       })}>
         {message.user && !message.isMine && <UserAvatar user={message.user} />}
-        <Bubble isMine={message.isMine}>
+        <MessageBubble isMine={message.isMine}>
           {(() => {
             if (!message.user_id) {
               return <NotificationMessage message={message} />
@@ -55,7 +50,7 @@ class Message extends Component {
             return <TextMessage message={message} />
           })()}
 
-        </Bubble>
+        </MessageBubble>
       </div>
     )
   }
