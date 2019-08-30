@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, string, func } from 'prop-types'
 import Asset from 'api/asset'
 import userShape from 'shapes/user'
-import { CircularProgress, IconButton, withStyles } from '@material-ui/core'
+import { CircularProgress, withStyles } from '@material-ui/core'
 import { UserAvatar } from 'components'
 import InsertPhotoIcon from 'mdi-react/CameraAltIcon'
 
@@ -25,10 +25,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: 'white',
+    color: 'rgba(255,255,255,0.7)',
     cursor: 'pointer',
     '&:focus,&:hover': {
       backgroundColor: 'rgba(0,0,0,0.6)',
+      color: 'rgba(255,255,255,1)',
     }
   },
   fileInput: {
@@ -40,7 +41,7 @@ const styles = {
   circular: {
     position: 'absolute',
     top: 0,
-  }
+  },
 }
 
 class AvatarField extends Component {
@@ -98,11 +99,9 @@ class AvatarField extends Component {
           onChange={this.upload}
         />
         <label htmlFor="upload-avatar" className={classes.cover}>
-          <IconButton color="secondary">
-            <label style={{ display: 'flex' }} htmlFor="upload-avatar">
-              <InsertPhotoIcon />
-            </label>
-          </IconButton>
+          <label style={{ display: 'flex' }} htmlFor="upload-avatar">
+            <InsertPhotoIcon />
+          </label>
         </label>
         {Boolean(loading) && (
           <CircularProgress
