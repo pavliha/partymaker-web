@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import React, { Component } from 'react'
-import { object, shape, func } from 'prop-types'
+import { object, shape, func, string } from 'prop-types'
 import { GoogleLogin } from 'react-google-login'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { Button, withStyles } from '@material-ui/core'
 import FacebookBoxIcon from 'mdi-react/FacebookBoxIcon'
 import GoogleIcon from 'mdi-react/GoogleIcon'
 import { actions, connect } from 'src/redux'
+import classNames from 'classnames'
 
 const styles = {
   root: {
@@ -68,10 +69,10 @@ class SocialLogin extends Component {
   }
 
   render() {
-    const { classes } = this.props
+    const { classes, className } = this.props
 
     return (
-      <div className={classes.root}>
+      <div className={classNames(classes.root, className)}>
         <FacebookLogin
           appId="2175525285996959"
           fields="name,email,picture"
@@ -113,6 +114,7 @@ class SocialLogin extends Component {
 
 SocialLogin.propTypes = {
   classes: object.isRequired,
+  className: string,
   onLogin: func.isRequired,
   redux: shape({
     loginWithFacebook: func.isRequired,

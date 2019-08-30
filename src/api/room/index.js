@@ -25,8 +25,8 @@ const room = {
     return Http.delete(`/rooms/${id}`)
   },
 
-  join(room) {
-    return Http.post(`/invite/accept/${room.id}`)
+  join(room_id) {
+    return Http.post(`/invite/accept/${room_id}`)
   }
 }
 

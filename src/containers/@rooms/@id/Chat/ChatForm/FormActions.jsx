@@ -1,5 +1,5 @@
 import React from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 
@@ -22,9 +22,9 @@ const styles = {
   }
 }
 
-const FormActions = ({ classes, isGuest, onInvite, onTime, onOrder }) =>
+const FormActions = ({ classes, onInvite, onTime, onOrder }) =>
   <div className={classes.root}>
-    <Button color="primary" disabled={isGuest} className={classes.actionLabel} onClick={onInvite}>
+    <Button color="primary" className={classes.actionLabel} onClick={onInvite}>
       Пригласить друзей
     </Button>
     <KeyboardArrowRightIcon className={classes.arrow} />
@@ -38,7 +38,6 @@ const FormActions = ({ classes, isGuest, onInvite, onTime, onOrder }) =>
   </div>
 FormActions.propTypes = {
   classes: object.isRequired,
-  isGuest: bool,
   onInvite: func.isRequired,
   onTime: func.isRequired,
   onOrder: func.isRequired,

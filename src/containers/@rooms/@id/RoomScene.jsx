@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
-import { InviteButton, Load, RoomTitle } from 'components'
+import { InviteButton, Load, RoomTitle, AuthDialog } from 'components'
 import Guests from './Guests'
 import Chat from './Chat'
 import Socket from 'services/Socket'
@@ -23,6 +23,10 @@ const styles = {
 
 class RoomScene extends Component {
 
+  state = {
+    isAuthDialogOpen: false,
+  }
+
   constructor(props) {
     super(props)
     const { redux: { subscribe }, match } = props
@@ -32,6 +36,18 @@ class RoomScene extends Component {
   componentWillUnmount() {
     const { redux: { unsubscribe }, match } = this.props
     unsubscribe(match.params.id)
+  }
+
+  showAuthDialog = () =>
+    this.setState({ isAuthDialogOpen: true })
+
+  closeAuthDialog = () =>
+    this.setState({ isAuthDialogOpen: false })
+
+  joinRoom = async (room) => {
+    const { redux: { auth_id, joinRoom } } = this.props
+    if (!auth_id) return this.showAuthDialog()
+    joinRoom(room.id)
   }
 
   leaveRoom = async (room) => {
@@ -47,7 +63,8 @@ class RoomScene extends Component {
 
   render() {
     const { classes, redux } = this.props
-    const { room, isGuest, loadMessages, loadRoom, sendMessage, joinRoom } = redux
+    const { isAuthDialogOpen } = this.state
+    const { room, isGuest, loadMessages, loadRoom, sendMessage } = redux
 
     return (
       <Load promise={loadRoom}>
@@ -60,14 +77,19 @@ class RoomScene extends Component {
             <Chat
               room={room}
               isGuest={isGuest}
+              onMount={this.receiveMessage}
               onLoad={loadMessages}
               onSend={sendMessage}
+              onJoin={this.joinRoom}
               onLeave={this.leaveRoom}
-              onMount={this.receiveMessage}
-              onJoin={joinRoom}
             />
           </section>
         )}
+        <AuthDialog
+          isOpen={isAuthDialogOpen}
+          onClose={this.closeAuthDialog}
+          onAuth={this.closeAuthDialog}
+        />
       </Load>
     )
   }
@@ -89,6 +111,7 @@ RoomScene.propTypes = {
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
+  auth_id: state.auth.user_id,
   isGuest: !select.rooms.guests.exist(state, id),
   room: select.rooms.current(state, id),
   loadRoom: () => actions.rooms.load(id),
