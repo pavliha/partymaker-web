@@ -1,7 +1,8 @@
-import React from 'react'
-import { object } from 'prop-types'
+import React, { Component } from 'react'
+import { number, object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
+import { EntertainmentsDrawer } from 'components'
 
 const styles = () => ({
   root: {
@@ -9,6 +10,7 @@ const styles = () => ({
     alignItems: 'center',
   },
   picture: {
+    cursor: 'pointer',
     backgroundImage: (p) => `url(${p.place?.picture_url})`,
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundSize: 'cover',
@@ -18,22 +20,58 @@ const styles = () => ({
     marginRight: 5,
   },
   title: {
+    cursor: 'pointer',
     fontSize: 18,
   }
 })
 
-const PlaceTitle = ({ classes, place }) =>
-  <div className={classes.root}>
-    <div className={classes.picture} />
-    <div>
-      <Typography className={classes.title}>{place?.title || 'Выбрать место'}</Typography>
-      <Typography color="textSecondary" variant="caption">{place?.price || 'Место еще не выбрано'}</Typography>
-    </div>
-  </div>
+class PlaceTitle extends Component {
+
+  state = {
+    isDrawerOpen: false,
+  }
+
+  openPlacesDrawer = () =>
+    this.setState({ isDrawerOpen: true })
+
+  closePlacesDrawer = () =>
+    this.setState({ isDrawerOpen: false })
+
+  render() {
+    const { classes, room_id, place } = this.props
+    const { isDrawerOpen } = this.state
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.picture} onClick={this.openPlacesDrawer} />
+        <div>
+          <Typography
+            className={classes.title}
+            onClick={this.openPlacesDrawer}
+          >
+            {place?.title || 'Выбрать место'}
+          </Typography>
+          <Typography
+            color="textSecondary"
+            variant="caption"
+          >
+            {place?.price || 'Место еще не выбрано'}
+          </Typography>
+        </div>
+        <EntertainmentsDrawer
+          room_id={room_id}
+          isOpen={isDrawerOpen}
+          onClose={this.closePlacesDrawer}
+        />
+      </div>
+    )
+  }
+}
 
 PlaceTitle.propTypes = {
   classes: object.isRequired,
   place: placeShape,
+  room_id: number,
 }
 
 export default withStyles(styles)(PlaceTitle)

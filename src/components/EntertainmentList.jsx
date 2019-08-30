@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import { object, func, array, shape } from 'prop-types'
+import { object, func, array, shape, string, number } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { connect, actions, select } from 'src/redux'
 import { Load, EntertainmentGroup } from 'components'
+import classNames from 'classnames'
 
 const styles = {
   root: {
     paddingTop: 30,
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
   },
   container: {},
   title: {
@@ -21,22 +21,24 @@ const styles = {
 class EntertainmentList extends Component {
 
   newRoom = async (entertainment, place) => {
-    const { redux: { createRoom }, onCreated } = this.props
-    const action = await createRoom({
+    const { redux: { createRoom, updateRoom }, onCreated, room_id } = this.props
+    const form = {
       title: entertainment.title,
       place_id: place.id,
-    })
-
+    }
+    const action = await room_id ? updateRoom(room_id, form) : createRoom(form)
     onCreated(action.value)
 
     return action
   }
 
   render() {
-    const { classes, redux: { entertainments, loadEntertainments } } = this.props
+    const { classes, className, redux, buttonTitle } = this.props
+    const { entertainments, loadEntertainments } = redux
+
     return (
       <Load promise={loadEntertainments}>
-        <section className={classes.root}>
+        <section className={classNames(classes.root, className)}>
           <div className={classes.container}>
             <Typography className={classes.title} variant="h5">
               Что бы вы хотели сделать с друзьями?
@@ -44,6 +46,7 @@ class EntertainmentList extends Component {
 
             {entertainments.map(entertainment =>
               <EntertainmentGroup
+                buttonTitle={buttonTitle}
                 key={entertainment.id}
                 entertainment={entertainment}
                 onIWantThis={this.newRoom}
@@ -59,16 +62,24 @@ class EntertainmentList extends Component {
 
 EntertainmentList.propTypes = {
   classes: object.isRequired,
-  onCreated: func.isRequired,
+  className: string,
+  room_id: number,
+  buttonTitle: string,
+  onCreated: func,
   redux: shape({
     entertainments: array,
     loadEntertainments: func.isRequired,
   })
 }
+
+EntertainmentList.defaultProps = {
+  onCreated: () => {}
+}
 const redux = state => ({
   entertainments: select.entertainments.all(state),
   loadEntertainments: actions.entertainments.loadMany,
-  createRoom: actions.rooms.create
+  createRoom: actions.rooms.create,
+  updateRoom: actions.rooms.update,
 })
 
 export default withStyles(styles)(connect(redux)(EntertainmentList))

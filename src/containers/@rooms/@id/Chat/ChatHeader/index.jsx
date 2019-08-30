@@ -57,7 +57,7 @@ class ChatHeader extends Component {
 
     return (
       <div className={classes.root}>
-        <PlaceTitle place={room.place} />
+        <PlaceTitle room_id={room.id} place={room.place} />
         <div className={classes.aside}>
           <Time>{room?.time}</Time>
           {isGuest

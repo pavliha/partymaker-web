@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
 import { Typography, withStyles, Button } from '@material-ui/core'
 import placeShape from 'shapes/place'
 
@@ -58,7 +58,7 @@ class PlaceCard extends Component {
   }
 
   render() {
-    const { classes, place } = this.props
+    const { classes, place, buttonTitle } = this.props
     const { isCreating } = this.state
 
     return (
@@ -79,7 +79,7 @@ class PlaceCard extends Component {
             color="primary"
             onClick={this.iWantHere}
           >
-            ХОЧУ СЮДА
+            {buttonTitle}
           </Button>
         </div>
       </div>
@@ -91,6 +91,10 @@ PlaceCard.propTypes = {
   classes: object.isRequired,
   place: placeShape.isRequired,
   onIWantHere: func.isRequired,
+  buttonTitle: string,
+}
+PlaceCard.defaultProps = {
+  buttonTitle: 'ХОЧУ СЮДА'
 }
 
 export default withStyles(styles)(PlaceCard)

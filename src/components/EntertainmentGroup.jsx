@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { Expand, PlaceCard } from 'components'
+import entertainmentShape from 'shapes/entertainment'
 
 const styles = {
   root: {},
@@ -19,13 +20,18 @@ class EntertainmentGroup extends Component {
   }
 
   render() {
-    const { classes, entertainment } = this.props
+    const { classes, entertainment, buttonTitle } = this.props
     return (
       <section className={classes.root}>
         <Expand title={entertainment.title}>
           <div className={classes.places}>
             {entertainment.places.map(place =>
-              <PlaceCard key={place.id} place={place} onIWantHere={this.wantThis} />
+              <PlaceCard
+                key={place.id}
+                place={place}
+                onIWantHere={this.wantThis}
+                buttonTitle={buttonTitle}
+              />
             )}
           </div>
         </Expand>
@@ -35,7 +41,9 @@ class EntertainmentGroup extends Component {
 }
 
 EntertainmentGroup.propTypes = {
+  entertainment: entertainmentShape,
   classes: object.isRequired,
+  buttonTitle: string,
   onIWantThis: func.isRequired,
 }
 
