@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { object, func, string } from 'prop-types'
-import { withStyles, IconButton, Tooltip } from '@material-ui/core'
+import { withStyles, IconButton, Tooltip, Typography } from '@material-ui/core'
 import CopyIcon from 'mdi-react/ContentCopyIcon'
 import wait from 'utils/wait'
 import CloseButton from 'components/CloseButton'
@@ -8,6 +8,7 @@ import { FRONTEND_URL } from 'src/config/app'
 
 const styles = (theme) => ({
   root: {
+    position: 'relative',
     flexGrow: 1,
     height: 72,
     overflow: 'auto',
@@ -24,6 +25,11 @@ const styles = (theme) => ({
   },
   container: {
     flex: 1,
+  },
+  caption: {
+    position: 'absolute',
+    top: 5,
+    left: 60,
   }
 
 })
@@ -52,6 +58,9 @@ class InviteOverlay extends Component {
     const { isCopied } = this.state
     return (
       <div className={classes.root}>
+        <Typography color="textSecondary" variant="caption" className={classes.caption}>
+          Скопируй эту ссылку и отправь друзьям что бы пригласить
+        </Typography>
         <div className={classes.container}>
           <Tooltip title="Скопировать сслыку">
             <IconButton onClick={this.copy} className={classes.icon}><CopyIcon /></IconButton>

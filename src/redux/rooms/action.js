@@ -1,4 +1,4 @@
-import room from 'api/room'
+import api from 'api'
 import messages from './messages/action'
 import guests from './guests/action'
 
@@ -32,33 +32,33 @@ const unsubscribe = () => ({
 
 const loadMany = () => ({
   type: LOAD_ROOMS,
-  payload: room.loadMany()
+  payload: api.auth.rooms.loadMany()
 })
 
 const load = (room_id) => ({
   type: LOAD_ROOM,
-  payload: room.load(room_id)
+  payload: api.room.load(room_id)
 })
 
 const create = (form) => ({
   type: CREATE_ROOM,
-  payload: room.create(form)
+  payload: api.room.create(form)
 })
 
 const update = (id, form) => ({
   type: UPDATE_ROOM,
-  payload: room.update(id, form)
+  payload: api.room.update(id, form)
 })
 
 const join = (room_id) => ({
   type: JOIN_ROOM,
-  payload: room.join(room_id),
+  payload: api.room.join(room_id),
   meta: { room_id }
 })
 
 const leave = (room_id) => ({
   type: LEAVE_ROOM,
-  payload: room.leave(room_id),
+  payload: api.room.leave(room_id),
   meta: { room_id }
 })
 

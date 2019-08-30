@@ -55,6 +55,7 @@ class Load extends Component {
           <div className={classes.errorContainer}>
             <ErrorIcon className={classes.error} />
             <Typography color="textSecondary">{error.message}</Typography>
+            <Typography color="textSecondary">{error.error.message}</Typography>
           </div>
         </div>
       )

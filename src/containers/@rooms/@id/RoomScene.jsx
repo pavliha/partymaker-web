@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
-import { InviteButton, Load, RoomTitle, AuthDialog } from 'components'
+import { Invite, Load, RoomTitle, AuthDialog } from 'components'
 import Guests from './Guests'
 import Chat from './Chat'
 import Socket from 'services/Socket'
@@ -71,7 +71,7 @@ class RoomScene extends Component {
         {room && (
           <section className={classes.root}>
             <div className={classes.guests}>
-              <RoomTitle room={room} action={<InviteButton onClick={() => {}} />} />
+              <RoomTitle room={room} action={<Invite invite_token={room.invite_token} />} />
               <Guests guests={room.guests} onKick={() => {}} />
             </div>
             <Chat

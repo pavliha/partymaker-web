@@ -20,7 +20,7 @@ const defineRelationsFrom = (models) => ([
   [models.place, actions.places.setMany],
 ])
 
-function* setRooms({ payload: { data: rooms } }) {
+function* setRooms({ payload: rooms }) {
   const models = normalize(rooms, 'room')
   const relations = defineRelationsFrom(models)
   yield putRelationsToStore(models, relations)
