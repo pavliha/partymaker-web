@@ -13,6 +13,9 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import theme from 'config/theme'
 import { store } from 'src/redux'
 import './index.css'
+import moment from 'moment'
+
+moment.locale('ru')
 
 const App = () =>
   <ThemeProvider theme={createMuiTheme(theme)}>
