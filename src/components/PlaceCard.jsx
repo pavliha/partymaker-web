@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { object, func, string } from 'prop-types'
 import { Typography, withStyles, Button } from '@material-ui/core'
 import placeShape from 'shapes/place'
+import { Picture } from 'components'
 
 const styles = {
   root: {
@@ -46,40 +47,54 @@ const styles = {
 class PlaceCard extends Component {
 
   state = {
-    isCreating: false
+    isLoading: false
   }
 
   iWantHere = async () => {
-    const { place, onIWantHere } = this.props
-    this.setState({ isCreating: true, })
-    await onIWantHere(place)
-    this.setState({ isCreating: false, })
-
+    const { place, onSelect } = this.props
+    this.setState({ isLoading: true, })
+    await onSelect(place)
+    this.setState({ isLoading: false, })
   }
 
   render() {
     const { classes, place, buttonTitle } = this.props
-    const { isCreating } = this.state
+    const { isLoading } = this.state
 
     return (
       <div className={classes.root}>
-        <div className={classes.picture} onClick={this.iWantHere} />
+        <Picture
+          src={place.picture_url}
+          className={classes.picture}
+          onClick={this.iWantHere}
+        />
         <div className={classes.container}>
-          <Typography className={classes.title} onClick={this.iWantHere}>{place.title}</Typography>
-          <Typography color="textSecondary">{place.working_hours}</Typography>
+          <Typography
+            className={classes.title}
+            onClick={this.iWantHere}
+          >
+            {place.title}
+          </Typography>
+          <Typography color="textSecondary">
+            {place.working_hours}
+          </Typography>
         </div>
         <div className={classes.actions}>
           <div className={classes.secondaryActions}>
-            <a target="_blank" href={place.website_url}><Button className={classes.secondaryButton}>САЙТ</Button></a>
-            <a target="_blank" href={place.map_url}><Button className={classes.secondaryButton}>КАРТА</Button></a>
+            <a target="_blank" href={place.website_url}>
+              <Button className={classes.secondaryButton}>САЙТ</Button>
+            </a>
+            <a target="_blank" href={place.map_url}>
+              <Button className={classes.secondaryButton}>КАРТА</Button>
+            </a>
           </div>
           <Button
-            disabled={isCreating}
+            disabled={isLoading}
             variant="outlined"
             color="primary"
             onClick={this.iWantHere}
           >
-            {buttonTitle}
+            {isLoading ? 'Загрузка...' : buttonTitle}
           </Button>
         </div>
       </div>
@@ -90,7 +105,7 @@ class PlaceCard extends Component {
 PlaceCard.propTypes = {
   classes: object.isRequired,
   place: placeShape.isRequired,
-  onIWantHere: func.isRequired,
+  onSelect: func.isRequired,
   buttonTitle: string,
 }
 PlaceCard.defaultProps = {

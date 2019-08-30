@@ -29,7 +29,7 @@ class EntertainmentGroup extends Component {
               <PlaceCard
                 key={place.id}
                 place={place}
-                onIWantHere={this.wantThis}
+                onSelect={this.wantThis}
                 buttonTitle={buttonTitle}
               />
             )}

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { number, object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
-import { EntertainmentsDrawer } from 'components'
+import { EntertainmentsDrawer, Picture, PlaceDialog } from 'components'
 
 const styles = () => ({
   root: {
@@ -10,13 +10,8 @@ const styles = () => ({
     alignItems: 'center',
   },
   picture: {
-    cursor: 'pointer',
-    backgroundImage: (p) => `url(${p.place?.picture_url})`,
-    backgroundColor: 'rgba(0,0,0,0.12)',
-    backgroundSize: 'cover',
     width: '90px',
     height: 50,
-    borderRadius: 3,
     marginRight: 5,
   },
   title: {
@@ -28,26 +23,39 @@ const styles = () => ({
 class PlaceTitle extends Component {
 
   state = {
-    isDrawerOpen: false,
+    isSelectPlaceDrawerOpen: false,
+    inPlaceDialogOpen: false,
   }
 
   openPlacesDrawer = () =>
-    this.setState({ isDrawerOpen: true })
+    this.setState({ isSelectPlaceDrawerOpen: true })
 
   closePlacesDrawer = () =>
-    this.setState({ isDrawerOpen: false })
+    this.setState({ isSelectPlaceDrawerOpen: false })
+
+  openPlaceDrawer = () =>
+    this.setState({ inPlaceDialogOpen: true })
+
+  closePlaceDrawer = () =>
+    this.setState({ inPlaceDialogOpen: false })
 
   render() {
     const { classes, room_id, place } = this.props
-    const { isDrawerOpen } = this.state
+    const { isSelectPlaceDrawerOpen, inPlaceDialogOpen } = this.state
+
+    const handleClick = place ? this.openPlaceDrawer : this.openPlacesDrawer
 
     return (
       <div className={classes.root}>
-        <div className={classes.picture} onClick={this.openPlacesDrawer} />
+        <Picture
+          src={place?.picture_url}
+          className={classes.picture}
+          onClick={handleClick}
+        />
         <div>
           <Typography
             className={classes.title}
-            onClick={this.openPlacesDrawer}
+            onClick={handleClick}
           >
             {place?.title || 'Выбрать место'}
           </Typography>
@@ -60,9 +68,18 @@ class PlaceTitle extends Component {
         </div>
         <EntertainmentsDrawer
           room_id={room_id}
-          isOpen={isDrawerOpen}
+          isOpen={isSelectPlaceDrawerOpen}
           onClose={this.closePlacesDrawer}
         />
+        {place && (
+          <PlaceDialog
+            title="Место"
+            place={place}
+            isOpen={inPlaceDialogOpen}
+            onClose={this.closePlaceDrawer}
+            onReplace={this.openPlacesDrawer}
+          />
+        )}
       </div>
     )
   }

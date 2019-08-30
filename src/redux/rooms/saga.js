@@ -18,6 +18,7 @@ const defineRelationsFrom = (models) => ([
   [models.room, actions.rooms.setMany],
   [models.users, actions.users.setMany],
   [models.place, actions.places.setMany],
+  [models.entertainment, actions.entertainments.setMany],
 ])
 
 function* setRooms({ payload: rooms }) {
