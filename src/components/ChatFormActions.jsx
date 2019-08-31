@@ -1,6 +1,7 @@
 import React from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
+import roomShape from 'shapes/room'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 
 const styles = {
@@ -22,7 +23,7 @@ const styles = {
   }
 }
 
-const ChatFormActions = ({ classes, isMultipleGuests, isTimeSelected, onInvite, onTime, onOrder }) =>
+const ChatFormActions = ({ classes, room, onInvite, onTime, onOrder }) =>
   <div className={classes.root}>
     <Button
       color="primary"
@@ -33,7 +34,8 @@ const ChatFormActions = ({ classes, isMultipleGuests, isTimeSelected, onInvite, 
     </Button>
     <KeyboardArrowRightIcon className={classes.arrow} />
     <Button
-      color="primary" disabled={!isMultipleGuests}
+      color="primary"
+      disabled={room.guests.length <= 1}
       className={classes.actionLabel}
       onClick={onTime}
     >
@@ -42,17 +44,17 @@ const ChatFormActions = ({ classes, isMultipleGuests, isTimeSelected, onInvite, 
     <KeyboardArrowRightIcon className={classes.arrow} />
     <Button
       color="primary"
-      disabled={!isTimeSelected}
+      disabled={!room.time}
       className={classes.actionLabel}
       onClick={onOrder}
     >
       Заказать
     </Button>
   </div>
+
 ChatFormActions.propTypes = {
   classes: object.isRequired,
-  isMultipleGuests: bool,
-  isTimeSelected: bool,
+  room: roomShape.isRequired,
   onInvite: func.isRequired,
   onTime: func.isRequired,
   onOrder: func.isRequired,

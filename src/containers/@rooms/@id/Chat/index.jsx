@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import wait from 'utils/wait'
+import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
 import { Loading, Messages } from 'components'
 import ChatBody from './ChatBody'
@@ -90,7 +91,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { classes, room, isGuest, onLeave } = this.props
+    const { classes, auth, room, isGuest, onLeave } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
@@ -115,10 +116,9 @@ class Chat extends Component {
             }
           </ChatBody>
           <ChatForm
+            auth={auth}
             isGuest={isGuest}
-            isTimeSelected={!!room.time}
-            isMultipleGuests={room.guests.length > 1}
-            invite_token={room.invite_token}
+            room={room}
             onJoin={this.join}
             onSubmit={this.sendMessage}
           />
@@ -131,6 +131,7 @@ class Chat extends Component {
 Chat.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
+  auth: userShape,
   isGuest: bool,
   onLoad: func.isRequired,
   onSend: func.isRequired,

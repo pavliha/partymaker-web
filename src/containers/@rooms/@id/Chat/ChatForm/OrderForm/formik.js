@@ -2,15 +2,12 @@ import { withFormik } from 'formik'
 import * as Yup from 'yup'
 import to from 'util-to'
 import transformValidationApi from 'utils/transformValidationApi'
-import uniqId from 'uniqid'
 
-const initialValues = ({ auth }) => ({
-  text: '',
-  asset_id: null,
-  place_id: null,
-  token: `temp-${uniqId()}`,
-  user_id: auth.id,
-  date: '',
+const initialValues = ({ room, user }) => ({
+  date: room.date,
+  time: room.time,
+  guest_count: room.guests.length,
+  phone: user.phone,
 })
 
 const formik = withFormik({
@@ -19,7 +16,6 @@ const formik = withFormik({
   mapPropsToValues: initialValues,
 
   handleSubmit: async (form, { props, setErrors, setSubmitting, resetForm }) => {
-    if (!form.text && !form.asset_id && !form.place_id && !form.date) return
     setSubmitting(true)
     resetForm(initialValues(props))
     const [err] = await to(props.onSubmit(form))
@@ -27,7 +23,7 @@ const formik = withFormik({
 
     setSubmitting(false)
   },
-  displayName: 'DatetimeForm',
+  displayName: 'OrderForm',
 })
 
 export default formik

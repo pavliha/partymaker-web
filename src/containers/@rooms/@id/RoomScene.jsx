@@ -46,8 +46,8 @@ class RoomScene extends Component {
     this.setState({ isAuthDialogOpen: false })
 
   joinRoom = async () => {
-    const { redux: { auth_id, joinRoom, room } } = this.props
-    if (!auth_id) return this.showAuthDialog()
+    const { redux: { auth, joinRoom, room } } = this.props
+    if (!auth) return this.showAuthDialog()
     await joinRoom(room.id)
     this.closeAuthDialog()
   }
@@ -67,7 +67,7 @@ class RoomScene extends Component {
   render() {
     const { classes, redux } = this.props
     const { isAuthDialogOpen } = this.state
-    const { room, isGuest, loadMessages, loadRoom, sendMessage } = redux
+    const { auth, room, isGuest, loadMessages, loadRoom, sendMessage } = redux
 
     return (
       <Load promise={loadRoom}>
@@ -78,6 +78,7 @@ class RoomScene extends Component {
               <Guests guests={room.guests} onKick={() => {}} />
             </div>
             <Chat
+              auth={auth}
               room={room}
               isGuest={isGuest}
               onMount={this.receiveMessage}
@@ -114,14 +115,14 @@ RoomScene.propTypes = {
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
-  auth_id: state.auth.user_id,
-  isGuest: !select.rooms.guests.exist(state, id),
+  auth: select.auth.user(state),
   room: select.rooms.current(state, id),
+  isGuest: !select.rooms.guests.exist(state, id),
   loadRoom: () => actions.rooms.load(id),
   loadMessages: params => actions.rooms.messages.loadMany(id, params),
   leaveRoom: actions.rooms.leave,
   joinRoom: actions.rooms.join,
-  sendMessage: form => actions.rooms.messages.create(id, { ...form, user_id: state.auth.user_id }),
+  sendMessage: form => actions.rooms.messages.create(id, form),
   subscribe: actions.rooms.subscribe,
   unsubscribe: actions.rooms.unsubscribe,
 })

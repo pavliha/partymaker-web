@@ -2,15 +2,19 @@
 import React, { Component } from 'react'
 import { Form, Field } from 'formik'
 import { bool, object, shape, string, func } from 'prop-types'
-import { IconButton, withStyles } from '@material-ui/core'
-import { AssetField, MessageField } from 'components/formik'
-import formik from './formik'
+import { IconButton, withStyles, Dialog, DialogTitle } from '@material-ui/core'
 import SendIcon from 'mdi-react/SendIcon'
-import InviteOverlay from './InviteOverlay'
+import roomShape from 'shapes/room'
+import userShape from 'shapes/user'
+import { AssetField, MessageField } from 'components/formik'
 import { ChatFormActions } from 'components'
+import InviteOverlay from './InviteOverlay'
 import OverlayManager from './OverlayManager'
 import GuestOverlay from './GuestOverlay'
 import DatetimeOverlay from './DatetimeOverlay'
+import OrderForm from './OrderForm'
+import formik from './formik'
+import CloseButton from 'components/CloseButton'
 
 const styles = {
   root: {
@@ -35,6 +39,12 @@ const styles = {
   },
   arrow: {
     color: 'rgba(0, 0, 0, 0.12)'
+  },
+  orderTitle: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 2,
   }
 }
 
@@ -43,6 +53,7 @@ class ChatForm extends Component {
   state = {
     isInviteOpen: false,
     isDatetimeOpen: false,
+    isOrderDialogOpen: false,
   }
 
   toggleInvite = () =>
@@ -50,6 +61,9 @@ class ChatForm extends Component {
 
   toggleDatetime = () =>
     this.setState(state => ({ isDatetimeOpen: !state.isDatetimeOpen }))
+
+  toggleOrderDialog = () =>
+    this.setState(state => ({ isOrderDialogOpen: !state.isOrderDialogOpen }))
 
   sendDateTimeMessage = ({ date, time }) => {
     const { setFieldValue, submitForm } = this.props
@@ -60,12 +74,12 @@ class ChatForm extends Component {
   }
 
   render() {
-    const { classes, values, invite_token, isGuest, onJoin, isMultipleGuests, isTimeSelected } = this.props
-    const { isInviteOpen, isDatetimeOpen } = this.state
+    const { classes, values, room, isGuest, onJoin, auth, } = this.props
+    const { isInviteOpen, isDatetimeOpen, isOrderDialogOpen } = this.state
 
     const overlays = [
       isDatetimeOpen && <DatetimeOverlay onSubmit={this.sendDateTimeMessage} onClose={this.toggleDatetime} />,
-      isInviteOpen && <InviteOverlay invite_token={invite_token} onClose={this.toggleInvite} />,
+      isInviteOpen && <InviteOverlay invite_token={room.invite_token} onClose={this.toggleInvite} />,
       isGuest && <GuestOverlay onJoin={onJoin} />
     ]
 
@@ -79,12 +93,22 @@ class ChatForm extends Component {
           }
         </OverlayManager>
         <ChatFormActions
-          isMultipleGuests={isMultipleGuests}
-          isTimeSelected={isTimeSelected}
+          room={room}
           onInvite={this.toggleInvite}
           onTime={this.toggleDatetime}
-          onOrder={() => {}}
+          onOrder={this.toggleOrderDialog}
         />
+        <Dialog
+          open={isOrderDialogOpen}
+          onClose={this.toggleOrderDialog}
+        >
+          <div className={classes.orderTitle}>
+            <DialogTitle>Заказ</DialogTitle>
+            <CloseButton onClick={this.toggleOrderDialog} />
+          </div>
+          <OrderForm user={auth} room={room} />
+        </Dialog>
+
       </Form>
     )
   }
@@ -92,13 +116,13 @@ class ChatForm extends Component {
 
 ChatForm.propTypes = {
   classes: object.isRequired,
-  values: shape({ text: string.isRequired, }),
-  invite_token: string.isRequired,
+  room: roomShape.isRequired,
+  auth: userShape.isRequired,
   isGuest: bool,
-  isMultipleGuests: bool,
-  isTimeSelected: bool,
   onSubmit: func.isRequired,
   onJoin: func.isRequired,
+  // formik props
+  values: shape({ text: string.isRequired, }),
   setFieldValue: func.isRequired,
   submitForm: func.isRequired,
 }
