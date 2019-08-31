@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
-import { Invite, Load, RoomTitle, AuthDialog } from 'components'
-import Guests from 'components/Guests'
+import { Invite, Load, RoomTitle, AuthDialog, Guests } from 'components'
 import Chat from './Chat'
 
 const styles = {

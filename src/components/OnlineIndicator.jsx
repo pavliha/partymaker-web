@@ -6,12 +6,13 @@ const styles = () => ({
   root: {
     position: 'absolute',
     borderRadius: '100%',
-    bottom: 1,
-    right: 1,
+    bottom: -1,
+    right: -1,
     width: 10,
     height: 10,
     background: '#2dc24a',
-    boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
+    border: '2px solid white',
+    // boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
   },
 })
 

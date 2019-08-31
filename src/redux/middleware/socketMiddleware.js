@@ -8,7 +8,7 @@ const socketMiddleware = (listeners) => ({ dispatch, getState }) => next => asyn
   const { token } = getState().auth
 
   if (action.disconnect_socket) {
-    if (ws) ws.close()
+    if (ws?.ws) ws.close()
     next(action)
     return action
   }
