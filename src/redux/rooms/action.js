@@ -1,6 +1,7 @@
 import api from 'api'
 import messages from './messages/action'
 import guests from './guests/action'
+import orders from './orders/action'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
 export const LOAD_ROOMS_FULFILLED = 'LOAD_ROOMS_FULFILLED'
@@ -22,9 +23,7 @@ export const JOIN_ROOM_FULFILLED = 'JOIN_ROOM_FULFILLED'
 
 const subscribe = (room_id) => ({
   type: SUBSCRIBE,
-  connect_socket: {
-    room_id,
-  }
+  connect_socket: { room_id }
 })
 
 const unsubscribe = () => ({
@@ -82,6 +81,7 @@ const remove = room_id => ({
 export default {
   guests,
   messages,
+  orders,
   subscribe,
   unsubscribe,
   loadMany,

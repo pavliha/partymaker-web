@@ -1,7 +1,10 @@
 import Http from 'services/Http'
 import messages from './messages'
+import order from './order'
 
 const room = {
+
+  order,
 
   messages,
 

@@ -67,7 +67,7 @@ class RoomScene extends Component {
   render() {
     const { classes, redux } = this.props
     const { isAuthDialogOpen } = this.state
-    const { auth, room, isGuest, loadMessages, loadRoom, sendMessage } = redux
+    const { auth, room, isGuest, loadMessages, loadRoom, sendMessage, orderPlace } = redux
 
     return (
       <Load promise={loadRoom}>
@@ -86,6 +86,7 @@ class RoomScene extends Component {
               onSend={sendMessage}
               onJoin={this.joinRoom}
               onLeave={this.leaveRoom}
+              onOrder={orderPlace}
             />
           </section>
         )}
@@ -109,6 +110,7 @@ RoomScene.propTypes = {
     loadMessages: func.isRequired,
     leaveRoom: func.isRequired,
     joinRoom: func.isRequired,
+    orderPlace: func.isRequired,
     subscribe: func.isRequired,
     unsubscribe: func.isRequired,
   })
@@ -123,6 +125,7 @@ const redux = (state, { match: { params: { id } } }) => ({
   leaveRoom: actions.rooms.leave,
   joinRoom: actions.rooms.join,
   sendMessage: form => actions.rooms.messages.create(id, form),
+  orderPlace: (form) => actions.rooms.orders.create(id, form),
   subscribe: actions.rooms.subscribe,
   unsubscribe: actions.rooms.unsubscribe,
 })

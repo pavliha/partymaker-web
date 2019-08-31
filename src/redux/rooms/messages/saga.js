@@ -3,10 +3,10 @@ import { all, put, takeEvery } from 'redux-saga/effects'
 import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
 import {
-  LOAD_ROOM_MESSAGES_FULFILLED,
-  CREATE_ROOM_MESSAGE_PENDING,
-  CREATE_ROOM_MESSAGE_FULFILLED,
-  RECEIVE_ROOM_MESSAGE,
+  LOAD_MESSAGES_FULFILLED,
+  CREATE_MESSAGE_PENDING,
+  CREATE_MESSAGE_FULFILLED,
+  RECEIVE_MESSAGE,
 } from './action'
 
 /*
@@ -42,8 +42,8 @@ function* setMessage({ payload }) {
 
   if (asset) yield put(actions.assets.set(asset))
 
-  yield put(actions.messages.remove(message.token))
-  yield put(actions.messages.set(message))
+  yield put(actions.rooms.messages.remove(message.token))
+  yield put(actions.rooms.messages.set(message))
 }
 
 /*
@@ -51,7 +51,7 @@ function* setMessage({ payload }) {
  */
 function* setTempMessage({ meta: { room_id, form } }) {
   const tempMessage = createTempMessage(room_id, form)
-  yield put(actions.messages.set(tempMessage))
+  yield put(actions.rooms.messages.set(tempMessage))
 }
 
 /*
@@ -62,7 +62,7 @@ function* addMessages({ payload: { data } }) {
   const messages = data.map(createMessage)
   const assets = data.map(m => m.asset).filter(a => !!a)
 
-  yield put(actions.messages.setMany(messages))
+  yield put(actions.rooms.messages.setMany(messages))
   if (!isEmpty(assets)) yield put(actions.assets.setMany(assets))
 }
 
@@ -71,9 +71,9 @@ function* addMessages({ payload: { data } }) {
  */
 export default function* saga() {
   yield all([
-    takeEvery(LOAD_ROOM_MESSAGES_FULFILLED, addMessages),
-    takeEvery(CREATE_ROOM_MESSAGE_PENDING, setTempMessage),
-    takeEvery(CREATE_ROOM_MESSAGE_FULFILLED, setMessage),
-    takeEvery(RECEIVE_ROOM_MESSAGE, setMessage)
+    takeEvery(LOAD_MESSAGES_FULFILLED, addMessages),
+    takeEvery(CREATE_MESSAGE_PENDING, setTempMessage),
+    takeEvery(CREATE_MESSAGE_FULFILLED, setMessage),
+    takeEvery(RECEIVE_MESSAGE, setMessage)
   ])
 }

@@ -4,9 +4,8 @@ import { withStyles } from '@material-ui/core'
 import wait from 'utils/wait'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
-import { Loading, Messages } from 'components'
+import { Loading, Messages, ChatForm } from 'components'
 import ChatBody from './ChatBody'
-import ChatForm from './ChatForm'
 import ChatHeader from './ChatHeader'
 
 const styles = {
@@ -91,7 +90,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { classes, auth, room, isGuest, onLeave } = this.props
+    const { classes, auth, room, isGuest, onLeave, onOrder } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
@@ -121,6 +120,7 @@ class Chat extends Component {
             room={room}
             onJoin={this.join}
             onSubmit={this.sendMessage}
+            onOrder={onOrder}
           />
         </div>
       </div>
@@ -138,5 +138,6 @@ Chat.propTypes = {
   onMount: func.isRequired,
   onJoin: func.isRequired,
   onLeave: func.isRequired,
+  onOrder: func.isRequired,
 }
 export default withStyles(styles)(Chat)

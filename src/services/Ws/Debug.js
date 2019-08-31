@@ -1,5 +1,4 @@
 'use strict'
-
 /*
  * adonis-websocket-client
  *
@@ -9,7 +8,9 @@
  * file that was distributed with this source code.
 */
 
-if (process.env.DEBUG_WEBSOCKET) {
+const { DEBUG_WEBSOCKET } = require('config/app')
+
+if (DEBUG_WEBSOCKET !== 'false') {
   const Debug = require('debug')
   Debug.enable('adonis:*')
   module.exports = Debug('adonis:websocket')

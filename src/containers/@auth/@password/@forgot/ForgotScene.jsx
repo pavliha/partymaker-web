@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import { AuthCard } from 'components'
-import ForgotForm from './ForgotForm'
+import { AuthCard, PasswordForgotForm } from 'components'
 import { actions, connect } from 'src/redux'
 
 class ForgotScene extends Component {
@@ -21,7 +20,7 @@ class ForgotScene extends Component {
         title="Восстановление пароля"
         documentTitle="Восстановление пароля - Partymaker"
       >
-        <ForgotForm onSubmit={this.forgotPassword} />
+        <PasswordForgotForm onSubmit={this.forgotPassword} />
       </AuthCard>
     )
   }

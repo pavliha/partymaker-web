@@ -1,4 +1,4 @@
-import { LOAD_ROOM_MESSAGES_FULFILLED } from '../messages/action'
+import { LOAD_MESSAGES_FULFILLED } from '../messages/action'
 
 const initialState = {
   messages: {
@@ -10,7 +10,7 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
 
-    case LOAD_ROOM_MESSAGES_FULFILLED:
+    case LOAD_MESSAGES_FULFILLED:
       return {
         ...state,
         messages: {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { shape, string, func } from 'prop-types'
-import { AuthCard } from 'components'
-import ResetForm from './ResetForm'
+import { AuthCard, PasswordResetForm } from 'components'
 import { actions, connect } from 'src/redux'
 
 class ResetScene extends Component {
@@ -24,21 +23,15 @@ class ResetScene extends Component {
         title="Восстановление пароля"
         documentTitle="Восстановление пароля - Partymaker"
       >
-        <ResetForm onSubmit={this.resetPassword} />
+        <PasswordResetForm onSubmit={this.resetPassword} />
       </AuthCard>
     )
   }
 }
 
 ResetScene.propTypes = {
-  history: shape({
-    push: func.isRequired,
-  }),
-  match: shape({
-    params: shape({
-      hash: string.isRequired,
-    })
-  }).isRequired,
+  history: shape({ push: func.isRequired, }),
+  match: shape({ params: shape({ hash: string.isRequired }) }).isRequired,
   redux: shape({
     resetPassword: func.isRequired,
   })

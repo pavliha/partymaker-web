@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { object, func, bool, shape } from 'prop-types'
 import { Dialog, withStyles, Typography } from '@material-ui/core'
-import LoginForm from 'containers/@auth/@login/LoginForm'
-import SocialLogin from 'containers/@auth/SocialLogin'
-import RegisterForm from 'containers/@auth/@register/RegisterForm'
-import AuthCard from 'components/AuthCard'
+import SocialLogin from 'components/SocialLoginActions'
+import { AuthCard, RegisterForm, LoginForm } from 'components'
 import { connect, actions } from 'src/redux'
 
 const styles = {

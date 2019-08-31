@@ -26,7 +26,7 @@ export default (state, room_id) =>
     state => state.rooms.entities,
     state => select.places.all(state),
     state => select.users.all(state),
-    state => select.messages.all(state),
+    state => select.rooms.messages.all(state),
     state => state.rooms.status.messages.total,
     current(parseInt(room_id)),
   )(state)

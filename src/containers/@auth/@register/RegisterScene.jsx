@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import { AuthCard } from 'components'
-import RegisterForm from './RegisterForm'
+import { AuthCard, RegisterForm } from 'components'
 import { Helmet } from 'react-helmet'
 import Storage from 'services/Storage'
 import { actions, connect } from 'src/redux'
