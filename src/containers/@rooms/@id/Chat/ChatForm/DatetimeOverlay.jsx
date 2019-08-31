@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import React from 'react'
+import { func, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import DatetimeForm from './DatetimeForm'
 
@@ -14,17 +14,10 @@ const styles = (theme) => ({
   },
 })
 
-class DatetimeOverlay extends Component {
-  render() {
-    const { classes, onClose, onSubmit } = this.props
-
-    return (
-      <div className={classes.root}>
-        <DatetimeForm onClose={onClose} onSubmit={onSubmit} />
-      </div>
-    )
-  }
-}
+const DatetimeOverlay = ({ classes, onClose, onSubmit }) =>
+  <div className={classes.root}>
+    <DatetimeForm onClose={onClose} onSubmit={onSubmit} />
+  </div>
 
 DatetimeOverlay.propTypes = {
   classes: object.isRequired,

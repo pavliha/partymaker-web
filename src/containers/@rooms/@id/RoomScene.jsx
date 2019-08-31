@@ -5,7 +5,6 @@ import { actions, select, connect } from 'src/redux'
 import { Invite, Load, RoomTitle, AuthDialog } from 'components'
 import Guests from 'components/Guests'
 import Chat from './Chat'
-import Socket from 'services/Socket'
 
 const styles = {
   root: {
@@ -23,6 +22,8 @@ const styles = {
 
 class RoomScene extends Component {
 
+  topic = null
+
   state = {
     isAuthDialogOpen: false,
   }
@@ -30,12 +31,13 @@ class RoomScene extends Component {
   constructor(props) {
     super(props)
     const { redux: { subscribe }, match } = props
-    subscribe(match.params.id)
+    this.topic = subscribe(match.params.id)
   }
 
   componentWillUnmount() {
     const { redux: { unsubscribe }, match } = this.props
     unsubscribe(match.params.id)
+    this.topic = null
   }
 
   showAuthDialog = () =>
@@ -57,9 +59,10 @@ class RoomScene extends Component {
     history.push('/rooms')
   }
 
-  receiveMessage = (scrollBottom) => {
-    if (!Socket.socket) return
-    Socket.on('message', scrollBottom)
+  receiveMessage = async (scrollBottom) => {
+    if (!this.topic) return
+    const socket = await this.topic
+    socket.on('message', scrollBottom)
   }
 
   render() {

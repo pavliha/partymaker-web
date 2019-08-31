@@ -22,7 +22,9 @@ export const JOIN_ROOM_FULFILLED = 'JOIN_ROOM_FULFILLED'
 
 const subscribe = (room_id) => ({
   type: SUBSCRIBE,
-  connect_socket: `ws://localhost:3333/rooms/${room_id}`
+  connect_socket: {
+    room_id,
+  }
 })
 
 const unsubscribe = () => ({
