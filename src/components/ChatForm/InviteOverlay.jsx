@@ -25,13 +25,23 @@ const styles = (theme) => ({
   },
   container: {
     flex: 1,
+    display: 'flex',
+    alignItems: 'center',
   },
   caption: {
+    display: 'none',
     position: 'absolute',
     top: 5,
     left: 60,
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
+  },
+  invite: {
+    maxWidth: '70vw',
+    overflow: 'auto',
+    // textOverflow: 'ellipsis',
   }
-
 })
 
 class InviteOverlay extends Component {
@@ -62,10 +72,14 @@ class InviteOverlay extends Component {
           Скопируй эту ссылку и отправь друзьям что бы пригласить
         </Typography>
         <div className={classes.container}>
-          <Tooltip title="Скопировать сслыку">
-            <IconButton onClick={this.copy} className={classes.icon}><CopyIcon /></IconButton>
-          </Tooltip>
-          <span>{isCopied ? 'Пригласительная сслыка скопирована' : `${FRONTEND_URL}/invite/${invite_token}`}</span>
+          <div>
+            <Tooltip title="Скопировать сслыку">
+              <IconButton onClick={this.copy} className={classes.icon}><CopyIcon /></IconButton>
+            </Tooltip>
+          </div>
+          <div className={classes.invite}>
+            {isCopied ? 'Пригласительная сслыка скопирована' : `${FRONTEND_URL}/invite/${invite_token}`}
+          </div>
         </div>
         <CloseButton onClick={onClose} />
       </div>

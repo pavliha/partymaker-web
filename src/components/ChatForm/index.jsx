@@ -14,6 +14,7 @@ import GuestOverlay from './GuestOverlay'
 import DatetimeOverlay from './DatetimeOverlay'
 import OrderForm from '../OrderForm'
 import formik from './formik'
+import { FRONTEND_URL } from 'config/app'
 
 const styles = {
   root: {
@@ -49,8 +50,19 @@ class ChatForm extends Component {
     isOrderDialogOpen: false,
   }
 
-  toggleInvite = () =>
+  toggleInvite = () => {
+    const { room } = this.props
+    if (navigator.share) {
+      navigator.share({
+        title: 'Partymaker Invite',
+        text: room.title,
+        url: `${FRONTEND_URL}/invite/${room.invite_token}`,
+      })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error))
+    }
     this.setState(state => ({ isInviteOpen: !state.isInviteOpen }))
+  }
 
   toggleDatetime = () =>
     this.setState(state => ({ isDatetimeOpen: !state.isDatetimeOpen }))

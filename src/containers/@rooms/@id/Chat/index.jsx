@@ -104,10 +104,8 @@ class Chat extends Component {
             onScrollTop={this.loadMoreMessages}
             onForceScrollBottom={this.disableForceScrolling}
           >
-            {isLoading
-              ? <Loading className={classes.loading} />
-              : <Messages messages={room.messages || []} />
-            }
+            {isLoading && <Loading className={classes.loading} />}
+            <Messages messages={room.messages || []} />
           </ChatBody>
           <ChatForm
             auth={auth}
