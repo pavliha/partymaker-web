@@ -42,7 +42,7 @@ class RoomsScene extends Component {
         <Load promise={redux.loadRooms}>
           <div className={classes.container}>
             <div className={classes.actions}>
-              <Typography gutterBottom variant="h5">
+              <Typography variant="h5">
                 Мои компании
               </Typography>
               <Button

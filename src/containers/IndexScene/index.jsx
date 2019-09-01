@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { select, connect } from 'src/redux'
 import userShape from 'shapes/user'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
   },
@@ -25,7 +25,7 @@ const styles = {
     background: `url(${nightZP}) no-repeat`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: 940,
+    height: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-around',
@@ -33,6 +33,10 @@ const styles = {
   title: {
     color: 'white',
     maxWidth: 340,
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'left'
+    }
   },
   button: {
     borderRadius: '30px',
@@ -48,8 +52,23 @@ const styles = {
   container: {
     maxWidth: 1130,
     margin: '0 auto',
+  },
+  screenshot: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    }
+  },
+  entertainmentTitle: {
+    paddingTop: 30,
+    fontFamily: 'Google Sans,sans-serf',
+    fontSize: 24,
+    textAlign: 'center',
+    [theme.breakpoints.up('md')]: {
+      textAlign: 'left'
+    }
   }
-}
+})
 
 class IndexScene extends Component {
 
@@ -82,12 +101,15 @@ class IndexScene extends Component {
                 </Link>
               </div>
             </div>
-            <div>
+            <div className={classes.screenshot}>
               <img alt="screenshot" src={phone} />
             </div>
           </div>
         </section>
         <section className={classes.container}>
+          <Typography className={classes.entertainmentTitle} variant="h5">
+            Что бы вы хотели сделать с друзьями?
+          </Typography>
           <EntertainmentList onCreated={this.redirectToRoom} />
         </section>
       </main>

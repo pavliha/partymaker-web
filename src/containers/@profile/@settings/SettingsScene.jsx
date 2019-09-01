@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core'
 import { OutlineCard, ContactsForm, ProfileForm, PasswordChangeForm, AvatarForm } from 'components'
 import { select, connect, actions } from 'src/redux'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
     display: 'flex',
@@ -18,11 +18,13 @@ const styles = {
     flexDirection: 'column',
   },
   card: {
-    width: 450,
+    width: '100%',
     marginBottom: 30,
+    [theme.breakpoints.up('md')]: {
+      width: 450,
+    }
   },
-
-}
+})
 
 class SettingsScene extends Component {
 

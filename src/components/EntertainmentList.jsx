@@ -1,22 +1,7 @@
 import React, { Component } from 'react'
-import { object, func, array, shape, string, number } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { func, array, shape, string, number } from 'prop-types'
 import { connect, actions, select } from 'src/redux'
 import { Load, EntertainmentGroup } from 'components'
-import classNames from 'classnames'
-
-const styles = {
-  root: {
-    paddingTop: 30,
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  container: {},
-  title: {
-    fontFamily: 'Google Sans,sans-serf',
-    fontSize: 24,
-  }
-}
 
 class EntertainmentList extends Component {
 
@@ -33,36 +18,25 @@ class EntertainmentList extends Component {
   }
 
   render() {
-    const { classes, className, redux, buttonTitle } = this.props
+    const { redux, buttonTitle } = this.props
     const { entertainments, loadEntertainments } = redux
 
     return (
       <Load promise={loadEntertainments}>
-        <section className={classNames(classes.root, className)}>
-          <div className={classes.container}>
-            <Typography className={classes.title} variant="h5">
-              Что бы вы хотели сделать с друзьями?
-            </Typography>
-
-            {entertainments.map(entertainment =>
-              <EntertainmentGroup
-                buttonTitle={buttonTitle}
-                key={entertainment.id}
-                entertainment={entertainment}
-                onIWantThis={this.newRoom}
-              />
-            )}
-
-          </div>
-        </section>
+        {entertainments.map(entertainment =>
+          <EntertainmentGroup
+            buttonTitle={buttonTitle}
+            key={entertainment.id}
+            entertainment={entertainment}
+            onIWantThis={this.newRoom}
+          />
+        )}
       </Load>
     )
   }
 }
 
 EntertainmentList.propTypes = {
-  classes: object.isRequired,
-  className: string,
   room_id: number,
   buttonTitle: string,
   onCreated: func,
@@ -82,4 +56,4 @@ const redux = state => ({
   updateRoom: actions.rooms.update,
 })
 
-export default withStyles(styles)(connect(redux)(EntertainmentList))
+export default connect(redux)(EntertainmentList)

@@ -3,10 +3,13 @@ import { node, object } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Card, CardHeader } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
-    width: 400,
+    maxWidth: '100%',
     padding: 20,
+    [theme.breakpoints.up('md')]: {
+      width: 400,
+    }
   },
   title: {
     paddingLeft: 0,
@@ -14,7 +17,7 @@ const styles = {
     paddingBottom: 10,
     textAlign: 'center',
   },
-}
+})
 
 const AuthCard = ({ classes, children, title }) =>
   <Card className={classes.root}>

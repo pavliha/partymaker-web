@@ -4,13 +4,17 @@ import { withStyles } from '@material-ui/core'
 import { Expand, PlaceCard } from 'components'
 import entertainmentShape from 'shapes/entertainment'
 
-const styles = {
+const styles = theme => ({
   root: {},
   places: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    [theme.breakpoints.up('md')]: {
+      justifyContent: 'flex-start'
+    }
   }
-}
+})
 
 class EntertainmentGroup extends Component {
 

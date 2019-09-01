@@ -31,6 +31,7 @@ const styles = () => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-evenly',
+    padding: 15,
   },
   divider: {
     color: 'white',
