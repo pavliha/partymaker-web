@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, object, func } from 'prop-types'
-import { Header ,Entertainments} from 'components'
+import { Header, EntertainmentList } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles } from '@material-ui/core'
@@ -88,7 +88,7 @@ class IndexScene extends Component {
           </div>
         </section>
         <section className={classes.container}>
-          <Entertainments onCreated={this.redirectToRoom} />
+          <EntertainmentList onCreated={this.redirectToRoom} />
         </section>
       </main>
     )

@@ -8,7 +8,7 @@ const initialValues = ({ auth }) => ({
   text: '',
   asset_id: null,
   token: `temp-${uniqId()}`,
-  user_id: auth.id,
+  user_id: auth?.id,
   date: '',
 })
 

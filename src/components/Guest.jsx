@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { object, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, withStyles } from '@material-ui/core'
-import { UserAvatar } from 'components'
-import KickGuestDialog from 'components/KickGuestDialog'
-import GuestItemText from 'components/GuestItemText'
+import { UserAvatar, KickGuestDialog, GuestItemText } from 'components'
 
 const styles = {
   root: {
@@ -26,13 +24,11 @@ class Guest extends Component {
     isKickGuestDialogOpen: false,
   }
 
-  openKickGuestDialog = () => {
+  openKickGuestDialog = () =>
     this.setState({ isKickGuestDialogOpen: true })
-  }
 
-  closeKickGuestDialog = () => {
+  closeKickGuestDialog = () =>
     this.setState({ isKickGuestDialogOpen: false })
-  }
 
   kickGuest = () => {
     const { guest, onKick } = this.props

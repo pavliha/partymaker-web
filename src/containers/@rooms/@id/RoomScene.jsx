@@ -5,19 +5,22 @@ import { actions, select, connect } from 'src/redux'
 import { Invite, Load, RoomTitle, AuthDialog, Guests } from 'components'
 import Chat from './Chat'
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     maxHeight: 'calc(100vh - 65px)',
     flexGrow: 1,
   },
   guests: {
-    width: 380,
-    display: 'flex',
+    display: 'none',
     flexDirection: 'column',
-    borderRight: 'solid 1px rgba(0, 0, 0, 0.12)',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      borderRight: 'solid 1px rgba(0, 0, 0, 0.12)',
+      width: 380,
+    }
   },
-}
+})
 
 class RoomScene extends Component {
 
@@ -52,8 +55,8 @@ class RoomScene extends Component {
     this.closeAuthDialog()
   }
 
-  leaveRoom = async (room) => {
-    const { redux: { leaveRoom }, history } = this.props
+  leaveRoom = async () => {
+    const { redux: { leaveRoom, room }, history } = this.props
     await leaveRoom(room.id)
     history.push('/rooms')
   }
@@ -67,7 +70,7 @@ class RoomScene extends Component {
   render() {
     const { classes, redux } = this.props
     const { isAuthDialogOpen } = this.state
-    const { auth, room, isGuest, loadMessages, loadRoom, sendMessage, orderPlace } = redux
+    const { auth, room, isGuest, loadMessages, loadRoom, sendMessage, orderPlace, kickGuest } = redux
 
     return (
       <Load promise={loadRoom}>
@@ -75,7 +78,10 @@ class RoomScene extends Component {
           <section className={classes.root}>
             <div className={classes.guests}>
               <RoomTitle room={room} action={<Invite invite_token={room.invite_token} />} />
-              <Guests guests={room.guests} onKick={() => {}} />
+              <Guests
+                guests={room.guests}
+                onKick={kickGuest}
+              />
             </div>
             <Chat
               auth={auth}
@@ -126,6 +132,7 @@ const redux = (state, { match: { params: { id } } }) => ({
   joinRoom: actions.rooms.join,
   sendMessage: form => actions.rooms.messages.create(id, form),
   orderPlace: (form) => actions.rooms.orders.create(id, form),
+  kickGuest: guest => actions.rooms.guests.kick(id, guest.id),
   subscribe: actions.rooms.subscribe,
   unsubscribe: actions.rooms.unsubscribe,
 })

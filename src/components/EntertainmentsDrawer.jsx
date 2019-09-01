@@ -1,15 +1,17 @@
 import React from 'react'
 import { object, func, bool, number } from 'prop-types'
 import { Drawer, withStyles } from '@material-ui/core'
-import { Entertainments } from 'components'
-import CloseButton from 'components/CloseButton'
+import { EntertainmentList, CloseButton } from 'components'
 
-const styles = {
+const styles = theme => ({
   root: {
-    width: 780,
+    width: '100%',
     position: 'relative',
     display: 'flex',
     flex: 1,
+    [theme.breakpoints.up('md')]: {
+      width: 780,
+    }
   },
   closeArea: {
     position: 'absolute',
@@ -22,7 +24,7 @@ const styles = {
   title: {
     paddingLeft: 55,
   }
-}
+})
 
 const EntertainmentsDrawer = ({ classes, room_id, isOpen, onClose }) => {
   return (
@@ -35,7 +37,7 @@ const EntertainmentsDrawer = ({ classes, room_id, isOpen, onClose }) => {
         <div className={classes.closeArea}>
           <CloseButton onClick={onClose} />
         </div>
-        <Entertainments
+        <EntertainmentList
           room_id={room_id}
           classes={{ title: classes.title }}
           className={classes.entertainments}

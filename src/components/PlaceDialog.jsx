@@ -1,10 +1,13 @@
 import React from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func, bool, string } from 'prop-types'
 import { Button, Dialog, Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture, CloseButton } from 'components'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 
-const styles = {
+const styles = theme => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -13,8 +16,11 @@ const styles = {
   },
   picture: {
     borderRadius: 0,
-    width: 500,
+    width: 410,
     height: 300,
+    [theme.breakpoints.up('sm')]: {
+      width: 500,
+    }
   },
   header: {
     paddingTop: 5,
@@ -25,7 +31,16 @@ const styles = {
     justifyContent: 'space-between',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 20,
+    }
+  },
+  subtitle: {
+    fontSize: 13,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 14,
+    }
   },
   container: {
     padding: 15,
@@ -43,12 +58,8 @@ const styles = {
   secondaryActions: {
     flex: 1
   },
-  info: {
-    padding: 15,
-    justifyContent: 'space-between',
-    display: 'flex',
-    alignItems: 'center',
-  },
+  info: {},
+
   infoItem: {
     textAlign: 'center',
     maxWidth: 130,
@@ -57,26 +68,45 @@ const styles = {
   orderButton: {
     marginRight: 20,
     color: 'rgba(0,0,0,0.54)',
+  },
+  paperWidthSm: {
+    maxWidth: 'initial',
+    maxHeight: 'calc(100% - 30px)',
+    margin: 15,
+  },
+  primaryTitle: {
+    paddingLeft: 5,
+  },
+  datetime: {
+    paddingTop: 2,
+  },
+  entertainment: {
+    paddingTop: 5,
+    paddingBottom: 5,
   }
-}
+})
 
-const PlaceDialog = ({ classes, place, isOpen, onClose, onReplace }) =>
+const PlaceDialog = ({ classes, place, datetime, isOpen, onClose, onReplace }) =>
   <Dialog
+    classes={{ paperWidthSm: classes.paperWidthSm }}
     open={isOpen}
     onClose={onClose}
   >
     <div className={classes.root}>
       <header className={classes.header}>
-        <Typography variant="h5">{place.entertainment.title}</Typography>
+        <div className={classes.entertainment}>
+          <Typography variant="h5">{place.entertainment.title}</Typography>
+          <Typography className={classes.datetime} color="textSecondary">{datetime}</Typography>
+        </div>
         <CloseButton onClick={onClose} />
       </header>
       <Picture src={place.picture_url} className={classes.picture} />
       <div className={classes.container}>
-        <div>
+        <div className={classes.primaryTitle}>
           <Typography className={classes.title}>
             {place.title}
           </Typography>
-          <Typography color="textSecondary">
+          <Typography className={classes.subtitle} color="textSecondary">
             {place.working_hours}
           </Typography>
         </div>
@@ -91,41 +121,27 @@ const PlaceDialog = ({ classes, place, isOpen, onClose, onReplace }) =>
           </div>
           <Button className={classes.orderButton}>Заказать</Button>
           <Button variant="outlined" color="primary" onClick={onReplace}>
-            Выбрать другое
+            Сменить
           </Button>
         </div>
-        <div className={classes.info}>
-          <div className={classes.infoItem}>
-            <Typography variant="subtitle1">
-              Номер телефона
-            </Typography>
-            <Typography color="textSecondary">
-              {place.phone}
-            </Typography>
-          </div>
-          <div className={classes.infoItem}>
-            <Typography variant="subtitle1">
-              Время работы
-            </Typography>
-            <Typography color="textSecondary">
-              {place.working_hours}
-            </Typography>
-          </div>
-          <div className={classes.infoItem}>
-            <Typography variant="subtitle1">
-              Цена
-            </Typography>
-            <Typography color="textSecondary">
-              {place.price}
-            </Typography>
-          </div>
-        </div>
+        <List className={classes.info}>
+          <ListItem>
+            <ListItemText primary="Номер телефона" secondary={place.phone} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Время работы" secondary={place.working_hours} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Цена" secondary={place.price} />
+          </ListItem>
+        </List>
       </div>
     </div>
   </Dialog>
 
 PlaceDialog.propTypes = {
   classes: object.isRequired,
+  datetime: string,
   place: placeShape.isRequired,
   isOpen: bool.isRequired,
   onClose: func.isRequired,

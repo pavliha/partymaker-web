@@ -17,6 +17,7 @@ const styles = {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    padding: '0 20px'
   },
   actions: {
     display: 'flex',

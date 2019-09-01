@@ -84,13 +84,8 @@ class Chat extends Component {
   disableForceScrolling = () =>
     this.setState({ isForceScrollingBottom: false })
 
-  join = () => {
-    const { room, onJoin } = this.props
-    onJoin(room)
-  }
-
   render() {
-    const { classes, auth, room, isGuest, onLeave, onOrder } = this.props
+    const { classes, auth, room, isGuest, onLeave, onJoin, onOrder } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
@@ -99,7 +94,7 @@ class Chat extends Component {
           room={room}
           isGuest={isGuest}
           onLeave={onLeave}
-          onJoin={this.join}
+          onJoin={onJoin}
         />
         <div className={classes.body}>
           <ChatBody
@@ -118,7 +113,7 @@ class Chat extends Component {
             auth={auth}
             isGuest={isGuest}
             room={room}
-            onJoin={this.join}
+            onJoin={onJoin}
             onSubmit={this.sendMessage}
             onOrder={onOrder}
           />

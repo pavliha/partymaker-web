@@ -17,6 +17,7 @@ module.exports = () => ({
   devServer: {
     hot: true,
     port: 3000,
+    host: '0.0.0.0',
     historyApiFallback: true,
     disableHostCheck: true,
   },
@@ -78,7 +79,8 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.jsx?$/, exclude: /node_modules/,
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         use: ['babel-loader'],
       },
       {

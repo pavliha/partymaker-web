@@ -4,10 +4,16 @@ import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { AccountButton } from 'components'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center'
+  },
+  userName: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+    },
   }
 })
 
@@ -19,7 +25,7 @@ class UserMenu extends Component {
     return (
       <Link to="/profile">
         <div className={classes.root}>
-          <Typography variant="subtitle1" color="inherit">{user.name}</Typography>
+          <Typography className={classes.userName} variant="subtitle1" color="inherit">{user.name}</Typography>
           <AccountButton user={user} />
         </div>
       </Link>

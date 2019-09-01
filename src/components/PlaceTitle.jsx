@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { number, object } from 'prop-types'
+import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
-import placeShape from 'shapes/place'
+import roomShape from 'shapes/room'
 import { EntertainmentsDrawer, Picture, PlaceDialog } from 'components'
+import moment from 'moment'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
   },
@@ -13,11 +15,20 @@ const styles = () => ({
     width: '90px',
     height: 50,
     marginRight: 5,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+    },
   },
   title: {
     cursor: 'pointer',
-    fontSize: 18,
-  }
+    fontSize: 14,
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 18,
+    },
+  },
 })
 
 class PlaceTitle extends Component {
@@ -40,7 +51,7 @@ class PlaceTitle extends Component {
     this.setState({ inPlaceDialogOpen: false })
 
   render() {
-    const { classes, room_id, place } = this.props
+    const { classes, room: { place, id, date, time } } = this.props
     const { isSelectPlaceDrawerOpen, inPlaceDialogOpen } = this.state
 
     const handleClick = place ? this.openPlaceDrawer : this.openPlacesDrawer
@@ -67,13 +78,14 @@ class PlaceTitle extends Component {
           </Typography>
         </div>
         <EntertainmentsDrawer
-          room_id={room_id}
+          room_id={id}
           isOpen={isSelectPlaceDrawerOpen}
           onClose={this.closePlacesDrawer}
         />
         {place && (
           <PlaceDialog
             title="Место"
+            datetime={`${moment(date).format('D MMMM, dddd')} ${time}`}
             place={place}
             isOpen={inPlaceDialogOpen}
             onClose={this.closePlaceDrawer}
@@ -87,8 +99,7 @@ class PlaceTitle extends Component {
 
 PlaceTitle.propTypes = {
   classes: object.isRequired,
-  place: placeShape,
-  room_id: number,
+  room: roomShape,
 }
 
 export default withStyles(styles)(PlaceTitle)

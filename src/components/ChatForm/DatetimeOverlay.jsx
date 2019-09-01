@@ -1,7 +1,7 @@
 import React from 'react'
 import { func, object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import DatetimeForm from '../DatetimeForm'
+import { DatetimeForm } from 'components'
 
 const styles = (theme) => ({
   root: {

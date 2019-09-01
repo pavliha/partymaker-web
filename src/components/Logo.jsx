@@ -2,7 +2,7 @@ import React from 'react'
 import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -10,14 +10,33 @@ const styles = {
   },
   city: {
     fontWeight: '100',
-    padding: '0 15px'
+    padding: '0 15px',
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    }
+  },
+  fullTitle: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    }
+  },
+  shortTitle: {
+    display: 'block',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    }
   }
-}
+})
 
 const Logo = ({ classes }) =>
   <div className={classes.root}>
-    <Typography variant="h6" color="inherit">
+    <Typography className={classes.fullTitle} variant="h6" color="inherit">
       Partymaker
+    </Typography>
+    <Typography className={classes.shortTitle} variant="h6" color="inherit">
+      P
     </Typography>
     <Typography className={classes.city} color="inherit">Запорожье</Typography>
   </div>

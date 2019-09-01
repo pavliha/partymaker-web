@@ -6,11 +6,18 @@ export Loading from './Loading'
 export Invite from './Invite'
 export Expand from './Expand'
 export EntertainmentGroup from './EntertainmentGroup'
-export Entertainments from './EntertainmentList'
 export OnlineIndicator from './OnlineIndicator'
 export UserMenu from './UserMenu'
 export Logo from './Logo'
 export Picture from './Picture'
+export Guest from './Guest'
+export GuestItemText from './GuestItemText'
+
+/**
+ * Lists
+ */
+export EntertainmentList from './EntertainmentList'
+export GuestList from './GuestList'
 
 /**
  * Buttons
@@ -39,8 +46,16 @@ export DialogPicture from './DialogPicture'
 export PlaceDialog from './PlaceDialog'
 export AuthDialog from './AuthDialog'
 export InviteDialog from './InviteDialog'
-export EntertainmentsDrawer from './EntertainmentsDrawer'
 export PictureDialog from './PictureDialog'
+export ClipboardImageDialog from './ClipboardImageDialog'
+export DateTimeStatus from './DateTimeStatus'
+export Guests from './GuestList'
+export FieldLabel from './Label'
+export LeaveRoomDialog from './LeaveRoomDialog'
+export FormDialog from './FormDialog'
+export KickGuestDialog from './KickGuestDialog'
+export EntertainmentsDrawer from './EntertainmentsDrawer'
+export GuestsDrawer from './GuestsDrawer'
 
 /**
  * Inputs & pickers & fields
@@ -65,16 +80,6 @@ export DateMessage from './DateMessage'
 export NotificationMessage from './NotificationMessage'
 
 /**
- * Dialogs
- */
-export ClipboardImageDialog from './ClipboardImageDialog'
-export DateTimeStatus from './DateTimeStatus'
-export Guests from './Guests'
-export FieldLabel from './Label'
-export LeaveRoomDialog from './LeaveRoomDialog'
-export FormDialog from './FormDialog'
-
-/**
  * Forms
  */
 export ChatForm from './ChatForm'
@@ -94,3 +99,8 @@ export AvatarForm from './AvatarForm'
 export ChatFormActions from './ChatFormActions'
 export AuthCardActions from './AuthCardActions'
 export SocialLoginActions from './SocialLoginActions'
+
+/**
+ * Menus
+ */
+export ChatMenu from './ChatMenu'

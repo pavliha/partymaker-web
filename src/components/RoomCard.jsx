@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/styles'
 import { Typography, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
-const styles = {
+const styles = theme => ({
   root: {
     borderRadius: 3,
     overflow: 'none',
@@ -27,19 +27,25 @@ const styles = {
     paddingLeft: 15,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
+    [theme.breakpoints.up('md')]: {
+      fontSize: 20,
+    }
   },
   subtitle: {
     fontSize: 14,
     color: 'rgba(0,0,0,0.54)'
   },
   actions: {
+    display: 'none',
     padding: 5,
-    display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+    }
   }
-}
+})
 
 const RoomCard = ({ classes, room }) =>
   <div className={classes.root}>
