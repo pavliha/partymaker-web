@@ -1,4 +1,4 @@
-import { SET_USER, SET_USERS } from '../action'
+import { DETACH_USER_FROM_ROOM, SET_USER, SET_USERS } from '../action'
 import { arrayToObject, fromJWT } from 'utils'
 import Storage from 'services/Storage'
 
@@ -21,6 +21,18 @@ const usersReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         ...arrayToObject(payload),
+      }
+
+    case DETACH_USER_FROM_ROOM:
+      return {
+        ...state,
+        [payload.user_id]: {
+          ...state[payload.user_id],
+          pivot: {
+            ...state[payload.user_id].pivot,
+            room_id: null,
+          }
+        },
       }
 
     default:

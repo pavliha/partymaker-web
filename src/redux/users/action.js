@@ -10,6 +10,7 @@ export const LOAD_USER_FULFILLED = 'LOAD_USER_FULFILLED'
 
 export const UPDATE_USER = 'UPDATE_USER'
 export const UPDATE_USER_FULFILLED = 'UPDATE_USER_FULFILLED'
+export const DETACH_USER_FROM_ROOM = 'DETACH_USER_FROM_ROOM'
 
 /**
  * Async actions. Making API requests
@@ -49,6 +50,10 @@ const online = (users_ids) => ({
   payload: users_ids,
 })
 
+const detach = (user_id, room_id) => ({
+  type: DETACH_USER_FROM_ROOM,
+  payload: { user_id, room_id },
+})
 
 export default {
   load,
@@ -57,4 +62,5 @@ export default {
   setMany,
   remove,
   online,
+  detach,
 }
