@@ -10,7 +10,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       justifyContent: 'flex-start',
     },
     padding: 5,
@@ -21,9 +21,7 @@ const styles = theme => ({
   actionLabel: {
     paddingLeft: 5,
     marginTop: 1,
-    [theme.breakpoints.up('xs')]: {
-      fontSize: 10,
-    },
+    fontSize: 10,
     [theme.breakpoints.up('sm')]: {
       fontSize: 12,
     },
