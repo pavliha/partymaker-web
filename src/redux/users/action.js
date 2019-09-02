@@ -50,7 +50,7 @@ const online = (users_ids) => ({
   payload: users_ids,
 })
 
-const detach = (user_id, room_id) => ({
+const detach = ({ user_id, room_id }) => ({
   type: DETACH_USER_FROM_ROOM,
   payload: { user_id, room_id },
 })

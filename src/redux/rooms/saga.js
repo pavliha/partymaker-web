@@ -9,7 +9,7 @@ import {
   CREATE_ROOM_FULFILLED,
   UPDATE_ROOM_FULFILLED,
   LEAVE_ROOM_FULFILLED,
-  JOIN_ROOM_FULFILLED,
+  JOIN_ROOM_FULFILLED, RECEIVE_ROOM,
 } from './action'
 
 import { normalize, putRelationsToStore } from 'utils'
@@ -47,5 +47,6 @@ export default function* saga() {
     takeEvery(UPDATE_ROOM_FULFILLED, setRoom),
     takeEvery(JOIN_ROOM_FULFILLED, setRoom),
     takeEvery(LEAVE_ROOM_FULFILLED, removeRoom),
+    takeEvery(RECEIVE_ROOM, setRoom)
   ])
 }

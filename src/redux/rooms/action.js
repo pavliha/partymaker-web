@@ -20,6 +20,12 @@ export const SUBSCRIBE = 'SUBSCRIBE'
 export const UNSUBSCRIBE = 'UNSUBSCRIBE'
 export const JOIN_ROOM = 'JOIN_ROOM'
 export const JOIN_ROOM_FULFILLED = 'JOIN_ROOM_FULFILLED'
+export const RECEIVE_ROOM = 'RECEIVE_ROOM'
+
+const receive = room => ({
+  type: RECEIVE_ROOM,
+  payload: room
+})
 
 const subscribe = (room_id) => ({
   type: SUBSCRIBE,
@@ -82,6 +88,7 @@ export default {
   guests,
   messages,
   orders,
+  receive,
   subscribe,
   unsubscribe,
   loadMany,
