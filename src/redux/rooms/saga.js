@@ -1,5 +1,5 @@
 import { all, put, takeEvery, fork } from 'redux-saga/effects'
-import actions from 'src/redux/action'
+import { actions } from 'src/redux'
 import messages from './messages/saga'
 import guests from './guests/saga'
 

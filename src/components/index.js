@@ -38,6 +38,7 @@ export AuthCard from './AuthCard'
 export PlaceCard from './PlaceCard'
 export RoomCard from './RoomCard'
 export OutlineCard from './OutlineCard'
+export OrderCard from './OrderCard'
 
 /**
  * Dialogs & drawers

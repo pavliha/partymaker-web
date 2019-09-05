@@ -4,6 +4,7 @@ import rooms from './rooms/saga'
 import places from './places/saga'
 import assets from './assets/saga'
 import entertainments from './entertainments/saga'
+import orders from './orders/saga'
 
 export default function* rootSaga() {
   yield all([
@@ -11,6 +12,7 @@ export default function* rootSaga() {
     fork(rooms),
     fork(places),
     fork(assets),
-    fork(entertainments)
+    fork(entertainments),
+    fork(orders)
   ])
 }

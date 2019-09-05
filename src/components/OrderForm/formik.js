@@ -11,6 +11,7 @@ const formik = withFormik({
     time: room.time,
     guests: room.guests.length,
     phone: auth.phone,
+    room_id: room.id,
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
@@ -22,7 +23,6 @@ const formik = withFormik({
     } finally {
       setSubmitting(false)
     }
-
   },
   displayName: 'OrderForm',
 })

@@ -49,7 +49,7 @@ class TextMessage extends Component {
 
   componentDidMount() {
     const { textRef: { current } } = this
-    if (current.offsetHeight > 30) {
+    if (current && current.offsetHeight > 30) {
       this.setState({ isMultiline: true })
     }
   }
@@ -73,7 +73,7 @@ class TextMessage extends Component {
         [classes.multiline]: isMultiline
       })}>
         <Typography ref={this.textRef} className={classes.text}>
-          <Linkify>{this.formatEmoji(message.text)}</Linkify>
+          <Linkify>{this.formatEmoji(message.text.trim())}</Linkify>
         </Typography> {' '}
         <MessageStatus message={message} />
       </div>

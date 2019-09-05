@@ -139,7 +139,7 @@ const redux = (state, { match: { params: { id } } }) => ({
   leaveRoom: actions.rooms.leave,
   joinRoom: actions.rooms.join,
   sendMessage: form => actions.rooms.messages.create(id, form),
-  orderPlace: (form) => actions.rooms.orders.create(id, form),
+  orderPlace: actions.orders.create,
   kickGuest: guest => actions.rooms.guests.kick(id, guest.id),
   subscribe: actions.rooms.subscribe,
   unsubscribe: actions.rooms.unsubscribe,

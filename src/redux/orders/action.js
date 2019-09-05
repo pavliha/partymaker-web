@@ -1,4 +1,4 @@
-import order from 'api/room/order'
+import api from 'api'
 
 export const LOAD_ORDER = 'LOAD_ORDER'
 export const LOAD_ORDER_FULFILLED = 'LOAD_ORDER_FULFILLED'
@@ -14,14 +14,14 @@ export const REMOVE_ORDER = 'REMOVE_ORDER'
  * Async actions. Making API requests
  */
 
-const load = (room_id) => ({
+const load = order_id => ({
   type: LOAD_ORDER,
-  payload: order.load(room_id)
+  payload: api.orders.load(order_id)
 })
 
-const create = (room_id, form) => ({
+const create = form => ({
   type: CREATE_ORDER,
-  payload: order.create(room_id, form)
+  payload: api.orders.create(form)
 })
 
 /**

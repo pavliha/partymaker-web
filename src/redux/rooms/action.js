@@ -1,7 +1,6 @@
 import api from 'api'
 import messages from './messages/action'
 import guests from './guests/action'
-import orders from './orders/action'
 
 export const LOAD_ROOMS = 'LOAD_ROOMS'
 export const LOAD_ROOMS_FULFILLED = 'LOAD_ROOMS_FULFILLED'
@@ -87,7 +86,6 @@ const remove = room_id => ({
 export default {
   guests,
   messages,
-  orders,
   receive,
   subscribe,
   unsubscribe,

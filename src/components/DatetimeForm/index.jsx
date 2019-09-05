@@ -8,6 +8,7 @@ import { CloseButton } from 'components'
 import CalendarClockIcon from 'mdi-react/CalendarClockIcon'
 import CheckIcon from 'mdi-react/CheckIcon'
 import formik from './formik'
+import classNames from 'classnames'
 
 const styles = {
   root: {
@@ -16,8 +17,8 @@ const styles = {
     alignItems: 'center',
   },
   field: {
-    maxWidth: 170,
-    marginRight: 20,
+    maxWidth: 128,
+    marginRight: 10,
   },
   input: {
 
@@ -37,8 +38,11 @@ const styles = {
     alignItems: 'center',
   },
   checkButton: {
-    marginLeft: 20,
+    marginLeft: 10,
     marginRight: 5,
+  },
+  timeField: {
+    maxWidth: 96,
   }
 }
 
@@ -59,7 +63,7 @@ const DatetimeForm = ({ classes, handleSubmit, onClose }) =>
         name="time"
         type="time"
         component={TextField}
-        className={classes.field}
+        className={classNames([classes.field, classes.timeField])}
         inputProps={{ className: classes.input, }}
       />
     </div>
