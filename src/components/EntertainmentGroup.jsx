@@ -10,7 +10,7 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       justifyContent: 'flex-start'
     }
   }
@@ -18,9 +18,9 @@ const styles = theme => ({
 
 class EntertainmentGroup extends Component {
 
-  wantThis = (place) => {
-    const { entertainment, onIWantThis } = this.props
-    return onIWantThis(entertainment, place)
+  select = (place) => {
+    const { entertainment, onSelect } = this.props
+    return onSelect(entertainment, place)
   }
 
   render() {
@@ -33,7 +33,7 @@ class EntertainmentGroup extends Component {
               <PlaceCard
                 key={place.id}
                 place={place}
-                onSelect={this.wantThis}
+                onSelect={this.select}
                 buttonTitle={buttonTitle}
               />
             )}
@@ -48,7 +48,7 @@ EntertainmentGroup.propTypes = {
   entertainment: entertainmentShape,
   classes: object.isRequired,
   buttonTitle: string,
-  onIWantThis: func.isRequired,
+  onSelect: func.isRequired,
 }
 
 export default withStyles(styles)(EntertainmentGroup)

@@ -14,22 +14,6 @@ export const SET_ROOM_GUEST = 'SET_ROOM_GUEST'
 export const REMOVE_ROOM_GUEST = 'REMOVE_ROOM_GUEST'
 
 /**
- * Websocket actions. Catching socket events
- */
-
-const joined = (room_id, guest) => ({
-  type: GUEST_JOINED,
-  payload: guest,
-  meta: { room_id }
-})
-
-const left = (room_id, guest) => ({
-  type: GUEST_LEFT,
-  payload: guest,
-  meta: { room_id }
-})
-
-/**
  * Async actions. Making API requests
  */
 
@@ -68,8 +52,6 @@ const remove = (room_id, guest_id) => ({
 })
 
 export default {
-  joined,
-  left,
   list,
   kick,
   set,

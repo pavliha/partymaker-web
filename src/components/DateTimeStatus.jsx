@@ -6,7 +6,6 @@ import classNames from 'classnames'
 
 const styles = {
   root: {
-    paddingRight: 20,
     width: 170,
   },
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, func, bool, number } from 'prop-types'
-import { Drawer, withStyles } from '@material-ui/core'
+import { Drawer, Typography, withStyles } from '@material-ui/core'
 import { EntertainmentList, CloseButton } from 'components'
 
 const styles = theme => ({
@@ -8,21 +8,28 @@ const styles = theme => ({
     width: '100%',
     position: 'relative',
     display: 'flex',
+    padding: 15,
+    flexDirection: 'column',
     flex: 1,
     [theme.breakpoints.up('md')]: {
-      width: 780,
+      width: '760px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '1130px',
     }
   },
-  closeArea: {
-    position: 'absolute',
-    padding: '20px 0px 0 15px',
+
+  header: {
+    display: 'flex',
+    alignItems: 'center',
   },
+
   entertainments: {
-    paddingLeft: 15,
     flex: 1,
   },
+
   title: {
-    paddingLeft: 55,
+    paddingLeft: 15,
   }
 })
 
@@ -34,16 +41,21 @@ const EntertainmentsDrawer = ({ classes, room_id, isOpen, onClose }) => {
       onClose={onClose}
     >
       <div className={classes.root}>
-        <div className={classes.closeArea}>
+        <header className={classes.header}>
           <CloseButton onClick={onClose} />
+          <Typography className={classes.title} variant="h5">
+            Куда бы вы хотели сходить с друзьями?
+          </Typography>
+        </header>
+        <div>
+          <EntertainmentList
+            room_id={room_id}
+            classes={{ title: classes.title }}
+            className={classes.entertainments}
+            onCreated={onClose}
+            buttonTitle="Выбрать"
+          />
         </div>
-        <EntertainmentList
-          room_id={room_id}
-          classes={{ title: classes.title }}
-          className={classes.entertainments}
-          onCreated={onClose}
-          buttonTitle="Выбрать"
-        />
       </div>
     </Drawer>
   )

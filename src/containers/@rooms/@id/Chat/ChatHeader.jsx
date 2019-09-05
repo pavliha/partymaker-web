@@ -33,6 +33,7 @@ const styles = theme => ({
     }
   },
   datetime: {
+    paddingRight: 20,
     display: 'none',
     [theme.breakpoints.up('md')]: {
       display: 'block',
@@ -63,7 +64,7 @@ class ChatHeader extends Component {
             <PeopleIcon />
           </IconButton>
         </div>
-        <PlaceTitle room={room} />
+        <PlaceTitle room={room} isGuest={isGuest} />
         <div className={classes.aside}>
           <DateTimeStatus
             className={classes.datetime}

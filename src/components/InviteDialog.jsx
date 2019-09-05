@@ -30,7 +30,7 @@ class InviteDialog extends Component {
     const { invite_token } = this.props
     const { clipboard } = navigator
     try {
-      await clipboard.writeText(`${FRONTEND_URL}/${invite_token}`)
+      await clipboard.writeText(`${FRONTEND_URL}/invite/${invite_token}`)
       this.setState({ isCopied: true })
       await wait(2000)
       this.setState({ isCopied: false })

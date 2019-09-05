@@ -5,14 +5,11 @@ import ExpandMoreIcon from 'mdi-react/KeyboardArrowUpIcon'
 import CollapseIcon from 'mdi-react/KeyboardArrowDownIcon'
 
 const styles = {
-  root: {
-    paddingLeft: 5,
-    paddingRight: 5
-  },
+  root: {},
 
   expand: {
     display: 'flex',
-    paddingTop: 15,
+    paddingTop: 5,
     paddingBottom: 5,
     alignItems: 'center',
   },

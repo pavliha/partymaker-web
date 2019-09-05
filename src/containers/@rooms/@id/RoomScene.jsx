@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
+import { userShape, roomShape } from 'shapes'
 import { Invite, Load, RoomTitle, AuthDialog, Guests } from 'components'
 import Chat from './Chat'
 
@@ -32,8 +33,8 @@ class RoomScene extends Component {
 
   constructor(props) {
     super(props)
-    const { redux: { subscribe }, match } = props
-    this.topic = subscribe(match.params.id)
+    const { redux: { subscribe, auth }, match } = props
+    this.topic = auth && subscribe(match.params.id)
   }
 
   componentWillUnmount() {
@@ -49,15 +50,18 @@ class RoomScene extends Component {
     this.setState({ isAuthDialogOpen: false })
 
   joinRoom = async () => {
-    const { redux: { auth, joinRoom, room } } = this.props
+    const { redux: { auth, joinRoom, room, subscribe } } = this.props
     if (!auth) return this.showAuthDialog()
     await joinRoom(room.id)
+    this.topic = subscribe(room.id)
     this.closeAuthDialog()
   }
 
   leaveRoom = async () => {
-    const { redux: { leaveRoom, room }, history } = this.props
+    const { redux: { leaveRoom, room, unsubscribe }, history } = this.props
     await leaveRoom(room.id)
+    this.topic = null
+    unsubscribe(room.id)
     history.push('/rooms')
   }
 
@@ -111,6 +115,8 @@ RoomScene.propTypes = {
   history: shape({ push: func.isRequired, }),
   match: shape({ params: shape({ id: string.isRequired, }), }),
   redux: shape({
+    auth: userShape,
+    room: roomShape,
     isGuest: bool.isRequired,
     loadRoom: func.isRequired,
     loadMessages: func.isRequired,
@@ -119,6 +125,8 @@ RoomScene.propTypes = {
     orderPlace: func.isRequired,
     subscribe: func.isRequired,
     unsubscribe: func.isRequired,
+    sendMessage: func.isRequired,
+    kickGuest: func.isRequired,
   })
 }
 

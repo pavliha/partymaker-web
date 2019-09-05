@@ -15,7 +15,7 @@ const current = (room_id) => (
   return {
     ...room,
     place: places.find(p => p.id === room.place_id),
-    guests: users.filter(u => u.pivot?.room_id === room_id),
+    guests: users.filter(u => u?.room_id === room_id),
     messages: messages.filter(m => m.room_id === room_id),
     totalMessages,
   }

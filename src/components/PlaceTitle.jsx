@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { object } from 'prop-types'
+import { object, bool } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import roomShape from 'shapes/room'
-import { EntertainmentsDrawer, Picture, PlaceDialog } from 'components'
-import moment from 'moment'
+import { EntertainmentsDrawer, Picture, PlaceDialog, DateTimeStatus } from 'components'
 
 const styles = theme => ({
   root: {
@@ -51,7 +50,7 @@ class PlaceTitle extends Component {
     this.setState({ inPlaceDialogOpen: false })
 
   render() {
-    const { classes, room: { place, id, date, time } } = this.props
+    const { classes, isGuest, room: { place, id, date, time } } = this.props
     const { isSelectPlaceDrawerOpen, inPlaceDialogOpen } = this.state
 
     const handleClick = place ? this.openPlaceDrawer : this.openPlacesDrawer
@@ -85,8 +84,9 @@ class PlaceTitle extends Component {
         {place && (
           <PlaceDialog
             title="Место"
-            datetime={`${moment(date).format('D MMMM, dddd')} ${time}`}
+            datetime={<DateTimeStatus time={time} date={date} />}
             place={place}
+            isGuest={isGuest}
             isOpen={inPlaceDialogOpen}
             onClose={this.closePlaceDrawer}
             onReplace={this.openPlacesDrawer}
@@ -99,6 +99,7 @@ class PlaceTitle extends Component {
 
 PlaceTitle.propTypes = {
   classes: object.isRequired,
+  isGuest: bool,
   room: roomShape,
 }
 

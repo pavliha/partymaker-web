@@ -1,11 +1,8 @@
 import React from 'react'
-import { object, func, bool, string } from 'prop-types'
-import { Button, Dialog, Typography, withStyles } from '@material-ui/core'
+import { object, func, bool, node } from 'prop-types'
+import { Button, Dialog, Typography, withStyles, List, ListItem, ListItemText } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture, CloseButton } from 'components'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 
 const styles = theme => ({
   root: {
@@ -86,7 +83,7 @@ const styles = theme => ({
   }
 })
 
-const PlaceDialog = ({ classes, place, datetime, isOpen, onClose, onReplace }) =>
+const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onReplace }) =>
   <Dialog
     classes={{ paperWidthSm: classes.paperWidthSm }}
     open={isOpen}
@@ -96,7 +93,7 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, onClose, onReplace }) =
       <header className={classes.header}>
         <div className={classes.entertainment}>
           <Typography variant="h5">{place.entertainment.title}</Typography>
-          <Typography className={classes.datetime} color="textSecondary">{datetime}</Typography>
+          {datetime}
         </div>
         <CloseButton onClick={onClose} />
       </header>
@@ -119,8 +116,8 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, onClose, onReplace }) =
               <Button className={classes.secondaryButton}>КАРТА</Button>
             </a>
           </div>
-          <Button className={classes.orderButton}>Заказать</Button>
-          <Button variant="outlined" color="primary" onClick={onReplace}>
+          <Button disabled={isGuest} className={classes.orderButton}>Заказать</Button>
+          <Button variant="outlined" disabled={isGuest} color="primary" onClick={onReplace}>
             Сменить
           </Button>
         </div>
@@ -141,9 +138,10 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, onClose, onReplace }) =
 
 PlaceDialog.propTypes = {
   classes: object.isRequired,
-  datetime: string,
+  datetime: node,
   place: placeShape.isRequired,
   isOpen: bool.isRequired,
+  isGuest: bool,
   onClose: func.isRequired,
   onReplace: func,
 }

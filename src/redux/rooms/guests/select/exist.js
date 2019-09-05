@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 const exist = (room_id) => (users, auth_id) => {
   const user = users[auth_id]
-  return user && user.pivot?.room_id === room_id
+  return user && user.room_id === room_id
 }
 
 export default (state, room_id) =>

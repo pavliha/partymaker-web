@@ -12,7 +12,7 @@ class EntertainmentList extends Component {
       place_id: place.id,
     }
     const action = await room_id ? updateRoom(room_id, form) : createRoom(form)
-    onCreated(action.value)
+    await onCreated(action.value)
 
     return action
   }
@@ -28,7 +28,7 @@ class EntertainmentList extends Component {
             buttonTitle={buttonTitle}
             key={entertainment.id}
             entertainment={entertainment}
-            onIWantThis={this.newRoom}
+            onSelect={this.newRoom}
           />
         )}
       </Load>

@@ -1,9 +1,15 @@
-import { DETACH_USER_FROM_ROOM, SET_USER, SET_USERS } from '../action'
+import { DETACH_USER_FROM_ROOM, SET_USER, SET_USERS, SET_USERS_ONLINE } from '../action'
 import { arrayToObject, fromJWT } from 'utils'
 import Storage from 'services/Storage'
+import omit from 'lodash/omit'
 
 const user = fromJWT(Storage.get('token'))
 const initialState = user ? { [user.id]: user } : {}
+
+const formatUser = user => ({
+  ...omit(user, 'pivot'),
+  ...omit(user?.pivot, 'user_iod'),
+})
 
 const usersReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -11,16 +17,13 @@ const usersReducer = (state = initialState, { type, payload }) => {
     case SET_USER:
       return {
         ...state,
-        [payload.id]: {
-          ...payload,
-          pivot: payload?.pivot || state[payload.id]?.pivot,
-        },
+        [payload.id]: formatUser(payload),
       }
 
     case SET_USERS:
       return {
         ...state,
-        ...arrayToObject(payload),
+        ...arrayToObject(payload.map(formatUser)),
       }
 
     case DETACH_USER_FROM_ROOM:
@@ -28,11 +31,17 @@ const usersReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.user_id]: {
           ...state[payload.user_id],
-          pivot: {
-            ...state[payload.user_id].pivot,
-            room_id: null,
-          }
+          room_id: null,
         },
+      }
+
+    case SET_USERS_ONLINE:
+      return {
+        ...state,
+        ...arrayToObject(Object.values(state).map(user => ({
+          ...formatUser(user),
+          is_online: !!payload.find(id => user.id === id)
+        })))
       }
 
     default:
