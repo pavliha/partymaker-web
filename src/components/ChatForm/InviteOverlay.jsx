@@ -40,7 +40,6 @@ const styles = (theme) => ({
   invite: {
     maxWidth: '70vw',
     overflow: 'auto',
-    // textOverflow: 'ellipsis',
   }
 })
 

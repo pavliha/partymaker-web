@@ -8,7 +8,7 @@ const styles = theme => ({
     borderRadius: 15,
     marginLeft: 10,
     marginRight: 10,
-    maxWidth: 500,
+    maxWidth: 520,
   },
   isMine: {
     background: theme.palette.primary.main

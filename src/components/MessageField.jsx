@@ -33,7 +33,6 @@ class MessageField extends Component {
 
   change = (e) => {
     const { name, onChange } = this.props
-
     onChange(name, e.target.value)
   }
 

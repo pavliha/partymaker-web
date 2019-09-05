@@ -4,11 +4,14 @@ import { IconButton, withStyles } from '@material-ui/core'
 import CloseIcon from 'mdi-react/CloseIcon'
 import classNames from 'classnames'
 
-const styles = {
+const styles = theme => ({
   root: {
-    marginRight: 5,
+    marginRight: 0,
+    [theme.breakpoints.up('md')]: {
+      marginRight: 5,
+    }
   },
-}
+})
 
 const CloseButton = ({ classes, color, onClick, className }) =>
   <div className={classNames(classes.root, className)}>

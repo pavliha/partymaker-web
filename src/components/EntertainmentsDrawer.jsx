@@ -8,20 +8,26 @@ const styles = theme => ({
     width: '100%',
     position: 'relative',
     display: 'flex',
-    padding: 15,
+    padding: 0,
+    boxSizing: 'border-box',
     flexDirection: 'column',
     flex: 1,
     [theme.breakpoints.up('md')]: {
-      width: '760px',
+      width: '785px',
+      padding: 15,
     },
     [theme.breakpoints.up('lg')]: {
-      width: '1130px',
+      width: '1160px',
     }
   },
 
   header: {
     display: 'flex',
     alignItems: 'center',
+    padding: 15,
+    [theme.breakpoints.up('md')]: {
+      padding: 0,
+    }
   },
 
   entertainments: {
