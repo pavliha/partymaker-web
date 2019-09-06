@@ -5,7 +5,9 @@ import ExpandMoreIcon from 'mdi-react/KeyboardArrowUpIcon'
 import CollapseIcon from 'mdi-react/KeyboardArrowDownIcon'
 
 const styles = {
-  root: {},
+  root: {
+    marginLeft: 5,
+  },
 
   expand: {
     display: 'flex',

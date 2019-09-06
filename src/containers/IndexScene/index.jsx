@@ -3,10 +3,11 @@ import { shape, object, func } from 'prop-types'
 import { Header, EntertainmentList } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
-import { Typography, Button, withStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Typography, Button, withStyles, SvgIcon } from '@material-ui/core'
 import { select, connect } from 'src/redux'
 import userShape from 'shapes/user'
+import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -31,6 +32,7 @@ const styles = theme => ({
     justifyContent: 'space-around',
   },
   title: {
+    marginTop: 150,
     color: 'white',
     maxWidth: 340,
     textAlign: 'center',
@@ -44,7 +46,7 @@ const styles = theme => ({
   },
 
   action: {
-    marginTop: '150px',
+    marginTop: 200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -67,14 +69,29 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       textAlign: 'left'
     }
-  }
+  },
+  arrowDown: {
+    marginTop: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    animationDuration: '2s',
+    animationIterationCount: 3,
+    transformOrigin: 'bottom',
+  },
 })
 
 class IndexScene extends Component {
 
+  placesRef = React.createRef()
+
   redirectToRoom = (room) => {
     const { history } = this.props
     history.push(`/rooms/${room.id}`)
+  }
+
+  scrollToPlaces = () => {
+    const element = this.placesRef
+    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   render() {
@@ -89,16 +106,22 @@ class IndexScene extends Component {
               <Typography gutterBottom variant="h2">Partymaker</Typography>
               <Typography variant="h5">Здесь можно собрать друзей и найти куда сходить</Typography>
               <div className={classes.action}>
-                <Link to="/auth/login">
+                <div>
                   <Button
                     variant="outlined"
                     color="inherit"
                     size="large"
                     className={classes.button}
+                    onClick={this.scrollToPlaces}
                   >
                     Начать
                   </Button>
-                </Link>
+                  <div className={classNames([classes.arrowDown, 'animate-bounce'])}>
+                    <div>
+                      <SvgIcon className="animate-bounce" fontSize="large"><KeyboardArrowDownIcon /></SvgIcon>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div className={classes.screenshot}>
@@ -106,11 +129,11 @@ class IndexScene extends Component {
             </div>
           </div>
         </section>
-        <section className={classes.container}>
+        <section ref={(ref) => { this.placesRef = ref }} className={classes.container}>
           <Typography className={classes.entertainmentTitle} variant="h5">
             Что бы вы хотели сделать с друзьями?
           </Typography>
-          <EntertainmentList onCreated={this.redirectToRoom} />
+          <EntertainmentList onCreated={this.redirectToRoom} buttonTitle="Хочу сюда" />
         </section>
       </main>
     )
