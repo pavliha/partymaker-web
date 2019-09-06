@@ -18,6 +18,7 @@ export GuestItemText from './GuestItemText'
  */
 export EntertainmentList from './EntertainmentList'
 export GuestList from './GuestList'
+export PlaceList from './PlaceList'
 
 /**
  * Buttons

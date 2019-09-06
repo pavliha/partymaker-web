@@ -5,7 +5,6 @@ import classNames from 'classnames'
 
 const styles = {
   root: {
-    cursor: 'pointer',
     borderRadius: 3,
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundSize: 'cover',

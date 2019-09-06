@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, string } from 'prop-types'
-import { withStyles } from '@material-ui/core'
-import { Expand, PlaceCard } from 'components'
+import { Button, withStyles } from '@material-ui/core'
+import { Expand, PlaceList } from 'components'
 import entertainmentShape from 'shapes/entertainment'
 
 const styles = theme => ({
@@ -18,25 +18,38 @@ const styles = theme => ({
 
 class EntertainmentGroup extends Component {
 
-  select = (place) => {
+  state = {
+    isLoading: false
+  }
+
+  select = (place) => async () => {
     const { entertainment, onSelect } = this.props
-    return onSelect(entertainment, place)
+    this.setState({ isLoading: true })
+    await onSelect(entertainment, place)
+    this.setState({ isLoading: false })
   }
 
   render() {
     const { classes, entertainment, buttonTitle } = this.props
+    const { isLoading } = this.state
+
     return (
       <section className={classes.root}>
         <Expand title={entertainment.title}>
           <div className={classes.places}>
-            {entertainment.places.map(place =>
-              <PlaceCard
-                key={place.id}
-                place={place}
-                onSelect={this.select}
-                buttonTitle={buttonTitle}
-              />
-            )}
+            <PlaceList
+              places={entertainment.places}
+              action={place => (
+                <Button
+                  disabled={isLoading}
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.select(place)}
+                >
+                  {isLoading ? 'Загрузка...' : buttonTitle}
+                </Button>
+              )}
+            />
           </div>
         </Expand>
       </section>
