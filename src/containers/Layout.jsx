@@ -6,8 +6,7 @@ import AuthLayout from './@auth/AuthLayout'
 import RoomsLayout from './@rooms/RoomsLayout'
 import ProfileLayout from './@profile/ProfileLayout'
 import InviteScene from './@invite/InviteScene'
-import OrdersLayout from './@orders/OrdersLayout'
-import OrderTokenScene from './@order/OrderTokenScene'
+import OrderScene from './@order/OrderScene'
 
 const Layout = () =>
   <Switch>
@@ -15,8 +14,7 @@ const Layout = () =>
     <Route path="/auth" component={AuthLayout} />
     <Route exact path="/invite/:invite_token" component={InviteScene} />
     <Route path="/rooms" component={RoomsLayout} />
-    <Route path="/order/:token" component={OrderTokenScene} />
-    <Route path="/orders" component={OrdersLayout} />
+    <Route path="/order/:token" component={OrderScene} />
     <AuthGate path="/profile" component={ProfileLayout} />
   </Switch>
 

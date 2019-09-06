@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
+import { object, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, withStyles } from '@material-ui/core'
 import { UserAvatar, KickGuestDialog, GuestItemText } from 'components'
@@ -37,13 +37,14 @@ class Guest extends Component {
   }
 
   render() {
-    const { classes, guest, onKick } = this.props
+    const { classes, guest, hideOnline, onKick } = this.props
     const { isKickGuestDialogOpen } = this.state
     return (
       <ListItem className={classes.root}>
         <UserAvatar is_online={guest.is_online} user={guest} />
         <GuestItemText
           guest={guest}
+          hideOnline={hideOnline}
           onKick={onKick && this.openKickGuestDialog}
         />
         <KickGuestDialog
@@ -59,8 +60,9 @@ class Guest extends Component {
 
 Guest.propTypes = {
   classes: object.isRequired,
+  hideOnline: bool,
   guest: userShape.isRequired,
-  onKick: func.isRequired,
+  onKick: func,
 }
 
 export default withStyles(styles)(Guest)
