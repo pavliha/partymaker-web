@@ -4,9 +4,12 @@ import { Typography, withStyles, IconButton } from '@material-ui/core'
 import ExpandMoreIcon from 'mdi-react/KeyboardArrowUpIcon'
 import CollapseIcon from 'mdi-react/KeyboardArrowDownIcon'
 
-const styles = {
+const styles = theme => ({
   root: {
     marginLeft: 5,
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: 0,
+    }
   },
 
   expand: {
@@ -22,7 +25,7 @@ const styles = {
     fontSize: 20,
   }
 
-}
+})
 
 class Expand extends Component {
   state = {

@@ -11,7 +11,10 @@ class EntertainmentList extends Component {
       title: entertainment.title,
       place_id: place.id,
     }
-    const action = await room_id ? updateRoom(room_id, form) : createRoom(form)
+    const action = await (room_id
+      ? await updateRoom(room_id, form)
+      : await createRoom(form))
+
     await onCreated(action.value)
 
     return action

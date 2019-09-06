@@ -19,14 +19,14 @@ const styles = theme => ({
 class EntertainmentGroup extends Component {
 
   state = {
-    isLoading: false
+    isLoading: {}
   }
 
   select = (place) => async () => {
     const { entertainment, onSelect } = this.props
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: place.id })
     await onSelect(entertainment, place)
-    this.setState({ isLoading: false })
+    this.setState({ isLoading: {} })
   }
 
   render() {
@@ -39,16 +39,16 @@ class EntertainmentGroup extends Component {
           <div className={classes.places}>
             <PlaceList
               places={entertainment.places}
-              action={place => (
+              action={place =>
                 <Button
-                  disabled={isLoading}
+                  disabled={isLoading[place.id]}
                   variant="outlined"
                   color="primary"
                   onClick={this.select(place)}
                 >
-                  {isLoading ? 'Загрузка...' : buttonTitle}
+                  {isLoading[place.id] ? 'Загрузка...' : buttonTitle}
                 </Button>
-              )}
+              }
             />
           </div>
         </Expand>
