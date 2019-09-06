@@ -50,6 +50,16 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/api.partymaker.zp.ua/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+    # enables WS support
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+
+    # prevents 502 bad gateway error
+    proxy_buffers 8 32k;
+    proxy_buffer_size 64k;
+
+    reset_timedout_connection on;
 
 
     location / {
