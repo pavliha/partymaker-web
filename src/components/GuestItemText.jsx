@@ -34,7 +34,7 @@ class GuestItemText extends Component {
   }
 
   render() {
-    const { classes, guest, onClose, redux: { user } } = this.props
+    const { classes, guest, onKick, redux: { user } } = this.props
     return (
       <div className={classes.root}>
         <div>
@@ -44,9 +44,9 @@ class GuestItemText extends Component {
           </Typography>
         </div>
 
-        {user && (guest.id !== user.id) && (
+        {onKick && user && (guest.id !== user.id) && (
           <aside className={classes.actions}>
-            <CloseButton onClick={onClose} />
+            <CloseButton onClick={onKick} />
           </aside>
         )}
       </div>
@@ -57,7 +57,7 @@ class GuestItemText extends Component {
 GuestItemText.propTypes = {
   classes: object.isRequired,
   guest: userShape.isRequired,
-  onClose: func.isRequired,
+  onKick: func,
   redux: shape({ user: userShape, })
 }
 const redux = (state) => ({

@@ -37,14 +37,14 @@ class Guest extends Component {
   }
 
   render() {
-    const { classes, guest } = this.props
+    const { classes, guest, onKick } = this.props
     const { isKickGuestDialogOpen } = this.state
     return (
       <ListItem className={classes.root}>
         <UserAvatar is_online={guest.is_online} user={guest} />
         <GuestItemText
           guest={guest}
-          onClose={this.openKickGuestDialog}
+          onKick={onKick && this.openKickGuestDialog}
         />
         <KickGuestDialog
           guest={guest}

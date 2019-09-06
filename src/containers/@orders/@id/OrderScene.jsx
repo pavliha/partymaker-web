@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, func, shape } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import orderShape from 'shapes/order'
 import { actions, connect, select } from 'src/redux'
 import { Header, Load, PlaceCard, OrderCard, GuestList } from 'components'
@@ -9,6 +9,14 @@ const styles = {
   root: {},
   container: {
     display: 'flex'
+  },
+  order: {
+    padding: 20,
+    flex: 1,
+  },
+  guests: {
+    padding: 20,
+    minWidth: 320,
   }
 }
 
@@ -19,12 +27,13 @@ const OrderScene = ({ classes, redux: { auth, order, loadOrder } }) => {
         <Header user={auth} />
         <div className={classes.container}>
           <div>
-            {order?.place && <PlaceCard place={order.place} />}
+            {order?.room?.place && <PlaceCard place={order.room.place} />}
           </div>
-          <div>
+          <div className={classes.order}>
             <OrderCard order={order} />
           </div>
-          <div>
+          <div className={classes.guests}>
+            <Typography variant="h5">Участники</Typography>
             {order?.room?.guests && <GuestList guests={order.room.guests} />}
           </div>
         </div>

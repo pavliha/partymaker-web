@@ -25,7 +25,7 @@ const GuestList = ({ classes, guests, onKick }) =>
 GuestList.propTypes = {
   classes: object.isRequired,
   guests: arrayOf(userShape).isRequired,
-  onKick: func.isRequired,
+  onKick: func,
 }
 
 export default withStyles(styles)(GuestList)

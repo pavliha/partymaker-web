@@ -1,17 +1,20 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
-import FieldLabel from 'components/Label'
+import { FieldLabel } from 'components'
 import orderShape from 'shapes/order'
+import moment from 'moment'
 
 const styles = {
   root: {},
+  actions: {}
 }
 
 const OrderCard = ({ classes, order }) =>
   <div className={classes.root}>
+    <Typography gutterBottom variant="h5">У вас новый заказ</Typography>
     <FieldLabel title="Дата">
-      <Typography>{order.date}</Typography>
+      <Typography>{moment(order.date).format('D MMMM, dddd')}</Typography>
     </FieldLabel>
     <FieldLabel title="Время">
       <Typography>{order.time}</Typography>
@@ -22,6 +25,8 @@ const OrderCard = ({ classes, order }) =>
     <FieldLabel title="Контактный телефон">
       <Typography>{order.phone}</Typography>
     </FieldLabel>
+    <div className={classes.actions} />
+
   </div>
 
 OrderCard.propTypes = {
