@@ -4,6 +4,7 @@ import { Typography, withStyles, Button } from '@material-ui/core'
 import { FieldLabel } from 'components'
 import orderShape from 'shapes/order'
 import moment from 'moment'
+import wait from 'utils/wait'
 
 const styles = {
   root: {},
@@ -12,23 +13,38 @@ const styles = {
   },
   reject: {
     marginLeft: 5,
-  }
+  },
+  response: {}
 }
 
 class OrderCard extends Component {
 
+  state = {
+    showResponse: false
+  }
+
   confirm = () => {
     const { order, onConfirm } = this.props
+    this.flashResponse()
     return onConfirm(order)
   }
 
   reject = () => {
     const { order, onReject } = this.props
+    this.flashResponse()
     return onReject(order)
+  }
+
+  flashResponse = () => {
+    this.setState({ showResponse: true })
+    wait(3000).then(() =>
+      this.setState({ showResponse: false })
+    )
   }
 
   render() {
     const { classes, order } = this.props
+    const { showResponse } = this.state
     const isConfirmed = order.state === 'confirmed'
     const isRejected = order.state === 'rejected'
 
@@ -64,6 +80,11 @@ class OrderCard extends Component {
             {isRejected ? 'Отказано' : 'Отказать'}
           </Button>
         </div>
+        {showResponse && (
+          <Typography color="textSecondary" variant="caption" className={classes.response}>
+            Спасибо. Ваш ответ был отправлен участникам группы
+          </Typography>)
+        }
 
       </div>
     )

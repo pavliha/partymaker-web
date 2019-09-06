@@ -6,20 +6,32 @@ import { GuestList, Header, Load, OrderCard, PlaceCard } from 'components'
 import { Typography, withStyles } from '@material-ui/core'
 import { connect, select } from 'src/redux'
 
-const styles = {
+const styles = theme => ({
   root: {},
   container: {
-    display: 'flex'
+    display: 'flex',
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row'
+    }
   },
+  place: {},
+
   order: {
     padding: 20,
     flex: 1,
   },
   guests: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none'
+    },
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    },
     padding: 20,
     minWidth: 320,
   }
-}
+})
 
 class OrderScene extends Component {
 
@@ -53,7 +65,7 @@ class OrderScene extends Component {
         <div className={classes.root}>
           <Header user={auth} />
           <div className={classes.container}>
-            <div>
+            <div className={classes.place}>
               {order?.room?.place && <PlaceCard place={order.room.place} />}
             </div>
             <div className={classes.order}>
