@@ -60,8 +60,9 @@ class ChatForm extends Component {
       })
         .then(() => console.log('Successful share'))
         .catch((error) => console.log('Error sharing', error))
+    } else {
+      this.setState(state => ({ isInviteOpen: !state.isInviteOpen }))
     }
-    this.setState(state => ({ isInviteOpen: !state.isInviteOpen }))
   }
 
   toggleDatetime = () =>
