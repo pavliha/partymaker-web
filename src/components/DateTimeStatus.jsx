@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 const styles = {
   root: {
-    width: 170,
+    width: 180,
   },
 }
 

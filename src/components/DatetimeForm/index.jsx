@@ -17,8 +17,8 @@ const styles = {
     alignItems: 'center',
   },
   field: {
-    maxWidth: 128,
-    marginRight: 10,
+    maxWidth: 138,
+    marginRight: 5,
   },
   input: {
 
