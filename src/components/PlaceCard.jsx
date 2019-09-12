@@ -6,6 +6,7 @@ import { Picture } from 'components'
 
 const styles = {
   root: {
+    position: 'relative',
     margin: 15,
     width: 344,
     border: '1px solid rgba(0,0,0,0.12)',
@@ -19,6 +20,17 @@ const styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundColor: 'rgba(0,0,0,0.12)',
+  },
+
+  price: {
+    position: 'absolute',
+    right: 0,
+    top: 5,
+    color: 'rgba(255,255,255,0.9)',
+    padding: 5,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    backgroundColor: 'rgba(0,0,0,0.6)'
   },
 
   title: {
@@ -45,6 +57,7 @@ const styles = {
 const PlaceCard = ({ classes, place, action }) =>
   <div className={classes.root}>
     <Picture src={place.picture_url} className={classes.picture} />
+    <Typography color="inherit" className={classes.price}>{place.price}</Typography>
     <div className={classes.container}>
       <Typography className={classes.title}>
         {place.title}
