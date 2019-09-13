@@ -6,8 +6,9 @@ import { Card, CardHeader } from '@material-ui/core'
 const styles = theme => ({
   root: {
     maxWidth: '100%',
-    padding: 20,
+    padding: 5,
     [theme.breakpoints.up('md')]: {
+      padding: 20,
       width: 400,
     }
   },

@@ -8,7 +8,8 @@ import { connect, actions } from 'src/redux'
 const styles = {
   root: {},
   paper: {
-    overflowY: 'visible'
+    overflowY: 'visible',
+    margin: 10,
   },
   social: {
     position: 'absolute',
