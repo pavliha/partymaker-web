@@ -130,7 +130,7 @@ class ChatForm extends Component {
 ChatForm.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
-  auth: userShape.isRequired,
+  auth: userShape,
   isGuest: bool,
   onSubmit: func.isRequired,
   onJoin: func.isRequired,

@@ -35,6 +35,7 @@ const styles = theme => ({
     marginTop: 150,
     color: 'white',
     maxWidth: 340,
+    textShadow: '1px 1px 2px black',
     textAlign: 'center',
     [theme.breakpoints.up('md')]: {
       textAlign: 'left'

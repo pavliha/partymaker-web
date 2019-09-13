@@ -45,13 +45,15 @@ class RoomsScene extends Component {
               <Typography variant="h5">
                 Мои компании
               </Typography>
-              <Button
-                color="primary"
-                variant="contained"
-                onClick={this.createRoom}
-              >
-                собрать компанию
-              </Button>
+              <div>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={this.createRoom}
+                >
+                  собрать компанию
+                </Button>
+              </div>
             </div>
             {redux.rooms.map(room =>
               <RoomCard key={room.id} room={room} />

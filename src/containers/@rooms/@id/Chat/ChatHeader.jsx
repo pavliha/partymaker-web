@@ -23,7 +23,12 @@ const styles = theme => ({
   },
 
   joinButton: {
+    display: 'none',
     color: theme.palette.primary.main,
+
+    [theme.breakpoints.up('sm')]: {
+      display: 'block'
+    }
   },
   peopleIcon: {
     display: 'flex',

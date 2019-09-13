@@ -92,7 +92,7 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onRep
     <div className={classes.root}>
       <header className={classes.header}>
         <div className={classes.entertainment}>
-          <Typography variant="h5">{place.entertainment.title}</Typography>
+          <Typography variant="h6">{place.entertainment.title}</Typography>
           {datetime}
         </div>
         <CloseButton onClick={onClose} />
@@ -116,7 +116,6 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onRep
               <Button className={classes.secondaryButton}>КАРТА</Button>
             </a>
           </div>
-          <Button disabled={isGuest} className={classes.orderButton}>Заказать</Button>
           <Button variant="outlined" disabled={isGuest} color="primary" onClick={onReplace}>
             Сменить
           </Button>

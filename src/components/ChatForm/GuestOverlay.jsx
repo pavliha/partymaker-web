@@ -3,7 +3,7 @@ import { object, func } from 'prop-types'
 import { IconButton, withStyles, Button } from '@material-ui/core'
 import FaceIcon from 'mdi-react/SentimentVerySatisfiedIcon'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1,
     height: 72,
@@ -18,13 +18,20 @@ const styles = () => ({
     flex: 1,
     paddingLeft: 15,
     opacity: '0.2'
+  },
+
+  icon: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    }
   }
 
 })
 
 const GuestOverlay = ({ classes, onJoin }) =>
   <div className={classes.root}>
-    <IconButton disabled>
+    <IconButton className={classes.icon} disabled>
       <FaceIcon />
     </IconButton>
     <div className={classes.container}>
