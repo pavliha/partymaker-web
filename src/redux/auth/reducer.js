@@ -3,13 +3,12 @@ import Storage from 'services/Storage'
 
 import {
   LOGIN_USER_FULFILLED,
-  LOGOUT_USER,
   REGISTER_USER_FULFILLED,
   SET_AUTH_USER,
   SET_AUTH_EMAIL,
   ACTIVATE_USER_FULFILLED,
   LOGIN_GOOGLE_USER_FULFILLED,
-  LOGIN_FACEBOOK_USER_FULFILLED,
+  LOGIN_FACEBOOK_USER_FULFILLED, LOGOUT_USER_FULFILLED,
 } from './action'
 
 const token = Storage.get('token')
@@ -37,7 +36,7 @@ const authReducer = (state = initialState, { type, payload }) => {
         user_id: fromJWT(payload.token)?.id,
       }
 
-    case LOGOUT_USER: {
+    case LOGOUT_USER_FULFILLED: {
       Storage.clear()
       return {
         ...state,
