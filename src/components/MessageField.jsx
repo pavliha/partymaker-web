@@ -36,6 +36,10 @@ class MessageField extends Component {
     onChange(name, e.target.value)
   }
 
+  blur = (e) => {
+    e.preventDefault()
+  }
+
   render() {
     const { classes, name, value, placeholder, onPaste } = this.props
 
@@ -49,6 +53,7 @@ class MessageField extends Component {
           className={classes.root}
           onKeyPress={this.listenForEnter}
           onChange={this.change}
+          onBlur={this.blur}
           onPaste={onPaste}
         />
       </div>
