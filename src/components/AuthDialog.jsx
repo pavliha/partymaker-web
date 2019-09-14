@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, bool, shape } from 'prop-types'
 import { Dialog, withStyles, Typography } from '@material-ui/core'
-import SocialLogin from 'components/SocialLoginActions'
-import { AuthCard, RegisterForm, LoginForm } from 'components'
+import { AuthCard, RegisterForm, LoginForm, SocialLoginActions } from 'components'
 import { connect, actions } from 'src/redux'
 
 const styles = {
@@ -82,7 +81,7 @@ class AuthDialog extends Component {
             : <RegisterForm onSubmit={this.register} />
           }
         </AuthCard>
-        <SocialLogin className={classes.social} onLogin={onAuth} />
+        <SocialLoginActions className={classes.social} onLogin={onAuth} />
       </Dialog>
     )
   }
