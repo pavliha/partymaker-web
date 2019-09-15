@@ -84,15 +84,17 @@ class PlaceTitle extends Component {
           isOpen={location.pathname === `/rooms/${room.id}/entertainments`}
           onClose={this.closePlacesDrawer}
         />
-        <PlaceDialog
-          title="Место"
-          datetime={<DateTimeStatus time={room.time} date={room.date} />}
-          place={place}
-          isGuest={isGuest}
-          isOpen={location.pathname === `/rooms/${room.id}/place`}
-          onClose={this.closePlaceDrawer}
-          onReplace={this.openPlacesDrawer}
-        />
+        {place && (
+          <PlaceDialog
+            title="Место"
+            datetime={<DateTimeStatus time={room.time} date={room.date} />}
+            place={place}
+            isGuest={isGuest}
+            isOpen={location.pathname === `/rooms/${room.id}/place`}
+            onClose={this.closePlaceDrawer}
+            onReplace={this.openPlacesDrawer}
+          />
+        )}
 
       </div>
     )

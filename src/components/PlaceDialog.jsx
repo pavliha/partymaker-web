@@ -92,7 +92,7 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onRep
     <div className={classes.root}>
       <header className={classes.header}>
         <div className={classes.entertainment}>
-          <Typography variant="h6">{place.entertainment.title}</Typography>
+          <Typography variant="h6">{place.entertainment?.title}</Typography>
           {datetime}
         </div>
         <CloseButton onClick={onClose} />
