@@ -9,24 +9,37 @@ import CloseButton from 'components/CloseButton'
 
 const styles = theme => ({
   root: {
+    position: 'relative',
     borderRadius: 3,
     overflow: 'none',
     display: 'flex',
     border: '1px solid rgba(0,0,0,0.12)',
     marginBottom: 20,
+    flexDirection: 'column',
+    [theme.breakpoints.up('sm')]: {
+      flexDirection: 'row',
+    },
   },
   picture: {
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundImage: (p) => `url(${p.room?.place?.picture_url})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    width: 182,
+    minHeight: 130,
     height: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 182,
+      minHeight: 'inherit',
+    },
   },
   container: {
     flex: 1,
     padding: 5,
     paddingLeft: 15,
+    [theme.breakpoints.up('sm')]: {
+      marginRight: 100,
+
+    },
   },
   title: {
     fontSize: 18,
@@ -39,7 +52,9 @@ const styles = theme => ({
     color: 'rgba(0,0,0,0.54)'
   },
   actions: {
-    paddingTop: 3,
+    position: 'absolute',
+    top: 5,
+    right: 5,
   }
 })
 

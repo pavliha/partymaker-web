@@ -107,3 +107,4 @@ export SocialLoginActions from './SocialLoginActions'
  * Menus
  */
 export ChatMenu from './ChatMenu'
+export AppBottomNavigation from './AppBottomNavigation'

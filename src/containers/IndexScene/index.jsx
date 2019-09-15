@@ -55,6 +55,9 @@ const styles = theme => ({
   container: {
     maxWidth: 1130,
     margin: '0 auto',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 15px',
+    }
   },
   screenshot: {
     display: 'none',
@@ -63,11 +66,12 @@ const styles = theme => ({
     }
   },
   entertainmentTitle: {
-    paddingTop: 30,
+    paddingTop: 60,
+    paddingBottom: 40,
     fontFamily: 'Google Sans,sans-serf',
     fontSize: 24,
     textAlign: 'center',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       textAlign: 'left'
     }
   },

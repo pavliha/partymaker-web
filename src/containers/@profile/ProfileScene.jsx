@@ -3,7 +3,7 @@ import { object, func, arrayOf, shape } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
-import { Load, Profile, RoomCard } from 'components'
+import { Load, Profile, RoomCard, AppBottomNavigation } from 'components'
 import userShape from 'shapes/user'
 
 const styles = theme => ({
@@ -11,7 +11,8 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     display: 'flex',
-    justifyContent: 'center'
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   container: {
     maxWidth: 700,
@@ -36,7 +37,9 @@ const styles = theme => ({
     }
   },
   rooms: {
+    flex: 1,
     marginTop: 15,
+    marginBottom: 100,
   }
 })
 
@@ -79,6 +82,7 @@ class ProfileScene extends Component {
               )}
             </div>
           </Load>
+          <AppBottomNavigation />
         </div>
       </div>
     )

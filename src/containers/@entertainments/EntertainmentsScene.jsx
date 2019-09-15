@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
-import { EntertainmentList, Header } from 'components'
+import { EntertainmentList, Header, AppBottomNavigation } from 'components'
 import { select, connect } from 'src/redux'
 
 const styles = theme => ({
@@ -45,6 +45,7 @@ class EntertainmentsScene extends Component {
             />
           </div>
         </section>
+        <AppBottomNavigation />
       </div>
     )
   }
