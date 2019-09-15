@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { object, bool } from 'prop-types'
+import { object, bool, shape, func, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import roomShape from 'shapes/room'
+import { withRouter } from 'react-router-dom'
 import { EntertainmentsDrawer, Picture, PlaceDialog, DateTimeStatus } from 'components'
 
 const styles = theme => ({
@@ -31,26 +32,29 @@ const styles = theme => ({
 
 class PlaceTitle extends Component {
 
-  state = {
-    isSelectPlaceDrawerOpen: false,
-    inPlaceDialogOpen: false,
+  openPlacesDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/entertainments`)
   }
 
-  openPlacesDrawer = () =>
-    this.setState({ isSelectPlaceDrawerOpen: true })
+  closePlacesDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/place`)
+  }
 
-  closePlacesDrawer = () =>
-    this.setState({ isSelectPlaceDrawerOpen: false })
+  openPlaceDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/place`)
+  }
 
-  openPlaceDrawer = () =>
-    this.setState({ inPlaceDialogOpen: true })
-
-  closePlaceDrawer = () =>
-    this.setState({ inPlaceDialogOpen: false })
+  closePlaceDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}`)
+  }
 
   render() {
-    const { classes, isGuest, room: { place, id, date, time } } = this.props
-    const { isSelectPlaceDrawerOpen, inPlaceDialogOpen } = this.state
+    const { location, classes, isGuest, room } = this.props
+    const { place } = room
 
     const handleClick = place ? this.openPlaceDrawer : this.openPlacesDrawer
 
@@ -76,30 +80,31 @@ class PlaceTitle extends Component {
           </Typography>
         </div>
         <EntertainmentsDrawer
-          room_id={id}
-          isOpen={isSelectPlaceDrawerOpen}
+          room_id={room.id}
+          isOpen={location.pathname === `/rooms/${room.id}/entertainments`}
           onClose={this.closePlacesDrawer}
         />
-        {place && (
-          <PlaceDialog
-            title="Место"
-            datetime={<DateTimeStatus time={time} date={date} />}
-            place={place}
-            isGuest={isGuest}
-            isOpen={inPlaceDialogOpen}
-            onClose={this.closePlaceDrawer}
-            onReplace={this.openPlacesDrawer}
-          />
-        )}
+        <PlaceDialog
+          title="Место"
+          datetime={<DateTimeStatus time={room.time} date={room.date} />}
+          place={place}
+          isGuest={isGuest}
+          isOpen={location.pathname === `/rooms/${room.id}/place`}
+          onClose={this.closePlaceDrawer}
+          onReplace={this.openPlacesDrawer}
+        />
+
       </div>
     )
   }
 }
 
 PlaceTitle.propTypes = {
+  location: shape({ pathname: string }),
+  history: shape({ push: func }),
   classes: object.isRequired,
   isGuest: bool,
   room: roomShape,
 }
 
-export default withStyles(styles)(PlaceTitle)
+export default withStyles(styles)(withRouter(PlaceTitle))
