@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { bool, func, object } from 'prop-types'
+import { bool, func, object, shape, string } from 'prop-types'
 import roomShape from 'shapes/room'
+import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
 import { ChatMenu, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
 
@@ -36,15 +37,18 @@ class ChatHeader extends Component {
     isGuestsDrawerOpen: false,
   }
 
-  openGuests = () =>
-    this.setState({ isGuestsDrawerOpen: true })
+  openGuests = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/guests`)
+  }
 
-  closeGuests = () =>
-    this.setState({ isGuestsDrawerOpen: false })
+  closeGuests = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}`)
+  }
 
   render() {
-    const { classes, room, isGuest, onJoin, onLeave } = this.props
-    const { isGuestsDrawerOpen } = this.state
+    const { classes, location, room, isGuest, onJoin, onLeave } = this.props
 
     return (
       <div className={classes.root}>
@@ -65,7 +69,7 @@ class ChatHeader extends Component {
         <GuestsDrawer
           anchor="left"
           room={room}
-          isOpen={isGuestsDrawerOpen}
+          isOpen={location.pathname === `/rooms/${room.id}/guests`}
           onClose={this.closeGuests}
           onOpen={this.openGuests}
         />
@@ -77,9 +81,11 @@ class ChatHeader extends Component {
 ChatHeader.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
+  history: shape({ push: func }),
+  location: shape({ pathname: string }),
   isGuest: bool,
   onJoin: func.isRequired,
   onLeave: func.isRequired,
 }
 
-export default withStyles(styles)(ChatHeader)
+export default withStyles(styles)(withRouter(ChatHeader))

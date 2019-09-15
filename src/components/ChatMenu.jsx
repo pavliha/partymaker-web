@@ -48,28 +48,33 @@ class ChatMenu extends Component {
   openLeaveRoomDialog = () => {
     const { history, room } = this.props
     history.push(`/rooms/${room.id}/leave`)
+    this.close()
   }
 
   closeLeaveRoomDialog = () => {
     const { history, room } = this.props
     history.push(`/rooms/${room.id}`)
+    this.close()
   }
 
   openGuestsDrawer = () => {
     const { history, room } = this.props
     history.push(`/rooms/${room.id}/guests`)
+    this.close()
   }
 
   leaveRoom = async () => {
     const { onLeave } = this.props
     this.closeLeaveRoomDialog()
     onLeave()
+    this.close()
   }
 
   joinRoom = async () => {
     const { room, onJoin } = this.props
     this.closeLeaveRoomDialog()
     onJoin(room)
+    this.close()
   }
 
   render() {
@@ -89,7 +94,7 @@ class ChatMenu extends Component {
         >
           <MenuItem className={classes.guests} onClick={this.openGuestsDrawer}>Участники</MenuItem>
           {isGuest
-            ? <MenuItem className={classes.join} onClick={this.joinRoom}>Присоеденится</MenuItem>
+            ? <MenuItem className={classes.join} onClick={this.joinRoom}>Присоедениться</MenuItem>
             : <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>Покинуть компанию</MenuItem>
           }
 

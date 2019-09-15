@@ -37,7 +37,7 @@ const GuestOverlay = ({ classes, onJoin }) =>
     <div className={classes.container}>
       Что бы начать писать присоденись к компании
     </div>
-    <Button color="primary" onClick={onJoin}>Присоеденится</Button>
+    <Button color="primary" onClick={onJoin}>Присоедениться</Button>
   </div>
 
 GuestOverlay.propTypes = {
