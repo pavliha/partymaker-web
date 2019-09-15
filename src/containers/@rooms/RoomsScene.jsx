@@ -5,7 +5,7 @@ import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
 import { Load, RoomCard } from 'components'
 
-const styles = {
+const styles = theme => ({
 
   root: {
     flexGrow: 1,
@@ -25,8 +25,15 @@ const styles = {
     alignItems: 'center',
     marginTop: '30px',
     marginBottom: '30px',
+  },
+
+  companyLabel: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'inline',
+    }
   }
-}
+})
 
 class RoomsScene extends Component {
 
@@ -51,7 +58,7 @@ class RoomsScene extends Component {
                   variant="contained"
                   onClick={this.createRoom}
                 >
-                  собрать компанию
+                  собрать <span className={classes.companyLabel}>компанию</span>
                 </Button>
               </div>
             </div>

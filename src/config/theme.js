@@ -13,4 +13,13 @@ export default {
       main: '#D6000A',
     },
   },
+
+  overrides: {
+    MuiDialog: {
+      paper: {
+        margin: 10,
+      },
+    },
+  },
+
 }

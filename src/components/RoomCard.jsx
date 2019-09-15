@@ -19,7 +19,7 @@ const styles = theme => ({
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     width: 182,
-    height: 94,
+    height: '100%',
   },
   container: {
     flex: 1,
