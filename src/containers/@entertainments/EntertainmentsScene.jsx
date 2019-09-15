@@ -6,7 +6,7 @@ import { EntertainmentList, Header } from 'components'
 import { select, connect } from 'src/redux'
 
 const styles = theme => ({
-  root: {
+  container: {
     maxWidth: 1130,
     margin: '0 auto',
   },

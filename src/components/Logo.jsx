@@ -31,6 +31,12 @@ const styles = theme => ({
   },
   logoIcon: {
     color: 'white',
+  },
+  logoButton: {
+    display: 'block',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    }
   }
 })
 
@@ -39,7 +45,7 @@ const Logo = ({ classes }) =>
     <Typography className={classes.fullTitle} variant="h6" color="inherit">
       Partymaker
     </Typography>
-    <IconButton>
+    <IconButton className={classes.logoButton}>
       <SvgIcon>
         <LogoIcon className={classes.logoIcon} />
       </SvgIcon>

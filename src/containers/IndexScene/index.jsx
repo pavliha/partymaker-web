@@ -72,6 +72,7 @@ const styles = theme => ({
     }
   },
   arrowDown: {
+    cursor: 'pointer',
     marginTop: 50,
     display: 'flex',
     justifyContent: 'center',
@@ -119,7 +120,13 @@ class IndexScene extends Component {
                   </Button>
                   <div className={classNames([classes.arrowDown, 'animate-bounce'])}>
                     <div>
-                      <SvgIcon className="animate-bounce" fontSize="large"><KeyboardArrowDownIcon /></SvgIcon>
+                      <SvgIcon
+                        onClick={this.scrollToPlaces}
+                        className="animate-bounce"
+                        fontSize="large"
+                      >
+                        <KeyboardArrowDownIcon />
+                      </SvgIcon>
                     </div>
                   </div>
                 </div>
