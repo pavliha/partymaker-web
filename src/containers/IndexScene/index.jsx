@@ -8,6 +8,7 @@ import { select, connect } from 'src/redux'
 import userShape from 'shapes/user'
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon'
 import classNames from 'classnames'
+import { Helmet } from 'react-helmet'
 
 const styles = theme => ({
   root: {
@@ -105,6 +106,9 @@ class IndexScene extends Component {
 
     return (
       <main className={classes.root}>
+        <Helmet>
+          <title>Partymaker - Здесь можно найти где погулать с друзями</title>
+        </Helmet>
         <section className={classes.background}>
           <Header isTransparent user={user} />
           <div className={classes.banner}>

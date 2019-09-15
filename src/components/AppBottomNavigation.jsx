@@ -9,17 +9,20 @@ import { withRouter, Link } from 'react-router-dom'
 import { func, object, shape, string } from 'prop-types'
 import { actions, connect } from 'src/redux'
 
-const styles = {
+const styles = theme => ({
   root: {
     position: 'fixed',
     bottom: 0,
     left: 0,
     width: '100%',
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    }
   },
   label: {
     display: 'none',
   }
-}
+})
 
 class AppBottomNavigation extends Component {
 

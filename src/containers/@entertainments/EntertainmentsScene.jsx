@@ -4,6 +4,7 @@ import { Typography, withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
 import { EntertainmentList, Header, AppBottomNavigation } from 'components'
 import { select, connect } from 'src/redux'
+import { Helmet } from 'react-helmet'
 
 const styles = theme => ({
   container: {
@@ -33,6 +34,9 @@ class EntertainmentsScene extends Component {
     const { classes, redux: { user } } = this.props
     return (
       <div>
+        <Helmet>
+          <title>Partymaker - Поиск развлечений</title>
+        </Helmet>
         <Header user={user} />
         <section className={classes.container}>
           <Typography className={classes.entertainmentTitle} variant="h5">
