@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { bool, func, object } from 'prop-types'
 import roomShape from 'shapes/room'
-import { Button, withStyles, IconButton } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import { ChatMenu, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
-import PeopleIcon from 'mdi-react/PeopleIcon'
 
 const styles = theme => ({
   root: {
@@ -28,13 +27,6 @@ const styles = theme => ({
 
     [theme.breakpoints.up('sm')]: {
       display: 'block'
-    }
-  },
-  peopleIcon: {
-    display: 'flex',
-    paddingRight: 5,
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
     }
   },
   datetime: {
@@ -64,11 +56,6 @@ class ChatHeader extends Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.peopleIcon}>
-          <IconButton onClick={this.openGuests}>
-            <PeopleIcon />
-          </IconButton>
-        </div>
         <PlaceTitle room={room} isGuest={isGuest} />
         <div className={classes.aside}>
           <DateTimeStatus

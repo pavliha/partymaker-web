@@ -14,7 +14,6 @@ const styles = theme => ({
     width: '90px',
     height: 50,
     marginRight: 5,
-    display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
     },

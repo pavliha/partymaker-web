@@ -20,7 +20,7 @@ const styles = {
   root: {
     display: 'flex',
     justifyContent: 'flex-start',
-    padding: '5px 15px'
+    padding: '5px 12px'
   },
   isMine: {
     flexDirection: 'row-reverse',

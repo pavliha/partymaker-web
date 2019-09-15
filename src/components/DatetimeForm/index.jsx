@@ -10,7 +10,7 @@ import CheckIcon from 'mdi-react/CheckIcon'
 import formik from './formik'
 import classNames from 'classnames'
 
-const styles = {
+const styles = theme => ({
   root: {
     flex: 1,
     display: 'flex',
@@ -44,9 +44,15 @@ const styles = {
     display: 'flex',
   },
   timeField: {
-    maxWidth: 'auto',
+    minWidth: 'auto',
+  },
+  closeIcon: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'inherit'
+    },
   }
-}
+})
 
 const DatetimeForm = ({ classes, handleSubmit, onClose }) =>
   <div className={classes.root}>
@@ -72,6 +78,7 @@ const DatetimeForm = ({ classes, handleSubmit, onClose }) =>
       </div>
     </div>
     <CloseButton
+      className={classes.closeIcon}
       color="default"
       onClick={onClose}
     />
