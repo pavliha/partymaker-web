@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func, bool, shape, string } from 'prop-types'
 import { IconButton, withStyles, Menu, MenuItem } from '@material-ui/core'
 import MoreIcon from 'mdi-react/MoreVertIcon'
 import roomShape from 'shapes/room'
-import { GuestsDrawer, LeaveRoomDialog } from 'components'
+import { withRouter } from 'react-router-dom'
+import { LeaveRoomDialog } from 'components'
 
 const styles = theme => ({
   root: {},
@@ -36,8 +37,6 @@ class ChatMenu extends Component {
 
   state = {
     anchorEl: null,
-    isLeaveRoomDialogOpen: false,
-    isGuestsDrawerOpen: false,
   }
 
   open = (e) =>
@@ -46,17 +45,20 @@ class ChatMenu extends Component {
   close = () =>
     this.setState({ anchorEl: null })
 
-  openLeaveRoomDialog = async () =>
-    this.setState({ isLeaveRoomDialogOpen: true })
+  openLeaveRoomDialog = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/leave`)
+  }
 
-  closeLeaveRoomDialog = () =>
-    this.setState({ isLeaveRoomDialogOpen: false })
+  closeLeaveRoomDialog = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}`)
+  }
 
-  openGuestsDrawer = () =>
-    this.setState({ isGuestsDrawerOpen: true })
-
-  closeGuestsDrawer = () =>
-    this.setState({ isGuestsDrawerOpen: false })
+  openGuestsDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/guests`)
+  }
 
   leaveRoom = async () => {
     const { onLeave } = this.props
@@ -71,9 +73,8 @@ class ChatMenu extends Component {
   }
 
   render() {
-    const { classes, room, isGuest } = this.props
+    const { location, classes, room, isGuest } = this.props
     const { anchorEl } = this.state
-    const { isLeaveRoomDialogOpen, isGuestsDrawerOpen } = this.state
 
     return (
       <div className={classes.root}>
@@ -86,32 +87,17 @@ class ChatMenu extends Component {
           open={Boolean(anchorEl)}
           onClose={this.close}
         >
-          <MenuItem className={classes.guests} onClick={this.openGuestsDrawer}>
-            Участники
-          </MenuItem>
+          <MenuItem className={classes.guests} onClick={this.openGuestsDrawer}>Участники</MenuItem>
           {isGuest
-            ? (
-              <MenuItem className={classes.join} onClick={this.joinRoom}>
-                Присоеденится
-              </MenuItem>
-            )
-            : (
-              <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>
-                Покинуть компанию
-              </MenuItem>
-            )
+            ? <MenuItem className={classes.join} onClick={this.joinRoom}>Присоеденится</MenuItem>
+            : <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>Покинуть компанию</MenuItem>
           }
 
         </Menu>
         <LeaveRoomDialog
-          isOpen={isLeaveRoomDialogOpen}
+          isOpen={location.pathname === `/rooms/${room.id}/leave`}
           onCancel={this.closeLeaveRoomDialog}
           onConfirm={this.leaveRoom}
-        />
-        <GuestsDrawer
-          room={room}
-          isOpen={isGuestsDrawerOpen}
-          onClose={this.closeGuestsDrawer}
         />
       </div>
     )
@@ -120,10 +106,12 @@ class ChatMenu extends Component {
 
 ChatMenu.propTypes = {
   classes: object.isRequired,
+  history: shape({ push: func }),
+  location: shape({ pathname: string }),
   room: roomShape.isRequired,
   isGuest: bool,
   onLeave: func.isRequired,
   onJoin: func.isRequired,
 }
 
-export default withStyles(styles)(ChatMenu)
+export default withStyles(styles)(withRouter(ChatMenu))
