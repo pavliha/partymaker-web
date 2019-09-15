@@ -20,6 +20,16 @@ export default {
         margin: 10,
       },
     },
+    MuiBottomNavigationAction: {
+      root: {
+        '&$selected': {
+          paddingBottom: 0,
+        },
+      },
+      label: {
+        display: 'none',
+      }
+    }
   },
 
 }

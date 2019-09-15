@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, arrayOf, shape } from 'prop-types'
 import roomShape from 'shapes/room'
-import { Typography, Button, withStyles } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
 import { Load, Profile, RoomCard, AppBottomNavigation } from 'components'
 import userShape from 'shapes/user'
@@ -50,11 +50,6 @@ class ProfileScene extends Component {
     loadAccount()
   }
 
-  createRoom = async () => {
-    const { redux: { createRoom } } = this.props
-    await createRoom()
-  }
-
   render() {
     const { classes, redux } = this.props
     return (
@@ -67,15 +62,6 @@ class ProfileScene extends Component {
                 <Typography variant="h5">
                   Мои компании
                 </Typography>
-                <div>
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={this.createRoom}
-                  >
-                    собрать<span className={classes.companyLabel}>&nbsp;компанию</span>
-                  </Button>
-                </div>
               </div>
               {redux.rooms.map(room =>
                 <RoomCard key={room.id} room={room} />
