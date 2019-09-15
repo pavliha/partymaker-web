@@ -8,22 +8,24 @@ const styles = {
 
   root: {
     boxShadow: '2px 2px 3px -1px rgba(156, 169, 189, 0.3)',
-    width: 330,
-    height: 300,
+    maxWidth: 500,
     backgroundImage: `url(/images/transparent-background.svg)`,
     backgroundSize: 'cover',
-    borderRadius: 20,
+    borderRadius: 10,
   },
 
   picture: {
-    padding: 15,
     height: '100%',
-    backgroundSize: 'cover',
-    borderRadius: 20,
+    borderRadius: 10,
+    marginBottom: -5,
+    overflow: 'hidden'
   },
   caption: {
-    marginTop: 35,
+    marginTop: 5,
     marginRight: 10,
+  },
+  img: {
+    marginBottom: -5,
   }
 }
 
@@ -47,11 +49,9 @@ class PictureMessage extends Component {
     return (
       <>
         <div className={classes.root}>
-          <div
-            onClick={this.openPictureModal}
-            className={classes.picture}
-            style={{ backgroundImage: `url(${message.asset.url})` }}
-          />
+          <div onClick={this.openPictureModal} className={classes.picture}>
+            <img className={classes.img} alt={message.text} width="100%" src={message.asset.url} />
+          </div>
           <PictureDialog
             url={message.asset.url}
             isOpen={isPictureModalOpen}
