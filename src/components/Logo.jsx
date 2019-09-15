@@ -1,6 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { Typography, withStyles, IconButton, SvgIcon } from '@material-ui/core'
+import LogoIcon from 'assets/images/logo-filled.svg'
 
 const styles = theme => ({
   root: {
@@ -27,6 +28,9 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       display: 'none',
     }
+  },
+  logoIcon: {
+    color: 'white',
   }
 })
 
@@ -35,9 +39,11 @@ const Logo = ({ classes }) =>
     <Typography className={classes.fullTitle} variant="h6" color="inherit">
       Partymaker
     </Typography>
-    <Typography className={classes.shortTitle} variant="h6" color="inherit">
-      P
-    </Typography>
+    <IconButton>
+      <SvgIcon>
+        <LogoIcon className={classes.logoIcon} />
+      </SvgIcon>
+    </IconButton>
     <Typography className={classes.city} color="inherit">Запорожье</Typography>
   </div>
 

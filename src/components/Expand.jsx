@@ -16,6 +16,7 @@ const styles = theme => ({
     display: 'flex',
     paddingTop: 5,
     paddingBottom: 5,
+    paddingLeft: 15,
     alignItems: 'center',
   },
 

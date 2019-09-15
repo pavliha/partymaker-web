@@ -29,15 +29,10 @@ const styles = theme => ({
       display: 'none',
     }
   },
-  logo: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'inherit',
-    }
-  }
+  logo: {}
 })
 
-const Header = ({ classes, history, className, user, isTransparent }) =>
+const Header = ({ classes, location, history, className, user, isTransparent }) =>
   <AppBar
     position="static"
     color="primary"
@@ -48,12 +43,12 @@ const Header = ({ classes, history, className, user, isTransparent }) =>
     })}
   >
     <Toolbar>
-      <IconButton className={classes.backIcon} onClick={history.goBack}>
-        <ArrowBackIcon />
-      </IconButton>
-      <Link className={classes.logo} to="/"><Logo /></Link>
+      {location.pathname === 'profile'
+        ? <IconButton className={classes.backIcon} onClick={history.goBack}><ArrowBackIcon /></IconButton>
+        : <Link className={classes.logo} to="/"><Logo /></Link>
+      }
       <div className={classes.navigation}>
-        {user && <Link to="/profile"><Button color="inherit">моя страница</Button></Link>}
+        {user && <Link to="/entertainments"><Button color="inherit">куда сходить?</Button></Link>}
       </div>
       {user
         ? <UserMenu user={user} />
@@ -73,6 +68,7 @@ const Header = ({ classes, history, className, user, isTransparent }) =>
 Header.propTypes = {
   classes: object.isRequired,
   history: shape({ goBack: func }),
+  location: shape({ pathname: string }),
   className: string,
   isTransparent: bool,
   user: userShape,
