@@ -17,11 +17,10 @@ const styles = {
     alignItems: 'center',
   },
   field: {
-    maxWidth: 138,
-    marginRight: 5,
+    marginRight: 0,
+    minWidth: 125,
   },
   input: {
-
     marginBottom: 3,
     height: 72,
     overflow: 'auto',
@@ -41,8 +40,11 @@ const styles = {
     marginLeft: 10,
     marginRight: 5,
   },
+  fields: {
+    display: 'flex',
+  },
   timeField: {
-    maxWidth: 96,
+    maxWidth: 'auto',
   }
 }
 
@@ -52,20 +54,22 @@ const DatetimeForm = ({ classes, handleSubmit, onClose }) =>
       <IconButton disabled className={classes.icon}>
         <CalendarClockIcon />
       </IconButton>
-      <Field
-        name="date"
-        type="date"
-        component={TextField}
-        className={classes.field}
-        inputProps={{ className: classes.input, }}
-      />
-      <Field
-        name="time"
-        type="time"
-        component={TextField}
-        className={classNames([classes.field, classes.timeField])}
-        inputProps={{ className: classes.input, }}
-      />
+      <div className={classes.fields}>
+        <Field
+          name="date"
+          type="date"
+          component={TextField}
+          className={classes.field}
+          inputProps={{ className: classes.input, }}
+        />
+        <Field
+          name="time"
+          type="time"
+          component={TextField}
+          className={classNames([classes.field, classes.timeField])}
+          inputProps={{ className: classes.input, }}
+        />
+      </div>
     </div>
     <CloseButton
       color="default"

@@ -7,11 +7,11 @@ const formik = withFormik({
   validationSchema: Yup.object().shape({}),
 
   mapPropsToValues: ({ room, auth }) => ({
-    date: moment(room.date).format('YYYY-MM-DD'),
-    time: room.time,
-    guests: room.guests.length,
-    phone: auth.phone,
-    room_id: room.id,
+    date: room.date ? moment(room.date).format('YYYY-MM-DD') : '',
+    time: room.time || '',
+    guests: room.guests.length || '',
+    phone: auth.phone || '',
+    room_id: room.id || '',
   }),
 
   handleSubmit: async (form, { props, setErrors, setSubmitting }) => {
