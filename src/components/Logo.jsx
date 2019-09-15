@@ -1,7 +1,8 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, string, shape } from 'prop-types'
 import { Typography, withStyles, IconButton, SvgIcon } from '@material-ui/core'
 import LogoIcon from 'assets/images/logo-filled.svg'
+import { withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -40,21 +41,25 @@ const styles = theme => ({
   }
 })
 
-const Logo = ({ classes }) =>
+const Logo = ({ classes, location }) =>
   <div className={classes.root}>
     <Typography className={classes.fullTitle} variant="h6" color="inherit">
       Partymaker
     </Typography>
-    <IconButton className={classes.logoButton}>
-      <SvgIcon>
-        <LogoIcon className={classes.logoIcon} />
-      </SvgIcon>
-    </IconButton>
+    {(location.pathname === '/profile' || location.pathname === '/') && (
+      <IconButton className={classes.logoButton}>
+        <SvgIcon>
+          <LogoIcon className={classes.logoIcon} />
+        </SvgIcon>
+      </IconButton>
+    )}
+
     <Typography className={classes.city} color="inherit">Запорожье</Typography>
   </div>
 
 Logo.propTypes = {
   classes: object.isRequired,
+  location: shape({ pathname: string })
 }
 
-export default withStyles(styles)(Logo)
+export default withStyles(styles)(withRouter(Logo))

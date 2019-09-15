@@ -52,8 +52,8 @@ class ChatMenu extends Component {
   }
 
   closeLeaveRoomDialog = () => {
-    const { history, room } = this.props
-    history.push(`/rooms/${room.id}`)
+    const { history } = this.props
+    history.goBack()
     this.close()
   }
 
@@ -64,10 +64,11 @@ class ChatMenu extends Component {
   }
 
   leaveRoom = async () => {
-    const { onLeave } = this.props
+    const { history, onLeave } = this.props
     this.closeLeaveRoomDialog()
     onLeave()
     this.close()
+    history.push(`/profile`)
   }
 
   joinRoom = async () => {
@@ -111,7 +112,7 @@ class ChatMenu extends Component {
 
 ChatMenu.propTypes = {
   classes: object.isRequired,
-  history: shape({ push: func }),
+  history: shape({ push: func, goBack: func }),
   location: shape({ pathname: string }),
   room: roomShape.isRequired,
   isGuest: bool,

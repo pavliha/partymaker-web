@@ -2,8 +2,10 @@ import React from 'react'
 import { object } from 'prop-types'
 import roomShape from 'shapes/room'
 import { withStyles } from '@material-ui/styles'
-import { Typography, Button } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import DateTimeStatus from 'components/DateTimeStatus'
+import CloseButton from 'components/CloseButton'
 
 const styles = theme => ({
   root: {
@@ -37,13 +39,7 @@ const styles = theme => ({
     color: 'rgba(0,0,0,0.54)'
   },
   actions: {
-    display: 'none',
-    padding: 5,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    }
+    paddingTop: 3,
   }
 })
 
@@ -60,9 +56,10 @@ const RoomCard = ({ classes, room }) =>
         }
       </Link>
       <Typography className={classes.subtitle}>{room.place?.title || 'Место еще не выбрано'}</Typography>
+      <div className={classes.subtitle}><DateTimeStatus date={room.date} time={room.time} /></div>
     </div>
     <div className={classes.actions}>
-      <Link to={`/rooms/${room.id}`}><Button>открыть</Button></Link>
+      <Link to={`/rooms/${room.id}/leave`}><CloseButton /></Link>
     </div>
   </div>
 

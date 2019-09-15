@@ -23,7 +23,7 @@ const CloseButton = ({ classes, color, onClick, className }) =>
 CloseButton.propTypes = {
   classes: object.isRequired,
   className: string,
-  onClick: func.isRequired,
+  onClick: func,
   color: string,
 }
 
