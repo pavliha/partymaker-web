@@ -89,14 +89,18 @@ class ChatMenu extends Component {
           <MenuItem className={classes.guests} onClick={this.openGuestsDrawer}>
             Участники
           </MenuItem>
-          <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>
-            Покинуть компанию
-          </MenuItem>
-          {isGuest && (
-            <MenuItem className={classes.join} onClick={this.joinRoom}>
-              Присоеденится
-            </MenuItem>
-          )}
+          {isGuest
+            ? (
+              <MenuItem className={classes.join} onClick={this.joinRoom}>
+                Присоеденится
+              </MenuItem>
+            )
+            : (
+              <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>
+                Покинуть компанию
+              </MenuItem>
+            )
+          }
 
         </Menu>
         <LeaveRoomDialog

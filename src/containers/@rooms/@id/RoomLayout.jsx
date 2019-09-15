@@ -44,6 +44,7 @@ class RoomScene extends Component {
     const { history, redux: { auth, joinRoom, room, subscribe } } = this.props
     if (!auth) return history.push(`/rooms/${room.id}/auth`)
     await joinRoom(room.id)
+    history.push(`/rooms/${room.id}`)
     this.topic = subscribe(room.id)
   }
 
