@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
-import { IconButton, withStyles, Menu, MenuItem, Button } from '@material-ui/core'
+import { object, func, bool } from 'prop-types'
+import { IconButton, withStyles, Menu, MenuItem } from '@material-ui/core'
 import MoreIcon from 'mdi-react/MoreVertIcon'
 import roomShape from 'shapes/room'
 import { GuestsDrawer, LeaveRoomDialog } from 'components'
@@ -18,18 +18,18 @@ const styles = theme => ({
       display: 'block'
     }
   },
-  moreButton: {
-    display: 'block',
-    [theme.breakpoints.up('lg')]: {
-      display: 'none'
-    }
-  },
+
+  moreButton: {},
+
   guests: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none'
     }
-  }
+  },
+  join: {
+    color: theme.palette.primary.main,
+  },
 })
 
 class ChatMenu extends Component {
@@ -64,21 +64,19 @@ class ChatMenu extends Component {
     onLeave()
   }
 
+  joinRoom = async () => {
+    const { room, onJoin } = this.props
+    this.closeLeaveRoomDialog()
+    onJoin(room)
+  }
+
   render() {
-    const { classes, room } = this.props
+    const { classes, room, isGuest } = this.props
     const { anchorEl } = this.state
     const { isLeaveRoomDialogOpen, isGuestsDrawerOpen } = this.state
 
     return (
       <div className={classes.root}>
-        <Button
-          className={classes.leaveButton}
-          color="inherit"
-          variant="outlined"
-          onClick={this.openLeaveRoomDialog}
-        >
-          Покинуть компанию
-        </Button>
         <IconButton className={classes.moreButton} onClick={this.open}>
           <MoreIcon />
         </IconButton>
@@ -94,6 +92,12 @@ class ChatMenu extends Component {
           <MenuItem className={classes.danger} onClick={this.openLeaveRoomDialog}>
             Покинуть компанию
           </MenuItem>
+          {isGuest && (
+            <MenuItem className={classes.join} onClick={this.joinRoom}>
+              Присоеденится
+            </MenuItem>
+          )}
+
         </Menu>
         <LeaveRoomDialog
           isOpen={isLeaveRoomDialogOpen}
@@ -113,7 +117,9 @@ class ChatMenu extends Component {
 ChatMenu.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
+  isGuest: bool,
   onLeave: func.isRequired,
+  onJoin: func.isRequired,
 }
 
 export default withStyles(styles)(ChatMenu)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bool, func, object } from 'prop-types'
 import roomShape from 'shapes/room'
-import { Button, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import { ChatMenu, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
 
 const styles = theme => ({
@@ -21,14 +21,6 @@ const styles = theme => ({
     alignItems: 'center'
   },
 
-  joinButton: {
-    display: 'none',
-    color: theme.palette.primary.main,
-
-    [theme.breakpoints.up('sm')]: {
-      display: 'block'
-    }
-  },
   datetime: {
     paddingRight: 20,
     display: 'none',
@@ -63,10 +55,12 @@ class ChatHeader extends Component {
             date={room.date}
             time={room.time}
           />
-          {isGuest
-            ? <Button className={classes.joinButton} variant="outlined" onClick={onJoin}>Присоеденится</Button>
-            : <ChatMenu room={room} onLeave={onLeave} />
-          }
+          <ChatMenu
+            room={room}
+            isGuest={isGuest}
+            onJoin={onJoin}
+            onLeave={onLeave}
+          />
         </div>
         <GuestsDrawer
           anchor="left"
