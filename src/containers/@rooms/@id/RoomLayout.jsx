@@ -3,7 +3,8 @@ import { object, shape, string, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import { userShape, roomShape } from 'shapes'
-import { Invite, Load, RoomTitle, AuthDialog, Guests } from 'components'
+import { Route } from 'react-router-dom'
+import { Invite, Load, RoomTitle, Guests, AuthDialog } from 'components'
 import Chat from './Chat'
 
 const styles = theme => ({
@@ -27,10 +28,6 @@ class RoomScene extends Component {
 
   topic = null
 
-  state = {
-    isAuthDialogOpen: false,
-  }
-
   constructor(props) {
     super(props)
     const { redux: { subscribe, auth }, match } = props
@@ -43,18 +40,11 @@ class RoomScene extends Component {
     this.topic = null
   }
 
-  showAuthDialog = () =>
-    this.setState({ isAuthDialogOpen: true })
-
-  closeAuthDialog = () =>
-    this.setState({ isAuthDialogOpen: false })
-
   joinRoom = async () => {
-    const { redux: { auth, joinRoom, room, subscribe } } = this.props
-    if (!auth) return this.showAuthDialog()
+    const { history, redux: { auth, joinRoom, room, subscribe } } = this.props
+    if (!auth) return history.push(`/rooms/${room.id}/auth`)
     await joinRoom(room.id)
     this.topic = subscribe(room.id)
-    this.closeAuthDialog()
   }
 
   leaveRoom = async () => {
@@ -73,7 +63,6 @@ class RoomScene extends Component {
 
   render() {
     const { classes, redux } = this.props
-    const { isAuthDialogOpen } = this.state
     const { auth, room, isGuest, loadMessages, loadRoom, sendMessage, orderPlace, kickGuest } = redux
 
     return (
@@ -81,7 +70,7 @@ class RoomScene extends Component {
         {room && (
           <section className={classes.root}>
             <div className={classes.guests}>
-              <RoomTitle room={room} action={<Invite invite_token={room.invite_token} />} />
+              <RoomTitle room={room} action={<Invite room={room} />} />
               <Guests
                 guests={room.guests}
                 onKick={kickGuest}
@@ -100,10 +89,15 @@ class RoomScene extends Component {
             />
           </section>
         )}
-        <AuthDialog
-          isOpen={isAuthDialogOpen}
-          onClose={this.closeAuthDialog}
-          onAuth={this.joinRoom}
+        <Route
+          path="/rooms/:id/auth"
+          render={({ history }) =>
+            <AuthDialog
+              isOpen
+              onClose={history.goBack}
+              onAuth={this.joinRoom}
+            />
+          }
         />
       </Load>
     )

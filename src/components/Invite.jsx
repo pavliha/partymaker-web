@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { object, string } from 'prop-types'
+import { object, string, shape, number, func } from 'prop-types'
 import { IconButton, SvgIcon, withStyles } from '@material-ui/core'
+import { Route, withRouter } from 'react-router-dom'
 import PersonAddIcon from 'mdi-react/PersonAddIcon'
 import { InviteDialog } from 'components'
 
@@ -10,19 +11,13 @@ const styles = {
 
 class Invite extends Component {
 
-  state = {
-    isDialogOpen: false
+  open = () => {
+    const { room, history } = this.props
+    history.push(`/rooms/${room.id}/invite`)
   }
 
-  open = () =>
-    this.setState({ isDialogOpen: true })
-
-  close = () =>
-    this.setState({ isDialogOpen: false })
-
   render() {
-    const { classes, invite_token } = this.props
-    const { isDialogOpen } = this.state
+    const { classes, room } = this.props
 
     return (
       <div className={classes.root}>
@@ -31,10 +26,15 @@ class Invite extends Component {
             <PersonAddIcon />
           </SvgIcon>
         </IconButton>
-        <InviteDialog
-          invite_token={invite_token}
-          isOpen={isDialogOpen}
-          onClose={this.close} />
+        <Route
+          path="/rooms/:id/invite"
+          render={({ history }) =>
+            <InviteDialog
+              isOpen
+              invite_token={room.invite_token}
+              onClose={history.goBack} />
+          }
+        />
       </div>
     )
   }
@@ -42,7 +42,11 @@ class Invite extends Component {
 
 Invite.propTypes = {
   classes: object.isRequired,
-  invite_token: string.isRequired
+  history: shape({ push: func }),
+  room: shape({
+    id: number,
+    invite_token: string.isRequired,
+  })
 }
 
-export default withStyles(styles)(Invite)
+export default withStyles(styles)(withRouter(Invite))

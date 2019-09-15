@@ -21,20 +21,22 @@ const RoomTitle = ({ classes, room, action }) => {
     two: 'Участника'
   })
 
-  return <div className={classes.root}>
-    <div>
-      {room.title
-        ? <Typography variant="h5">{room.title}</Typography>
-        : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
-      }
-      <Typography color="textSecondary" variant="caption">
-        {count} {format(count)}
-      </Typography>
+  return (
+    <div className={classes.root}>
+      <div>
+        {room.title
+          ? <Typography variant="h5">{room.title}</Typography>
+          : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
+        }
+        <Typography color="textSecondary" variant="caption">
+          {count} {format(count)}
+        </Typography>
+      </div>
+      <div>
+        {action}
+      </div>
     </div>
-    <div>
-      {action}
-    </div>
-  </div>
+  )
 }
 
 RoomTitle.propTypes = {
