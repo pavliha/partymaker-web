@@ -41,12 +41,13 @@ class MessageField extends Component {
   }
 
   render() {
-    const { classes, name, value, placeholder, onPaste } = this.props
+    const { classes, inputRef, name, value, placeholder, onPaste } = this.props
 
     return (
       <div className={classes.root}>
         <EmojiPicker onSelect={this.addEmoji} />
         <MessageInput
+          inputRef={inputRef}
           name={name}
           value={value}
           placeholder={placeholder}
@@ -62,6 +63,7 @@ class MessageField extends Component {
 }
 
 MessageField.propTypes = {
+  inputRef: object,
   classes: object.isRequired,
   placeholder: string.isRequired,
   name: string.isRequired,

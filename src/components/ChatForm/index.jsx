@@ -86,6 +86,12 @@ class ChatForm extends Component {
     return action
   }
 
+  handleSend = () => {
+    const { inputRef } = this
+    window.inputRef = inputRef
+    inputRef.focus()
+  }
+
   render() {
     const { classes, values, room, isGuest, onJoin, auth } = this.props
     const { isInviteOpen, isDatetimeOpen, isOrderDialogOpen } = this.state
@@ -99,9 +105,14 @@ class ChatForm extends Component {
     return (
       <Form className={classes.root}>
         <OverlayManager overlays={overlays}>
-          <Field name="text" className={classes.sendField} component={MessageField} />
+          <Field
+            name="text"
+            className={classes.sendField}
+            inputRef={(ref) => { this.inputRef = ref }}
+            component={MessageField}
+          />
           {values.text
-            ? <IconButton type="submit" color="primary"><SendIcon /></IconButton>
+            ? <IconButton type="submit" color="primary" onClick={this.handleSend}><SendIcon /></IconButton>
             : <Field name="asset_id" component={AssetField} />
           }
         </OverlayManager>

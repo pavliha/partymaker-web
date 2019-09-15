@@ -14,8 +14,9 @@ const styles = {
   },
 }
 
-const MessageInput = ({ classes, placeholder, name, value, onChange, onPaste, onKeyPress, }) =>
+const MessageInput = ({ classes, inputRef, placeholder, name, value, onChange, onPaste, onKeyPress, }) =>
   <Input
+    ref={inputRef}
     placeholder={placeholder}
     classes={classes}
     name={name}
@@ -30,6 +31,7 @@ const MessageInput = ({ classes, placeholder, name, value, onChange, onPaste, on
   />
 
 MessageInput.propTypes = {
+  inputRef: object,
   classes: object.isRequired,
   placeholder: string.isRequired,
   name: string.isRequired,
