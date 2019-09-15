@@ -10,7 +10,7 @@ import classNames from 'classnames'
 
 const styles = () => ({
   root: {
-    padding: '9px 15px',
+    padding: '8px 10px',
     display: 'flex',
     borderRadius: 15,
     alignItems: 'flex-end',

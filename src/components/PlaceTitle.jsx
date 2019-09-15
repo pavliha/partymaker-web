@@ -22,10 +22,11 @@ const styles = theme => ({
   title: {
     cursor: 'pointer',
     fontSize: 14,
-    whiteSpace: 'nowrap',
+    maxWidth: 150,
     textOverflow: 'ellipsis',
     [theme.breakpoints.up('sm')]: {
       fontSize: 18,
+      maxWidth: 'inherit'
     },
   },
 })
