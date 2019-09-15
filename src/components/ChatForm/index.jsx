@@ -86,9 +86,10 @@ class ChatForm extends Component {
     return action
   }
 
-  handleSend = () => {
-    const { inputRef } = this
-    window.inputRef = inputRef
+  handleSend = (e) => {
+    const { inputRef, props: { submitForm } } = this
+    submitForm()
+    e.preventDefault()
     inputRef.focus()
   }
 
@@ -112,7 +113,7 @@ class ChatForm extends Component {
             component={MessageField}
           />
           {values.text
-            ? <IconButton type="submit" color="primary" onClick={this.handleSend}><SendIcon /></IconButton>
+            ? <IconButton color="primary" onMouseDown={this.handleSend}><SendIcon /></IconButton>
             : <Field name="asset_id" component={AssetField} />
           }
         </OverlayManager>
