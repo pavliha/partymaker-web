@@ -49,11 +49,10 @@ class RoomScene extends Component {
   }
 
   leaveRoom = async () => {
-    const { redux: { leaveRoom, room, unsubscribe }, history } = this.props
+    const { redux: { leaveRoom, room, unsubscribe } } = this.props
     await leaveRoom(room.id)
     this.topic = null
     unsubscribe(room.id)
-    history.push('/rooms')
   }
 
   receiveMessage = async (scrollBottom) => {

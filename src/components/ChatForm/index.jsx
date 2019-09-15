@@ -107,6 +107,7 @@ class ChatForm extends Component {
         </OverlayManager>
         <ChatFormActions
           room={room}
+          isGuest={isGuest}
           onInvite={this.toggleInvite}
           onTime={this.toggleDatetime}
           onOrder={this.toggleOrderDialog}
