@@ -43,9 +43,9 @@ const Header = ({ classes, location, history, className, user, isTransparent }) 
     })}
   >
     <Toolbar>
-      {location.pathname === 'profile'
-        ? <IconButton className={classes.backIcon} onClick={history.goBack}><ArrowBackIcon /></IconButton>
-        : <Link className={classes.logo} to="/"><Logo /></Link>
+      {location.pathname === '/profile' || location.pathname === '/'
+        ? <Link className={classes.logo} to="/"><Logo /></Link>
+        : <IconButton className={classes.backIcon} onClick={history.goBack}><ArrowBackIcon /></IconButton>
       }
       <div className={classes.navigation}>
         {user && <Link to="/entertainments"><Button color="inherit">куда сходить?</Button></Link>}
