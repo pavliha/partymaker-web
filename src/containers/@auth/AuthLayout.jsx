@@ -59,7 +59,7 @@ class AuthLayout extends Component {
   loginWithSocial = () => {
     const { history } = this.props
     const previous_user_location = Storage.get('previous_user_location')
-    history.push(previous_user_location || '/rooms')
+    history.push(previous_user_location || '/profile')
   }
 
   render() {

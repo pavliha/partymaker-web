@@ -12,6 +12,7 @@ export Logo from './Logo'
 export Picture from './Picture'
 export Guest from './Guest'
 export GuestItemText from './GuestItemText'
+export Profile from './Profile'
 
 /**
  * Lists

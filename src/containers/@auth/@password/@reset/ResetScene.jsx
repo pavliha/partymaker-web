@@ -13,7 +13,7 @@ class ResetScene extends Component {
       password
     })
 
-    history.push('/rooms')
+    history.push('/profile')
   }
 
   render() {

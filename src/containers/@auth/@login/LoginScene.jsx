@@ -12,7 +12,7 @@ class LoginScene extends Component {
     const { redux, history } = this.props
     const action = await redux.login(credentials)
     const previous_user_location = Storage.get('previous_user_location')
-    history.push(previous_user_location || '/rooms')
+    history.push(previous_user_location || '/profile')
     return action
   }
 

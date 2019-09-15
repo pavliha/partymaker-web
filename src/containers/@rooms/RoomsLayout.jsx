@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import RoomsScene from './RoomsScene'
 import RoomLayout from './@id/RoomLayout'
 import { Header } from 'components'
 import { userShape } from 'shapes'
@@ -11,7 +10,6 @@ const RoomsLayout = ({ redux: { user } }) =>
   <Fragment>
     <Header user={user} />
     <Switch>
-      <Route exact path="/rooms" component={RoomsScene} />
       <Route path="/rooms/:id" component={RoomLayout} />
     </Switch>
   </Fragment>

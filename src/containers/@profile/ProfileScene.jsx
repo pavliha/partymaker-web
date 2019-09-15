@@ -1,60 +1,84 @@
 import React, { Component } from 'react'
-import { func, object, shape } from 'prop-types'
+import { object, func, arrayOf, shape } from 'prop-types'
+import roomShape from 'shapes/room'
+import { Typography, Button, withStyles } from '@material-ui/core'
+import { actions, connect, select } from 'src/redux'
+import { Load, Profile, RoomCard } from 'components'
 import userShape from 'shapes/user'
-import { Button, Typography, withStyles } from '@material-ui/core'
-import { UserAvatar } from 'components'
-import { Link } from 'react-router-dom'
-import { select, connect, actions } from 'src/redux'
 
-const styles = {
+const styles = theme => ({
+
   root: {
     flexGrow: 1,
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: 'center'
   },
-  avatar: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
+  container: {
+    maxWidth: 700,
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '0 20px',
+    paddingTop: 30,
   },
   actions: {
-    marginTop: 200,
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    width: 250,
+    alignItems: 'center',
+    marginTop: '30px',
+    marginBottom: '30px',
+  },
+
+  companyLabel: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'inline',
+    }
+  },
+  rooms: {
+    marginTop: 15,
   }
-}
+})
 
 class ProfileScene extends Component {
-  constructor(props) {
-    super(props)
-    const { redux: { loadAccount } } = props
 
+  componentDidMount() {
+    const { redux: { loadAccount } } = this.props
     loadAccount()
   }
 
+  createRoom = async () => {
+    const { redux: { createRoom } } = this.props
+    await createRoom()
+  }
+
   render() {
-    const { classes, redux: { user } } = this.props
+    const { classes, redux } = this.props
     return (
       <div className={classes.root}>
-        <UserAvatar clickable className={classes.avatar} user={user} />
-        <Typography gutterBottom variant="h5">{user.name}</Typography>
-        <Typography gutterBottom color="textSecondary">{user.email}</Typography>
-        <Typography gutterBottom color="textSecondary">{user.phone}</Typography>
-        <div className={classes.actions}>
-          <Link to="/profile/settings">
-            <Button variant="contained" color="primary">
-              Настройки
-            </Button>
-          </Link>
-          <Link to="/auth/logout">
-            <Button variant="outlined">
-              Выйти
-            </Button>
-          </Link>
+        <div className={classes.container}>
+          <Profile user={redux.user} />
+          <Load promise={redux.loadRooms}>
+            <div className={classes.rooms}>
+              <div className={classes.actions}>
+                <Typography variant="h5">
+                  Мои компании
+                </Typography>
+                <div>
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={this.createRoom}
+                  >
+                    собрать<span className={classes.companyLabel}>&nbsp;компанию</span>
+                  </Button>
+                </div>
+              </div>
+              {redux.rooms.map(room =>
+                <RoomCard key={room.id} room={room} />
+              )}
+            </div>
+          </Load>
         </div>
       </div>
     )
@@ -66,12 +90,17 @@ ProfileScene.propTypes = {
   redux: shape({
     user: userShape.isRequired,
     loadAccount: func.isRequired,
-  }),
+    rooms: arrayOf(roomShape).isRequired,
+    loadRooms: func.isRequired,
+  })
 }
 
-const redux = (state) => ({
+const redux = state => ({
   user: select.auth.user(state),
-  loadAccount: actions.auth.user.account.load
+  loadAccount: actions.auth.user.account.load,
+  rooms: select.rooms.all(state),
+  loadRooms: actions.rooms.loadMany,
+  createRoom: actions.rooms.create,
 })
 
 export default withStyles(styles)(connect(redux)(ProfileScene))

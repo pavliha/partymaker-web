@@ -1,12 +1,13 @@
 import React from 'react'
-import { object, bool, string } from 'prop-types'
+import { object, bool, string, shape, func } from 'prop-types'
 import userShape from 'shapes/user'
-import { AppBar, Toolbar, Button, withStyles } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { AppBar, Toolbar, Button, withStyles, IconButton } from '@material-ui/core'
+import { Link, withRouter } from 'react-router-dom'
 import { UserMenu, Logo } from 'components'
 import classNames from 'classnames'
+import ArrowBackIcon from 'mdi-react/ArrowBackIcon'
 
-const styles = {
+const styles = theme => ({
   root: {},
 
   transparent: {
@@ -17,11 +18,26 @@ const styles = {
   },
   navigation: {
     flex: 1,
-    marginLeft: 60,
+    marginLeft: 15,
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: 60,
+    }
+  },
+  backIcon: {
+    color: 'white',
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    }
+  },
+  logo: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'inherit',
+    }
   }
-}
+})
 
-const Header = ({ classes, className, user, isTransparent }) =>
+const Header = ({ classes, history, className, user, isTransparent }) =>
   <AppBar
     position="static"
     color="primary"
@@ -32,9 +48,12 @@ const Header = ({ classes, className, user, isTransparent }) =>
     })}
   >
     <Toolbar>
-      <Link to="/"><Logo /></Link>
+      <IconButton className={classes.backIcon} onClick={history.goBack}>
+        <ArrowBackIcon />
+      </IconButton>
+      <Link className={classes.logo} to="/"><Logo /></Link>
       <div className={classes.navigation}>
-        {user && <Link to="/rooms"><Button color="inherit">мои компани</Button></Link>}
+        {user && <Link to="/profile"><Button color="inherit">моя страница</Button></Link>}
       </div>
       {user
         ? <UserMenu user={user} />
@@ -53,6 +72,7 @@ const Header = ({ classes, className, user, isTransparent }) =>
 
 Header.propTypes = {
   classes: object.isRequired,
+  history: shape({ goBack: func }),
   className: string,
   isTransparent: bool,
   user: userShape,
@@ -62,4 +82,4 @@ Header.defaultProps = {
   user: null,
 }
 
-export default withStyles(styles)(Header)
+export default withStyles(styles)(withRouter(Header))
