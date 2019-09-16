@@ -2,17 +2,20 @@ import React from 'react'
 import { func, object, string } from 'prop-types'
 import { Input, withStyles } from '@material-ui/core'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
     paddingLeft: 15,
-    maxHeight: 72,
-    minHeight: 72,
+    maxHeight: 200,
+    minHeight: 60,
+    [theme.breakpoints.up('sm')]: {
+      minHeight: 72,
+    }
   },
   inputMultiline: {
     padding: 0,
   },
-}
+})
 
 const MessageInput = ({ classes, inputRef, placeholder, name, value, onChange, onPaste, onKeyPress, }) =>
   <Input

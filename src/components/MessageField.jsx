@@ -7,7 +7,7 @@ import { MessageInput, EmojiPicker } from 'components'
 const styles = {
   root: {
     flexGrow: 1,
-    maxHeight: 72,
+    maxHeight: 200,
     overflow: 'auto',
     display: 'flex',
     alignItems: 'center'
