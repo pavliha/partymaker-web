@@ -45,6 +45,9 @@ const styles = theme => ({
   button: {
     borderRadius: '30px',
     minWidth: '250px',
+    '&:hover': {
+      backgroundColor: 'rgba(255,255,255,0.1)'
+    }
   },
 
   action: {

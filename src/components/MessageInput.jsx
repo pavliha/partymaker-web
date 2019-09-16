@@ -34,7 +34,7 @@ const MessageInput = ({ classes, inputRef, placeholder, name, value, onChange, o
   />
 
 MessageInput.propTypes = {
-  inputRef: object,
+  inputRef: func,
   classes: object.isRequired,
   placeholder: string.isRequired,
   name: string.isRequired,

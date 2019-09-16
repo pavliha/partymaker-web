@@ -63,7 +63,7 @@ class MessageField extends Component {
 }
 
 MessageField.propTypes = {
-  inputRef: object,
+  inputRef: func,
   classes: object.isRequired,
   placeholder: string.isRequired,
   name: string.isRequired,
