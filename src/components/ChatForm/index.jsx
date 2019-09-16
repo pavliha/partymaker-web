@@ -148,7 +148,6 @@ ChatForm.propTypes = {
   onSubmit: func.isRequired,
   onJoin: func.isRequired,
   onOrder: func.isRequired,
-  // formik props
   values: shape({ text: string.isRequired, }),
   setFieldValue: func.isRequired,
   submitForm: func.isRequired,

@@ -4,37 +4,14 @@ import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import { roomShape, userShape } from 'shapes'
 import { Route } from 'react-router-dom'
-import { Load, AuthDialog, RoomNavigation, BackButton, UserMenu } from 'components'
-import Room from './Room'
-import RoomHeader from './RoomHeader'
-import Logo from 'components/Logo'
+import { Load, AuthDialog, Room, RoomHeader } from 'components'
 
-const styles = (theme) => ({
+const styles = () => ({
   root: {
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',
   },
-  chatMenu: {
-    flex: 1,
-  },
-  mobileHeader: {
-    display: 'flex',
-    flex: 1,
-    [theme.breakpoints.up('md')]: {
-      display: 'none'
-    }
-  },
-  desktopHeader: {
-    display: 'none',
-    flex: 1,
-    [theme.breakpoints.up('md')]: {
-      display: 'flex'
-    }
-  },
-  logo: {
-    flex: 1,
-  }
 })
 
 class RoomScene extends Component {
@@ -60,24 +37,17 @@ class RoomScene extends Component {
       <Load promise={loadRoom}>
         {room && (
           <div className={classes.root}>
-            <RoomHeader>
-              <div className={classes.desktopHeader}>
-                <Logo className={classes.logo} />
-                <UserMenu user={auth} />
-              </div>
-              <div className={classes.mobileHeader}>
-                <BackButton />
-                <RoomNavigation
-                  className={classes.chatMenu}
-                  room={room}
-                  isGuest={isGuest}
-                  onLeave={this.leaveRoom}
-                  onJoin={this.leaveRoom}
-                />
-              </div>
-            </RoomHeader>
-            <Room
+            <RoomHeader
+              auth={auth}
+              isGuest={isGuest}
               room={room}
+              onJoin={this.leaveRoom}
+              onLeave={this.leaveRoom}
+            />
+            <Room
+              auth={auth}
+              room={room}
+              isGuest={isGuest}
               onJoin={this.joinRoom}
               onLeave={this.leaveRoom}
             />

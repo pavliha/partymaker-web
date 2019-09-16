@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { Guests, Invite, RoomTitle } from 'components'
+import { Guests, Invite, RoomTitle, Chat } from 'components'
 import roomShape from 'shapes/room'
 import userShape from 'shapes/user'
-import Chat from './Chat'
-import { actions, connect, select } from 'src/redux'
+import { actions, connect } from 'src/redux'
 
 const styles = theme => ({
   root: {
@@ -28,10 +27,20 @@ class Room extends Component {
 
   topic = null
 
+  state = {
+    socket: null,
+  }
+
   constructor(props) {
     super(props)
-    const { redux: { subscribe, auth }, room } = props
+    const { redux: { subscribe }, room, auth } = props
     this.topic = auth && subscribe(room.id)
+  }
+
+  async componentDidMount() {
+    if (!this.topic) return
+    const socket = await this.topic
+    this.setState({ socket })
   }
 
   componentWillUnmount() {
@@ -40,15 +49,9 @@ class Room extends Component {
     this.topic = null
   }
 
-  receiveMessage = async (scrollBottom) => {
-    if (!this.topic) return
-    const socket = await this.topic
-    socket.on('message', scrollBottom)
-  }
-
   render() {
     const { classes, room, onJoin, onLeave, redux } = this.props
-    const { loadMessages, sendMessage, kickGuest } = redux
+    const { socket } = this.state
 
     return (
       <section className={classes.root}>
@@ -56,14 +59,14 @@ class Room extends Component {
           <RoomTitle room={room} action={<Invite room={room} />} />
           <Guests
             guests={room.guests}
-            onKick={kickGuest}
+            onKick={redux.kickGuest}
           />
         </div>
         <Chat
+          socket={socket}
           room={room}
-          onMount={this.receiveMessage}
-          onLoad={loadMessages}
-          onSend={sendMessage}
+          onLoad={redux.loadMessages}
+          onSend={redux.sendMessage}
           onJoin={onJoin}
           onLeave={onLeave}
         />
@@ -75,10 +78,10 @@ class Room extends Component {
 Room.propTypes = {
   classes: object.isRequired,
   room: roomShape,
+  auth: userShape,
   onJoin: func.isRequired,
   onLeave: func.isRequired,
   redux: shape({
-    auth: userShape,
     loadMessages: func.isRequired,
     sendMessage: func.isRequired,
     kickGuest: func.isRequired,
@@ -88,7 +91,6 @@ Room.propTypes = {
 }
 
 const redux = (state, { room: { id } }) => ({
-  auth: select.auth.user(state),
   loadMessages: params => actions.rooms.messages.loadMany(id, params),
   sendMessage: form => actions.rooms.messages.create(id, form),
   kickGuest: guest => actions.rooms.guests.kick(id, guest.id),

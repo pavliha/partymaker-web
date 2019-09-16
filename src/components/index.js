@@ -13,6 +13,8 @@ export Picture from './Picture'
 export Guest from './Guest'
 export GuestItemText from './GuestItemText'
 export Profile from './Profile'
+export Room from './Room'
+export RoomHeader from './RoomHeader'
 
 /**
  * Lists
@@ -109,3 +111,9 @@ export SocialLoginActions from './SocialLoginActions'
 export ChatDropdown from './ChatDropdown'
 export AppBottomNavigation from './AppBottomNavigation'
 export RoomNavigation from './RoomNavigation'
+
+/**
+ * Chat
+ */
+export Chat from './Chat'
+export ChatBody from './ChatBody'

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { Component } from 'react'
-import { object, node, bool, func } from 'prop-types'
+import { object, node, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import background from 'assets/images/chat-background.jpg'
 
@@ -18,15 +18,6 @@ const styles = {
 class ChatBody extends Component {
 
   chatBody = React.createRef()
-
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    if (nextProps.isScrollingBottom) {
-      this.scrollToBottom()
-    }
-    if (nextProps.isForceScrollingBottom) {
-      this.forceScrollToBottom()
-    }
-  }
 
   forceScrollToBottom = () => {
     const { onForceScrollBottom } = this.props
@@ -56,7 +47,6 @@ class ChatBody extends Component {
   }
 
   handleScroll = (e) => {
-
     requestAnimationFrame(async () => {
       const scrollY = e.target.scrollTop
       const isScrollingTop = this.oldScroll > scrollY
@@ -94,11 +84,15 @@ class ChatBody extends Component {
 ChatBody.propTypes = {
   classes: object.isRequired,
   children: node.isRequired,
-  isScrollingBottom: bool.isRequired,
-  isForceScrollingBottom: bool.isRequired,
-  onScrollTop: func.isRequired,
-  onScrollBottom: func.isRequired,
-  onForceScrollBottom: func.isRequired,
+  onScrollTop: func,
+  onScrollBottom: func,
+  onForceScrollBottom: func,
+}
+
+ChatBody.defaultProps = {
+  onScrollTop: () => {},
+  onScrollBottom: () => {},
+  onForceScrollBottom: () => {},
 }
 
 export default withStyles(styles)(ChatBody)

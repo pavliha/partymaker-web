@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { object, func, bool, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import wait from 'utils/wait'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
-import { Loading, Messages, ChatForm, RoomNavigation } from 'components'
-import ChatBody from './ChatBody'
+import { Loading, Messages, ChatForm, RoomNavigation, ChatBody } from 'components'
 import { actions, connect, select } from 'src/redux'
 
 const styles = theme => ({
@@ -18,6 +16,7 @@ const styles = theme => ({
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
+    overflow: 'auto',
   },
   titles: {
     paddingLeft: 13,
@@ -42,19 +41,19 @@ const styles = theme => ({
 
 class Chat extends Component {
 
+  chatBody = React.createRef()
+
   state = {
     page: 1,
     limit: 20,
-    isScrollingBottom: false,
-    isForceScrollingBottom: false,
     isLoading: true
   }
 
   async componentDidMount() {
-    const { onMount } = this.props
+    const { socket } = this.props
     await this.load()
-    this.forceScrollBottom()
-    onMount(this.scrollBottom)
+    this.chatBody.current.forceScrollToBottom()
+    socket && socket.on('message', this.scrollBottom)
   }
 
   load = async (page = 1) => {
@@ -81,22 +80,11 @@ class Chat extends Component {
   }
 
   scrollBottom = () =>
-    this.setState({ isScrollingBottom: true })
-
-  forceScrollBottom = () =>
-    this.setState({ isForceScrollingBottom: true })
-
-  disableScrolling = async () => {
-    await wait(500)
-    this.setState({ isScrollingBottom: false })
-  }
-
-  disableForceScrolling = () =>
-    this.setState({ isForceScrollingBottom: false })
+    this.chatBody.current.scrollToBottom()
 
   render() {
     const { classes, room, onLeave, onJoin, redux: { auth, isGuest, orderPlace }, } = this.props
-    const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
+    const { isLoading } = this.state
 
     return (
       <div className={classes.root}>
@@ -111,11 +99,8 @@ class Chat extends Component {
         </header>
         <div className={classes.body}>
           <ChatBody
-            isScrollingBottom={isScrollingBottom}
-            isForceScrollingBottom={isForceScrollingBottom}
-            onScrollBottom={this.disableScrolling}
+            ref={this.chatBody}
             onScrollTop={this.loadMoreMessages}
-            onForceScrollBottom={this.disableForceScrolling}
           >
             {isLoading && <Loading className={classes.loading} />}
             <Messages messages={room.messages || []} />
@@ -136,10 +121,10 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
+  socket: shape({ on: func }),
   room: roomShape.isRequired,
   onLoad: func.isRequired,
   onSend: func.isRequired,
-  onMount: func.isRequired,
   onJoin: func.isRequired,
   onLeave: func.isRequired,
   redux: shape({
