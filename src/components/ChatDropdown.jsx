@@ -20,7 +20,10 @@ const styles = theme => ({
     }
   },
 
-  moreButton: {},
+  moreButton: {
+    color: 'inherit',
+    opacity: 0.8,
+  },
 
   guests: {
     display: 'flex',
@@ -33,7 +36,7 @@ const styles = theme => ({
   },
 })
 
-class ChatMenu extends Component {
+class ChatDropdown extends Component {
 
   state = {
     anchorEl: null,
@@ -110,7 +113,7 @@ class ChatMenu extends Component {
   }
 }
 
-ChatMenu.propTypes = {
+ChatDropdown.propTypes = {
   classes: object.isRequired,
   history: shape({ push: func, goBack: func }),
   location: shape({ pathname: string }),
@@ -120,4 +123,4 @@ ChatMenu.propTypes = {
   onJoin: func.isRequired,
 }
 
-export default withStyles(styles)(withRouter(ChatMenu))
+export default withStyles(styles)(withRouter(ChatDropdown))

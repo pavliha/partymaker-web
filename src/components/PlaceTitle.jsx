@@ -11,6 +11,11 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
   },
+  container: {
+    flexGrow: 1,
+    display: 'flex',
+    flexDirection: 'column',
+  },
   picture: {
     width: '90px',
     height: 50,
@@ -22,13 +27,14 @@ const styles = theme => ({
   title: {
     cursor: 'pointer',
     fontSize: 14,
-    maxWidth: 150,
     textOverflow: 'ellipsis',
     [theme.breakpoints.up('sm')]: {
       fontSize: 18,
-      maxWidth: 'inherit'
     },
   },
+  price: {
+    opacity: 0.8,
+  }
 })
 
 class PlaceTitle extends Component {
@@ -66,17 +72,14 @@ class PlaceTitle extends Component {
           className={classes.picture}
           onClick={handleClick}
         />
-        <div>
+        <div className={classes.container}>
           <Typography
             className={classes.title}
             onClick={handleClick}
           >
             {place?.title || 'Выбрать место'}
           </Typography>
-          <Typography
-            color="textSecondary"
-            variant="caption"
-          >
+          <Typography variant="caption" className={classes.price}>
             {place?.price || 'Место еще не выбрано'}
           </Typography>
         </div>

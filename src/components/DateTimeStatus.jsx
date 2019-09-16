@@ -7,14 +7,12 @@ import classNames from 'classnames'
 const styles = {
   root: {
     width: 180,
+    opacity: 0.7,
   },
 }
 
 const DateTimeStatus = ({ classes, className, date, time }) =>
-  <Typography
-    color="textSecondary"
-    className={classNames([classes.root, className])}
-  >
+  <Typography className={classNames([classes.root, className])}>
     {(date && moment(date).format('D MMMM, dddd')) || 'дата еще не выбрана'} {time}
   </Typography>
 

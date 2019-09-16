@@ -10,6 +10,9 @@ const styles = {
     alignItems: 'center',
     padding: '15px 20px 30px 20px',
   },
+  title: {
+    fontSize: '1.3rem',
+  }
 }
 
 const RoomTitle = ({ classes, room, action }) => {
@@ -25,7 +28,7 @@ const RoomTitle = ({ classes, room, action }) => {
     <div className={classes.root}>
       <div>
         {room.title
-          ? <Typography variant="h5">{room.title}</Typography>
+          ? <Typography className={classes.title} variant="h5">{room.title}</Typography>
           : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
         }
         <Typography color="textSecondary" variant="caption">

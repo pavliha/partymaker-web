@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { object, func, bool } from 'prop-types'
+import { object, func, bool, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import wait from 'utils/wait'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
-import { Loading, Messages, ChatForm } from 'components'
+import { Loading, Messages, ChatForm, RoomNavigation } from 'components'
 import ChatBody from './ChatBody'
-import ChatHeader from './ChatHeader'
+import { actions, connect, select } from 'src/redux'
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1,
     display: 'flex',
@@ -18,7 +18,6 @@ const styles = {
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
-    maxHeight: 'calc(100vh - 141px)'
   },
   titles: {
     paddingLeft: 13,
@@ -28,7 +27,18 @@ const styles = {
     justifyContent: 'center',
     padding: 10,
   },
-}
+  header: {
+    borderBottom: 'solid 1px rgba(0, 0, 0, 0.12)',
+    padding: '5px 0',
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'inherit'
+    }
+  },
+  navigation: {
+    flex: 1,
+  }
+})
 
 class Chat extends Component {
 
@@ -85,17 +95,20 @@ class Chat extends Component {
     this.setState({ isForceScrollingBottom: false })
 
   render() {
-    const { classes, auth, room, isGuest, onLeave, onJoin, onOrder } = this.props
+    const { classes, room, onLeave, onJoin, redux: { auth, isGuest, orderPlace }, } = this.props
     const { isScrollingBottom, isForceScrollingBottom, isLoading } = this.state
 
     return (
       <div className={classes.root}>
-        <ChatHeader
-          room={room}
-          isGuest={isGuest}
-          onLeave={onLeave}
-          onJoin={onJoin}
-        />
+        <header className={classes.header}>
+          <RoomNavigation
+            className={classes.navigation}
+            room={room}
+            isGuest={isGuest}
+            onLeave={onLeave}
+            onJoin={onJoin}
+          />
+        </header>
         <div className={classes.body}>
           <ChatBody
             isScrollingBottom={isScrollingBottom}
@@ -113,7 +126,7 @@ class Chat extends Component {
             room={room}
             onJoin={onJoin}
             onSubmit={this.sendMessage}
-            onOrder={onOrder}
+            onOrder={orderPlace}
           />
         </div>
       </div>
@@ -124,13 +137,22 @@ class Chat extends Component {
 Chat.propTypes = {
   classes: object.isRequired,
   room: roomShape.isRequired,
-  auth: userShape,
-  isGuest: bool,
   onLoad: func.isRequired,
   onSend: func.isRequired,
   onMount: func.isRequired,
   onJoin: func.isRequired,
   onLeave: func.isRequired,
-  onOrder: func.isRequired,
+  redux: shape({
+    auth: userShape,
+    isGuest: bool,
+    orderPlace: func.isRequired,
+  })
 }
-export default withStyles(styles)(Chat)
+
+const redux = (state, { room: { id } }) => ({
+  auth: select.auth.user(state),
+  isGuest: !select.rooms.guests.exist(state, id),
+  orderPlace: actions.orders.create,
+})
+
+export default withStyles(styles)(connect(redux)(Chat))

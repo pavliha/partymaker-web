@@ -3,6 +3,7 @@ import { object, string, shape } from 'prop-types'
 import { Typography, withStyles, IconButton, SvgIcon } from '@material-ui/core'
 import LogoIcon from 'assets/images/logo-filled.svg'
 import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -41,8 +42,8 @@ const styles = theme => ({
   }
 })
 
-const Logo = ({ classes, location }) =>
-  <div className={classes.root}>
+const Logo = ({ classes, className, location }) =>
+  <div className={classNames(classes.root, className)}>
     <Typography className={classes.fullTitle} variant="h6" color="inherit">
       Partymaker
     </Typography>
@@ -59,6 +60,7 @@ const Logo = ({ classes, location }) =>
 
 Logo.propTypes = {
   classes: object.isRequired,
+  className: string,
   location: shape({ pathname: string })
 }
 

@@ -77,7 +77,6 @@ ChatFormActions.propTypes = {
   onInvite: func.isRequired,
   onTime: func.isRequired,
   onOrder: func.isRequired,
-
 }
 
 export default withStyles(styles)(ChatFormActions)

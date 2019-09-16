@@ -26,6 +26,7 @@ export PlaceList from './PlaceList'
  */
 export CloseButton from './CloseButton'
 export AccountButton from './AccountButton'
+export BackButton from './BackButton'
 
 /**
  * Titles
@@ -105,5 +106,6 @@ export SocialLoginActions from './SocialLoginActions'
 /**
  * Menus
  */
-export ChatMenu from './ChatMenu'
+export ChatDropdown from './ChatDropdown'
 export AppBottomNavigation from './AppBottomNavigation'
+export RoomNavigation from './RoomNavigation'

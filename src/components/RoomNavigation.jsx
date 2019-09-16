@@ -3,16 +3,15 @@ import { bool, func, object, shape, string } from 'prop-types'
 import roomShape from 'shapes/room'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
-import { ChatMenu, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
+import { ChatDropdown, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
     display: 'flex',
-    height: 60,
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '8px 8px',
-    borderBottom: 'solid 1px rgba(0, 0, 0, 0.12)',
+    padding: '5px 5px',
     [theme.breakpoints.up('md')]: {
       padding: '8px 20px',
     }
@@ -31,7 +30,7 @@ const styles = theme => ({
   }
 })
 
-class ChatHeader extends Component {
+class RoomNavigation extends Component {
 
   state = {
     isGuestsDrawerOpen: false,
@@ -48,10 +47,10 @@ class ChatHeader extends Component {
   }
 
   render() {
-    const { classes, location, room, isGuest, onJoin, onLeave } = this.props
+    const { classes, className, location, room, isGuest, onJoin, onLeave } = this.props
 
     return (
-      <div className={classes.root}>
+      <div className={classNames(classes.root, className)}>
         <PlaceTitle room={room} isGuest={isGuest} />
         <div className={classes.aside}>
           <DateTimeStatus
@@ -59,7 +58,7 @@ class ChatHeader extends Component {
             date={room.date}
             time={room.time}
           />
-          <ChatMenu
+          <ChatDropdown
             room={room}
             isGuest={isGuest}
             onJoin={onJoin}
@@ -78,8 +77,9 @@ class ChatHeader extends Component {
   }
 }
 
-ChatHeader.propTypes = {
+RoomNavigation.propTypes = {
   classes: object.isRequired,
+  className: string,
   room: roomShape.isRequired,
   history: shape({ push: func }),
   location: shape({ pathname: string }),
@@ -88,4 +88,4 @@ ChatHeader.propTypes = {
   onLeave: func.isRequired,
 }
 
-export default withStyles(styles)(withRouter(ChatHeader))
+export default withStyles(styles)(withRouter(RoomNavigation))
