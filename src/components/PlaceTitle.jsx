@@ -39,8 +39,8 @@ class PlaceTitle extends Component {
   }
 
   closePlacesDrawer = () => {
-    const { history, room } = this.props
-    history.push(`/rooms/${room.id}/place`)
+    const { history } = this.props
+    history.goBack()
   }
 
   openPlaceDrawer = () => {
@@ -104,7 +104,7 @@ class PlaceTitle extends Component {
 
 PlaceTitle.propTypes = {
   location: shape({ pathname: string }),
-  history: shape({ push: func }),
+  history: shape({ push: func, goBack: func }),
   classes: object.isRequired,
   isGuest: bool,
   room: roomShape,

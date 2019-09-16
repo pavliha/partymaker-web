@@ -1,11 +1,10 @@
 import React from 'react'
 import { object } from 'prop-types'
 import roomShape from 'shapes/room'
-import { withStyles } from '@material-ui/styles'
-import { Typography } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import DateTimeStatus from 'components/DateTimeStatus'
-import CloseButton from 'components/CloseButton'
+import { DateTimeStatus, CloseButton } from 'components'
+import { formatCount } from 'utils'
 
 const styles = theme => ({
   root: {
@@ -34,7 +33,8 @@ const styles = theme => ({
   },
   container: {
     flex: 1,
-    padding: 5,
+    padding: 15,
+    paddingTop: 5,
     paddingLeft: 15,
     [theme.breakpoints.up('sm')]: {
       marginRight: 100,
@@ -58,25 +58,41 @@ const styles = theme => ({
   }
 })
 
-const RoomCard = ({ classes, room }) =>
-  <div className={classes.root}>
-    <Link to={`/rooms/${room.id}`}>
-      <div className={classes.picture} />
-    </Link>
-    <div className={classes.container}>
+const RoomCard = ({ classes, room }) => {
+  const count = room.guest_count
+
+  const format = formatCount({
+    few: 'учасников',
+    one: 'участник',
+    two: 'участника'
+  })
+
+  return (
+    <div className={classes.root}>
       <Link to={`/rooms/${room.id}`}>
-        {room.title
-          ? <Typography className={classes.title}>{room.title}</Typography>
-          : <Typography color="textSecondary" className={classes.title}>Что будем делать?</Typography>
-        }
+        <div className={classes.picture} />
       </Link>
-      <Typography className={classes.subtitle}>{room.place?.title || 'Место еще не выбрано'}</Typography>
-      <div className={classes.subtitle}><DateTimeStatus date={room.date} time={room.time} /></div>
+      <div className={classes.container}>
+        <Link to={`/rooms/${room.id}`}>
+          {room.title
+            ? <Typography className={classes.title}>{room.title}</Typography>
+            : <Typography color="textSecondary" className={classes.title}>Что будем делать?</Typography>
+          }
+        </Link>
+        <Typography className={classes.subtitle}>{room.place?.title || 'Место еще не выбрано'}</Typography>
+        <DateTimeStatus className={classes.subtitle} date={room.date} time={room.time} />
+        {count &&
+        <Typography align="right" color="textSecondary" variant="caption">
+          {count} {format(count)}
+        </Typography>
+        }
+      </div>
+      <div className={classes.actions}>
+        <Link to={`/rooms/${room.id}/leave`}><CloseButton /></Link>
+      </div>
     </div>
-    <div className={classes.actions}>
-      <Link to={`/rooms/${room.id}/leave`}><CloseButton /></Link>
-    </div>
-  </div>
+  )
+}
 
 RoomCard.propTypes = {
   classes: object.isRequired,

@@ -5,6 +5,7 @@ const listRooms = (rooms, places) =>
     .map(room => ({
       ...room,
       place: places[room.place_id],
+      guest_count: room.__meta__?.guest_count
     }))
     .sort((prev, next) => next.updated_at - prev.updated_at)
     .reverse()

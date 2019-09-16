@@ -1,26 +1,23 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import { AuthGate, Loading } from 'components'
-
-const IndexScene = lazy(() => import('./IndexScene'))
-const RoomsLayout = lazy(() => import('./@rooms/RoomsLayout'))
-const AuthLayout = lazy(() => import('./@auth/AuthLayout'))
-const InviteScene = lazy(() => import('./@invite/InviteScene'))
-const ProfileLayout = lazy(() => import('./@profile/ProfileLayout'))
-const EntertainmentsScene = lazy(() => import('./@entertainments/EntertainmentsScene'))
-const OrderScene = lazy(() => import('./@order/OrderScene'))
+import { AuthGate } from 'components'
+import AuthLayout from './@auth/AuthLayout'
+import RoomsLayout from './@rooms/RoomsLayout'
+import ProfileLayout from './@profile/ProfileLayout'
+import InviteScene from './@invite/InviteScene'
+import OrderScene from './@order/OrderScene'
+import EntertainmentsScene from './@entertainments/EntertainmentsScene'
+import IndexScene from './IndexScene'
 
 const Layout = () =>
-  <Suspense fallback={<Loading center />}>
-    <Switch>
-      <Route exact path="/" component={IndexScene} />
-      <Route path="/auth" component={AuthLayout} />
-      <Route path="/entertainments" component={EntertainmentsScene} />
-      <Route exact path="/invite/:invite_token" component={InviteScene} />
-      <Route path="/rooms" component={RoomsLayout} />
-      <Route path="/order/:token" component={OrderScene} />
-      <AuthGate path="/profile" component={ProfileLayout} />
-    </Switch>
-  </Suspense>
+  <Switch>
+    <Route exact path="/" component={IndexScene} />
+    <Route path="/auth" component={AuthLayout} />
+    <Route path="/entertainments" component={EntertainmentsScene} />
+    <Route exact path="/invite/:invite_token" component={InviteScene} />
+    <Route path="/rooms" component={RoomsLayout} />
+    <Route path="/order/:token" component={OrderScene} />
+    <AuthGate path="/profile" component={ProfileLayout} />
+  </Switch>
 
 export default Layout

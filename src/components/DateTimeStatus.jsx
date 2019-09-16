@@ -13,7 +13,6 @@ const styles = {
 const DateTimeStatus = ({ classes, className, date, time }) =>
   <Typography
     color="textSecondary"
-    variant="body2"
     className={classNames([classes.root, className])}
   >
     {(date && moment(date).format('D MMMM, dddd')) || 'дата еще не выбрана'} {time}

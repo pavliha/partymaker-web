@@ -29,7 +29,7 @@ class AppBottomNavigation extends Component {
   createRoom = async () => {
     const { history, redux: { createRoom } } = this.props
     const action = await createRoom()
-    history.push(`/rooms/${action.value.id}`)
+    history.push(`/rooms/${action.value.id}/entertainments`)
   }
 
   render() {
