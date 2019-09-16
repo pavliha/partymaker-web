@@ -19,6 +19,16 @@ class ChatBody extends Component {
 
   chatBody = React.createRef()
 
+  componentDidMount() {
+    const chatBody = this.chatBody.current
+    chatBody.addEventListener('scroll', this.handleScroll)
+  }
+
+  componentWillUnmount() {
+    const chatBody = this.chatBody.current
+    chatBody.removeEventListener('scroll', this.handleScroll)
+  }
+
   forceScrollToBottom = () => {
     const { onForceScrollBottom } = this.props
     const chatBody = this.chatBody.current
@@ -36,14 +46,6 @@ class ChatBody extends Component {
     }
 
     onScrollBottom()
-  }
-
-  componentDidMount() {
-    this.chatBody.current.addEventListener('scroll', this.handleScroll)
-  }
-
-  componentWillUnmount() {
-    this.chatBody.current.removeEventListener('scroll', this.handleScroll)
   }
 
   handleScroll = (e) => {

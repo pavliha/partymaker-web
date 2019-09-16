@@ -2,7 +2,7 @@ import React from 'react'
 import { object, shape } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
-import { Header } from 'components'
+import { ProfileHeader } from 'components'
 import { Switch, Route } from 'react-router-dom'
 import ProfileScene from './ProfileScene'
 import SettingsScene from './@settings/SettingsScene'
@@ -18,7 +18,7 @@ const styles = {
 
 const ProfileLayout = ({ classes, redux: { user }, }) =>
   <div className={classes.root}>
-    <Header user={user} />
+    <ProfileHeader user={user} />
     <Switch>
       <Route exact path="/profile" component={ProfileScene} />
       <Route exact path="/profile/settings" component={SettingsScene} />

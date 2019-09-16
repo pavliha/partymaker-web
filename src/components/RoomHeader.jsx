@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bool, func, object, shape } from 'prop-types'
 import { Toolbar, withStyles, AppBar } from '@material-ui/core'
-import { BackButton, Logo, RoomNavigation, UserMenu } from 'components'
+import { BackButton, Logo, RoomNavigation, Account } from 'components'
 import { userShape, roomShape } from 'shapes'
 import { withRouter } from 'react-router-dom'
 
@@ -43,7 +43,7 @@ class RoomHeader extends Component {
       <Toolbar>
         <div className={classes.desktopHeader}>
           <Logo className={classes.logo} />
-          <UserMenu user={auth} />
+          {auth && <Account user={auth} />}
         </div>
         <div className={classes.mobileHeader}>
           <BackButton onClick={this.goHome} />

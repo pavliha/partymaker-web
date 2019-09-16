@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, object, func } from 'prop-types'
-import { Header, EntertainmentList } from 'components'
+import { TransparentHeader, EntertainmentList } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles, SvgIcon } from '@material-ui/core'
@@ -113,7 +113,7 @@ class IndexScene extends Component {
           <title>Partymaker - Здесь можно найти где погулать с друзями</title>
         </Helmet>
         <section className={classes.background}>
-          <Header isTransparent user={user} />
+          <TransparentHeader user={user} />
           <div className={classes.banner}>
             <div className={classes.title}>
               <Typography gutterBottom variant="h2">Partymaker</Typography>

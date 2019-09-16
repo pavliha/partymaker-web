@@ -17,13 +17,13 @@ const styles = theme => ({
   }
 })
 
-class UserMenu extends Component {
+class Account extends Component {
 
   render() {
-    const { classes, user } = this.props
+    const { classes, className, user } = this.props
 
     return (
-      <Link to="/profile">
+      <Link to="/profile" className={className}>
         <div className={classes.root}>
           <Typography className={classes.userName} variant="subtitle1" color="inherit">{user.name}</Typography>
           <AccountButton user={user} />
@@ -33,16 +33,17 @@ class UserMenu extends Component {
   }
 }
 
-UserMenu.propTypes = {
+Account.propTypes = {
   classes: object.isRequired,
+  className: string,
   user: shape({
     name: string.isRequired,
     avatar_url: string.isRequired,
-  }),
+  }).isRequired,
 }
 
-UserMenu.defaultProps = {
+Account.defaultProps = {
   user: null,
 }
 
-export default withStyles(styles)(UserMenu)
+export default withStyles(styles)(Account)

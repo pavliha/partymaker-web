@@ -1,4 +1,3 @@
-export Header from './Header'
 export UserAvatar from './UserAvatar'
 export AuthGate from './AuthGate'
 export Load from './Load'
@@ -7,14 +6,21 @@ export Invite from './Invite'
 export Expand from './Expand'
 export EntertainmentGroup from './EntertainmentGroup'
 export OnlineIndicator from './OnlineIndicator'
-export UserMenu from './UserMenu'
+export Account from './Account'
 export Logo from './Logo'
 export Picture from './Picture'
 export Guest from './Guest'
 export GuestItemText from './GuestItemText'
 export Profile from './Profile'
 export Room from './Room'
+
+/**
+ * Headers
+ */
+
 export RoomHeader from './RoomHeader'
+export ProfileHeader from './ProfileHeader'
+export TransparentHeader from './TransparentHeader'
 
 /**
  * Lists
@@ -29,6 +35,7 @@ export PlaceList from './PlaceList'
 export CloseButton from './CloseButton'
 export AccountButton from './AccountButton'
 export BackButton from './BackButton'
+export LogoButton from './LogoButton'
 
 /**
  * Titles
@@ -109,6 +116,7 @@ export SocialLoginActions from './SocialLoginActions'
  * Menus
  */
 export ChatDropdown from './ChatDropdown'
+export AccountDropdown from './AccountDropdown'
 export AppBottomNavigation from './AppBottomNavigation'
 export RoomNavigation from './RoomNavigation'
 

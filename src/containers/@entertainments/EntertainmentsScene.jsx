@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
-import { EntertainmentList, Header, AppBottomNavigation } from 'components'
+import { EntertainmentList, ProfileHeader, AppBottomNavigation } from 'components'
 import { select, connect } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
@@ -37,7 +37,7 @@ class EntertainmentsScene extends Component {
         <Helmet>
           <title>Partymaker - Поиск развлечений</title>
         </Helmet>
-        <Header user={user} />
+        <ProfileHeader user={user} />
         <section className={classes.container}>
           <Typography className={classes.entertainmentTitle} variant="h5">
             Что бы вы хотели сделать с друзьями?

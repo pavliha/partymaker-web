@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string } from 'prop-types'
 import api from 'api'
 import userShape from 'shapes/user'
-import { GuestList, Header, Load, OrderCard, PlaceCard } from 'components'
+import { GuestList, ProfileHeader, Load, OrderCard, PlaceCard } from 'components'
 import { Typography, withStyles } from '@material-ui/core'
 import { connect, select } from 'src/redux'
 
@@ -63,7 +63,7 @@ class OrderScene extends Component {
     return (
       <Load promise={this.load}>
         <div className={classes.root}>
-          <Header user={auth} />
+          <ProfileHeader user={auth} />
           <div className={classes.container}>
             <div className={classes.place}>
               {order?.room?.place && <PlaceCard place={order.room.place} />}

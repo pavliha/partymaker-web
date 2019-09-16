@@ -1,22 +1,21 @@
 import React from 'react'
-import { object, bool, string, shape, func } from 'prop-types'
+import { object, string } from 'prop-types'
 import userShape from 'shapes/user'
-import { AppBar, Toolbar, Button, withStyles, IconButton } from '@material-ui/core'
+import { AppBar, Toolbar, Button, withStyles } from '@material-ui/core'
 import { Link, withRouter } from 'react-router-dom'
-import { UserMenu, Logo } from 'components'
+import { Account, LogoButton } from 'components'
 import classNames from 'classnames'
-import ArrowBackIcon from 'mdi-react/ArrowBackIcon'
 
 const styles = theme => ({
-  root: {},
-
-  transparent: {
+  root: {
     position: 'absolute',
     background: 'transparent',
     boxShadow: 'none',
     top: 0,
   },
+
   navigation: {
+    display: 'flex',
     flex: 1,
     marginLeft: 15,
     [theme.breakpoints.up('sm')]: {
@@ -29,29 +28,33 @@ const styles = theme => ({
       display: 'none',
     }
   },
-  logo: {}
+  company: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'inherit',
+    }
+  }
 })
 
-const Header = ({ classes, location, history, className, user, isTransparent }) =>
+const TransparentHeader = ({ classes, className, user }) =>
   <AppBar
     position="static"
     color="primary"
     className={classNames({
       [classes.root]: true,
-      [classes.transparent]: isTransparent,
       [className]: true,
     })}
   >
     <Toolbar>
-      <Link className={classes.logo} to="/"><Logo /></Link>
-      {!(location.pathname === '/profile' || location.pathname === '/') && (
-        <IconButton className={classes.backIcon} onClick={history.goBack}><ArrowBackIcon /></IconButton>
-      )}
+      <Link to="/"><LogoButton /></Link>
+
       <div className={classes.navigation}>
-        {user && <Link to="/entertainments"><Button color="inherit">куда сходить?</Button></Link>}
+        {user && <Link to="/entertainments"><Button color="inherit">куда сходить c друзьям?</Button></Link>}
+        {user && <Link className={classes.company} to="/rooms"><Button color="inherit">найти компанию</Button></Link>}
       </div>
+
       {user
-        ? <UserMenu user={user} />
+        ? <Account user={user} />
         : <>
           <Link to="/auth/login">
             <Button color="inherit">войти</Button>
@@ -65,17 +68,14 @@ const Header = ({ classes, location, history, className, user, isTransparent }) 
     </Toolbar>
   </AppBar>
 
-Header.propTypes = {
+TransparentHeader.propTypes = {
   classes: object.isRequired,
-  history: shape({ goBack: func }),
-  location: shape({ pathname: string }),
   className: string,
-  isTransparent: bool,
   user: userShape,
 }
 
-Header.defaultProps = {
+TransparentHeader.defaultProps = {
   user: null,
 }
 
-export default withStyles(styles)(withRouter(Header))
+export default withStyles(styles)(withRouter(TransparentHeader))
