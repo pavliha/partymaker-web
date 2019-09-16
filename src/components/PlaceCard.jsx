@@ -14,6 +14,7 @@ const styles = {
     flexDirection: 'column'
   },
   picture: {
+    cursor: 'pointer',
     width: '100%',
     height: 177,
   },
@@ -30,6 +31,7 @@ const styles = {
   },
 
   title: {
+    cursor: 'pointer',
     fontSize: 20,
   },
   container: {
@@ -76,7 +78,7 @@ class PlaceCard extends Component {
           {place.price}
         </Typography>
         <div className={classes.container}>
-          <Typography className={classes.title}>
+          <Typography className={classes.title} onClick={this.show}>
             {place.title}
           </Typography>
           <Typography color="textSecondary">
