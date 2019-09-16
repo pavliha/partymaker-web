@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+import React, { Component, lazy, Suspense } from 'react'
 import { object, func, shape } from 'prop-types'
-import { withStyles } from '@material-ui/styles'
+import { withStyles, Typography } from '@material-ui/core'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { Header, SocialLoginActions } from 'components'
+import { Header, Loading, SocialLoginActions } from 'components'
 import sparks from '../IndexScene/nightZP.png'
-import LoginScene from './@login/LoginScene'
-import LogoutScene from './@logout/LogoutScene'
-import RegisterScene from './@register/RegisterScene'
-import ActivateScene from './@activate/ActivateScene'
-import PasswordLayout from './@password/PasswordLayout'
 import Storage from 'services/Storage'
-import { Typography } from '@material-ui/core'
+
+const LoginScene = lazy(() => import('./@login/LoginScene'))
+const LogoutScene = lazy(() => import('./@logout/LogoutScene'))
+const RegisterScene = lazy(() => import('./@register/RegisterScene'))
+const ActivateScene = lazy(() => import('./@activate/ActivateScene'))
+const PasswordLayout = lazy(() => import('./@password/PasswordLayout'))
 
 const styles = () => ({
   root: {
@@ -70,14 +70,16 @@ class AuthLayout extends Component {
         <div className={classes.container}>
           <div className={classes.scene}>
             <div>
-              <Switch>
-                <Route exact path="/auth/register" component={RegisterScene} />
-                <Route exact path="/auth/login" component={LoginScene} />
-                <Route exact path="/auth/activate/:hash" component={ActivateScene} />
-                <Route exact path="/auth/logout" component={LogoutScene} />
-                <Route path="/auth/password" component={PasswordLayout} />
-                <Redirect to="/auth/login" />
-              </Switch>
+              <Suspense fallback={<Loading center />}>
+                <Switch>
+                  <Route exact path="/auth/register" component={RegisterScene} />
+                  <Route exact path="/auth/login" component={LoginScene} />
+                  <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+                  <Route exact path="/auth/logout" component={LogoutScene} />
+                  <Route path="/auth/password" component={PasswordLayout} />
+                  <Redirect to="/auth/login" />
+                </Switch>
+              </Suspense>
             </div>
             <div className={classes.divider}>
               <div className={classes.dividerChild}>
@@ -90,7 +92,9 @@ class AuthLayout extends Component {
                 </div>
               </div>
             </div>
-            <SocialLoginActions onLogin={this.loginWithSocial} />
+            <Suspense fallback={<Loading center />}>
+              <SocialLoginActions onLogin={this.loginWithSocial} />
+            </Suspense>
           </div>
         </div>
       </div>

@@ -64,7 +64,6 @@ export GuestsDrawer from './GuestsDrawer'
  * Inputs & pickers & fields
  */
 export MessageInput from './MessageInput'
-export EmojiPicker from './EmojiPicker'
 export AvatarField from './AvatarField'
 
 /**

@@ -2,7 +2,7 @@
 import { withStyles } from '@material-ui/core'
 import { string, func, object } from 'prop-types'
 import React, { Component } from 'react'
-import { MessageInput, EmojiPicker } from 'components'
+import { MessageInput } from 'components'
 
 const styles = {
   root: {
@@ -45,7 +45,6 @@ class MessageField extends Component {
 
     return (
       <div className={classes.root}>
-        <EmojiPicker onSelect={this.addEmoji} />
         <MessageInput
           inputRef={inputRef}
           name={name}

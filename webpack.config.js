@@ -7,13 +7,12 @@ const TerserPlugin = require('terser-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const Clean = require('clean-webpack-plugin')
-const CircularDependencyPlugin = require('circular-dependency-plugin')
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-module.exports = () => ({
+const analyze = process.argv.find(a => a === '--analyze')
 
+module.exports = {
   devtool: 'cheap-module-eval-source-map',
-
   devServer: {
     hot: true,
     port: 3000,
@@ -111,28 +110,11 @@ module.exports = () => ({
   },
 
   plugins: [
-    new CircularDependencyPlugin({
-      // exclude detection of files based on a RegExp
-      exclude: /a\.js|node_modules/,
-      // include specific files based on a RegExp
-      include: /dir/,
-      // add errors to webpack instead of warnings
-      failOnError: true,
-      // allow import cycles that include an asyncronous import,
-      // e.g. via import(/* webpackMode: "weak" */ './file.js')
-      allowAsyncCycles: false,
-      // set the current working directory for displaying module paths
-      cwd: process.cwd(),
-    }),
-    // new BundleAnalyzerPlugin(),
+    ...(analyze ? [new BundleAnalyzerPlugin()] : []),
     new Dotenv(),
     new Clean('./dist', { root: path.resolve(__dirname, './') }),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
-      chunkFilename: '[id].[contenthash].css',
-    }),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
@@ -143,5 +125,4 @@ module.exports = () => ({
       inject: true,
     }),
   ],
-
-})
+}
