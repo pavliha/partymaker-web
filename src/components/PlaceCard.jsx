@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { node, object } from 'prop-types'
 import { Button, Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
-import { Picture } from 'components'
+import { Picture, PlaceDialog } from 'components'
 
 const styles = {
   root: {
@@ -16,10 +16,6 @@ const styles = {
   picture: {
     width: '100%',
     height: 177,
-    backgroundImage: (p) => `url(${p.place.picture_url})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundColor: 'rgba(0,0,0,0.12)',
   },
 
   price: {
@@ -54,30 +50,60 @@ const styles = {
   }
 }
 
-const PlaceCard = ({ classes, place, action }) =>
-  <div className={classes.root}>
-    <Picture src={place.picture_url} className={classes.picture} />
-    <Typography color="inherit" className={classes.price}>{place.price}</Typography>
-    <div className={classes.container}>
-      <Typography className={classes.title}>
-        {place.title}
-      </Typography>
-      <Typography color="textSecondary">
-        {place.working_hours}
-      </Typography>
-    </div>
-    <div className={classes.actions}>
-      <div className={classes.secondaryActions}>
-        <a target="_blank" href={place.website_url}>
-          <Button className={classes.secondaryButton}>САЙТ</Button>
-        </a>
-        <a target="_blank" href={place.map_url}>
-          <Button className={classes.secondaryButton}>КАРТА</Button>
-        </a>
+class PlaceCard extends Component {
+
+  state = {
+    isDialogOpen: false,
+  }
+
+  show = () =>
+    this.setState({ isDialogOpen: true })
+
+  hide = () =>
+    this.setState({ isDialogOpen: false })
+
+  select = () => {
+
+  }
+
+  render() {
+    const { classes, place, action } = this.props
+    const { isDialogOpen } = this.state
+    return (
+      <div className={classes.root}>
+        <Picture src={place.picture_url} className={classes.picture} onClick={this.show} />
+        <Typography color="inherit" className={classes.price}>
+          {place.price}
+        </Typography>
+        <div className={classes.container}>
+          <Typography className={classes.title}>
+            {place.title}
+          </Typography>
+          <Typography color="textSecondary">
+            {place.working_hours}
+          </Typography>
+        </div>
+        <div className={classes.actions}>
+          <div className={classes.secondaryActions}>
+            <a target="_blank" href={place.website_url}>
+              <Button className={classes.secondaryButton}>САЙТ</Button>
+            </a>
+            <a target="_blank" href={place.map_url}>
+              <Button className={classes.secondaryButton}>КАРТА</Button>
+            </a>
+          </div>
+          {action}
+        </div>
+        <PlaceDialog
+          place={place}
+          isOpen={isDialogOpen}
+          action={action}
+          onClose={this.hide}
+        />
       </div>
-      {action}
-    </div>
-  </div>
+    )
+  }
+}
 
 PlaceCard.propTypes = {
   classes: object.isRequired,

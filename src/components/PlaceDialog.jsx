@@ -83,7 +83,7 @@ const styles = theme => ({
   }
 })
 
-const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onReplace }) =>
+const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onReplace, action }) =>
   <Dialog
     classes={{ paperWidthSm: classes.paperWidthSm }}
     open={isOpen}
@@ -93,6 +93,7 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onRep
       <header className={classes.header}>
         <div className={classes.entertainment}>
           <Typography variant="h6">{place.entertainment?.title}</Typography>
+          {!place.entertainment?.title && <Typography variant="h6">{place.price}</Typography>}
           {datetime}
         </div>
         <CloseButton onClick={onClose} />
@@ -116,9 +117,12 @@ const PlaceDialog = ({ classes, place, datetime, isOpen, isGuest, onClose, onRep
               <Button className={classes.secondaryButton}>КАРТА</Button>
             </a>
           </div>
-          <Button variant="outlined" disabled={isGuest} color="primary" onClick={onReplace}>
-            Сменить
-          </Button>
+          {onReplace && (
+            <Button variant="outlined" disabled={isGuest} color="primary" onClick={onReplace}>
+              Сменить
+            </Button>
+          )}
+          {action}
         </div>
         <List className={classes.info}>
           <ListItem>
@@ -141,11 +145,9 @@ PlaceDialog.propTypes = {
   place: placeShape.isRequired,
   isOpen: bool.isRequired,
   isGuest: bool,
+  action: node,
   onClose: func.isRequired,
   onReplace: func,
-}
-PlaceDialog.defaultProps = {
-  onReplace: () => {}
 }
 
 export default withStyles(styles)(PlaceDialog)

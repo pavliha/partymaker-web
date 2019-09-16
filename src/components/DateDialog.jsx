@@ -16,7 +16,7 @@ const styles = {
   content: {}
 }
 
-const PlaceDialog = ({ classes, date, isOpen, onConfirm, onCancel }) =>
+const DateDialog = ({ classes, date, isOpen, onConfirm, onCancel }) =>
   <Dialog className={classes.root} open={isOpen} onClose={onCancel}>
     <DialogTitle>Установить предложенную дату?</DialogTitle>
     <DialogContent className={classes.content}>
@@ -30,7 +30,7 @@ const PlaceDialog = ({ classes, date, isOpen, onConfirm, onCancel }) =>
     </DialogActions>
   </Dialog>
 
-PlaceDialog.propTypes = {
+DateDialog.propTypes = {
   classes: object.isRequired,
   date: string.isRequired,
   isOpen: bool.isRequired,
@@ -38,4 +38,4 @@ PlaceDialog.propTypes = {
   onCancel: func.isRequired,
 }
 
-export default withStyles(styles)(PlaceDialog)
+export default withStyles(styles)(DateDialog)
