@@ -5,6 +5,7 @@ export Loading from './Loading'
 export Invite from './Invite'
 export Expand from './Expand'
 export EntertainmentGroup from './EntertainmentGroup'
+export EntertainmentsSearch from './EntertainmentsSearch'
 export OnlineIndicator from './OnlineIndicator'
 export Account from './Account'
 export Logo from './Logo'
@@ -27,7 +28,7 @@ export TransparentHeader from './TransparentHeader'
  */
 export EntertainmentList from './EntertainmentList'
 export GuestList from './GuestList'
-export PlaceList from './PlaceList'
+export PlacesList from './PlacesSlider'
 
 /**
  * Buttons

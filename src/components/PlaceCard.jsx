@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { node, object } from 'prop-types'
-import { Button, Typography, withStyles } from '@material-ui/core'
+import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture, PlaceDialog } from 'components'
 
@@ -8,48 +8,28 @@ const styles = {
   root: {
     position: 'relative',
     margin: 15,
-    width: 344,
-    border: '1px solid rgba(0,0,0,0.12)',
+    width: 150,
     display: 'flex',
     flexDirection: 'column'
   },
   picture: {
     cursor: 'pointer',
-    width: '100%',
-    height: 177,
-  },
-
-  price: {
-    position: 'absolute',
-    right: 0,
-    top: 5,
-    color: 'rgba(255,255,255,0.9)',
-    padding: 5,
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5,
-    backgroundColor: 'rgba(0,0,0,0.6)'
+    width: 150,
+    height: 150,
   },
 
   title: {
     cursor: 'pointer',
-    fontSize: 20,
+    fontSize: 16,
   },
   container: {
     flex: 1,
-    padding: 15,
+    paddingTop: 15,
+    paddingLeft: 5,
   },
   secondaryButton: {
     color: 'rgba(0,0,0,0.54)'
   },
-
-  actions: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: 15,
-  },
-  secondaryActions: {
-    flex: 1
-  }
 }
 
 class PlaceCard extends Component {
@@ -74,27 +54,13 @@ class PlaceCard extends Component {
     return (
       <div className={classes.root}>
         <Picture src={place.picture_url} className={classes.picture} onClick={this.show} />
-        <Typography color="inherit" className={classes.price}>
-          {place.price}
-        </Typography>
         <div className={classes.container}>
           <Typography className={classes.title} onClick={this.show}>
             {place.title}
           </Typography>
           <Typography color="textSecondary">
-            {place.working_hours}
+            {place.price}
           </Typography>
-        </div>
-        <div className={classes.actions}>
-          <div className={classes.secondaryActions}>
-            <a target="_blank" href={place.website_url}>
-              <Button className={classes.secondaryButton}>САЙТ</Button>
-            </a>
-            <a target="_blank" href={place.map_url}>
-              <Button className={classes.secondaryButton}>КАРТА</Button>
-            </a>
-          </div>
-          {action}
         </div>
         <PlaceDialog
           place={place}

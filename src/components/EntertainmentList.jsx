@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { func, array, shape, string, number } from 'prop-types'
+import { func, array, shape, number } from 'prop-types'
 import { connect, actions, select } from 'src/redux'
 import { Load, EntertainmentGroup } from 'components'
 
@@ -21,14 +21,13 @@ class EntertainmentList extends Component {
   }
 
   render() {
-    const { redux, buttonTitle } = this.props
+    const { redux } = this.props
     const { entertainments, loadEntertainments } = redux
 
     return (
       <Load promise={loadEntertainments}>
         {entertainments.map(entertainment =>
           <EntertainmentGroup
-            buttonTitle={buttonTitle}
             key={entertainment.id}
             entertainment={entertainment}
             onSelect={this.newRoom}
@@ -41,7 +40,6 @@ class EntertainmentList extends Component {
 
 EntertainmentList.propTypes = {
   room_id: number,
-  buttonTitle: string,
   onCreated: func,
   redux: shape({
     entertainments: array,
@@ -52,6 +50,7 @@ EntertainmentList.propTypes = {
 EntertainmentList.defaultProps = {
   onCreated: () => {}
 }
+
 const redux = state => ({
   entertainments: select.entertainments.all(state),
   loadEntertainments: actions.entertainments.loadMany,

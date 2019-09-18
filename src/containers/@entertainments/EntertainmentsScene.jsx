@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
-import { EntertainmentList, ProfileHeader, AppBottomNavigation } from 'components'
+import { EntertainmentList, ProfileHeader, AppBottomNavigation, EntertainmentsSearch } from 'components'
 import { select, connect } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
 const styles = theme => ({
   container: {
-    maxWidth: 1130,
+    maxWidth: 960,
     margin: '0 auto',
   },
   entertainmentTitle: {
@@ -21,6 +21,11 @@ const styles = theme => ({
       textAlign: 'left'
     }
   },
+  searchArea: {
+    paddingTop: 60,
+    paddingLeft: 15,
+    paddingBottom: 50,
+  }
 })
 
 class EntertainmentsScene extends Component {
@@ -39,9 +44,9 @@ class EntertainmentsScene extends Component {
         </Helmet>
         <ProfileHeader user={user} />
         <section className={classes.container}>
-          <Typography className={classes.entertainmentTitle} variant="h5">
-            Что бы вы хотели сделать с друзьями?
-          </Typography>
+          <div className={classes.searchArea}>
+            <EntertainmentsSearch />
+          </div>
           <div className={classes.list}>
             <EntertainmentList
               onCreated={this.redirectToRoom}
