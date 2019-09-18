@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shape, object, func } from 'prop-types'
-import { TransparentHeader, EntertainmentList } from 'components'
+import { TransparentHeader, EntertainmentsLoader } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles, SvgIcon } from '@material-ui/core'
@@ -152,7 +152,7 @@ class IndexScene extends Component {
           <Typography className={classes.entertainmentTitle} variant="h5">
             Что бы вы хотели сделать с друзьями?
           </Typography>
-          <EntertainmentList onCreated={this.redirectToRoom} buttonTitle="Хочу сюда" />
+          <EntertainmentsLoader />
         </section>
       </main>
     )

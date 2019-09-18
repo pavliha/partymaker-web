@@ -1,4 +1,4 @@
-import { all, takeEvery, put } from 'redux-saga/effects'
+import { all, takeEvery } from 'redux-saga/effects'
 import {
   CREATE_ENTERTAINMENT_FULFILLED,
   LOAD_ENTERTAINMENT_FULFILLED,
@@ -6,16 +6,26 @@ import {
   LOAD_ENTERTAINMENTS_FULFILLED
 } from './action'
 import actions from 'src/redux/action'
+import { normalize, putRelationsToStore } from 'utils/index'
 
-function* setEntertainments({ payload: entertainments }) {
-  yield put(actions.entertainments.setMany(entertainments))
+const defineRelationsFrom = (models) => ([
+  [models.entertainment, actions.entertainments.setMany],
+  [models.places, actions.places.setMany],
+])
+
+function * setEntertainments({ payload: entertainments }) {
+  const models = normalize(entertainments, 'entertainment')
+  const relations = defineRelationsFrom(models)
+  yield putRelationsToStore(models, relations)
 }
 
-function* setEntertainment({ payload: entertainment }) {
-  yield put(actions.entertainments.set(entertainment))
+function * setEntertainment({ payload: entertainment }) {
+  const models = normalize(entertainment, 'entertainment')
+  const relations = defineRelationsFrom(models)
+  yield putRelationsToStore(models, relations)
 }
 
-export default function* saga() {
+export default function * saga() {
   yield all([
     takeEvery(LOAD_ENTERTAINMENTS_FULFILLED, setEntertainments),
     takeEvery(LOAD_ENTERTAINMENT_FULFILLED, setEntertainment),

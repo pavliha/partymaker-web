@@ -3,8 +3,7 @@ export AuthGate from './AuthGate'
 export Load from './Load'
 export Loading from './Loading'
 export Invite from './Invite'
-export Expand from './Expand'
-export EntertainmentGroup from './EntertainmentGroup'
+export Entertainment from './Entertainment'
 export EntertainmentsSearch from './EntertainmentsSearch'
 export OnlineIndicator from './OnlineIndicator'
 export Account from './Account'
@@ -26,9 +25,9 @@ export TransparentHeader from './TransparentHeader'
 /**
  * Lists
  */
-export EntertainmentList from './EntertainmentList'
+export EntertainmentsLoader from './EntertainmentsLoader'
 export GuestList from './GuestList'
-export PlacesList from './PlacesSlider'
+export PlacesList from './PlacesList'
 
 /**
  * Buttons

@@ -7,7 +7,7 @@ import { Picture, PlaceDialog } from 'components'
 const styles = {
   root: {
     position: 'relative',
-    margin: 15,
+    margin: 10,
     width: 150,
     display: 'flex',
     flexDirection: 'column'
@@ -43,10 +43,6 @@ class PlaceCard extends Component {
 
   hide = () =>
     this.setState({ isDialogOpen: false })
-
-  select = () => {
-
-  }
 
   render() {
     const { classes, place, action } = this.props

@@ -1,7 +1,7 @@
 import React from 'react'
 import { object, func, bool, number } from 'prop-types'
 import { Drawer, Typography, withStyles } from '@material-ui/core'
-import { EntertainmentList, CloseButton } from 'components'
+import { EntertainmentsLoader, CloseButton } from 'components'
 
 const styles = theme => ({
   root: {
@@ -54,7 +54,7 @@ const EntertainmentsDrawer = ({ classes, room_id, isOpen, onClose }) => {
           </Typography>
         </header>
         <div>
-          <EntertainmentList
+          <EntertainmentsLoader
             room_id={room_id}
             classes={{ title: classes.title }}
             className={classes.entertainments}

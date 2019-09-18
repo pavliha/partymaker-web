@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
-import { EntertainmentList, ProfileHeader, AppBottomNavigation, EntertainmentsSearch } from 'components'
+import { EntertainmentsLoader, ProfileHeader, AppBottomNavigation, EntertainmentsSearch } from 'components'
 import { select, connect } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
@@ -22,9 +22,10 @@ const styles = theme => ({
     }
   },
   searchArea: {
-    paddingTop: 60,
+    paddingTop: 40,
     paddingLeft: 15,
-    paddingBottom: 50,
+    paddingRight: 25,
+    paddingBottom: 30,
   }
 })
 
@@ -48,7 +49,7 @@ class EntertainmentsScene extends Component {
             <EntertainmentsSearch />
           </div>
           <div className={classes.list}>
-            <EntertainmentList
+            <EntertainmentsLoader
               onCreated={this.redirectToRoom}
               buttonTitle="Хочу сюда"
             />

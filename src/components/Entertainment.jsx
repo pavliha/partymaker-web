@@ -1,7 +1,10 @@
 import React from 'react'
-import { node, object, string } from 'prop-types'
+import { object } from 'prop-types'
 import { IconButton, Typography, withStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from 'mdi-react/ArrowRightIcon'
+import { Link } from 'react-router-dom'
+import { entertainmentShape } from 'shapes'
+import { PlacesList } from 'components'
 
 const styles = theme => ({
   root: {
@@ -24,27 +27,36 @@ const styles = theme => ({
     cursor: 'pointer',
     paddingLeft: 5,
     fontSize: 20,
+  },
+
+  places: {
+    overflow: 'auto',
   }
 
 })
 
-const Expand = ({ classes, title, children }) =>
+const Entertainment = ({ classes, entertainment }) =>
   <div className={classes.root}>
-    <div className={classes.expand}>
+    <Link
+      to={`/entertainments/${entertainment.id}`}
+      component="div"
+      className={classes.expand}
+    >
       <Typography component="div" className={classes.title}>
-        {title}
+        {entertainment.title}
       </Typography>
       <IconButton>
         <KeyboardArrowRightIcon />
       </IconButton>
-    </div>
-    {children}
+    </Link>
+    {entertainment.places && (
+      <PlacesList className={classes.places} places={entertainment.places} />
+    )}
   </div>
 
-Expand.propTypes = {
+Entertainment.propTypes = {
   classes: object.isRequired,
-  title: string.isRequired,
-  children: node.isRequired,
+  entertainment: entertainmentShape.isRequired,
 }
 
-export default withStyles(styles)(Expand)
+export default withStyles(styles)(Entertainment)

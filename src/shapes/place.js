@@ -9,6 +9,7 @@ export default shape({
   map_url: string.isRequired,
   website_url: string.isRequired,
   working_hours: string.isRequired,
+  entertainment_id: number,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })
