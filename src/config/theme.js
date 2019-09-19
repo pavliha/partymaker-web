@@ -22,9 +22,14 @@ export default {
     },
     MuiBottomNavigationAction: {
       root: {
+        padding: 'inherit',
         '&$selected': {
+          paddingTop: 0,
           paddingBottom: 0,
         },
+        '&$iconOnly': {
+          paddingTop: 0,
+        }
       },
       label: {
         display: 'none',
