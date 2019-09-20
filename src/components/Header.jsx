@@ -7,7 +7,11 @@ const styles = theme => ({
   root: {
     backgroundColor: 'transparent',
     boxShadow: 'none',
+    height: 65,
     color: 'black',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
     [theme.breakpoints.up('sm')]: {
       backgroundColor: theme.palette.primary.main,
       color: 'white',
