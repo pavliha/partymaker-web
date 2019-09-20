@@ -6,7 +6,9 @@ import { userShape, roomShape } from 'shapes'
 import { withRouter } from 'react-router-dom'
 
 const styles = theme => ({
-  root: {},
+  root: {
+    minHeight: 65,
+  },
   chatMenu: {
     flex: 1,
   },
@@ -39,24 +41,26 @@ class RoomHeader extends Component {
 
   render() {
     const { classes, auth, room, isGuest, onLeave, onJoin } = this.props
-    return <AppBar position="static" color="primary">
-      <Toolbar>
-        <div className={classes.desktopHeader}>
-          <Logo className={classes.logo} />
-          {auth && <Account user={auth} />}
-        </div>
-        <div className={classes.mobileHeader}>
-          <BackButton onClick={this.goHome} />
-          <RoomNavigation
-            className={classes.chatMenu}
-            room={room}
-            isGuest={isGuest}
-            onLeave={onLeave}
-            onJoin={onJoin}
-          />
-        </div>
-      </Toolbar>
-    </AppBar>
+    return (
+      <AppBar position="static" color="primary" className={classes.root}>
+        <Toolbar>
+          <div className={classes.desktopHeader}>
+            <Logo className={classes.logo} />
+            {auth && <Account user={auth} />}
+          </div>
+          <div className={classes.mobileHeader}>
+            <BackButton onClick={this.goHome} />
+            <RoomNavigation
+              className={classes.chatMenu}
+              room={room}
+              isGuest={isGuest}
+              onLeave={onLeave}
+              onJoin={onJoin}
+            />
+          </div>
+        </Toolbar>
+      </AppBar>
+    )
   }
 }
 

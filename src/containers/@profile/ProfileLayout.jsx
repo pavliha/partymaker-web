@@ -2,7 +2,7 @@ import React from 'react'
 import { object, shape } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
-import { ProfileHeader } from 'components'
+import { AppBottomNavigation, ProfileHeader } from 'components'
 import { Switch, Route } from 'react-router-dom'
 import ProfileScene from './ProfileScene'
 import SettingsScene from './@settings/SettingsScene'
@@ -12,17 +12,24 @@ const styles = {
   root: {
     display: 'flex',
     flexDirection: 'column',
-    height: '100vh'
+    height: '100%'
   },
+  routes: {
+    flex: 1,
+    overflow: 'auto',
+  }
 }
 
 const ProfileLayout = ({ classes, redux: { user }, }) =>
   <div className={classes.root}>
     <ProfileHeader user={user} />
-    <Switch>
-      <Route exact path="/profile" component={ProfileScene} />
-      <Route exact path="/profile/settings" component={SettingsScene} />
-    </Switch>
+    <div className={classes.routes}>
+      <Switch>
+        <Route exact path="/profile" component={ProfileScene} />
+        <Route exact path="/profile/settings" component={SettingsScene} />
+      </Switch>
+    </div>
+    <AppBottomNavigation />
   </div>
 
 ProfileLayout.propTypes = {

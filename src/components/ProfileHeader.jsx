@@ -6,7 +6,12 @@ import { userShape } from 'shapes'
 import { Link } from 'react-router-dom'
 
 const styles = theme => ({
-  root: {},
+  root: {
+    height: 65,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
   },
@@ -36,7 +41,7 @@ class ProfileHeader extends Component {
   render() {
     const { classes, user } = this.props
     return (
-      <AppBar position="static" color="primary">
+      <AppBar position="static" color="primary" className={classes.root}>
         <Toolbar>
           <Logo />
           <div className={classes.container}>

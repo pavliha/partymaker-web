@@ -3,7 +3,7 @@ import { object, func, arrayOf, shape } from 'prop-types'
 import roomShape from 'shapes/room'
 import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
-import { Load, Profile, RoomCard, AppBottomNavigation } from 'components'
+import { Load, Profile, RoomCard } from 'components'
 import userShape from 'shapes/user'
 
 const styles = theme => ({
@@ -84,7 +84,6 @@ class ProfileScene extends Component {
               )}
             </div>
           </Load>
-          <AppBottomNavigation />
         </div>
       </div>
     )

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { object, shape, func } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
@@ -10,8 +10,15 @@ import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   container: {
-    maxWidth: 860,
-    margin: '0 auto',
+    height: 'calc(100% - 194px)',
+    overflow: 'auto',
+  },
+
+  list: {
+    [theme.breakpoints.up('md')]: {
+      margin: '0 auto',
+      maxWidth: 820,
+    }
   },
 
   logo: {
@@ -40,6 +47,10 @@ const styles = theme => ({
   },
 
   searchArea: {
+    [theme.breakpoints.up('md')]: {
+      margin: '0 auto',
+      maxWidth: 820,
+    },
     paddingTop: 10,
     paddingLeft: 15,
     paddingRight: 20,
@@ -61,7 +72,7 @@ class EntertainmentsScene extends Component {
   render() {
     const { classes, redux: { user } } = this.props
     return (
-      <div>
+      <Fragment>
         <Helmet><title>Partymaker - Поиск развлечений</title></Helmet>
         <Header>
           <Logo classes={{ root: classes.logo, title: classes.logoTitle }} />
@@ -78,10 +89,10 @@ class EntertainmentsScene extends Component {
           </div>
           <AccountDropdown />
         </Header>
+        <div className={classes.searchArea}>
+          <EntertainmentsSearch />
+        </div>
         <section className={classes.container}>
-          <div className={classes.searchArea}>
-            <EntertainmentsSearch />
-          </div>
           <div className={classes.list}>
             <EntertainmentsLoader
               onCreated={this.redirectToRoom}
@@ -90,7 +101,7 @@ class EntertainmentsScene extends Component {
           </div>
         </section>
         <AppBottomNavigation />
-      </div>
+      </Fragment>
     )
   }
 }
