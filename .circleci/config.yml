@@ -16,7 +16,7 @@ jobs:
 
       - deploy:
           name: digital-ocean
-          command: ssh -o "StrictHostKeyChecking no" dev@partymaker.zp.ua "cd ~/partymaker-web; sudo service mysql stop; ./build.sh; sudo service mysql start"
+          command: ssh -o "StrictHostKeyChecking no" dev@partymaker.zp.ua "cd ~/partymaker-web; ./build.sh"
 
 workflows:
   version: 2

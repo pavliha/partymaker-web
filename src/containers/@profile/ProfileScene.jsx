@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { object, func, arrayOf, shape } from 'prop-types'
-import roomShape from 'shapes/room'
+import { roomShape, userShape } from 'shapes'
 import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
 import { Load, Profile, RoomCard } from 'components'
-import userShape from 'shapes/user'
 
 const styles = theme => ({
 
