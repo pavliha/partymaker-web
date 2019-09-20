@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withStyles, BottomNavigation, BottomNavigationAction } from '@material-ui/core'
+import { withStyles, BottomNavigation, BottomNavigationAction, Paper } from '@material-ui/core'
 import AccountIcon from 'mdi-react/AccountIcon'
 import HomeIcon from 'mdi-react/HomeIcon'
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon'
@@ -35,43 +35,45 @@ class AppBottomNavigation extends Component {
   render() {
     const { match, classes } = this.props
     return (
-      <BottomNavigation value={match.path} className={classes.root}>
-        <BottomNavigationAction
-          classes={{ label: classes.label }}
-          component={Link}
-          to="/entertainments"
-          label="Куда сходить"
-          value="/entertainments"
-          icon={<HomeIcon />}
-        />
-        <BottomNavigationAction
-          classes={{ label: classes.label }}
-          label="Поиск"
-          value="/search"
-          icon={<SearchIcon />}
-        />
-        <BottomNavigationAction
-          classes={{ label: classes.label }}
-          label="Собрать компанию"
-          value="/rooms/create"
-          onClick={this.createRoom}
-          icon={<PlusBoxOutlineIcon />}
-        />
-        <BottomNavigationAction
-          classes={{ label: classes.label }}
-          label="Уведомления"
-          value="/notifications"
-          icon={<BellIcon />}
-        />
-        <BottomNavigationAction
-          classes={{ label: classes.label }}
-          component={Link}
-          to="/profile"
-          label="Аккаунт"
-          value="/profile"
-          icon={<AccountIcon />}
-        />
-      </BottomNavigation>
+      <Paper elevation={2} className={classes.root}>
+        <BottomNavigation value={match.path} >
+          <BottomNavigationAction
+            classes={{ label: classes.label }}
+            component={Link}
+            to="/entertainments"
+            label="Куда сходить"
+            value="/entertainments"
+            icon={<HomeIcon />}
+          />
+          <BottomNavigationAction
+            classes={{ label: classes.label }}
+            label="Поиск"
+            value="/search"
+            icon={<SearchIcon />}
+          />
+          <BottomNavigationAction
+            classes={{ label: classes.label }}
+            label="Собрать компанию"
+            value="/rooms/create"
+            onClick={this.createRoom}
+            icon={<PlusBoxOutlineIcon />}
+          />
+          <BottomNavigationAction
+            classes={{ label: classes.label }}
+            label="Уведомления"
+            value="/notifications"
+            icon={<BellIcon />}
+          />
+          <BottomNavigationAction
+            classes={{ label: classes.label }}
+            component={Link}
+            to="/profile"
+            label="Аккаунт"
+            value="/profile"
+            icon={<AccountIcon />}
+          />
+        </BottomNavigation>
+      </Paper>
     )
   }
 }

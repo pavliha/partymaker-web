@@ -3,7 +3,7 @@ import { bool, func, object, shape, string } from 'prop-types'
 import roomShape from 'shapes/room'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core'
-import { ChatDropdown, DateTimeStatus, PlaceTitle, GuestsDrawer } from 'components'
+import { ChatDropdown, DateTimeStatus, PlaceTitle, GuestsDrawer, EntertainmentsDrawer, PlaceDialog } from 'components'
 import classNames from 'classnames'
 
 const styles = theme => ({
@@ -46,12 +46,35 @@ class RoomNavigation extends Component {
     history.push(`/rooms/${room.id}`)
   }
 
+  openPlacesDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/entertainments`)
+  }
+
+  closePlacesDrawer = () => {
+    const { history } = this.props
+    history.goBack()
+  }
+
+  openPlaceDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}/place`)
+  }
+
+  closePlaceDrawer = () => {
+    const { history, room } = this.props
+    history.push(`/rooms/${room.id}`)
+  }
+
   render() {
     const { classes, className, location, room, isGuest, onJoin, onLeave } = this.props
 
     return (
       <div className={classNames(classes.root, className)}>
-        <PlaceTitle room={room} isGuest={isGuest} />
+        <PlaceTitle
+          place={room.place}
+          onClick={room.place ? this.openPlaceDrawer : this.openPlacesDrawer}
+        />
         <div className={classes.aside}>
           <DateTimeStatus
             className={classes.datetime}
@@ -72,6 +95,23 @@ class RoomNavigation extends Component {
           onClose={this.closeGuests}
           onOpen={this.openGuests}
         />
+        <EntertainmentsDrawer
+          room_id={room.id}
+          isOpen={location.pathname === `/rooms/${room.id}/entertainments`}
+          onClose={this.closePlacesDrawer}
+        />
+        {room.place && (
+          <PlaceDialog
+            title="Место"
+            datetime={<DateTimeStatus time={room.time} date={room.date} />}
+            place={room.place}
+            isGuest={isGuest}
+            isOpen={location.pathname === `/rooms/${room.id}/place`}
+            onClose={this.closePlaceDrawer}
+            onReplace={this.openPlacesDrawer}
+          />
+        )}
+
       </div>
     )
   }

@@ -13,15 +13,17 @@ export Guest from './Guest'
 export GuestItemText from './GuestItemText'
 export Profile from './Profile'
 export Room from './Room'
+export StatusItem from './StatusItem'
+export PlaceContact from './PlaceContact'
 
 /**
  * Headers
  */
-
+export Header from './Header'
 export RoomHeader from './RoomHeader'
 export ProfileHeader from './ProfileHeader'
 export TransparentHeader from './TransparentHeader'
-
+export DefaultHeader from './DefaultHeader'
 /**
  * Lists
  */

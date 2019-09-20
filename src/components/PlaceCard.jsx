@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
-import { node, object } from 'prop-types'
+import React from 'react'
+import { object } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
-import { Picture, PlaceDialog } from 'components'
+import { Picture } from 'components'
 
 const styles = {
   root: {
+    cursor: 'pointer',
     position: 'relative',
     margin: 10,
     width: 150,
@@ -13,13 +14,12 @@ const styles = {
     flexDirection: 'column'
   },
   picture: {
-    cursor: 'pointer',
+    borderRadius: 25,
     width: 150,
     height: 150,
   },
 
   title: {
-    cursor: 'pointer',
     fontSize: 16,
   },
   container: {
@@ -32,47 +32,18 @@ const styles = {
   },
 }
 
-class PlaceCard extends Component {
-
-  state = {
-    isDialogOpen: false,
-  }
-
-  show = () =>
-    this.setState({ isDialogOpen: true })
-
-  hide = () =>
-    this.setState({ isDialogOpen: false })
-
-  render() {
-    const { classes, place, action } = this.props
-    const { isDialogOpen } = this.state
-    return (
-      <div className={classes.root}>
-        <Picture src={place.picture_url} className={classes.picture} onClick={this.show} />
-        <div className={classes.container}>
-          <Typography className={classes.title} onClick={this.show}>
-            {place.title}
-          </Typography>
-          <Typography color="textSecondary">
-            {place.price}
-          </Typography>
-        </div>
-        <PlaceDialog
-          place={place}
-          isOpen={isDialogOpen}
-          action={action}
-          onClose={this.hide}
-        />
-      </div>
-    )
-  }
-}
+const PlaceCard = ({ classes, place }) =>
+  <div className={classes.root}>
+    <Picture src={place.picture_url} className={classes.picture} />
+    <div className={classes.container}>
+      <Typography className={classes.title}>{place.title}</Typography>
+      <Typography color="textSecondary">{place.price}</Typography>
+    </div>
+  </div>
 
 PlaceCard.propTypes = {
   classes: object.isRequired,
   place: placeShape.isRequired,
-  action: node,
 }
 
 export default withStyles(styles)(PlaceCard)

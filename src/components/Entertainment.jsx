@@ -6,12 +6,9 @@ import { Link } from 'react-router-dom'
 import { entertainmentShape } from 'shapes'
 import { PlacesList } from 'components'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    marginLeft: 5,
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: 0,
-    }
+    marginBottom: 25,
   },
 
   expand: {

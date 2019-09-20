@@ -11,6 +11,7 @@ const styles = () => ({
     alignItems: 'center',
     marginTop: -3
   },
+  title: {},
   city: {
     fontWeight: '100',
     padding: '0 15px',
@@ -19,10 +20,10 @@ const styles = () => ({
 
 const Logo = ({ classes, className }) =>
   <Link to="/" component="div" className={classNames(classes.root, className)}>
-    <Typography variant="h6" color="inherit">
+    <Typography className={classes.title} variant="h6" color="inherit">
       Partymaker
     </Typography>
-    <Typography className={classes.city} color="inherit">Запорожье</Typography>
+    <Typography className={classes.city}>Запорожье</Typography>
   </Link>
 
 Logo.propTypes = {

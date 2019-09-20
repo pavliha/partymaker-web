@@ -1,31 +1,53 @@
 import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { Button, withStyles } from '@material-ui/core'
 import { userShape } from 'shapes'
-import { EntertainmentsLoader, ProfileHeader, AppBottomNavigation, EntertainmentsSearch } from 'components'
+import { EntertainmentsLoader, AppBottomNavigation, EntertainmentsSearch, AccountDropdown, Header } from 'components'
+import Logo from 'components/Logo'
 import { select, connect } from 'src/redux'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   container: {
-    maxWidth: 960,
+    maxWidth: 860,
     margin: '0 auto',
   },
-  entertainmentTitle: {
-    paddingTop: 30,
-    paddingBottom: 30,
-    fontFamily: 'Google Sans,sans-serf',
-    fontSize: 24,
-    textAlign: 'center',
-    [theme.breakpoints.up('md')]: {
-      textAlign: 'left'
+
+  logo: {
+    flex: 1,
+    [theme.breakpoints.up('sm')]: {
+      flex: 'inherit',
+      color: 'white'
     }
   },
+
+  navigation: {
+    flex: 1,
+    display: 'none',
+    marginLeft: 15,
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      marginLeft: 60,
+    }
+  },
+
+  logoTitle: {
+    color: theme.palette.primary.main,
+    [theme.breakpoints.up('sm')]: {
+      color: 'white'
+    }
+  },
+
   searchArea: {
-    paddingTop: 40,
+    paddingTop: 10,
     paddingLeft: 15,
-    paddingRight: 25,
-    paddingBottom: 30,
+    paddingRight: 20,
+    paddingBottom: 15,
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 40,
+      paddingBottom: 30,
+    }
   }
 })
 
@@ -40,10 +62,22 @@ class EntertainmentsScene extends Component {
     const { classes, redux: { user } } = this.props
     return (
       <div>
-        <Helmet>
-          <title>Partymaker - Поиск развлечений</title>
-        </Helmet>
-        <ProfileHeader user={user} />
+        <Helmet><title>Partymaker - Поиск развлечений</title></Helmet>
+        <Header>
+          <Logo classes={{ root: classes.logo, title: classes.logoTitle }} />
+          <div className={classes.navigation}>
+            {user && (
+              <Link to="/profile">
+                <Button color="inherit">мои компании</Button>
+              </Link>)}
+            {user && (
+              <Link className={classes.company} to="/rooms">
+                <Button color="inherit">найти компанию</Button>
+              </Link>
+            )}
+          </div>
+          <AccountDropdown />
+        </Header>
         <section className={classes.container}>
           <div className={classes.searchArea}>
             <EntertainmentsSearch />

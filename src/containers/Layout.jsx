@@ -7,6 +7,7 @@ import ProfileLayout from './@profile/ProfileLayout'
 import InviteScene from './@invite/InviteScene'
 import OrderScene from './@order/OrderScene'
 import EntertainmentsLayout from './@entertainments/EntertainmentsLayout'
+import PlacesLayout from './@places/PlacesLayout'
 import IndexScene from './IndexScene'
 
 const Layout = () =>
@@ -14,6 +15,7 @@ const Layout = () =>
     <Route exact path="/" component={IndexScene} />
     <Route path="/auth" component={AuthLayout} />
     <Route path="/entertainments" component={EntertainmentsLayout} />
+    <Route path="/places" component={PlacesLayout} />
     <Route exact path="/invite/:invite_token" component={InviteScene} />
     <Route path="/rooms" component={RoomsLayout} />
     <Route path="/order/:token" component={OrderScene} />

@@ -9,7 +9,6 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    maxWidth: 400,
   },
   input: {
     marginLeft: theme.spacing(1),

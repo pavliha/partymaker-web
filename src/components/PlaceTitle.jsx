@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { object, bool, shape, func, string } from 'prop-types'
+import React from 'react'
+import { func, object, bool, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
-import roomShape from 'shapes/room'
-import { withRouter } from 'react-router-dom'
-import { EntertainmentsDrawer, Picture, PlaceDialog, DateTimeStatus } from 'components'
+import placeShape from 'shapes/place'
+import { Picture } from 'components'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -24,93 +24,57 @@ const styles = theme => ({
       display: 'flex',
     },
   },
+  largerPicture: {
+    height: 70,
+    borderRadius: 10,
+    marginRight: 15,
+  },
   title: {
-    cursor: 'pointer',
-    fontSize: 14,
+    fontSize: 16,
     textOverflow: 'ellipsis',
     [theme.breakpoints.up('sm')]: {
       fontSize: 18,
     },
   },
-  price: {
+  subtitle: {
     opacity: 0.8,
+  },
+  price: {
+    color: '#07522C',
   }
 })
 
-class PlaceTitle extends Component {
-
-  openPlacesDrawer = () => {
-    const { history, room } = this.props
-    history.push(`/rooms/${room.id}/entertainments`)
-  }
-
-  closePlacesDrawer = () => {
-    const { history } = this.props
-    history.goBack()
-  }
-
-  openPlaceDrawer = () => {
-    const { history, room } = this.props
-    history.push(`/rooms/${room.id}/place`)
-  }
-
-  closePlaceDrawer = () => {
-    const { history, room } = this.props
-    history.push(`/rooms/${room.id}`)
-  }
-
-  render() {
-    const { location, classes, isGuest, room } = this.props
-    const { place } = room
-
-    const handleClick = place ? this.openPlaceDrawer : this.openPlacesDrawer
-
-    return (
-      <div className={classes.root}>
-        <Picture
-          src={place?.picture_url}
-          className={classes.picture}
-          onClick={handleClick}
-        />
-        <div className={classes.container}>
-          <Typography
-            className={classes.title}
-            onClick={handleClick}
-          >
-            {place?.title || 'Выбрать место'}
-          </Typography>
-          <Typography variant="caption" className={classes.price}>
-            {place?.price || 'Место еще не выбрано'}
-          </Typography>
-        </div>
-        <EntertainmentsDrawer
-          room_id={room.id}
-          isOpen={location.pathname === `/rooms/${room.id}/entertainments`}
-          onClose={this.closePlacesDrawer}
-        />
-        {place && (
-          <PlaceDialog
-            title="Место"
-            datetime={<DateTimeStatus time={room.time} date={room.date} />}
-            place={place}
-            isGuest={isGuest}
-            isOpen={location.pathname === `/rooms/${room.id}/place`}
-            onClose={this.closePlaceDrawer}
-            onReplace={this.openPlacesDrawer}
-          />
-        )}
-
-      </div>
-    )
-  }
-}
+const PlaceTitle = ({ classes, className, place, full, onClick }) =>
+  <div className={classNames(classes.root, className)}>
+    <Picture
+      src={place?.picture_url}
+      className={classNames({
+        [classes.picture]: true,
+        [classes.largerPicture]: full,
+      })}
+      onClick={onClick}
+    />
+    <div className={classes.container}>
+      <Typography gutterBottom className={classes.title} onClick={onClick}>
+        {place?.title || 'Выбрать место'}
+      </Typography>
+      <Typography gutterBottom variant="caption" className={classes.subtitle}>
+        {place?.price || 'Место еще не выбрано'}
+      </Typography>
+      {full && (
+        <Typography gutterBottom variant="caption" className={classes.subtitle}>
+          {place?.working_hours}
+        </Typography>
+      )}
+    </div>
+  </div>
 
 PlaceTitle.propTypes = {
-  location: shape({ pathname: string }),
-  history: shape({ push: func, goBack: func }),
   classes: object.isRequired,
-  isGuest: bool,
-  room: roomShape,
+  className: string,
+  full: bool,
+  place: placeShape,
+  onClick: func,
 }
 
-export default withStyles(styles)(withRouter(PlaceTitle))
+export default withStyles(styles)(PlaceTitle)
