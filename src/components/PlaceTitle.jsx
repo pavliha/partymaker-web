@@ -31,8 +31,6 @@ const styles = theme => ({
   },
   title: {
     fontSize: 16,
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
     [theme.breakpoints.up('sm')]: {
       fontSize: 18,
     },

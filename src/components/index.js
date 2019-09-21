@@ -9,12 +9,12 @@ export OnlineIndicator from './OnlineIndicator'
 export Account from './Account'
 export Logo from './Logo'
 export Picture from './Picture'
-export Guest from './Guest'
-export GuestItemText from './GuestItemText'
 export Profile from './Profile'
 export Room from './Room'
 export StatusItem from './StatusItem'
+export RatingStatusItem from './RatingStatusItem'
 export PlaceContact from './PlaceContact'
+export PhotosSlider from './PhotosSlider'
 
 /**
  * Headers
@@ -30,6 +30,9 @@ export DefaultHeader from './DefaultHeader'
 export EntertainmentsLoader from './EntertainmentsLoader'
 export GuestList from './GuestList'
 export PlacesList from './PlacesList'
+export CommentListItem from './CommentListItem'
+export GuestListItem from './GuestListItem'
+export GuestListItemText from './GuestListItemText'
 
 /**
  * Buttons
@@ -115,7 +118,7 @@ export AuthCardActions from './AuthCardActions'
 export SocialLoginActions from './SocialLoginActions'
 
 /**
- * Menus
+ * Navigation
  */
 export ChatDropdown from './ChatDropdown'
 export AccountDropdown from './AccountDropdown'

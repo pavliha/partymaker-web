@@ -10,6 +10,9 @@ export default shape({
   website_url: string.isRequired,
   working_hours: string.isRequired,
   entertainment_id: number,
+  instagram_url: string,
+  rating: number,
+  rating_count: number,
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })

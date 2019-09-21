@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
 import userShape from 'shapes/user'
 import { ListItem, withStyles } from '@material-ui/core'
-import { UserAvatar, KickGuestDialog, GuestItemText } from 'components'
+import { UserAvatar, KickGuestDialog, GuestListItemText } from 'components'
 
 const styles = {
   root: {
@@ -18,7 +18,7 @@ const styles = {
   },
 }
 
-class Guest extends Component {
+class GuestListItem extends Component {
 
   state = {
     isKickGuestDialogOpen: false,
@@ -42,7 +42,7 @@ class Guest extends Component {
     return (
       <ListItem className={classes.root}>
         <UserAvatar is_online={guest.is_online} user={guest} />
-        <GuestItemText
+        <GuestListItemText
           guest={guest}
           hideOnline={hideOnline}
           onKick={onKick && this.openKickGuestDialog}
@@ -58,11 +58,11 @@ class Guest extends Component {
   }
 }
 
-Guest.propTypes = {
+GuestListItem.propTypes = {
   classes: object.isRequired,
   hideOnline: bool,
   guest: userShape.isRequired,
   onKick: func,
 }
 
-export default withStyles(styles)(Guest)
+export default withStyles(styles)(GuestListItem)

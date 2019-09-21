@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bool, object, oneOfType, number, shape, string } from 'prop-types'
 import { Avatar, withStyles } from '@material-ui/core'
 import classNames from 'classnames'
-import { initialsFromUserName } from 'utils'
+import initials from 'name-initials'
 import { PictureDialog, OnlineIndicator } from 'components'
 
 const styles = () => ({
@@ -59,7 +59,7 @@ class UserAvatar extends Component {
           className={this.overrides()}
           src={user.avatar_url}
         >
-          {user.avatar_url ? null : initialsFromUserName(user.name)}
+          {user.avatar_url ? null : initials(user.name)}
         </Avatar>
         <OnlineIndicator isVisible={is_online} />
         <PictureDialog

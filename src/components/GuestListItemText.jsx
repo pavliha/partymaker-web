@@ -20,7 +20,7 @@ const styles = {
   },
 }
 
-class GuestItemText extends Component {
+class GuestListItemText extends Component {
 
   lastSeen = (guest) => {
     if (guest?.is_online) return 'Онлайн'
@@ -56,7 +56,7 @@ class GuestItemText extends Component {
   }
 }
 
-GuestItemText.propTypes = {
+GuestListItemText.propTypes = {
   classes: object.isRequired,
   guest: userShape.isRequired,
   onKick: func,
@@ -67,4 +67,4 @@ const redux = (state) => ({
   user: select.auth.user(state)
 })
 
-export default withStyles(styles)(connect(redux)(GuestItemText))
+export default withStyles(styles)(connect(redux)(GuestListItemText))

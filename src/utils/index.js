@@ -1,5 +1,4 @@
 export fromJWT from './fromJWT'
-export initialsFromUserName from './initialsFromUserName'
 export transformValidationApi from './transformValidationApi'
 export connect from './connect'
 export arrayToObject from './arrayToObject'
