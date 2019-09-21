@@ -15,12 +15,15 @@ import LocationOnIcon from 'mdi-react/LocationOnIcon'
 const styles = (theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    height: '100%'
   },
 
   container: {
+    flex: 1,
     maxWidth: 820,
     paddingTop: 40,
+    overflow: 'auto',
     [theme.breakpoints.up('md')]: {
       margin: '0 auto',
     }

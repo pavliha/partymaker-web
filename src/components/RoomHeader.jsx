@@ -7,7 +7,7 @@ import { withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
-    minHeight: 65,
+    height: 65,
   },
   chatMenu: {
     flex: 1,

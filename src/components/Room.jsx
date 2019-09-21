@@ -9,7 +9,7 @@ import { actions, connect } from 'src/redux'
 const styles = theme => ({
   root: {
     display: 'flex',
-    maxHeight: 'calc(100vh - 65px)',
+    maxHeight: 'calc(100% - 65px)',
     flexGrow: 1,
   },
   guests: {

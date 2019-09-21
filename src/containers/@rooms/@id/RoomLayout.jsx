@@ -11,10 +11,11 @@ const styles = () => ({
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'column',
+    height: '100%',
   },
 })
 
-class RoomScene extends Component {
+class RoomLayout extends Component {
 
   joinRoom = async () => {
     const { history, redux: { auth, joinRoom, room, subscribe } } = this.props
@@ -67,7 +68,7 @@ class RoomScene extends Component {
   }
 }
 
-RoomScene.propTypes = {
+RoomLayout.propTypes = {
   classes: object.isRequired,
   history: shape({ push: func.isRequired, }),
   redux: shape({
@@ -89,4 +90,4 @@ const redux = (state, { match: { params: { id } } }) => ({
   joinRoom: actions.rooms.join,
 })
 
-export default withStyles(styles)(connect(redux)(RoomScene))
+export default withStyles(styles)(connect(redux)(RoomLayout))

@@ -32,6 +32,7 @@ const styles = theme => ({
   title: {
     fontSize: 16,
     textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
     [theme.breakpoints.up('sm')]: {
       fontSize: 18,
     },
@@ -55,14 +56,27 @@ const PlaceTitle = ({ classes, className, place, full, onClick }) =>
       onClick={onClick}
     />
     <div className={classes.container}>
-      <Typography gutterBottom className={classes.title} onClick={onClick}>
+      <Typography
+        component="div"
+        gutterBottom
+        className={classes.title}
+        onClick={onClick}
+      >
         {place?.title || 'Выбрать место'}
       </Typography>
-      <Typography gutterBottom variant="caption" className={classes.subtitle}>
+      <Typography
+        gutterBottom
+        variant="caption"
+        className={classes.subtitle}
+      >
         {place?.price || 'Место еще не выбрано'}
       </Typography>
       {full && (
-        <Typography gutterBottom variant="caption" className={classes.subtitle}>
+        <Typography
+          gutterBottom
+          variant="caption"
+          className={classes.subtitle}
+        >
           {place?.working_hours}
         </Typography>
       )}
