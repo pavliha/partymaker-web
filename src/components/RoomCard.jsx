@@ -24,7 +24,7 @@ const styles = theme => ({
     backgroundImage: (p) => `url(${p.room?.place?.picture_url})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    minHeight: 130,
+    minHeight: 100,
     height: '100%',
     [theme.breakpoints.up('sm')]: {
       width: 182,

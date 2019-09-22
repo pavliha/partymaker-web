@@ -23,6 +23,7 @@ export default {
     MuiBottomNavigationAction: {
       root: {
         padding: 'inherit',
+        minWidth: 'auto',
         '&$selected': {
           paddingTop: 0,
           paddingBottom: 0,

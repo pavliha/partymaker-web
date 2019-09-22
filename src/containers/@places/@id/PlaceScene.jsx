@@ -4,15 +4,10 @@ import placeShape from 'shapes/place'
 import Rating from '@material-ui/lab/Rating'
 import isEmpty from 'lodash/isEmpty'
 import { withStyles, Button, ListItemText, Typography, List } from '@material-ui/core'
-import { DefaultHeader, StatusItem, PlaceContact, CommentListItem, PhotosSlider, RatingStatusItem } from 'components'
+import { DefaultHeader, StatusItem, PlaceContacts, CommentListItem, PhotosSlider, RatingStatusItem } from 'components'
 import PlaceTitle from 'components/PlaceTitle'
 import Load from 'components/Load'
 import { select, connect, actions } from 'src/redux'
-import GlobeIcon from 'mdi-react/GlobeIcon'
-import InstagramIcon from 'mdi-react/InstagramIcon'
-import PhoneIcon from 'mdi-react/PhoneIcon'
-import MailIcon from 'mdi-react/MailIcon'
-import LocationOnIcon from 'mdi-react/LocationOnIcon'
 
 const styles = (theme) => ({
   root: {
@@ -42,7 +37,7 @@ const styles = (theme) => ({
     display: 'flex',
     justifyContent: 'space-around',
     maxWidth: 375,
-    paddingBottom: 40,
+    paddingBottom: 15,
   },
 
   status: {
@@ -52,18 +47,18 @@ const styles = (theme) => ({
 
   rating: {
     fontFamily: 'Google Sans',
-    padding: '20px 15px'
+    padding: '20px 20px'
   },
 
   contacts: {
     fontFamily: 'Google Sans',
-    padding: '0 15px',
+    padding: '0 20px',
     marginBottom: 30,
   },
 
   description: {
     fontFamily: 'Google Sans',
-    padding: '0 15px',
+    padding: '0 20px',
     marginBottom: 30,
   },
 
@@ -72,13 +67,20 @@ const styles = (theme) => ({
   },
 
   commentsTitle: {
-    padding: '0 15px',
+    padding: '0 20px',
   }
 })
 
 class PlaceScene extends Component {
+
+  createRoom = async () => {
+    const { history, redux: { place, createRoom } } = this.props
+    const action = await createRoom({ title: place.entertainment.title, place_id: place.id })
+    history.push(`/rooms/${action.value.id}`)
+  }
+
   render() {
-    let { classes, redux: { place, loadPlace } } = this.props
+    const { classes, redux: { place, loadPlace } } = this.props
 
     return (
       <Load promise={loadPlace}>
@@ -100,7 +102,13 @@ class PlaceScene extends Component {
               </div>
 
               <div className={classes.actions}>
-                <Button color="primary" variant="contained">Собрать компанию</Button>
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={this.createRoom}
+                >
+                  Хочу сходить
+                </Button>
                 <Button>Заказать</Button>
               </div>
 
@@ -115,19 +123,7 @@ class PlaceScene extends Component {
 
               <div className={classes.contacts}>
                 <Typography gutterBottom variant="subtitle1">Контакты</Typography>
-                {place.website_url && (
-                  <a target="_blank" href={place.website_url}>
-                    <PlaceContact icon={GlobeIcon} label="Website" />
-                  </a>
-                )}
-                {place.email && (<PlaceContact icon={MailIcon} label={place.email} />)}
-                {place.instagram_url && (
-                  <a target="_blank" href={place.instagram_url}>
-                    <PlaceContact icon={InstagramIcon} label={place.instagram_url} />
-                  </a>
-                )}
-                {place.phone && <PlaceContact icon={PhoneIcon} label={place.phone} />}
-                {place.address && <PlaceContact icon={LocationOnIcon} label={place.address} />}
+                {place.contacts && <PlaceContacts contacts={place.contacts} />}
               </div>
 
               {place.description && (
@@ -159,15 +155,18 @@ class PlaceScene extends Component {
 
 PlaceScene.propTypes = {
   classes: object.isRequired,
+  history: shape({ push: func }),
   redux: shape({
     place: placeShape,
     loadPlace: func.isRequired,
+    createRoom: func.isRequired,
   })
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
   place: select.places.current(state, id),
-  loadPlace: () => actions.places.load(id)
+  loadPlace: () => actions.places.load(id),
+  createRoom: actions.rooms.create,
 })
 
 export default withStyles(styles)(connect(redux)(PlaceScene))

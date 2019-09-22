@@ -95,7 +95,7 @@ export PictureMessage from './PictureMessage'
 export FileMessage from './FileMessage'
 export DateMessage from './DateMessage'
 export NotificationMessage from './NotificationMessage'
-
+export PlaceContacts from './PlaceContacts'
 /**
  * Forms
  */

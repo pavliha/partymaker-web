@@ -8,7 +8,9 @@ const defineRelationsFrom = (models) => ([
   [models.place, actions.places.setMany],
   [models.comments, actions.places.comments.setMany],
   [models.photos, actions.places.photos.setMany],
-  [models.user, actions.users.setMany]
+  [models.user, actions.users.setMany],
+  [models.contacts, actions.places.contacts.setMany],
+  [models.entertainment, actions.entertainments.setMany]
 ])
 
 function * setPlace({ payload }) {
