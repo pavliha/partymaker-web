@@ -13,8 +13,16 @@ export Profile from './Profile'
 export Room from './Room'
 export StatusItem from './StatusItem'
 export RatingStatusItem from './RatingStatusItem'
-export PlaceContact from './PlaceContact'
 export PhotosSlider from './PhotosSlider'
+export Place from './Place'
+export PlaceContact from './PlaceContact'
+export PlaceContacts from './PlaceContacts'
+
+/**
+ * Loaders
+ */
+export PlaceLoader from './PlaceLoader'
+export EntertainmentsLoader from './EntertainmentsLoader'
 
 /**
  * Headers
@@ -24,10 +32,10 @@ export RoomHeader from './RoomHeader'
 export ProfileHeader from './ProfileHeader'
 export TransparentHeader from './TransparentHeader'
 export DefaultHeader from './DefaultHeader'
+export EntertainmentHeader from './EntertainmentHeader'
 /**
  * Lists
  */
-export EntertainmentsLoader from './EntertainmentsLoader'
 export GuestList from './GuestList'
 export PlacesList from './PlacesList'
 export CommentListItem from './CommentListItem'
@@ -95,7 +103,6 @@ export PictureMessage from './PictureMessage'
 export FileMessage from './FileMessage'
 export DateMessage from './DateMessage'
 export NotificationMessage from './NotificationMessage'
-export PlaceContacts from './PlaceContacts'
 /**
  * Forms
  */
@@ -116,6 +123,7 @@ export AvatarForm from './AvatarForm'
 export ChatFormActions from './ChatFormActions'
 export AuthCardActions from './AuthCardActions'
 export SocialLoginActions from './SocialLoginActions'
+export PlaceActions from './PlaceActions'
 
 /**
  * Navigation

@@ -27,8 +27,8 @@ const StatusItem = ({ classes, primary, secondary }) =>
 
 StatusItem.propTypes = {
   classes: object.isRequired,
-  primary: node.isRequired,
-  secondary: node.isRequired,
+  primary: node,
+  secondary: node,
 }
 
 export default withStyles(styles)(StatusItem)

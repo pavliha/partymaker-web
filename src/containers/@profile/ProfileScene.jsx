@@ -10,16 +10,18 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   container: {
-    maxWidth: 700,
     flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
     padding: '0 20px',
     paddingTop: 30,
+    [theme.breakpoints.up('md')]: {
+      margin: '0 auto',
+      width: 700,
+    }
   },
   actions: {
     display: 'flex',
@@ -61,7 +63,7 @@ class ProfileScene extends Component {
       <div className={classes.root}>
         <div className={classes.container}>
           <Profile user={redux.user} />
-          <Load promise={redux.loadRooms}>
+          <Load load={redux.loadRooms}>
             <div className={classes.rooms}>
               <div className={classes.actions}>
                 <Typography variant="h5">

@@ -22,19 +22,19 @@ const RatingStatusItem = ({ classes, rating_count, rating }) => {
       className={classes.root}
       primary={(
         <Fragment>
-          <div>{rating.toFixed(1)}</div>
+          <div>{rating?.toFixed(1) || '0.0'}</div>
           <StarIcon style={{ width: 15, height: 15 }} />
         </Fragment>
       )}
-      secondary={`${rating_count} ${format(rating_count)}`}
+      secondary={`${rating_count || 0} ${format(rating_count)}`}
     />
   )
 }
 
 RatingStatusItem.propTypes = {
   classes: object.isRequired,
-  rating_count: number.isRequired,
-  rating: number.isRequired,
+  rating_count: number,
+  rating: number,
 }
 
 export default withStyles(styles)(RatingStatusItem)

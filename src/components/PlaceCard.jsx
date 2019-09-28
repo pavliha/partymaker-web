@@ -1,5 +1,5 @@
-import React from 'react'
-import { object } from 'prop-types'
+import React, { Component } from 'react'
+import { object, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
@@ -32,18 +32,36 @@ const styles = {
   },
 }
 
-const PlaceCard = ({ classes, place }) =>
-  <div className={classes.root}>
-    <Picture src={place.picture_url} className={classes.picture} />
-    <div className={classes.container}>
-      <Typography className={classes.title}>{place.title}</Typography>
-      <Typography color="textSecondary">{place.price}</Typography>
-    </div>
-  </div>
+class PlaceCard extends Component {
+
+  select = () => {
+    const { place, onSelect } = this.props
+    onSelect(place)
+  }
+
+  render() {
+    const { classes, place } = this.props
+
+    return (
+      <div className={classes.root} onClick={this.select}>
+        <Picture src={place.picture_url} className={classes.picture} />
+        <div className={classes.container}>
+          <Typography className={classes.title}>{place.title}</Typography>
+          <Typography color="textSecondary">{place.price}</Typography>
+        </div>
+      </div>
+    )
+  }
+}
 
 PlaceCard.propTypes = {
   classes: object.isRequired,
   place: placeShape.isRequired,
+  onSelect: func,
+}
+
+PlaceCard.defaultProps = {
+  onSelect: () => {}
 }
 
 export default withStyles(styles)(PlaceCard)

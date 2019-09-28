@@ -61,7 +61,7 @@ class OrderScene extends Component {
     const { order } = this.state
 
     return (
-      <Load promise={this.load}>
+      <Load load={this.load}>
         <div className={classes.root}>
           <ProfileHeader user={auth} />
           <div className={classes.container}>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { object, shape } from 'prop-types'
-import { Button, withStyles } from '@material-ui/core'
-import { AccountDropdown, BackButton, Header, Logo } from 'components/index'
+import { bool, object, shape, string } from 'prop-types'
+import { Button, Typography, withStyles } from '@material-ui/core'
+import { AccountDropdown, BackButton, Header, Logo } from 'components'
 import { Link } from 'react-router-dom'
 import userShape from 'shapes/user'
 import { connect, select } from 'src/redux'
@@ -35,10 +35,13 @@ const styles = theme => ({
   },
 })
 
-const DefaultHeader = ({ classes, redux: { user } }) =>
+const DefaultHeader = ({ classes, back, title, redux: { user } }) =>
   <Header className={classes.root}>
-    <BackButton />
-    <Logo classes={{ root: classes.logo, title: classes.logoTitle }} />
+    {back && <BackButton />}
+    {title
+      ? <Typography>{title}</Typography>
+      : <Logo classes={{ root: classes.logo, title: classes.logoTitle }} />
+    }
     <div className={classes.navigation}>
       {user && (
         <Link to="/profile">
@@ -55,6 +58,8 @@ const DefaultHeader = ({ classes, redux: { user } }) =>
 
 DefaultHeader.propTypes = {
   classes: object.isRequired,
+  back: bool,
+  title: string,
   redux: shape({
     user: userShape,
   })

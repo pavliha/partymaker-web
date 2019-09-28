@@ -26,14 +26,14 @@ class AppBottomNavigation extends Component {
   createRoom = async () => {
     const { history, redux: { createRoom } } = this.props
     const action = await createRoom()
-    history.push(`/rooms/${action.value.id}/entertainments`)
+    history.push(`/rooms/${action.value.id}`)
   }
 
   render() {
     const { match, classes } = this.props
     return (
       <Paper elevation={2} className={classes.root}>
-        <BottomNavigation value={match.path} >
+        <BottomNavigation value={match.path}>
           <BottomNavigationAction
             classes={{ label: classes.label }}
             component={Link}

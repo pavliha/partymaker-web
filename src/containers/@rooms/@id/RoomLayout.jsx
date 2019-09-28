@@ -35,7 +35,7 @@ class RoomLayout extends Component {
   render() {
     const { classes, redux: { auth, room, loadRoom, isGuest } } = this.props
     return (
-      <Load promise={loadRoom}>
+      <Load load={loadRoom}>
         {room && (
           <div className={classes.root}>
             <RoomHeader
