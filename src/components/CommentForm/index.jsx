@@ -8,7 +8,10 @@ import formik from './formik'
 
 const styles = {
 
-  root: {},
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 
   field: {
     display: 'flex'
