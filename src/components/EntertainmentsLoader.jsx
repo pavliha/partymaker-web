@@ -22,7 +22,7 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
             search={search}
             key={entertainment.id}
             entertainment={entertainment}
-            onSelectPlace={onSelect}
+            onSelect={onSelect}
           />
         )}
     </Load>
