@@ -1,6 +1,9 @@
 import Http from 'services/Http'
+import comments from './comments'
 
 const place = {
+
+  comments,
 
   loadMany() {
     return Http.get(`/places`)

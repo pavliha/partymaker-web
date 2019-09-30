@@ -7,6 +7,7 @@ import FullscreenIcon from 'mdi-react/FullscreenIcon'
 
 const styles = (theme) => ({
   root: {
+    overflow: 'auto',
     borderLeft: '1px solid rgba(0,0,0,0.1)',
     display: 'none',
     position: 'relative',

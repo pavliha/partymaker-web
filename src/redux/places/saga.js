@@ -1,8 +1,8 @@
-import { all, takeEvery } from 'redux-saga/effects'
-import { LOAD_PLACE_FULFILLED } from './action'
+import { all, takeEvery, fork } from 'redux-saga/effects'
 import actions from 'src/redux/action'
-
 import { normalize, putRelationsToStore } from 'utils'
+import comments from './comments/saga'
+import { LOAD_PLACE_FULFILLED } from './action'
 
 const defineRelationsFrom = (models) => ([
   [models.place, actions.places.setMany],
@@ -21,6 +21,7 @@ function * setPlace({ payload }) {
 
 export default function * saga() {
   yield all([
+    fork(comments),
     takeEvery(LOAD_PLACE_FULFILLED, setPlace),
   ])
 }

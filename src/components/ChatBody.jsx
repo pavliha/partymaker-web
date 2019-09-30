@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { Component } from 'react'
-import { object, node, func } from 'prop-types'
+import { object, node, func, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import background from 'assets/images/chat-background.jpg'
+import classNames from 'classnames'
 
 const styles = {
   root: {
@@ -73,10 +74,10 @@ class ChatBody extends Component {
   }
 
   render() {
-    const { classes, children } = this.props
+    const { classes, children, className } = this.props
 
     return (
-      <div ref={this.chatBody} className={classes.root}>
+      <div ref={this.chatBody} className={classNames([classes.root, className])}>
         {children}
       </div>
     )
@@ -85,6 +86,7 @@ class ChatBody extends Component {
 
 ChatBody.propTypes = {
   classes: object.isRequired,
+  className: string,
   children: node.isRequired,
   onScrollTop: func,
   onScrollBottom: func,

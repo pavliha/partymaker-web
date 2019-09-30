@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
-import { node, object } from 'prop-types'
+import { node, object, shape, func } from 'prop-types'
 import { List, ListItemText, Typography, withStyles } from '@material-ui/core'
-import { CommentListItem, PhotosSlider, PlaceContacts, RatingStatusItem, StatusItem, PlaceTitle } from 'components'
+import {
+  CommentListItem,
+  PhotosSlider,
+  PlaceContacts,
+  RatingStatusItem,
+  StatusItem,
+  PlaceTitle,
+  CommentForm,
+  ChatBody
+} from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Rating from '@material-ui/lab/Rating'
 import { placeShape } from 'shapes'
 import wait from 'utils/wait'
+import { connect, actions } from 'src/redux'
 
 const styles = () => ({
   root: {
     flex: 1,
     maxWidth: 820,
     paddingTop: 40,
-    overflow: 'auto',
   },
 
   placeTitle: {
@@ -52,14 +61,28 @@ const styles = () => ({
 
   comments: {
     fontFamily: 'Google Sans',
+    display: 'flex',
+    flex: '1 1 auto',
+    flexDirection: 'column'
   },
 
   commentsTitle: {
+    fontFamily: 'Google Sans',
     padding: '0 20px',
+  },
+
+  contactsTitle: {
+    fontFamily: 'Google Sans',
+  },
+
+  chatBody: {
+    background: 'transparent'
   }
 })
 
 class Place extends Component {
+
+  chatBody = React.createRef()
 
   state = {
     rated: null,
@@ -72,6 +95,16 @@ class Place extends Component {
     await wait(3000)
     this.setState({ rateTimeout: false })
   }
+
+  comment = async (form) => {
+    const { place, redux: { createComment } } = this.props
+    const action = await createComment(place.id, form)
+    this.scrollBottom()
+    return action
+  }
+
+  scrollBottom = () =>
+    this.chatBody.current.scrollToBottom()
 
   render() {
     const { classes, place, actions } = this.props
@@ -115,7 +148,7 @@ class Place extends Component {
         </div>
 
         <div className={classes.contacts}>
-          <Typography gutterBottom variant="subtitle1">Контакты</Typography>
+          <Typography className={classes.contactsTitle} gutterBottom variant="subtitle1">Контакты</Typography>
           {place.contacts && <PlaceContacts contacts={place.contacts} />}
         </div>
 
@@ -133,9 +166,12 @@ class Place extends Component {
             <Typography variant="subtitle1" className={classes.commentsTitle}>
               Комментарии
             </Typography>
-            <List>
-              {place.comments.map(comment => <CommentListItem key={comment.id} comment={comment} />)}
-            </List>
+            <ChatBody className={classes.chatBody} ref={this.chatBody}>
+              <List>
+                {place.comments.map(comment => <CommentListItem key={comment.id} comment={comment} />)}
+              </List>
+            </ChatBody>
+            <CommentForm onSubmit={this.comment} />
           </div>
         )}
       </div>
@@ -147,6 +183,13 @@ Place.propTypes = {
   classes: object.isRequired,
   place: placeShape,
   actions: node,
+  redux: shape({
+    createComment: func.isRequired,
+  })
 }
 
-export default withStyles(styles)(Place)
+const redux = () => ({
+  createComment: actions.places.comments.create,
+})
+
+export default withStyles(styles)(connect(redux)(Place))

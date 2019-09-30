@@ -14,7 +14,7 @@ export const REMOVE_PLACE = 'REMOVE_PLACE'
  * Async actions. Making API requests
  */
 
-const load = (place_id) => ({
+const load = place_id => ({
   type: LOAD_PLACE,
   payload: place.load(place_id)
 })

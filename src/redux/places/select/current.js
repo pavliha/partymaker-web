@@ -9,7 +9,7 @@ const current = (place_id) => (places, comments, photos, contacts, entertainment
   return {
     ...place,
     photos: photos.filter(p => p.place_id === place.id),
-    comments: comments.filter(c => c.place_id === place.id),
+    comments: comments.filter(c => Number(c.place_id) === place.id),
     contacts: contacts.find(c => c.place_id === place.id),
     entertainment: entertainments[place.entertainment_id]
   }

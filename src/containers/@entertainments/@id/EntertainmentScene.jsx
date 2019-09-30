@@ -9,12 +9,14 @@ import { Helmet } from 'react-helmet'
 const styles = (theme) => ({
 
   root: {
+    height: '100%',
     flex: 1,
     display: 'flex',
     flexDirection: 'column'
   },
 
   container: {
+    height: 'calc(100% - 64px)',
     position: 'relative',
     display: 'flex',
   },

@@ -34,6 +34,7 @@ export ProfileHeader from './ProfileHeader'
 export TransparentHeader from './TransparentHeader'
 export DefaultHeader from './DefaultHeader'
 export EntertainmentHeader from './EntertainmentHeader'
+
 /**
  * Lists
  */
@@ -104,6 +105,7 @@ export PictureMessage from './PictureMessage'
 export FileMessage from './FileMessage'
 export DateMessage from './DateMessage'
 export NotificationMessage from './NotificationMessage'
+
 /**
  * Forms
  */
@@ -117,6 +119,7 @@ export ProfileForm from './ProfileForm'
 export RegisterForm from './RegisterForm'
 export LoginForm from './LoginForm'
 export AvatarForm from './AvatarForm'
+export CommentForm from './CommentForm'
 
 /**
  * Actions

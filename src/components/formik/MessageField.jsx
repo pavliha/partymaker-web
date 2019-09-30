@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { MessageField, ClipboardImageDialog } from 'components'
 
 class FormikMessageField extends Component {
@@ -39,7 +39,7 @@ class FormikMessageField extends Component {
   }
 
   render() {
-    const { field, form, ...props } = this.props
+    const { field, form, placeholder, ...props } = this.props
     const { file, isOpenDialog } = this.state
     const { name, value, onBlur } = field
     const { handleSubmit, setFieldValue } = form
@@ -51,7 +51,7 @@ class FormikMessageField extends Component {
           onPaste={this.handlePaste}
           onChange={setFieldValue}
           onBlur={onBlur}
-          placeholder={'Ваше сообщение...'}
+          placeholder={placeholder || 'Ваше сообщение...'}
           onSend={handleSubmit}
           value={value}
           name={name}
@@ -70,6 +70,7 @@ class FormikMessageField extends Component {
 FormikMessageField.propTypes = {
   field: object.isRequired,
   form: object.isRequired,
+  placeholder: string,
 }
 
 export default FormikMessageField
