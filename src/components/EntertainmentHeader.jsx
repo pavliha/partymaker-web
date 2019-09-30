@@ -17,7 +17,7 @@ const styles = {
 const EntertainmentHeader = ({ classes, title }) =>
   <Header>
     <Link to="/entertainments">
-      <BackButton />
+      <BackButton onClick={() => {}} />
     </Link>
     <Typography component="div" className={classes.title}>
       {title}
