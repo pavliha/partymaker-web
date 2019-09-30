@@ -18,6 +18,7 @@ export Place from './Place'
 export PlaceContact from './PlaceContact'
 export PlaceContacts from './PlaceContacts'
 export PlaceAside from './PlaceAside'
+export Comments from './Comments'
 
 /**
  * Loaders

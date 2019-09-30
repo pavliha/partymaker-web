@@ -5,6 +5,7 @@ import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
 import { Loading, Messages, ChatForm, RoomNavigation, ChatBody } from 'components'
 import { actions, connect, select } from 'src/redux'
+import background from 'assets/images/chat-background.jpg'
 
 const styles = theme => ({
   root: {
@@ -36,6 +37,9 @@ const styles = theme => ({
   },
   navigation: {
     flex: 1,
+  },
+  chatBody: {
+    background: `url(${background})`,
   }
 })
 
@@ -99,6 +103,7 @@ class Chat extends Component {
         </header>
         <div className={classes.body}>
           <ChatBody
+            className={classes.chatBody}
             ref={this.chatBody}
             onScrollTop={this.loadMoreMessages}
           >

@@ -7,7 +7,10 @@ export default (state = {}, { type, payload }) => {
     case SET_COMMENTS:
       return {
         ...state,
-        ...arrayToObject(payload)
+        ...arrayToObject(payload.map(c => ({
+          ...c,
+          place_id: Number(c.place_id)
+        })))
       }
 
     default:

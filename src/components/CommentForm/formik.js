@@ -4,10 +4,9 @@ import to from 'util-to'
 import transformValidationApi from 'utils/transformValidationApi'
 import uniqId from 'uniqid'
 
-const initialValues = ({ auth }) => ({
+const initialValues = () => ({
   text: '',
   token: `temp-${uniqId()}`,
-  user_id: auth?.id,
 })
 
 const formik = withFormik({

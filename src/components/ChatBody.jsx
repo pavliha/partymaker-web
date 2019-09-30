@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import { object, node, func, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import background from 'assets/images/chat-background.jpg'
 import classNames from 'classnames'
 
 const styles = {
@@ -12,7 +11,6 @@ const styles = {
     overflowY: 'auto',
     padding: '15px 0',
     position: 'relative',
-    background: `url(${background})`,
   },
 }
 
