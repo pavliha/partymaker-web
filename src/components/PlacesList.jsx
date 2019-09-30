@@ -31,7 +31,7 @@ PlacesList.propTypes = {
   classes: object.isRequired,
   className: string,
   places: arrayOf(placeShape).isRequired,
-  onSelect: func.isRequired,
+  onSelect: func,
 }
 
 export default withStyles(styles)(PlacesList)

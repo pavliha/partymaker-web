@@ -1,22 +1,38 @@
 import React from 'react'
-import { array, func, shape } from 'prop-types'
+import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
 import { Entertainment, Load } from 'components'
+import isEmpty from 'lodash/isEmpty'
+import Fuse from 'fuse.js'
 
-const EntertainmentsLoader = ({ onSelectPlace, onLoad, redux: { entertainments, loadEntertainments } }) =>
-  <Load load={loadEntertainments} onLoad={onLoad}>
-    {entertainments.map(entertainment =>
-      <Entertainment
-        key={entertainment.id}
-        entertainment={entertainment}
-        onSelectPlace={onSelectPlace}
-      />
-    )}
-  </Load>
+const options = {
+  keys: ['title', 'places.title']
+}
+
+const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainments, loadEntertainments } }) => {
+  const fuse = new Fuse(entertainments, options)
+  const results = fuse.search(search || '')
+  const array = isEmpty(results) ? entertainments : results
+
+  return (
+    <Load load={loadEntertainments} onLoad={onLoad}>
+      {array
+        .map(entertainment =>
+          <Entertainment
+            search={search}
+            key={entertainment.id}
+            entertainment={entertainment}
+            onSelectPlace={onSelect}
+          />
+        )}
+    </Load>
+  )
+}
 
 EntertainmentsLoader.propTypes = {
+  search: string,
   onLoad: func,
-  onSelectPlace: func.isRequired,
+  onSelect: func.isRequired,
   redux: shape({
     entertainments: array,
     loadEntertainments: func.isRequired,

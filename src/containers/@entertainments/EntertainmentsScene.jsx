@@ -43,29 +43,25 @@ class EntertainmentsScene extends Component {
 
   state = {
     place_id: null,
+    search: null,
   }
 
   handleLoad = ({ value: places }) => {
     this.setState({ place_id: places[0]?.id })
   }
 
-  redirectToRoom = (room) => {
-    const { history } = this.props
-    history.push(`/rooms/${room.id}`)
-  }
-
   selectPlace = place => {
     const { history } = this.props
     const { matches } = window.matchMedia('(max-width: 768px)')
-
-    matches
-      ? history.push(`/places/${place.id}`)
-      : this.setState({ place_id: place.id })
+    matches ? history.push(`/places/${place.id}`) : this.setState({ place_id: place.id })
   }
+
+  search = (e) =>
+    this.setState({ search: e.target.value })
 
   render() {
     const { classes } = this.props
-    const { place_id } = this.state
+    const { place_id, search } = this.state
 
     return (
       <section className={classes.root}>
@@ -73,13 +69,14 @@ class EntertainmentsScene extends Component {
         <div className={classes.container}>
           <div className={classes.list}>
             <div className={classes.searchArea}>
-              <EntertainmentsSearch />
+              <EntertainmentsSearch onChange={this.search} />
             </div>
             <div className={classes.listLoader}>
               <EntertainmentsLoader
+                search={search}
+                filter={this.filter}
                 onLoad={this.handleLoad}
-                onCreated={this.redirectToRoom}
-                onSelectPlace={this.selectPlace}
+                onSelect={this.selectPlace}
               />
             </div>
           </div>

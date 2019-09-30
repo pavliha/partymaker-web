@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, func } from 'prop-types'
 import { withStyles, IconButton, InputBase, Divider, Paper } from '@material-ui/core'
 import SearchIcon from 'mdi-react/SearchIcon'
 
@@ -23,12 +23,13 @@ const styles = theme => ({
   },
 })
 
-const EntertainmentsSearch = ({ classes }) =>
+const EntertainmentsSearch = ({ classes, onChange }) =>
   <Paper className={classes.root}>
     <InputBase
       className={classes.input}
       placeholder="Искать развлечения"
       inputProps={{ 'aria-label': 'Искать развлечения' }}
+      onChange={onChange}
     />
     <Divider className={classes.divider} orientation="vertical" />
     <IconButton color="primary" className={classes.iconButton} aria-label="directions">
@@ -38,6 +39,7 @@ const EntertainmentsSearch = ({ classes }) =>
 
 EntertainmentsSearch.propTypes = {
   classes: object.isRequired,
+  onChange: func,
 }
 
 export default withStyles(styles)(EntertainmentsSearch)
