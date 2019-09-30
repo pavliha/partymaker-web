@@ -1,10 +1,8 @@
 import React from 'react'
-import { object, shape } from 'prop-types'
+import { object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { AccountDropdown, BackButton, Header } from 'components'
-import entertainmentShape from 'shapes/entertainment'
-import { select, connect } from 'src/redux'
 
 const styles = {
   root: {},
@@ -16,26 +14,20 @@ const styles = {
   },
 }
 
-const EntertainmentHeader = ({ classes, redux: { entertainment } }) =>
+const EntertainmentHeader = ({ classes, title }) =>
   <Header>
     <Link to="/entertainments">
       <BackButton />
     </Link>
     <Typography component="div" className={classes.title}>
-      {entertainment?.title}
+      {title}
     </Typography>
     <AccountDropdown />
   </Header>
 
 EntertainmentHeader.propTypes = {
   classes: object.isRequired,
-  redux: shape({
-    entertainment: entertainmentShape
-  })
+  title: string,
 }
 
-const redux = (state, { match: { params: { id } } }) => ({
-  entertainment: select.entertainments.current(state, id)
-})
-
-export default withStyles(styles)(connect(redux)(EntertainmentHeader))
+export default withStyles(styles)(EntertainmentHeader)

@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
-import { AppBottomNavigation, PlacesList, Load } from 'components'
+import { PlacesList, Load, EntertainmentHeader } from 'components'
 import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
+import { Route } from 'react-router-dom'
+import EntertainmentPlaceScene from './@places/EntertainmentPlaceScene'
 
 const styles = () => ({
 
@@ -35,11 +37,7 @@ class EntertainmentScene extends Component {
   selectPlace = place => {
     const { history, redux: { entertainment } } = this.props
     const { matches } = window.matchMedia('(max-width: 1280px)')
-    history.push(
-      matches
-        ? `/places/${place.id}`
-        : `/entertainments/${entertainment.id}/places/${place.id}`
-    )
+    history.push(matches ? `/places/${place.id}` : `/entertainments/${entertainment.id}/places/${place.id}`)
   }
 
   render() {
@@ -52,6 +50,7 @@ class EntertainmentScene extends Component {
             <Helmet>
               <title>Partymaker - {entertainment.title}</title>
             </Helmet>
+            <EntertainmentHeader title={entertainment.title} />
             <section className={classes.container}>
               <PlacesList
                 className={classes.places}
@@ -59,7 +58,12 @@ class EntertainmentScene extends Component {
                 onSelect={this.selectPlace}
               />
             </section>
-            <AppBottomNavigation />
+            <aside>
+              <Route
+                path="/entertainments/:entertainment_id/places/:id"
+                component={EntertainmentPlaceScene}
+              />
+            </aside>
           </div>
         )}
       </Load>

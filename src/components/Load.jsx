@@ -79,12 +79,16 @@ class Load extends Component {
       )
     }
 
-    if (isLoaded) {
+    if (isLoaded && className) {
       return (
         <div className={className}>
           {children}
         </div>
       )
+    }
+
+    if (isLoaded) {
+      return children
     }
 
     return null
