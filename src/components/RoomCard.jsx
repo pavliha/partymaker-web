@@ -12,24 +12,19 @@ const styles = theme => ({
     borderRadius: 3,
     overflow: 'none',
     display: 'flex',
-    border: '1px solid rgba(0,0,0,0.12)',
     marginBottom: 20,
-    flexDirection: 'column',
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
+    flexDirection: 'row',
   },
   picture: {
+    marginLeft: 5,
+    marginTop: 5,
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundImage: (p) => `url(${p.room?.place?.picture_url})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    minHeight: 100,
-    height: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 182,
-      minHeight: 'inherit',
-    },
+    width: 100,
+    height: 100,
+    borderRadius: 10,
   },
   container: {
     flex: 1,
@@ -53,7 +48,7 @@ const styles = theme => ({
   },
   actions: {
     position: 'absolute',
-    top: 5,
+    top: -5,
     right: 5,
   }
 })
