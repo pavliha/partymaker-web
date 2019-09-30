@@ -17,6 +17,7 @@ export PhotosSlider from './PhotosSlider'
 export Place from './Place'
 export PlaceContact from './PlaceContact'
 export PlaceContacts from './PlaceContacts'
+export PlaceAside from './PlaceAside'
 
 /**
  * Loaders

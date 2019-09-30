@@ -21,6 +21,7 @@ const styles = theme => ({
     }
   },
   desktopHeader: {
+    alignItems: 'center',
     display: 'none',
     flex: 1,
     [theme.breakpoints.up('md')]: {
@@ -45,6 +46,7 @@ class RoomHeader extends Component {
       <AppBar position="static" color="primary" className={classes.root}>
         <Toolbar>
           <div className={classes.desktopHeader}>
+            <BackButton onClick={this.goHome} />
             <Logo className={classes.logo} />
             {auth && <Account user={auth} />}
           </div>

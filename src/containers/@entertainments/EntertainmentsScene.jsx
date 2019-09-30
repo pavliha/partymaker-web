@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { EntertainmentsLoader, EntertainmentsSearch, DefaultHeader } from 'components'
-import EntertainmentPlaceScene from './@id/@places/EntertainmentPlaceScene'
-import { Route } from 'react-router-dom'
+import { EntertainmentsLoader, EntertainmentsSearch, DefaultHeader, AppBottomNavigation, PlaceAside } from 'components'
 
 const styles = theme => ({
 
@@ -32,30 +30,24 @@ const styles = theme => ({
   },
 
   list: {
-    overflow: 'auto',
+    overflowX: 'auto',
     flex: 1,
   },
 
   listLoader: {
     overflow: 'auto',
-    height: 'calc(100% - 110px)'
   },
-
-  aside: {
-    borderLeft: '1px solid rgba(0,0,0,0.1)',
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'inherit',
-      width: 350,
-    },
-    [theme.breakpoints.up('md')]: {
-      width: 650,
-    },
-    position: 'relative',
-  }
 })
 
 class EntertainmentsScene extends Component {
+
+  state = {
+    place_id: null,
+  }
+
+  handleLoad = ({ value: places }) => {
+    this.setState({ place_id: places[0]?.id })
+  }
 
   redirectToRoom = (room) => {
     const { history } = this.props
@@ -65,11 +57,15 @@ class EntertainmentsScene extends Component {
   selectPlace = place => {
     const { history } = this.props
     const { matches } = window.matchMedia('(max-width: 768px)')
-    history.push(matches ? `/places/${place.id}` : `/entertainments/places/${place.id}`)
+
+    matches
+      ? history.push(`/places/${place.id}`)
+      : this.setState({ place_id: place.id })
   }
 
   render() {
     const { classes } = this.props
+    const { place_id } = this.state
 
     return (
       <section className={classes.root}>
@@ -81,18 +77,15 @@ class EntertainmentsScene extends Component {
             </div>
             <div className={classes.listLoader}>
               <EntertainmentsLoader
+                onLoad={this.handleLoad}
                 onCreated={this.redirectToRoom}
                 onSelectPlace={this.selectPlace}
               />
             </div>
           </div>
-          <aside className={classes.aside}>
-            <Route
-              path="/entertainments/places/:id"
-              component={EntertainmentPlaceScene}
-            />
-          </aside>
+          <PlaceAside id={place_id} />
         </div>
+        <AppBottomNavigation />
       </section>
     )
   }

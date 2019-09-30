@@ -6,8 +6,8 @@ import EntertainmentsScene from './EntertainmentsScene'
 const EntertainmentsLayout = () =>
   <Fragment>
     <Switch>
-      <Route path="/entertainments/:id" component={EntertainmentScene} />
-      <Route path="/entertainments" component={EntertainmentsScene} />
+      <Route exact path="/entertainments" component={EntertainmentsScene} />
+      <Route exact path="/entertainments/:id" component={EntertainmentScene} />
     </Switch>
   </Fragment>
 

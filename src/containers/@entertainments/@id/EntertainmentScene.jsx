@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
-import { PlacesList, Load, EntertainmentHeader } from 'components'
+import { PlacesList, Load, EntertainmentHeader, PlaceAside } from 'components'
 import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
-import { Route } from 'react-router-dom'
-import EntertainmentPlaceScene from './@places/EntertainmentPlaceScene'
 
 const styles = (theme) => ({
 
@@ -53,14 +51,21 @@ const styles = (theme) => ({
 
 class EntertainmentScene extends Component {
 
+  state = {
+    place_id: null,
+  }
+
   selectPlace = place => {
-    const { history, redux: { entertainment } } = this.props
-    const { matches } = window.matchMedia('(max-width: 750px)')
-    history.push(matches ? `/places/${place.id}` : `/entertainments/${entertainment.id}/places/${place.id}`)
+    const { history } = this.props
+    const { matches } = window.matchMedia('(max-width: 768px)')
+    matches
+      ? history.push(`/places/${place.id}`)
+      : this.setState({ place_id: place.id })
   }
 
   render() {
     const { classes, redux: { entertainment, loadEntertainment } } = this.props
+    const { place_id } = this.state
 
     return (
       <Load load={loadEntertainment}>
@@ -76,12 +81,7 @@ class EntertainmentScene extends Component {
                 places={entertainment.places}
                 onSelect={this.selectPlace}
               />
-              <aside className={classes.aside}>
-                <Route
-                  path="/entertainments/:entertainment_id/places/:id"
-                  component={EntertainmentPlaceScene}
-                />
-              </aside>
+              <PlaceAside id={place_id || entertainment.places[0]?.id} />
             </section>
           </div>
         )}
