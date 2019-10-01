@@ -66,7 +66,7 @@ class ProfileScene extends Component {
           <Load load={redux.loadRooms}>
             <div className={classes.rooms}>
               <div className={classes.actions}>
-                <Typography variant="h5">
+                <Typography id="my-companies-label" variant="h5">
                   Мои компании
                 </Typography>
                 <div>

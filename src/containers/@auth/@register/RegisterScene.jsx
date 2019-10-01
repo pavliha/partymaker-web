@@ -4,6 +4,7 @@ import { AuthCard, RegisterForm } from 'components'
 import { Helmet } from 'react-helmet'
 import Storage from 'services/Storage'
 import { actions, connect } from 'src/redux'
+import Form from 'components/forms/Form'
 
 class RegisterScene extends Component {
 
@@ -20,7 +21,7 @@ class RegisterScene extends Component {
         <Helmet>
           <title>Регистрация - Partymaker</title>
         </Helmet>
-        <RegisterForm onSubmit={this.register} />
+        <Form component={RegisterForm} onSubmit={this.register} />
       </AuthCard>
     )
   }

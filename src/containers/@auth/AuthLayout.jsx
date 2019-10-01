@@ -65,7 +65,7 @@ class AuthLayout extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={classes.root}>
+      <div className={classes.root} id="AuthLayout">
         <TransparentHeader classes={{ root: classes.headerRoot }} />
         <div className={classes.container}>
           <div className={classes.scene}>

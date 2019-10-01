@@ -6,7 +6,9 @@
     "build": "webpack --mode=production",
     "build:analyze": "webpack --mode=production --analyze",
     "serve": "node server.js",
-    "test": "npm run build && npm run serve",
+    "test": "jest --runInBand",
+    "test:inspect": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
+    "test:prod": "npm run build && npm run serve",
     "test:analyze": "npm run build:analyze && npm run serve"
   },
   "dependencies": {
@@ -19,6 +21,7 @@
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
     "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
     "@loadable/babel-plugin": "^5.10.0",
     "@loadable/component": "^5.10.1",
@@ -57,6 +60,8 @@
     "html-webpack-plugin": "^3.2.0",
     "ignore-loader": "^0.1.2",
     "imagemin-webpack-plugin": "^2.4.2",
+    "jest": "^24.9.0",
+    "jest-puppeteer": "^4.3.0",
     "jwt-decode": "^2.2.0",
     "lodash": "latest",
     "mdi-react": "^5.5.0",
@@ -67,6 +72,7 @@
     "normalize-api": "^1.0.3",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "latest",
+    "puppeteer": "^1.20.0",
     "query-string": "latest",
     "react": "^16.8.6",
     "react-click-outside": "^3.0.1",
@@ -95,7 +101,11 @@
     "webpack-dev-server": "3.8.0",
     "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^4.2.1",
-    "yup": "^0.27.0"
+    "yup": "^0.27.0",
+    "jest-environment-node": "latest",
+    "chalk": "latest",
+    "mkdirp": "latest",
+    "rimraf": "latest"
   },
   "devDependencies": {
     "emittery": "^0.4.1"

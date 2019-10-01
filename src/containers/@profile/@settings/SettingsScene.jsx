@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import userShape from 'shapes/user'
 import { withStyles } from '@material-ui/core'
-import { OutlineCard, ContactsForm, ProfileForm, PasswordChangeForm, AvatarForm } from 'components'
+import { OutlineCard, ContactsForm, ProfileForm, PasswordChangeForm, AvatarForm, Form } from 'components'
 import { select, connect, actions } from 'src/redux'
 
 const styles = theme => ({
@@ -40,15 +40,30 @@ class SettingsScene extends Component {
     return (
       <div className={classes.root}>
         <div className={classes.container}>
-          <AvatarForm user={user} onSubmit={updateUser} />
+          <Form
+            component={AvatarForm}
+            user={user}
+            onSubmit={updateUser}
+          />
           <OutlineCard className={classes.card} title="Общее">
-            <ProfileForm user={user} onSubmit={updateUser} />
+            <Form
+              component={ProfileForm}
+              user={user}
+              onSubmit={updateUser}
+            />
           </OutlineCard>
           <OutlineCard className={classes.card} title="Контакты">
-            <ContactsForm account={user.account} onSubmit={updateAccount} />
+            <Form
+              component={ContactsForm}
+              account={user.account}
+              onSubmit={updateAccount}
+            />
           </OutlineCard>
           <OutlineCard className={classes.card} title="Пароль">
-            <PasswordChangeForm onSubmit={updatePassword} />
+            <Form
+              component={PasswordChangeForm}
+              onSubmit={updatePassword}
+            />
           </OutlineCard>
         </div>
       </div>
