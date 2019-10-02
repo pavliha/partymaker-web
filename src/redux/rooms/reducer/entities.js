@@ -1,4 +1,4 @@
-import { SET_ROOMS, REMOVE_ROOM } from '../action'
+import { SET_ROOMS, REMOVE_ROOM, SET_ROOM } from '../action'
 import arrayToObject from 'utils/arrayToObject'
 
 export default (state = {}, { type, payload }) => {
@@ -8,6 +8,15 @@ export default (state = {}, { type, payload }) => {
       return {
         ...state,
         ...arrayToObject(payload)
+      }
+
+    case SET_ROOM:
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          ...payload,
+        }
       }
 
     case REMOVE_ROOM: {

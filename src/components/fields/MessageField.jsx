@@ -69,7 +69,7 @@ MessageField.propTypes = {
   value: string.isRequired,
   onSend: func.isRequired,
   onChange: func.isRequired,
-  onPaste: func.isRequired,
+  onPaste: func,
 }
 
 export default withStyles(styles)(MessageField)

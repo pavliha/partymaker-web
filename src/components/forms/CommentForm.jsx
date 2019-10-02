@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Form, Field } from 'formik'
+import { Form } from 'formik'
 import { object, shape, string, func } from 'prop-types'
 import { IconButton, withStyles } from '@material-ui/core'
 import SendIcon from 'mdi-react/SendIcon'
-import { MessageField, ServerMessage } from 'components'
+import { MessageField, ServerMessage, Field } from 'components'
 import to from 'util-to'
 import transformValidationApi from 'utils/transformValidationApi'
 import uniqId from 'uniqid'
@@ -30,14 +30,14 @@ const styles = {
 class CommentForm extends Component {
 
   handleSend = (e) => {
-    const { inputRef, props: { submitForm } } = this
-    submitForm()
+    const { inputRef, props: { formik } } = this
+    formik.submitForm()
     e.preventDefault()
     inputRef.focus()
   }
 
   render() {
-    const { classes, values } = this.props
+    const { classes, formik: { values } } = this.props
 
     return (
       <Form className={classes.root}>
@@ -47,15 +47,18 @@ class CommentForm extends Component {
             placeholder="Ваш комментарий"
             className={classes.sendField}
             inputRef={(ref) => { this.inputRef = ref }}
+            onSend={this.handleSend}
             component={MessageField}
           />
           {values.text && (
-            <IconButton
-              color="primary"
-              onMouseDown={this.handleSend}
-            >
-              <SendIcon />
-            </IconButton>
+            <div>
+              <IconButton
+                color="primary"
+                onMouseDown={this.handleSend}
+              >
+                <SendIcon />
+              </IconButton>
+            </div>
           )}
         </div>
         <ServerMessage
@@ -71,8 +74,10 @@ class CommentForm extends Component {
 
 CommentForm.propTypes = {
   classes: object.isRequired,
-  values: shape({ text: string.isRequired, }),
-  submitForm: func.isRequired,
+  formik: shape({
+    values: shape({ text: string.isRequired, }),
+    submitForm: func.isRequired,
+  })
 }
 
 CommentForm.mapPropsToValues = () => ({

@@ -9,6 +9,7 @@ export const LOAD_ROOM_FULFILLED = 'LOAD_ROOM_FULFILLED'
 export const CREATE_ROOM = 'CREATE_ROOM'
 export const CREATE_ROOM_FULFILLED = 'CREATE_ROOM_FULFILLED'
 export const UPDATE_ROOM = 'UPDATE_ROOM'
+export const UPDATE_ROOM_PENDING = 'UPDATE_ROOM_PENDING'
 export const UPDATE_ROOM_FULFILLED = 'UPDATE_ROOM_FULFILLED'
 export const LEAVE_ROOM = 'LEAVE_ROOM'
 export const LEAVE_ROOM_FULFILLED = 'LEAVE_ROOM_FULFILLED'
@@ -51,9 +52,10 @@ const create = (form) => ({
   payload: api.room.create(form)
 })
 
-const update = (id, form) => ({
+const update = (room_id, form) => ({
   type: UPDATE_ROOM,
-  payload: api.room.update(id, form)
+  payload: api.room.update(room_id, form),
+  meta: { room_id, form }
 })
 
 const join = (room_id) => ({

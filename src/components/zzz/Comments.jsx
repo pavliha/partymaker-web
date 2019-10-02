@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, arrayOf } from 'prop-types'
 import { List, Typography, withStyles } from '@material-ui/core'
-import { ScrollableBody, CommentForm, CommentListItem } from 'components'
+import { ScrollableBody, CommentForm, CommentListItem, Form } from 'components'
 import { commentShape, userShape } from 'shapes'
 
 const styles = {
@@ -53,7 +53,7 @@ class Comments extends Component {
           </List>
         </ScrollableBody>
         {user
-          ? <CommentForm onSubmit={this.comment} />
+          ? <Form component={CommentForm} onSubmit={this.comment} />
           : (
             <Typography
               className={classes.authCaption}

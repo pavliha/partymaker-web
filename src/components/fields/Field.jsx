@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { func, string, elementType } from 'prop-types'
+import { func, string, elementType, bool } from 'prop-types'
 import { Field as FormikField } from 'formik'
 
 class Field extends Component {
@@ -14,7 +14,7 @@ class Field extends Component {
   }
 
   render() {
-    const { name, component: Component, ...props } = this.props
+    const { name, component: Component, fullWidth, ...props } = this.props
     return (
       <FormikField name={name} render={({ field, form }) => {
         const { value, name } = field
@@ -24,6 +24,7 @@ class Field extends Component {
             {...props}
             name={name}
             value={value}
+            fullWidth={fullWidth}
             onChange={this.handleChange(form)}
             error={(form.submitCount > 0) && !!form.errors[name]}
             helperText={(form.submitCount > 0) ? form.errors[name] : undefined}
@@ -39,11 +40,13 @@ Field.propTypes = {
   name: string,
   component: elementType,
   placeholder: string,
+  fullWidth: bool,
   onChange: func,
 }
 
 Field.defaultProps = {
-  onChange: () => {}
+  onChange: () => {},
+  fullWidth: true
 }
 
 export default Field

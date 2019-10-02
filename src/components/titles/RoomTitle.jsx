@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { object, string, shape, node, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { formatCount } from 'utils'
@@ -51,31 +51,31 @@ class RoomTitle extends Component {
 
     return (
       <div id="RoomTitle" className={classes.root}>
-        <div>
-          {isEditable ? (
+        {isEditable ? (
+          <Form
+            title={room.title}
+            component={RoomTitleForm}
+            onSubmit={this.changeTitle}
+            onCancel={this.toggleEditable}
+          />
+        ) : (
+          <Fragment>
             <div>
-              <Form
-                title={room.title}
-                component={RoomTitleForm}
-                onSubmit={this.changeTitle}
-                onCancel={this.toggleEditable}
-              />
+              <div className={classes.clickable} id="RoomTitle-toggle" onClick={this.toggleEditable}>
+                {room.title
+                  ? <Typography className={classes.title} variant="h5">{room.title}</Typography>
+                  : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
+                }
+              </div>
+              <Typography color="textSecondary" variant="caption">
+                {this.countPeople(room.guests?.length)}
+              </Typography>
             </div>
-          ) : (
-            <div className={classes.clickable} onClick={this.toggleEditable}>
-              {room.title
-                ? <Typography className={classes.title} variant="h5">{room.title}</Typography>
-                : <Typography color="textSecondary" variant="h5">Что будем делать?</Typography>
-              }
+            <div>
+              {action}
             </div>
-          )}
-          <Typography color="textSecondary" variant="caption">
-            {this.countPeople(room.guests?.length)}
-          </Typography>
-        </div>
-        <div>
-          {action}
-        </div>
+          </Fragment>
+        )}
       </div>
     )
   }

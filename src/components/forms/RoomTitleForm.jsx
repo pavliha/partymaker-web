@@ -9,33 +9,37 @@ import CheckIcon from 'mdi-react/CheckIcon'
 const styles = {
 
   root: {
+    flex: 1,
     display: 'flex',
-    flexDirection: 'column',
+    alignItems: 'center',
   },
 
   field: {
-    display: 'flex'
+    flex: 1,
   },
 
-  sendField: {
-    flexGrow: 1,
-  },
-  error: {
-    marginLeft: 15,
-  },
+  actions: {
+    display: 'flex'
+  }
 }
 
 const RoomTitleForm = ({ classes, onCancel }) =>
   <Form className={classes.root}>
-    <ServerMessage
-      className={classes.error}
-      variant="caption"
-      color="error"
-      name="non_field_error"
-    />
-    <Field name="title" component={TextField} />
-    <CloseButton onClick={onCancel} />
-    <IconButton type="submit"><CheckIcon /></IconButton>
+    <div className={classes.field}>
+      <Field name="title" id="RoomTitleForm-title-field" component={TextField} />
+      <ServerMessage
+        className={classes.error}
+        variant="caption"
+        color="error"
+        name="non_field_error"
+      />
+    </div>
+    <div className={classes.actions}>
+      <CloseButton color="default" onClick={onCancel} />
+      <div>
+        <IconButton color="primary" id="RoomTitleForm-submit-icon" type="submit"><CheckIcon /></IconButton>
+      </div>
+    </div>
   </Form>
 
 RoomTitleForm.propTypes = {
