@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
-import { PlacesList, Load, EntertainmentHeader, PlaceAside } from 'components'
+import { PlacesList, Loader, EntertainmentHeader, PlaceAside } from 'components'
 import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
@@ -70,7 +70,7 @@ class EntertainmentScene extends Component {
     const { place_id } = this.state
 
     return (
-      <Load load={loadEntertainment}>
+      <Loader load={loadEntertainment}>
         {entertainment && (
           <div className={classes.root}>
             <Helmet>
@@ -87,7 +87,7 @@ class EntertainmentScene extends Component {
             </section>
           </div>
         )}
-      </Load>
+      </Loader>
     )
   }
 }

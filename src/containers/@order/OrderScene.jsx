@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string } from 'prop-types'
 import api from 'api'
 import userShape from 'shapes/user'
-import { GuestList, ProfileHeader, Load, OrderCard, PlaceCard } from 'components'
+import { GuestList, ProfileHeader, Loader, OrderCard, PlaceCard } from 'components'
 import { Typography, withStyles } from '@material-ui/core'
 import { connect, select } from 'src/redux'
 
@@ -61,7 +61,7 @@ class OrderScene extends Component {
     const { order } = this.state
 
     return (
-      <Load load={this.load}>
+      <Loader load={this.load}>
         <div className={classes.root}>
           <ProfileHeader user={auth} />
           <div className={classes.container}>
@@ -81,7 +81,7 @@ class OrderScene extends Component {
             </div>
           </div>
         </div>
-      </Load>
+      </Loader>
     )
   }
 }

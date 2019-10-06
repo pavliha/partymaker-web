@@ -31,7 +31,7 @@ export AuthGate from './gates/AuthGate'
 /**
  * Loaders
  */
-export Load from './loaders/Load'
+export Loader from './loaders/Loader'
 export Loading from './loaders/Loading'
 export PlaceLoader from './loaders/PlaceLoader'
 export EntertainmentsLoader from './loaders/EntertainmentsLoader'

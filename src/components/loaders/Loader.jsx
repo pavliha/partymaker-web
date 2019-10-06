@@ -3,6 +3,7 @@ import { func, node, object, string, any } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { Loading } from 'components'
 import ErrorIcon from 'mdi-react/ErrorIcon'
+import isEqual from 'lodash/isEqual'
 
 const styles = theme => ({
 
@@ -29,7 +30,7 @@ const styles = theme => ({
   }
 })
 
-class Load extends Component {
+class Loader extends Component {
 
   state = {
     isLoaded: false,
@@ -37,7 +38,19 @@ class Load extends Component {
   }
 
   async componentDidMount() {
-    const { load, params, onError, onLoad } = this.props
+    const { params } = this.props
+    await this.load(params)
+  }
+
+  async shouldComponentUpdate(next) {
+    const prev = this.props
+    if (isEqual(prev.params, next.params)) return
+
+    await this.load(next.params)
+  }
+
+  load = async (params) => {
+    const { load, onError, onLoad } = this.props
     try {
       this.setState({ error: null })
       const result = await load(params)
@@ -47,12 +60,6 @@ class Load extends Component {
       this.setState({ error })
       onError(error)
     }
-  }
-
-  async componentDidUpdate(next) {
-    const prev = this.props
-    if (JSON.stringify(prev.params) === JSON.stringify(next.params)) return
-    await this.load(next.params)
   }
 
   render() {
@@ -95,7 +102,7 @@ class Load extends Component {
   }
 }
 
-Load.propTypes = {
+Loader.propTypes = {
   classes: object.isRequired,
   className: string,
   params: any,
@@ -105,9 +112,9 @@ Load.propTypes = {
   onError: func.isRequired,
 }
 
-Load.defaultProps = {
+Loader.defaultProps = {
   onLoad: () => {},
   onError: () => {}
 }
 
-export default withStyles(styles)(Load)
+export default withStyles(styles)(Loader)

@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import { roomShape, userShape } from 'shapes'
 import { Route } from 'react-router-dom'
-import { Load, AuthDialog, Room, RoomHeader } from 'components'
+import { Loader, AuthDialog, Room, RoomHeader } from 'components'
 
 const styles = () => ({
   root: {
@@ -35,7 +35,7 @@ class RoomLayout extends Component {
   render() {
     const { classes, redux: { auth, room, loadRoom, isGuest } } = this.props
     return (
-      <Load load={loadRoom}>
+      <Loader load={loadRoom}>
         {room && (
           <div className={classes.root}>
             <RoomHeader
@@ -63,7 +63,7 @@ class RoomLayout extends Component {
             />
           </div>
         )}
-      </Load>
+      </Loader>
     )
   }
 }

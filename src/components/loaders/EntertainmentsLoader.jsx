@@ -1,7 +1,7 @@
 import React from 'react'
 import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
-import { Entertainment, Load } from 'components'
+import { Entertainment, Loader } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Fuse from 'fuse.js'
 
@@ -15,7 +15,7 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
   const array = isEmpty(results) ? entertainments : results
 
   return (
-    <Load load={loadEntertainments} onLoad={onLoad}>
+    <Loader load={loadEntertainments} onLoad={onLoad}>
       {array
         .filter(e => !isEmpty(e.places))
         .map(entertainment =>
@@ -26,7 +26,7 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
             onSelect={onSelect}
           />
         )}
-    </Load>
+    </Loader>
   )
 }
 

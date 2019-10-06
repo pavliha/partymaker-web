@@ -3,7 +3,7 @@ import { object, func, arrayOf, shape } from 'prop-types'
 import { roomShape, userShape } from 'shapes'
 import { Typography, Button, withStyles } from '@material-ui/core'
 import { actions, connect, select } from 'src/redux'
-import { Load, Profile, RoomCard } from 'components'
+import { Loader, Profile, RoomCard } from 'components'
 
 const styles = theme => ({
 
@@ -63,7 +63,7 @@ class ProfileScene extends Component {
       <div className={classes.root}>
         <div className={classes.container}>
           <Profile user={redux.user} />
-          <Load load={redux.loadRooms}>
+          <Loader load={redux.loadRooms}>
             <div className={classes.rooms}>
               <div className={classes.actions}>
                 <Typography id="my-companies-label" variant="h5">
@@ -84,7 +84,7 @@ class ProfileScene extends Component {
                 <RoomCard key={room.id} room={room} />
               )}
             </div>
-          </Load>
+          </Loader>
         </div>
       </div>
     )

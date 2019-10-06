@@ -1,32 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { func, node, number, oneOfType, shape, string } from 'prop-types'
 import placeShape from 'shapes/place'
-import { Place, Load } from 'components'
-import { select, connect, actions } from 'src/redux'
+import { Loader, Place } from 'components'
+import { actions, connect, select } from 'src/redux'
 
-class PlaceLoader extends Component {
-
-  load = () => {
-    const { id, redux: { loadPlace } } = this.props
-    return loadPlace(id)
-  }
-
-  render() {
-    const { className, actions, redux: { place } } = this.props
-
-    return (
-      <Load load={this.load}>
-        {place && (
-          <Place
-            className={className}
-            place={place}
-            actions={actions}
-          />
-        )}
-      </Load>
-    )
-  }
-}
+const PlaceLoader = ({ className, id, actions, redux: { place, loadPlace } }) =>
+  <Loader params={id} load={loadPlace}>
+    {place && (
+      <Place
+        className={className}
+        place={place}
+        actions={actions}
+      />
+    )}
+  </Loader>
 
 PlaceLoader.propTypes = {
   id: oneOfType([string, number]).isRequired,
