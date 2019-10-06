@@ -58,7 +58,6 @@ const EntertainmentsDrawer = ({ classes, room_id, isOpen, onClose }) => {
             room_id={room_id}
             classes={{ title: classes.title }}
             className={classes.entertainments}
-            onCreated={onClose}
             buttonTitle="Выбрать"
           />
         </div>

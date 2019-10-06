@@ -33,7 +33,7 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
 EntertainmentsLoader.propTypes = {
   search: string,
   onLoad: func,
-  onSelect: func.isRequired,
+  onSelect: func,
   redux: shape({
     entertainments: array,
     loadEntertainments: func.isRequired,

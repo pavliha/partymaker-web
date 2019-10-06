@@ -40,8 +40,8 @@ MessageInput.propTypes = {
   name: string.isRequired,
   value: string.isRequired,
   onChange: func.isRequired,
-  onPaste: func.isRequired,
-  onKeyPress: func.isRequired,
+  onPaste: func,
+  onKeyPress: func,
 }
 
 export default withStyles(styles)(MessageInput)
