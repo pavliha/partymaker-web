@@ -1,8 +1,7 @@
-/* eslint-disable react/no-unused-prop-types */
 import React from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles, Button, Typography, TextField } from '@material-ui/core'
-import { roomShape, userShape } from 'shapes'
+import { roomShape, placeShape } from 'shapes'
 import { Form } from 'formik'
 import { FieldLabel, ServerMessage, Field } from 'components'
 import classNames from 'classnames'
@@ -38,7 +37,7 @@ const styles = {
   }
 }
 
-const OrderForm = ({ classes, room, formik: { handleSubmit } }) =>
+const OrderForm = ({ classes, room, place, formik: { handleSubmit } }) =>
   <Form className={classes.root}>
     <div className={classes.outline}>
       <FieldLabel title="Дата">
@@ -72,7 +71,7 @@ const OrderForm = ({ classes, room, formik: { handleSubmit } }) =>
           Или позвоните и скажите ему лично
         </Typography>
         <Typography align="center">
-          {room.place.phone}
+          {room?.place?.contacts?.phone || place?.contacts?.phone}
         </Typography>
       </div>
     </div>
@@ -80,19 +79,19 @@ const OrderForm = ({ classes, room, formik: { handleSubmit } }) =>
 
 OrderForm.propTypes = {
   classes: object.isRequired,
-  room: roomShape.isRequired,
-  auth: userShape.isRequired,
+  room: roomShape,
+  place: placeShape,
   formik: shape({
     handleSubmit: func.isRequired,
   }),
 }
 
 OrderForm.mapPropsToValues = ({ room, auth }) => ({
-  date: room.date ? moment(room.date).format('YYYY-MM-DD') : '',
-  time: room.time || '',
-  guests: room.guests.length || '',
-  phone: auth.phone || '',
-  room_id: room.id || '',
+  date: room?.date ? moment(room.date).format('YYYY-MM-DD') : '',
+  time: room?.time || '',
+  guests: room?.guests?.length || '',
+  phone: auth?.phone || '',
+  room_id: room?.id || '',
 })
 
 export default withStyles(styles)(OrderForm)

@@ -1,7 +1,7 @@
 import { number, shape, string } from 'prop-types'
 import userShape from 'shapes/user'
 
-export default shape({
+const commentShape = shape({
   id: number.isRequired,
   text: string.isRequired,
   place_id: number.isRequired,
@@ -10,3 +10,5 @@ export default shape({
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })
+
+export default commentShape

@@ -4,6 +4,8 @@ import { Button, withStyles } from '@material-ui/core'
 import { connect } from 'utils'
 import { actions, select } from 'src/redux'
 import { withRouter } from 'react-router-dom'
+import { OrderForm, Form, FormDialog } from 'components'
+import { placeShape } from 'shapes'
 
 const styles = {
   root: {},
@@ -13,6 +15,10 @@ const styles = {
 }
 
 class PlaceActions extends Component {
+
+  state = {
+    isPlaceOrderOpen: false,
+  }
 
   createRoom = async () => {
     const { history, redux: { place, createRoom } } = this.props
@@ -27,8 +33,20 @@ class PlaceActions extends Component {
     return action
   }
 
+  openPlaceOrder = () =>
+    this.setState({ isPlaceOrderOpen: true })
+
+  closePlaceOrder = () =>
+    this.setState({ isPlaceOrderOpen: false })
+
+  orderPlace = () => {
+
+  }
+
   render() {
-    const { classes } = this.props
+    const { classes, redux: { place } } = this.props
+    const { isPlaceOrderOpen } = this.state
+
     return (
       <div className={classes.root}>
         <Button
@@ -39,7 +57,15 @@ class PlaceActions extends Component {
         >
           Собрать компанию
         </Button>
-        <Button>Заказать</Button>
+        <Button onClick={this.openPlaceOrder}>Заказать</Button>
+
+        <FormDialog isOpen={isPlaceOrderOpen} onClose={this.closePlaceOrder}>
+          <Form
+            place={place}
+            component={OrderForm}
+            onSubmit={this.orderPlace}
+          />
+        </FormDialog>
       </div>
     )
   }
@@ -49,6 +75,7 @@ PlaceActions.propTypes = {
   classes: object.isRequired,
   history: shape({ push: func }),
   redux: shape({
+    place: placeShape,
     createRoom: func.isRequired,
   })
 }

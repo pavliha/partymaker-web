@@ -1,6 +1,6 @@
 import { number, shape, string } from 'prop-types'
 
-export default shape({
+const orderShape = shape({
   id: number.isRequired,
   date: string.isRequired,
   time: string,
@@ -9,3 +9,5 @@ export default shape({
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })
+
+export default orderShape

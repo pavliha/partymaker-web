@@ -1,8 +1,10 @@
 import { arrayOf, number, shape, string } from 'prop-types'
 import place from './place'
 
-export default shape({
+const entertainmentShape = shape({
   id: number.isRequired,
   title: string.isRequired,
   places: arrayOf(place),
 })
+
+export default entertainmentShape

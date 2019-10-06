@@ -16,7 +16,7 @@ const styles = {
 const FormDialog = ({ classes, title, isOpen, onClose, children }) =>
   <Dialog open={isOpen} onClose={onClose}>
     <div className={classes.heading}>
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle>{title || ''}</DialogTitle>
       <CloseButton onClick={onClose} />
     </div>
     {children}

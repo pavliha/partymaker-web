@@ -1,6 +1,6 @@
 import { number, oneOfType, shape, string, bool } from 'prop-types'
 
-export default shape({
+const messageShape = shape({
   id: oneOfType([number, string]).isRequired,
   text: string.isRequired,
   asset_id: number,
@@ -12,3 +12,5 @@ export default shape({
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })
+
+export default messageShape

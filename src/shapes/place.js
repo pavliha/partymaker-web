@@ -1,6 +1,6 @@
 import { number, shape, string } from 'prop-types'
 
-export default shape({
+const placeShape = shape({
   id: number.isRequired,
   title: string.isRequired,
   picture_url: string.isRequired,
@@ -12,3 +12,5 @@ export default shape({
   created_at: string.isRequired,
   updated_at: string.isRequired,
 })
+
+export default placeShape
