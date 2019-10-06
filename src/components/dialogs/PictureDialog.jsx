@@ -20,7 +20,7 @@ const PictureDialog = ({ classes, url, isOpen, onClose }) =>
 
 PictureDialog.propTypes = {
   classes: object.isRequired,
-  url: string.isRequired,
+  url: string,
   isOpen: bool.isRequired,
   onClose: func.isRequired,
 }

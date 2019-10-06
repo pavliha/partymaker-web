@@ -37,7 +37,7 @@ class PlaceActions extends Component {
           variant="contained"
           onClick={this.createRoom}
         >
-          Хочу сходить
+          Собрать компанию
         </Button>
         <Button>Заказать</Button>
       </div>

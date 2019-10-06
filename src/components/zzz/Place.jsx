@@ -25,7 +25,7 @@ const styles = () => ({
   actions: {
     paddingLeft: 20,
     display: 'flex',
-    paddingBottom: 15,
+    paddingBottom: 30,
   },
 
   status: {

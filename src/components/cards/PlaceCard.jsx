@@ -30,6 +30,9 @@ const styles = {
   secondaryButton: {
     color: 'rgba(0,0,0,0.54)'
   },
+  price: {
+    fontSize: '0.9rem',
+  }
 }
 
 class PlaceCard extends Component {
@@ -47,7 +50,7 @@ class PlaceCard extends Component {
         <Picture src={place.picture_url} className={classes.picture} />
         <div className={classes.container}>
           <Typography className={classes.title}>{place.title}</Typography>
-          <Typography color="textSecondary">{place.price}</Typography>
+          <Typography className={classes.price} color="textSecondary">{place.price}</Typography>
         </div>
       </div>
     )
