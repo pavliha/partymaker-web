@@ -13,6 +13,7 @@ const styles = () => ({
   root: {
     flex: 1,
     maxWidth: 820,
+    width: '100%',
     paddingTop: 20,
   },
 
