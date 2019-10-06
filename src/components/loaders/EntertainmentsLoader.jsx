@@ -15,18 +15,17 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
   const array = isEmpty(results) ? entertainments : results
 
   return (
-    <Load
-      load={loadEntertainments}
-      onLoad={onLoad}
-    >
-      {array.map(entertainment =>
-        <Entertainment
-          search={search}
-          key={entertainment.id}
-          entertainment={entertainment}
-          onSelect={onSelect}
-        />
-      )}
+    <Load load={loadEntertainments} onLoad={onLoad}>
+      {array
+        .filter(e => !isEmpty(e.places))
+        .map(entertainment =>
+          <Entertainment
+            search={search}
+            key={entertainment.id}
+            entertainment={entertainment}
+            onSelect={onSelect}
+          />
+        )}
     </Load>
   )
 }

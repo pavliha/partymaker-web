@@ -3,6 +3,7 @@ import { object, func, arrayOf } from 'prop-types'
 import { List, Typography, withStyles } from '@material-ui/core'
 import { ScrollableBody, CommentForm, CommentListItem, Form } from 'components'
 import { commentShape, userShape } from 'shapes'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = {
   root: {
@@ -44,9 +45,11 @@ class Comments extends Component {
     const { classes, comments, user } = this.props
     return (
       <div className={classes.root}>
-        <Typography variant="subtitle1" className={classes.commentsTitle}>
-          Комментарии
-        </Typography>
+        {!isEmpty(comments) && (
+          <Typography variant="subtitle1" className={classes.commentsTitle}>
+            Комментарии
+          </Typography>
+        )}
         <ScrollableBody className={classes.chatBody} ref={this.chatBody}>
           <List>
             {comments.map(comment => <CommentListItem key={comment.id} comment={comment} />)}

@@ -11,10 +11,8 @@ import { connect, actions, select } from 'src/redux'
 const styles = () => ({
   root: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
     maxWidth: 820,
-    paddingTop: 40,
+    paddingTop: 20,
   },
 
   placeTitle: {

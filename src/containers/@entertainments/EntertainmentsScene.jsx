@@ -46,8 +46,10 @@ class EntertainmentsScene extends Component {
     search: null,
   }
 
-  handleLoad = ({ value: places }) => {
-    this.setState({ place_id: places[0]?.id })
+  handleLoad = ({ value: entertainments }) => {
+    const firstEntertainment = entertainments[0]
+    const firstPlace = firstEntertainment?.places[0]
+    this.setState({ place_id: firstPlace?.id })
   }
 
   selectPlace = place => {

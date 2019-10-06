@@ -6,13 +6,11 @@ import { photoShape } from 'shapes'
 const styles = {
   root: {
     display: 'flex',
-    overflow: 'scroll',
+    overflowX: 'scroll',
     height: 120,
   },
 
   photo: {
-    width: 200,
-    minWidth: 200,
     height: 120,
     borderRadius: 5,
     marginRight: 10,
