@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { node, object, shape, func } from 'prop-types'
+import { node, object, shape, func, string } from 'prop-types'
 import { ListItemText, Typography, withStyles } from '@material-ui/core'
 import { PhotosSlider, PlaceContacts, RatingStatusItem, StatusItem, PlaceTitle, Comments } from 'components'
 import isEmpty from 'lodash/isEmpty'
@@ -7,6 +7,7 @@ import Rating from '@material-ui/lab/Rating'
 import { placeShape, userShape } from 'shapes'
 import wait from 'utils/wait'
 import { connect, actions, select } from 'src/redux'
+import classNames from 'classnames'
 
 const styles = () => ({
   root: {
@@ -78,11 +79,11 @@ class Place extends Component {
   }
 
   render() {
-    const { classes, place, actions, redux: { auth } } = this.props
+    const { classes, className, place, actions, redux: { auth } } = this.props
     const { rated, rateTimeout } = this.state
 
     return (
-      <div className={classes.root}>
+      <div className={classNames(classes.root, className)}>
         <PlaceTitle className={classes.placeTitle} full place={place} />
         <div className={classes.status}>
           <RatingStatusItem rating={place.rating} rating_count={place.rating_count} />
@@ -143,6 +144,7 @@ class Place extends Component {
 
 Place.propTypes = {
   classes: object.isRequired,
+  className: string,
   place: placeShape,
   actions: node,
   redux: shape({

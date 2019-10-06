@@ -12,12 +12,13 @@ class PlaceLoader extends Component {
   }
 
   render() {
-    const { actions, redux: { place } } = this.props
+    const { className, actions, redux: { place } } = this.props
 
     return (
       <Load load={this.load}>
         {place && (
           <Place
+            className={className}
             place={place}
             actions={actions}
           />
@@ -29,6 +30,7 @@ class PlaceLoader extends Component {
 
 PlaceLoader.propTypes = {
   id: oneOfType([string, number]).isRequired,
+  className: string,
   actions: node,
   redux: shape({
     place: placeShape,
