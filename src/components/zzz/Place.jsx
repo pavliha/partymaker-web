@@ -58,6 +58,9 @@ const styles = () => ({
     fontFamily: 'Google Sans',
   },
 
+  descriptionText: {
+    fontSize: 14,
+  }
 })
 
 class Place extends Component {
@@ -128,9 +131,7 @@ class Place extends Component {
         {place.description && (
           <div className={classes.description}>
             <Typography gutterBottom variant="subtitle1">Описание</Typography>
-            <Typography variant="caption">
-              {place.description}
-            </Typography>
+            <Typography className={classes.descriptionText} dangerouslySetInnerHTML={{ __html: place.description }} />
           </div>
         )}
         <Comments
