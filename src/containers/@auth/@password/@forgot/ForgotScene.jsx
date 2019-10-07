@@ -1,30 +1,16 @@
-import React, { Component } from 'react'
-import { shape, func } from 'prop-types'
-import { AuthCard, PasswordForgotForm } from 'components'
+import React from 'react'
+import { func, shape } from 'prop-types'
+import { AuthCard, PasswordForgotForm, Form } from 'components'
 import { actions, connect } from 'src/redux'
 
-class ForgotScene extends Component {
-
-  forgotPassword = async (form) => {
-    const { redux } = this.props
-
-    const { action } = await redux.forgotPassword(form)
-
-    return action.payload
-  }
-
-  render() {
-    return (
-      <AuthCard
-        images="forgot.jpg"
-        title="Восстановление пароля"
-        documentTitle="Восстановление пароля - Partymaker"
-      >
-        <PasswordForgotForm onSubmit={this.forgotPassword} />
-      </AuthCard>
-    )
-  }
-}
+const ForgotScene = ({ redux: { forgotPassword } }) =>
+  <AuthCard
+    images="forgot.jpg"
+    title="Восстановление пароля"
+    documentTitle="Восстановление пароля - Partymaker"
+  >
+    <Form component={PasswordForgotForm} onSubmit={forgotPassword} />
+  </AuthCard>
 
 ForgotScene.propTypes = {
   redux: shape({

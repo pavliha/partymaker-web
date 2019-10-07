@@ -33,6 +33,7 @@ const styles = theme => ({
 class Loader extends Component {
 
   state = {
+    isLoading: false,
     isLoaded: false,
     error: null,
   }
@@ -52,9 +53,9 @@ class Loader extends Component {
   load = async (params) => {
     const { load, onError, onLoad } = this.props
     try {
-      this.setState({ error: null })
+      this.setState({ error: null, isLoading: true })
       const result = await load(params)
-      this.setState({ isLoaded: true })
+      this.setState({ isLoaded: true, isLoading: false })
       onLoad(result)
     } catch (error) {
       this.setState({ error })

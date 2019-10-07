@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
-import { AuthCard, RegisterForm } from 'components'
+import { AuthCard, RegisterForm, Form } from 'components'
 import { Helmet } from 'react-helmet'
 import Storage from 'services/Storage'
 import { actions, connect } from 'src/redux'
-import Form from 'components/forms/Form'
 
 class RegisterScene extends Component {
 

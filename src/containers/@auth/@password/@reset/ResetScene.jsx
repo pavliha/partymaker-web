@@ -6,14 +6,10 @@ import { actions, connect } from 'src/redux'
 class ResetScene extends Component {
 
   resetPassword = async ({ password }) => {
-    const { match, redux, history } = this.props
-
-    await redux.resetPassword({
-      hash: match.params.hash,
-      password
-    })
-
+    const { match: { params: { hash } }, redux, history } = this.props
+    const action = await redux.resetPassword({ hash, password })
     history.push('/profile')
+    return action
   }
 
   render() {

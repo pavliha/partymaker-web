@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, string, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import invite from 'api/invite'
-import Loading from 'components/loaders/Loading'
+import { Loading } from 'components'
 
 const styles = {
   root: {},
