@@ -12,7 +12,7 @@ import classNames from 'classnames'
 const styles = () => ({
   root: {
     flex: 1,
-    maxWidth: 820,
+    maxWidth: 900,
     width: '100%',
     paddingTop: 20,
   },

@@ -4,22 +4,31 @@ import { withStyles } from '@material-ui/core'
 import { photoShape } from 'shapes'
 import { PictureDialog } from 'components'
 
-const styles = {
+const styles = theme => ({
   root: {
     display: 'flex',
     overflowX: 'scroll',
     height: 120,
+    [theme.breakpoints.up('md')]: {
+      height: 250
+    }
   },
 
   photo: {
     height: 120,
+    [theme.breakpoints.up('md')]: {
+      height: 250
+    },
     borderRadius: 5,
     marginRight: 10,
     '&:first-child': {
       marginLeft: 10,
     },
+    '&:last-child': {
+      paddingRight: 10,
+    },
   },
-}
+})
 
 class PhotosSlider extends Component {
 
