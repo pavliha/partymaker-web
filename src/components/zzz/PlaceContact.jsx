@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { object, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 
@@ -17,16 +17,25 @@ const styles = {
   label: {}
 }
 
-const PlaceContact = ({ classes, icon: Icon, label }) =>
-  <div className={classes.root}>
-    <Icon className={classes.icon} />
-    <div className={classes.label}>{label}</div>
-  </div>
+const PlaceContact = ({ classes, link, icon: Icon, label }) => {
+
+  const content = (
+    <Fragment>
+      <Icon className={classes.icon} />
+      <div className={classes.label}>{label}</div>
+    </Fragment>
+  )
+
+  return link
+    ? <a className={classes.root} target="_blank" href={link}>{content}</a>
+    : <div className={classes.root}>{content}</div>
+}
 
 PlaceContact.propTypes = {
   classes: object.isRequired,
   icon: object,
   label: string,
+  link: string
 }
 
 export default withStyles(styles)(PlaceContact)
