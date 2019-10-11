@@ -65,7 +65,8 @@ server {
     reset_timedout_connection on;
 
     location /uploads {
-        root /home/dev/partymaker-api/public/;
+        alias /home/dev/partymaker-api/public/uploads;
+        autoindex off;
         try_files $uri $uri/ $uri.html =404;
     }
 
