@@ -18,7 +18,7 @@ const PlaceStatus = ({ classes, className, place }) =>
     )}
     {Boolean(place.age) && (
       <StatusItem
-        primary={place.age}
+        primary={`${place.age}+`}
         secondary="возраст"
       />
     )}

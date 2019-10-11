@@ -30,9 +30,8 @@ const styles = (theme) => ({
 
   places: {
     paddingTop: 35,
-    flexWrap: 'wrap',
-    flex: 1,
     overflow: 'auto',
+    display: 'inline-block',
     [theme.breakpoints.up('xs')]: {
       paddingLeft: 30,
     }

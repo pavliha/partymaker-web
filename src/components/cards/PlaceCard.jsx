@@ -10,7 +10,7 @@ const styles = {
     position: 'relative',
     margin: 10,
     width: 150,
-    display: 'flex',
+    display: 'inline-flex',
     flexDirection: 'column'
   },
   picture: {
