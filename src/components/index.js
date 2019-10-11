@@ -1,5 +1,4 @@
 export EntertainmentsSearch from './zzz/EntertainmentsSearch'
-export RatingStatusItem from './zzz/RatingStatusItem'
 export OnlineIndicator from './zzz/OnlineIndicator'
 export DateTimeStatus from './zzz/DateTimeStatus'
 export ScrollableBody from './zzz/ScrollableBody'
@@ -10,7 +9,6 @@ export Entertainment from './zzz/Entertainment'
 export PlaceContact from './zzz/PlaceContact'
 export PhotosSlider from './zzz/PhotosSlider'
 export PlaceAside from './zzz/PlaceAside'
-export StatusItem from './zzz/StatusItem'
 export UserAvatar from './zzz/UserAvatar'
 export Comments from './zzz/Comments'
 export FieldLabel from './zzz/Label'
@@ -166,3 +164,11 @@ export InviteOverlay from './overlays/InviteOverlay'
 export DatetimeOverlay from './overlays/DatetimeOverlay'
 export GuestOverlay from './overlays/GuestOverlay'
 export OverlayManager from './overlays/OverlayManager'
+
+/**
+ * Status
+ */
+export PlaceStatus from './status/PlaceStatus'
+export StatusItem from './status/StatusItem'
+export RatingStatusItem from './status/RatingStatusItem'
+export PlayersStatusItem from './status/PlayersStatusItem'

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { node, object, shape, func, string } from 'prop-types'
 import { ListItemText, Typography, withStyles } from '@material-ui/core'
-import { PhotosSlider, PlaceContacts, RatingStatusItem, StatusItem, PlaceTitle, Comments } from 'components'
+import { PhotosSlider, PlaceContacts, PlaceTitle, Comments, PlaceStatus } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Rating from '@material-ui/lab/Rating'
 import { placeShape, userShape } from 'shapes'
@@ -89,24 +89,9 @@ class Place extends Component {
     return (
       <div className={classNames(classes.root, className)}>
         <PlaceTitle className={classes.placeTitle} full place={place} />
-        <div className={classes.status}>
-          <RatingStatusItem rating={place.rating} rating_count={place.rating_count} />
-          <StatusItem
-            primary={'14+'}
-            secondary="возраст"
-          />
-          <StatusItem
-            primary={place.order_count}
-            secondary="заказов"
-          />
-        </div>
-
-        <div className={classes.actions}>
-          {actions}
-        </div>
-
+        <PlaceStatus className={classes.status} place={place} />
+        <div className={classes.actions}>{actions}</div>
         {!isEmpty(place.photos) && <PhotosSlider photos={place.photos} />}
-
         <div className={classes.rating}>
           <ListItemText
             primary="Оцените заведение"
