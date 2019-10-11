@@ -37,11 +37,6 @@ server {
 
     return 301 https://$host$request_uri;
 
-    location /uploads {
-        root /home/dev/partymaker-api/public/uploads;
-        try_files $uri $uri/ $uri.html =404;
-    }
-
     location /.well-known/acme-challenge/ {
         root /var/www/letsencrypt/;
         log_not_found off;
@@ -69,6 +64,10 @@ server {
 
     reset_timedout_connection on;
 
+    location /uploads {
+        root /home/dev/partymaker-api/public/;
+        try_files $uri $uri/ $uri.html =404;
+    }
 
     location / {
         proxy_pass http://0.0.0.0:3333;
