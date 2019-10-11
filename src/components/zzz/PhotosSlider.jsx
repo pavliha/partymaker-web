@@ -8,9 +8,9 @@ const styles = theme => ({
   root: {
     display: 'flex',
     overflowX: 'scroll',
-    height: 120,
+    height: 135,
     [theme.breakpoints.up('md')]: {
-      height: 250
+      height: 265
     }
   },
 

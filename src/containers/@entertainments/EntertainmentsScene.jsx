@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { EntertainmentsLoader, EntertainmentsSearch, DefaultHeader, AppBottomNavigation, PlaceAside } from 'components'
+import { EntertainmentsLoader, EntertainmentsSearch, DefaultHeader, AppBottomNavigation } from 'components'
 
 const styles = theme => ({
 
@@ -30,8 +30,7 @@ const styles = theme => ({
   },
 
   list: {
-    overflowX: 'auto',
-    flex: 1,
+    margin: '0 auto'
   },
 
   listLoader: {
@@ -42,20 +41,12 @@ const styles = theme => ({
 class EntertainmentsScene extends Component {
 
   state = {
-    place_id: null,
     search: null,
-  }
-
-  handleLoad = ({ value: entertainments }) => {
-    const firstEntertainment = entertainments[0]
-    const firstPlace = firstEntertainment?.places[0]
-    this.setState({ place_id: firstPlace?.id })
   }
 
   selectPlace = place => {
     const { history } = this.props
-    const { matches } = window.matchMedia('(max-width: 768px)')
-    matches ? history.push(`/places/${place.id}`) : this.setState({ place_id: place.id })
+    history.push(`/places/${place.id}`)
   }
 
   search = (e) =>
@@ -63,7 +54,7 @@ class EntertainmentsScene extends Component {
 
   render() {
     const { classes } = this.props
-    const { place_id, search } = this.state
+    const { search } = this.state
 
     return (
       <section className={classes.root}>
@@ -82,7 +73,6 @@ class EntertainmentsScene extends Component {
               />
             </div>
           </div>
-          <PlaceAside id={place_id} />
         </div>
         <AppBottomNavigation />
       </section>

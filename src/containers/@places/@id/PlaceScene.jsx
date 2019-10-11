@@ -7,7 +7,6 @@ const styles = theme => ({
   place: {
     [theme.breakpoints.up('md')]: {
       margin: '0 auto',
-      border: '1px solid rgba(0,0,0,0.1)'
     }
   }
 })
