@@ -33,7 +33,14 @@ server {
     listen [::]:80;
     server_name api.partymaker.zp.ua;
 
+    root /home/dev/partymaker-api/;
+
     return 301 https://$host$request_uri;
+
+    location /uploads {
+        root /home/dev/partymaker-api/public/uploads
+        try_files $uri $uri/ $uri.html =404;
+    }
 
     location /.well-known/acme-challenge/ {
         root /var/www/letsencrypt/;
