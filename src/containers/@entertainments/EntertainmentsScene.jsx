@@ -18,7 +18,6 @@ const styles = theme => ({
   },
 
   searchArea: {
-    borderBottom: '1px solid rgba(0,0,0,0.1)',
     paddingTop: 10,
     paddingLeft: 15,
     paddingRight: 20,

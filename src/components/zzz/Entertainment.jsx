@@ -10,7 +10,8 @@ import isEmpty from 'lodash/isEmpty'
 
 const styles = () => ({
   root: {
-    marginBottom: 25,
+    borderTop: '1px solid rgba(0,0,0,0.1)',
+    marginBottom: 15,
   },
 
   expand: {
