@@ -5,12 +5,13 @@ import SearchIcon from 'mdi-react/SearchIcon'
 
 const styles = theme => ({
   root: {
-    padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
+    maxWidth: 400,
     width: '100%',
   },
   input: {
+    backgroundColor: 'transparent',
     marginLeft: theme.spacing(1),
     flex: 1,
   },

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { object, shape, func } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
-import { PlacesList, Loader, EntertainmentHeader, PlaceAside } from 'components'
+import { PlacesList, Loader, EntertainmentHeader } from 'components'
 import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
@@ -29,6 +29,7 @@ const styles = (theme) => ({
   },
 
   places: {
+    flex: 1,
     paddingTop: 35,
     overflow: 'auto',
     display: 'inline-block',
@@ -58,15 +59,11 @@ class EntertainmentScene extends Component {
 
   selectPlace = place => {
     const { history } = this.props
-    const { matches } = window.matchMedia('(max-width: 768px)')
-    matches
-      ? history.push(`/places/${place.id}`)
-      : this.setState({ place_id: place.id })
+    history.push(`/places/${place.id}`)
   }
 
   render() {
     const { classes, redux: { entertainment, loadEntertainment } } = this.props
-    const { place_id } = this.state
 
     return (
       <Loader load={loadEntertainment}>
@@ -82,7 +79,6 @@ class EntertainmentScene extends Component {
                 places={entertainment.places}
                 onSelect={this.selectPlace}
               />
-              <PlaceAside id={place_id || entertainment.places[0]?.id} />
             </section>
           </div>
         )}

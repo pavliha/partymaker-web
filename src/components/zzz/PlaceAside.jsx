@@ -16,7 +16,7 @@ const styles = (theme) => ({
       width: 350,
     },
     [theme.breakpoints.up('md')]: {
-      width: 600,
+      width: 700,
     },
   },
 
