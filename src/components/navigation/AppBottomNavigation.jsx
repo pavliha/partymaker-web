@@ -8,6 +8,7 @@ import SearchIcon from 'mdi-react/SearchIcon'
 import { withRouter, Link } from 'react-router-dom'
 import { func, object, shape, string } from 'prop-types'
 import { actions, connect } from 'src/redux'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -18,7 +19,14 @@ const styles = theme => ({
   },
   label: {
     display: 'none',
+  },
+
+  bottomNavigation: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
   }
+
 })
 
 class AppBottomNavigation extends Component {
@@ -30,9 +38,9 @@ class AppBottomNavigation extends Component {
   }
 
   render() {
-    const { match, classes } = this.props
+    const { match, classes, className } = this.props
     return (
-      <Paper elevation={2} className={classes.root}>
+      <Paper elevation={2} className={classNames([classes.root, className])}>
         <BottomNavigation value={match.path}>
           <BottomNavigationAction
             classes={{ label: classes.label }}
@@ -77,6 +85,7 @@ class AppBottomNavigation extends Component {
 
 AppBottomNavigation.propTypes = {
   classes: object.isRequired,
+  className: string,
   match: shape({ path: string }),
   history: shape({ push: func }),
   redux: shape({

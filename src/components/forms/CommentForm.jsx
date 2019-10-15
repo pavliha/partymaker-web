@@ -23,7 +23,6 @@ const styles = {
     flexGrow: 1,
   },
   error: {
-    marginLeft: 15,
   },
 }
 

@@ -4,6 +4,7 @@ import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'
+import BackButton from 'components/buttons/BackButton'
 
 const styles = theme => ({
   root: {
@@ -45,6 +46,9 @@ const styles = theme => ({
 
 const PlaceTitle = ({ classes, className, place, full, onClick }) =>
   <div className={classNames(classes.root, className)}>
+    <div>
+      <BackButton />
+    </div>
     <Picture
       src={place?.picture_url}
       className={classNames({

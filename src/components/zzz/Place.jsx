@@ -19,15 +19,13 @@ const styles = () => ({
 
   placeTitle: {
     fontFamily: 'Google Sans',
-    paddingLeft: 20,
     paddingBottom: 30,
     paddingRight: 5,
   },
 
   actions: {
-    paddingLeft: 20,
     display: 'flex',
-    paddingBottom: 30,
+    paddingBottom: 60,
   },
 
   status: {
@@ -35,22 +33,24 @@ const styles = () => ({
     display: 'flex',
   },
 
+  container: {
+    padding: '0 20px',
+  },
+
   rating: {
     display: 'flex',
     alignItems: 'center',
     fontFamily: 'Google Sans',
-    padding: '20px 20px'
+    padding: '20px 0'
   },
 
   contacts: {
     fontFamily: 'Google Sans',
-    padding: '0 20px',
     marginBottom: 30,
   },
 
   description: {
     fontFamily: 'Google Sans',
-    padding: '0 20px',
     marginBottom: 30,
   },
 
@@ -87,44 +87,46 @@ class Place extends Component {
     const { rated, rateTimeout } = this.state
 
     return (
-      <div className={classNames(classes.root, className)}>
+      <section className={classNames(classes.root, className)}>
         <PlaceTitle className={classes.placeTitle} full place={place} />
         <PlaceStatus className={classes.status} place={place} />
-        <div className={classes.actions}>{actions}</div>
-        {!isEmpty(place.photos) && <PhotosSlider photos={place.photos} />}
-        <div className={classes.rating}>
-          <ListItemText
-            primary="Оцените заведение"
-            secondary={(
-              <Rating
-                color={rated ? 'primary' : 'default'}
-                name="rating"
-                size="large"
-                value={rated || place.rating}
-                onChange={this.ratePlace}
-              />
-            )}
-          />
-          {rateTimeout && <Typography variant="caption">Ваш рейтинг сохранен!</Typography>}
-        </div>
-
-        <div className={classes.contacts}>
-          <Typography className={classes.contactsTitle} gutterBottom variant="subtitle1">Контакты</Typography>
-          {place.contacts && <PlaceContacts contacts={place.contacts} />}
-        </div>
-
-        {place.description && (
-          <div className={classes.description}>
-            <Typography gutterBottom variant="subtitle1">Описание</Typography>
-            <Typography className={classes.descriptionText} dangerouslySetInnerHTML={{ __html: place.description }} />
+        <section className={classes.container}>
+          <div className={classes.actions}>{actions}</div>
+          {!isEmpty(place.photos) && <PhotosSlider photos={place.photos} />}
+          <div className={classes.rating}>
+            <ListItemText
+              primary="Оцените заведение"
+              secondary={(
+                <Rating
+                  color={rated ? 'primary' : 'default'}
+                  name="rating"
+                  size="large"
+                  value={rated || place.rating}
+                  onChange={this.ratePlace}
+                />
+              )}
+            />
+            {rateTimeout && <Typography variant="caption">Ваш рейтинг сохранен!</Typography>}
           </div>
-        )}
-        <Comments
-          user={auth}
-          comments={place.comments}
-          onComment={this.comment}
-        />
-      </div>
+
+          <div className={classes.contacts}>
+            <Typography className={classes.contactsTitle} gutterBottom variant="subtitle1">Контакты</Typography>
+            {place.contacts && <PlaceContacts contacts={place.contacts} />}
+          </div>
+
+          {place.description && (
+            <div className={classes.description}>
+              <Typography gutterBottom variant="subtitle1">Описание</Typography>
+              <Typography className={classes.descriptionText} dangerouslySetInnerHTML={{ __html: place.description }} />
+            </div>
+          )}
+          <Comments
+            user={auth}
+            comments={place.comments}
+            onComment={this.comment}
+          />
+        </section>
+      </section>
     )
   }
 }

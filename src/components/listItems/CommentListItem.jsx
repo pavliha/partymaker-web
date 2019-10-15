@@ -9,7 +9,7 @@ const styles = {
 }
 
 const CommentListItem = ({ classes, comment }) =>
-  <ListItem className={classes.root}>
+  <ListItem disableGutters className={classes.root}>
     <ListItemAvatar>
       <UserAvatar user={comment.user} />
     </ListItemAvatar>

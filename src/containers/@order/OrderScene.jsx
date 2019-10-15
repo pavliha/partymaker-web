@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { object, shape, string } from 'prop-types'
 import api from 'api'
-import userShape from 'shapes/user'
-import { GuestList, ProfileHeader, Loader, OrderCard, PlaceCard } from 'components'
+import { GuestList, Loader, OrderCard, PlaceCard } from 'components'
 import { Typography, withStyles } from '@material-ui/core'
-import { connect, select } from 'src/redux'
 
 const styles = theme => ({
   root: {},
@@ -57,13 +55,12 @@ class OrderScene extends Component {
   }
 
   render() {
-    const { classes, redux: { auth } } = this.props
+    const { classes } = this.props
     const { order } = this.state
 
     return (
       <Loader load={this.load}>
         <div className={classes.root}>
-          <ProfileHeader user={auth} />
           <div className={classes.container}>
             <div className={classes.place}>
               {order?.room?.place && <PlaceCard place={order.room.place} />}
@@ -89,13 +86,6 @@ class OrderScene extends Component {
 OrderScene.propTypes = {
   classes: object.isRequired,
   match: shape({ params: shape({ token: string }) }),
-  redux: shape({
-    auth: userShape,
-  })
 }
 
-const redux = state => ({
-  auth: select.auth.user(state)
-})
-
-export default withStyles(styles)(connect(redux)(OrderScene))
+export default withStyles(styles)(OrderScene)

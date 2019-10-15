@@ -2,7 +2,7 @@ import React, { Component, lazy, Suspense } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles, Typography } from '@material-ui/core'
 import { Redirect, Route, Switch } from 'react-router-dom'
-import { TransparentHeader, Loading, SocialLoginActions } from 'components'
+import { Loading, SocialLoginActions } from 'components'
 import sparks from '../IndexScene/nightZP.png'
 import Storage from 'services/Storage'
 
@@ -66,7 +66,6 @@ class AuthLayout extends Component {
     const { classes } = this.props
     return (
       <div className={classes.root} id="AuthLayout">
-        <TransparentHeader classes={{ root: classes.headerRoot }} />
         <div className={classes.container}>
           <div className={classes.scene}>
             <div>

@@ -1,37 +1,31 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { object, shape, string } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { IconButton, Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { AccountButton } from 'components'
+import LogoutIcon from 'mdi-react/LogoutIcon'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     display: 'flex',
-    alignItems: 'center'
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  userName: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block',
-    },
+
+  name: {
+    marginRight: 5,
+    fontFamily: 'Google Sans'
   }
 })
 
-class Account extends Component {
-
-  render() {
-    const { classes, className, user } = this.props
-
-    return (
-      <Link to="/profile" className={className}>
-        <div className={classes.root}>
-          <Typography className={classes.userName} variant="subtitle1" color="inherit">{user.name}</Typography>
-          <AccountButton user={user} />
-        </div>
-      </Link>
-    )
-  }
-}
+const Account = ({ classes, className, user }) =>
+  <Link to="/profile" className={className}>
+    <div className={classes.root}>
+      <Typography className={classes.name} variant="subtitle1" color="inherit">{user.name}</Typography>
+      <IconButton>
+        <LogoutIcon />
+      </IconButton>
+    </div>
+  </Link>
 
 Account.propTypes = {
   classes: object.isRequired,

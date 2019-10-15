@@ -4,17 +4,21 @@ import { Typography, withStyles } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     cursor: 'pointer',
     display: 'flex',
     alignItems: 'center',
-    marginTop: -3
+    margin: 15,
   },
-  title: {},
+  title: {
+    fontFamily: 'Google Sans',
+    color: theme.palette.primary.main,
+  },
   city: {
+    fontFamily: 'Google Sans',
     fontWeight: '100',
-    padding: '0 15px',
+    paddingLeft: '15px',
   },
 })
 

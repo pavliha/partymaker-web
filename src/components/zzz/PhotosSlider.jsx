@@ -21,12 +21,6 @@ const styles = theme => ({
     },
     borderRadius: 5,
     marginRight: 10,
-    '&:first-child': {
-      marginLeft: 10,
-    },
-    '&:last-child': {
-      paddingRight: 10,
-    },
   },
 })
 

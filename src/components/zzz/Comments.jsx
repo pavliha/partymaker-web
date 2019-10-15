@@ -15,14 +15,12 @@ const styles = {
 
   commentsTitle: {
     fontFamily: 'Google Sans',
-    padding: '0 20px',
   },
   chatBody: {
     background: 'transparent'
   },
 
   authCaption: {
-    marginLeft: 15,
     marginBottom: 15,
   }
 }

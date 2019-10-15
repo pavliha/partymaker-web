@@ -8,6 +8,7 @@ import classNames from 'classnames'
 const styles = theme => ({
   root: {
     display: 'flex',
+    overflow: 'auto',
     justifyContent: 'center',
     padding: '0 10px',
     [theme.breakpoints.up('xs')]: {

@@ -3,16 +3,20 @@ import { func, node, number, oneOfType, shape, string } from 'prop-types'
 import placeShape from 'shapes/place'
 import { Loader, Place } from 'components'
 import { actions, connect, select } from 'src/redux'
+import { Helmet } from 'react-helmet'
 
 const PlaceLoader = ({ className, id, actions, redux: { place, loadPlace } }) =>
   <Loader params={id} load={loadPlace}>
-    {place && (
+    {place && [
+      <Helmet>
+        <title>{place.title}</title>
+      </Helmet>,
       <Place
         className={className}
         place={place}
         actions={actions}
       />
-    )}
+    ]}
   </Loader>
 
 PlaceLoader.propTypes = {

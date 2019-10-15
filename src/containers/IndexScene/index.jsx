@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { shape, object, func } from 'prop-types'
-import { TransparentHeader, EntertainmentsLoader } from 'components'
+import { EntertainmentsLoader } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles, SvgIcon } from '@material-ui/core'
-import { select, connect } from 'src/redux'
-import userShape from 'shapes/user'
 import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon'
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
@@ -105,7 +103,7 @@ class IndexScene extends Component {
   }
 
   render() {
-    const { classes, redux: { user } } = this.props
+    const { classes } = this.props
 
     return (
       <main className={classes.root}>
@@ -113,7 +111,6 @@ class IndexScene extends Component {
           <title>Partymaker - Здесь можно найти где погулать с друзями</title>
         </Helmet>
         <section className={classes.background}>
-          <TransparentHeader user={user} />
           <div className={classes.banner}>
             <div className={classes.title}>
               <Typography gutterBottom variant="h2">Partymaker</Typography>
@@ -162,11 +159,6 @@ class IndexScene extends Component {
 IndexScene.propTypes = {
   classes: object,
   history: shape({ push: func }),
-  redux: shape({ user: userShape })
 }
 
-const redux = state => ({
-  user: select.auth.user(state)
-})
-
-export default withStyles(styles)(connect(redux)(IndexScene))
+export default withStyles(styles)(IndexScene)

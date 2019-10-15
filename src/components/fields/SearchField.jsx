@@ -1,14 +1,15 @@
 import React from 'react'
-import { object, func } from 'prop-types'
+import { object, func, string } from 'prop-types'
 import { withStyles, IconButton, InputBase, Divider, Paper } from '@material-ui/core'
 import SearchIcon from 'mdi-react/SearchIcon'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    maxWidth: 1015,
-    width: '100%',
+    flex: 1,
+    height: 60,
   },
   input: {
     backgroundColor: 'transparent',
@@ -24,8 +25,8 @@ const styles = theme => ({
   },
 })
 
-const EntertainmentsSearch = ({ classes, onChange }) =>
-  <Paper className={classes.root}>
+const SearchField = ({ classes, className, onChange }) =>
+  <Paper className={classNames([classes.root, className])}>
     <InputBase
       className={classes.input}
       placeholder="Искать развлечения"
@@ -38,9 +39,10 @@ const EntertainmentsSearch = ({ classes, onChange }) =>
     </IconButton>
   </Paper>
 
-EntertainmentsSearch.propTypes = {
+SearchField.propTypes = {
   classes: object.isRequired,
+  className: string,
   onChange: func,
 }
 
-export default withStyles(styles)(EntertainmentsSearch)
+export default withStyles(styles)(SearchField)

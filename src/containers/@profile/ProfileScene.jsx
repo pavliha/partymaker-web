@@ -8,21 +8,20 @@ import { Loader, Profile, RoomCard } from 'components'
 const styles = theme => ({
 
   root: {
-    flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
   },
+
   container: {
-    flexGrow: 1,
     display: 'flex',
     flexDirection: 'column',
     padding: '0 20px',
     paddingTop: 30,
     [theme.breakpoints.up('md')]: {
-      margin: '0 auto',
-      width: 700,
+      width: 500,
     }
   },
+
   actions: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,16 +31,9 @@ const styles = theme => ({
   },
 
   rooms: {
-    flex: 1,
     marginTop: 15,
     marginBottom: 100,
   },
-  newRoom: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'inherit'
-    }
-  }
 })
 
 class ProfileScene extends Component {
@@ -63,28 +55,23 @@ class ProfileScene extends Component {
       <div className={classes.root}>
         <div className={classes.container}>
           <Profile user={redux.user} />
-          <Loader load={redux.loadRooms}>
-            <div className={classes.rooms}>
-              <div className={classes.actions}>
-                <Typography id="my-companies-label" variant="h5">
-                  Мои компании
-                </Typography>
-                <div>
-                  <Button
-                    className={classes.newRoom}
-                    color="primary"
-                    variant="contained"
-                    onClick={this.createRoom}
-                  >
-                    Собрать друзей
-                  </Button>
-                </div>
+          <div className={classes.rooms}>
+            <div className={classes.actions}>
+              <Typography id="my-companies-label" variant="h5">
+                Мои компании
+              </Typography>
+              <div>
+                <Button color="primary" variant="contained" onClick={this.createRoom}>
+                  Собрать друзей
+                </Button>
               </div>
+            </div>
+            <Loader load={redux.loadRooms}>
               {redux.rooms.map(room =>
                 <RoomCard key={room.id} room={room} />
               )}
-            </div>
-          </Loader>
+            </Loader>
+          </div>
         </div>
       </div>
     )

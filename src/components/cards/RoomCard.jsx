@@ -1,10 +1,11 @@
 import React from 'react'
 import { object } from 'prop-types'
 import roomShape from 'shapes/room'
-import { Typography, withStyles } from '@material-ui/core'
+import { Typography, withStyles, IconButton } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { DateTimeStatus, CloseButton } from 'components'
+import { DateTimeStatus } from 'components'
 import { formatCount } from 'utils'
+import CloseCircleIcon from 'mdi-react/CloseCircleIcon'
 
 const styles = theme => ({
   root: {
@@ -50,6 +51,11 @@ const styles = theme => ({
     position: 'absolute',
     top: -5,
     right: 5,
+  },
+  closeIcon: {
+    width: 18,
+    height: 18,
+    color: 'rgba(0,0,0,0.1)'
   }
 })
 
@@ -83,7 +89,11 @@ const RoomCard = ({ classes, room }) => {
         }
       </div>
       <div className={classes.actions}>
-        <Link to={`/rooms/${room.id}/leave`}><CloseButton /></Link>
+        <Link to={`/rooms/${room.id}/leave`}>
+          <IconButton>
+            <CloseCircleIcon className={classes.closeIcon} />
+          </IconButton>
+        </Link>
       </div>
     </div>
   )

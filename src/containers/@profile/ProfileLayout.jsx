@@ -1,28 +1,29 @@
 import React from 'react'
-import { object, shape } from 'prop-types'
-import userShape from 'shapes/user'
+import { object } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { AppBottomNavigation, ProfileHeader } from 'components'
+import { AppBottomNavigation, LeftNavigation } from 'components'
 import { Switch, Route } from 'react-router-dom'
 import ProfileScene from './ProfileScene'
 import SettingsScene from './@settings/SettingsScene'
-import { select, connect } from 'src/redux'
 
 const styles = {
+
   root: {
     display: 'flex',
-    flexDirection: 'column',
-    height: '100%'
+    height: '100%',
   },
   routes: {
+    marginLeft: 315,
     flex: 1,
-    overflow: 'auto',
+  },
+  nav: {
+    position: 'fixed',
   }
 }
 
-const ProfileLayout = ({ classes, redux: { user }, }) =>
+const ProfileLayout = ({ classes }) =>
   <div className={classes.root}>
-    <ProfileHeader user={user} />
+    <LeftNavigation className={classes.nav} />
     <div className={classes.routes}>
       <Switch>
         <Route exact path="/profile" component={ProfileScene} />
@@ -34,11 +35,6 @@ const ProfileLayout = ({ classes, redux: { user }, }) =>
 
 ProfileLayout.propTypes = {
   classes: object.isRequired,
-  redux: shape({ user: userShape, })
 }
 
-const redux = (state) => ({
-  user: select.auth.user(state),
-})
-
-export default withStyles(styles)(connect(redux)(ProfileLayout))
+export default withStyles(styles)(ProfileLayout)

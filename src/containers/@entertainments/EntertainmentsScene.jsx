@@ -1,40 +1,69 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { EntertainmentsLoader, AppBottomNavigation, SearchHeader } from 'components'
+import { EntertainmentsLoader, AppBottomNavigation, LeftNavigation, SearchField } from 'components'
+import { Helmet } from 'react-helmet'
 
 const styles = theme => ({
 
   root: {
     display: 'flex',
-    flexDirection: 'column',
     flexGrow: 1,
     height: '100%'
   },
 
   container: {
-    height: 'calc(100% - 64px)',
-    display: 'flex',
-  },
-
-  searchArea: {
-    paddingTop: 10,
-    paddingLeft: 15,
-    paddingRight: 20,
-    paddingBottom: 15,
-    [theme.breakpoints.up('sm')]: {
-      paddingTop: 30,
-      paddingBottom: 30,
-    }
+    position: 'relative',
+    width: '100%',
+    maxWidth: 1050,
+    height: '100%',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: 300,
+      width: 'calc(100% - 330px)',
+    },
   },
 
   list: {
-    margin: '0 auto'
+    flex: 1,
+    marginTop: 100,
+    overflow: 'auto',
+    marginBottom: 60,
+    [theme.breakpoints.up('md')]: {
+      display: 'block',
+      marginBottom: 0,
+    }
   },
 
-  listLoader: {
-    overflow: 'auto',
+  leftNavigation: {
+    position: 'fixed',
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    }
   },
+
+  searchArea: {
+    position: 'fixed',
+    padding: '15px 10px 0 10px',
+    boxSizing: 'border-box',
+    right: 0,
+    left: 0,
+    zIndex: 1,
+    height: 60,
+    marginLeft: 1,
+    maxWidth: 1050,
+    backgroundColor: 'white',
+    [theme.breakpoints.up('md')]: {
+      left: 300,
+      width: 'calc(100% - 600px)',
+    }
+  },
+
+  bottomNavigation: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+  }
 })
 
 class EntertainmentsScene extends Component {
@@ -43,34 +72,31 @@ class EntertainmentsScene extends Component {
     search: null,
   }
 
-  selectPlace = place => {
-    const { history } = this.props
-    history.push(`/places/${place.id}`)
-  }
-
   search = (e) =>
     this.setState({ search: e.target.value })
 
   render() {
-    const { classes } = this.props
+    const { classes, history } = this.props
     const { search } = this.state
 
     return (
       <section className={classes.root}>
-        <SearchHeader onSearch={this.search} />
-        <div className={classes.container}>
-          <div className={classes.list}>
-            <div className={classes.listLoader}>
-              <EntertainmentsLoader
-                search={search}
-                filter={this.filter}
-                onLoad={this.handleLoad}
-                onSelect={this.selectPlace}
-              />
-            </div>
+        <Helmet>
+          <title>Поиск мест</title>
+        </Helmet>
+        <LeftNavigation className={classes.leftNavigation} />
+        <section className={classes.container}>
+          <div className={classes.searchArea}>
+            <SearchField onChange={this.search} />
           </div>
-        </div>
-        <AppBottomNavigation />
+          <div className={classes.list}>
+            <EntertainmentsLoader
+              search={search}
+              onSelect={place => history.push(`/places/${place.id}`)}
+            />
+          </div>
+        </section>
+        <AppBottomNavigation className={classes.bottomNavigation} />
       </section>
     )
   }
