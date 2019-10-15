@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { object, string, shape, node, func } from 'prop-types'
+import { object, string, shape, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { formatCount } from 'utils'
 import { Form, RoomTitleForm } from 'components'
@@ -8,9 +8,7 @@ import { connect, actions } from 'src/redux'
 const styles = {
   root: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '15px 20px 30px 20px',
   },
   title: {
     fontSize: '1.3rem',
@@ -46,7 +44,7 @@ class RoomTitle extends Component {
   }
 
   render() {
-    const { classes, room, action } = this.props
+    const { classes, room } = this.props
     const { isEditable } = this.state
 
     return (
@@ -71,9 +69,6 @@ class RoomTitle extends Component {
                 {this.countPeople(room.guests?.length)}
               </Typography>
             </div>
-            <div>
-              {action}
-            </div>
           </Fragment>
         )}
       </div>
@@ -86,7 +81,6 @@ RoomTitle.propTypes = {
   room: shape({
     title: string,
   }),
-  action: node,
   redux: shape({
     updateRoom: func.isRequired,
   })

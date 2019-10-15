@@ -41,7 +41,6 @@ const ChatFormActions = ({ classes, room, isGuest, onInvite, onTime, onOrder }) 
   return (
     <div className={classes.root}>
       <Button
-        color="primary"
         disabled={isGuest}
         className={classes.actionLabel}
         onClick={onInvite}
@@ -50,7 +49,6 @@ const ChatFormActions = ({ classes, room, isGuest, onInvite, onTime, onOrder }) 
       </Button>
       <KeyboardArrowRightIcon className={classes.arrow} />
       <Button
-        color="primary"
         disabled={isGuest}
         className={classes.actionLabel}
         onClick={onTime}
@@ -60,7 +58,6 @@ const ChatFormActions = ({ classes, room, isGuest, onInvite, onTime, onOrder }) 
       <KeyboardArrowRightIcon className={classes.arrow} />
       <Button
         disabled={isGuest}
-        color="primary"
         className={classes.actionLabel}
         onClick={onOrder}
       >

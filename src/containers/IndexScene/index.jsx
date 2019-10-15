@@ -4,7 +4,6 @@ import { EntertainmentsLoader } from 'components'
 import nightZP from './nightZP.png'
 import phone from './phone.png'
 import { Typography, Button, withStyles, SvgIcon } from '@material-ui/core'
-import KeyboardArrowDownIcon from 'mdi-react/KeyboardArrowDownIcon'
 import classNames from 'classnames'
 import { Helmet } from 'react-helmet'
 
@@ -133,8 +132,7 @@ class IndexScene extends Component {
                         className="animate-bounce"
                         fontSize="large"
                       >
-                        <KeyboardArrowDownIcon />
-                      </SvgIcon>
+v                       </SvgIcon>
                     </div>
                   </div>
                 </div>

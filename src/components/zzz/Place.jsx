@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { node, object, shape, func, string } from 'prop-types'
 import { ListItemText, Typography, withStyles } from '@material-ui/core'
-import { PhotosSlider, PlaceContacts, PlaceTitle, Comments, PlaceStatus } from 'components'
+import { PhotosSlider, PlaceContacts, PlaceTitle, Comments, PlaceStatus, BackButton } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Rating from '@material-ui/lab/Rating'
 import { placeShape, userShape } from 'shapes'
@@ -15,6 +15,10 @@ const styles = () => ({
     maxWidth: 900,
     width: '100%',
     paddingTop: 20,
+  },
+
+  place: {
+    display: 'flex',
   },
 
   placeTitle: {
@@ -88,7 +92,12 @@ class Place extends Component {
 
     return (
       <section className={classNames(classes.root, className)}>
-        <PlaceTitle className={classes.placeTitle} full place={place} />
+        <div className={classes.place}>
+          <div>
+            <BackButton />
+          </div>
+          <PlaceTitle className={classes.placeTitle} full place={place} />
+        </div>
         <PlaceStatus className={classes.status} place={place} />
         <section className={classes.container}>
           <div className={classes.actions}>{actions}</div>

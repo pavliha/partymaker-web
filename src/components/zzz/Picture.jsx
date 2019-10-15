@@ -5,7 +5,7 @@ import classNames from 'classnames'
 
 const styles = {
   root: {
-    borderRadius: 3,
+    borderRadius: 20,
     backgroundColor: 'rgba(0,0,0,0.12)',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

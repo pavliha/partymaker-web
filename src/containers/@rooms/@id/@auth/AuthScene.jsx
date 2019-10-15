@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { object, func, bool, shape } from 'prop-types'
+import { object, func, shape } from 'prop-types'
 import { Dialog, withStyles, Typography } from '@material-ui/core'
 import { AuthCard, RegisterForm, LoginForm, SocialLoginActions } from 'components'
 import { connect, actions } from 'src/redux'
@@ -30,7 +30,7 @@ const styles = {
   }
 }
 
-class AuthDialog extends Component {
+class AuthScene extends Component {
 
   state = {
     current: 'Авторизация'
@@ -57,12 +57,12 @@ class AuthDialog extends Component {
   }
 
   render() {
-    const { classes, isOpen, onClose, onAuth } = this.props
+    const { classes, onClose, onAuth } = this.props
     const { current } = this.state
 
     return (
       <Dialog
-        open={isOpen}
+        open
         onClose={onClose}
         classes={{ paper: classes.paper }}
         className={classes.root}
@@ -87,9 +87,8 @@ class AuthDialog extends Component {
   }
 }
 
-AuthDialog.propTypes = {
+AuthScene.propTypes = {
   classes: object.isRequired,
-  isOpen: bool,
   onAuth: func,
   onClose: func,
   redux: shape({
@@ -101,4 +100,4 @@ const redux = () => ({
   login: actions.auth.login,
   register: actions.auth.register,
 })
-export default withStyles(styles)(connect(redux)(AuthDialog))
+export default withStyles(styles)(connect(redux)(AuthScene))

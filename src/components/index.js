@@ -17,6 +17,8 @@ export Place from './zzz/Place'
 export Logo from './zzz/Logo'
 export Room from './zzz/Room'
 export Chat from './zzz/Chat'
+export Route from './zzz/Route'
+export RoomAside from './zzz/RoomAside'
 
 /**
  * Gates
@@ -31,6 +33,7 @@ export Loader from './loaders/Loader'
 export Loading from './loaders/Loading'
 export PlaceLoader from './loaders/PlaceLoader'
 export EntertainmentsLoader from './loaders/EntertainmentsLoader'
+export RoomLoader from './loaders/RoomLoader'
 
 /**
  * Headers
@@ -66,14 +69,12 @@ export PlaceTitle from './titles/PlaceTitle'
 export AuthCard from './cards/AuthCard'
 export PlaceCard from './cards/PlaceCard'
 export RoomCard from './cards/RoomCard'
-export OutlineCard from './cards/OutlineCard'
 export OrderCard from './cards/OrderCard'
 
 /**
  * Dialogs
  */
 export PlaceDialog from './dialogs/PlaceDialog'
-export AuthDialog from './dialogs/AuthDialog'
 export InviteDialog from './dialogs/InviteDialog'
 export PictureDialog from './dialogs/PictureDialog'
 export ClipboardImageDialog from './dialogs/ClipboardImageDialog'

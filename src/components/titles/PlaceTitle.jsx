@@ -1,10 +1,9 @@
 import React from 'react'
-import { func, object, bool, string } from 'prop-types'
+import { func, object, string, node } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'
-import BackButton from 'components/buttons/BackButton'
 
 const styles = theme => ({
   root: {
@@ -18,18 +17,15 @@ const styles = theme => ({
     flexDirection: 'column',
   },
   picture: {
-    width: '90px',
-    height: 50,
+    width: 90,
+    height: 90,
+    borderRadius: 10,
     marginRight: 5,
     [theme.breakpoints.up('sm')]: {
       display: 'flex',
     },
   },
-  largerPicture: {
-    height: 70,
-    borderRadius: 10,
-    marginRight: 15,
-  },
+
   title: {
     fontSize: 16,
     [theme.breakpoints.up('sm')]: {
@@ -44,17 +40,11 @@ const styles = theme => ({
   }
 })
 
-const PlaceTitle = ({ classes, className, place, full, onClick }) =>
+const PlaceTitle = ({ classes, className, place, action, onClick }) =>
   <div className={classNames(classes.root, className)}>
-    <div>
-      <BackButton />
-    </div>
     <Picture
       src={place?.picture_url}
-      className={classNames({
-        [classes.picture]: true,
-        [classes.largerPicture]: full,
-      })}
+      className={classes.picture}
       onClick={onClick}
     />
     <div className={classes.container}>
@@ -73,22 +63,23 @@ const PlaceTitle = ({ classes, className, place, full, onClick }) =>
       >
         {place?.price || 'Место еще не выбрано'}
       </Typography>
-      {full && (
-        <Typography
-          gutterBottom
-          variant="caption"
-          className={classes.subtitle}
-        >
-          {place?.working_hours}
-        </Typography>
-      )}
+      <Typography
+        gutterBottom
+        variant="caption"
+        className={classes.subtitle}
+      >
+        {place?.working_hours}
+      </Typography>
+      <div>
+        {action}
+      </div>
     </div>
   </div>
 
 PlaceTitle.propTypes = {
   classes: object.isRequired,
   className: string,
-  full: bool,
+  action: node,
   place: placeShape,
   onClick: func,
 }

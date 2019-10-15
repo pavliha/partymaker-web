@@ -1,6 +1,6 @@
 import { number, shape, string } from 'prop-types'
 
-const rooShape = shape({
+const roomShape = shape({
   id: number.isRequired,
   title: string,
   place_id: number,
@@ -8,4 +8,4 @@ const rooShape = shape({
   updated_at: string.isRequired,
 })
 
-export default rooShape
+export default roomShape

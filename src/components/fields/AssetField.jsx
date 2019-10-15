@@ -10,7 +10,7 @@ const styles = {
     position: 'relative'
   },
   input: {
-    position: 'absolute',
+    display: 'none',
     top: 0,
     left: 0,
   },
