@@ -43,6 +43,7 @@ export ProfileHeader from './headers/ProfileHeader'
 export TransparentHeader from './headers/TransparentHeader'
 export DefaultHeader from './headers/DefaultHeader'
 export EntertainmentHeader from './headers/EntertainmentHeader'
+export SearchHeader from './headers/SearchHeader'
 
 /**
  * Lists

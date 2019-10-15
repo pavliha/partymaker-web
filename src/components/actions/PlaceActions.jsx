@@ -55,7 +55,7 @@ class PlaceActions extends Component {
           variant="contained"
           onClick={this.createRoom}
         >
-          Собрать компанию
+          Собрать друзей
         </Button>
         <Button onClick={this.openPlaceOrder}>Заказать</Button>
 

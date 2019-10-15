@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { EntertainmentsLoader, EntertainmentsSearch, AppBottomNavigation } from 'components'
-import Header from 'components/headers/Header'
-import Logo from 'components/zzz/Logo'
-import AccountDropdown from 'components/navigation/AccountDropdown'
+import { EntertainmentsLoader, AppBottomNavigation, SearchHeader } from 'components'
 
 const styles = theme => ({
 
@@ -60,11 +57,7 @@ class EntertainmentsScene extends Component {
 
     return (
       <section className={classes.root}>
-        <Header>
-          <Logo />
-          <EntertainmentsSearch onChange={this.search} />
-          <AccountDropdown />
-        </Header>
+        <SearchHeader onSearch={this.search} />
         <div className={classes.container}>
           <div className={classes.list}>
             <div className={classes.listLoader}>

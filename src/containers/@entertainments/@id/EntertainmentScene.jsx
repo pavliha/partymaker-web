@@ -7,7 +7,6 @@ import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
 const styles = (theme) => ({
-
   root: {
     height: '100%',
     flex: 1,

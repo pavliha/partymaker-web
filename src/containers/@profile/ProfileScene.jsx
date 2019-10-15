@@ -76,7 +76,7 @@ class ProfileScene extends Component {
                     variant="contained"
                     onClick={this.createRoom}
                   >
-                    собрать компанию
+                    Собрать друзей
                   </Button>
                 </div>
               </div>

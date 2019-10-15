@@ -7,7 +7,7 @@ const styles = theme => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    maxWidth: 400,
+    maxWidth: 1015,
     width: '100%',
   },
   input: {
