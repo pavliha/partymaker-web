@@ -37,19 +37,6 @@ class AvatarField extends Component {
     url: '',
   }
 
-  findSomePicture = (clipboardItems) =>
-    Array.from(clipboardItems).find(item => item.type.includes('image'))
-
-  handleChange = (e) => {
-    this.setState({ url: e.target.value })
-    this.setError(null)
-  }
-
-  handlePaste = async ({ clipboardData }) => {
-    const file = this.findSomePicture(clipboardData.files)
-    if (file) await this.uploadFile(file)
-  }
-
   handleFileInput = e =>
     this.uploadFile(e.target.files[0])
 
@@ -88,10 +75,11 @@ class AvatarField extends Component {
         <UserAvatar
           user={{ name, avatar_url }}
           className={classes.accountIcon}
-          clickable
           onClick={this.clickFileInput}
         />
-        <Typography className={classes.label} onClick={this.clickFileInput}>Сменить аватар</Typography>
+        <Typography className={classes.label} onClick={this.clickFileInput}>
+          Сменить аватар
+        </Typography>
         <input
           ref={this.fileInput}
           accept="image/*"

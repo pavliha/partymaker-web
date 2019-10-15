@@ -53,9 +53,9 @@ class UserAvatar extends Component {
     if (!user) return null
 
     return (
-      <div className={classes.avatar} onClick={onClick}>
+      <div className={classes.avatar}>
         <Avatar
-          onClick={clickable ? this.open : undefined}
+          onClick={clickable ? this.open : onClick}
           className={this.overrides()}
           src={user.avatar_url}
         >

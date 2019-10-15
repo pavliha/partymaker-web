@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { object, func, shape, string } from 'prop-types'
+import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { AvatarField } from 'components'
+import userShape from 'shapes/user'
 
 const styles = {
   root: {
@@ -22,15 +23,16 @@ class AvatarForm extends Component {
   }
 
   render() {
-    const { classes, username, formik: { values: { avatar_url } } } = this.props
+    const { classes, user, formik: { values: { avatar_url, setErrors } } } = this.props
 
     return (
       <div className={classes.root}>
         <AvatarField
           name="avatar_url"
-          username={username}
+          username={user?.name}
           value={avatar_url}
           onChange={this.updateAvatar}
+          onError={(error) => setErrors({ avatar_url: error })}
         />
       </div>
     )
@@ -39,7 +41,7 @@ class AvatarForm extends Component {
 
 AvatarForm.propTypes = {
   classes: object.isRequired,
-  username: string.isRequired,
+  user: userShape.isRequired,
   formik: shape({
     setFieldValue: func,
     submitForm: func,

@@ -55,20 +55,20 @@ class SettingsScene extends Component {
             </Typography>
           </div>
           <Form
+            user={user}
             component={AvatarForm}
-            username={user?.name}
             onSubmit={updateUser}
           />
           <Typography className={classes.subtitle}>Общее</Typography>
           <Form
-            component={ProfileForm}
             user={user}
+            component={ProfileForm}
             onSubmit={updateUser}
           />
           <Typography className={classes.subtitle}>Контакты</Typography>
           <Form
-            component={ContactsForm}
             account={user.account}
+            component={ContactsForm}
             onSubmit={updateAccount}
           />
           <Typography className={classes.subtitle}>Пароль</Typography>

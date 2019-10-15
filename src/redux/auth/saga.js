@@ -11,6 +11,10 @@ import {
   ACTIVATE_USER_FULFILLED
 } from './action'
 
+import {
+  UPDATE_AUTH_USER_FULFILLED
+} from 'src/redux/auth/user/action'
+
 function* setAuthUser({ payload: { token } }) {
   const user = fromJWT(token)
   Storage.put({ token })
@@ -25,6 +29,7 @@ export default function* saga() {
     takeEvery(REGISTER_USER_FULFILLED, setAuthUser),
     takeEvery(LOGIN_GOOGLE_USER_FULFILLED, setAuthUser),
     takeEvery(LOGIN_FACEBOOK_USER_FULFILLED, setAuthUser),
+    takeEvery(UPDATE_AUTH_USER_FULFILLED, setAuthUser),
     takeEvery(ACTIVATE_USER_FULFILLED, setAuthUser,),
   ])
 }
