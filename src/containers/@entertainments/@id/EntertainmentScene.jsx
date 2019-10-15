@@ -51,7 +51,6 @@ const styles = (theme) => ({
   },
 
   title: {
-    cursor: 'pointer',
     paddingLeft: 5,
     fontSize: 20,
   },

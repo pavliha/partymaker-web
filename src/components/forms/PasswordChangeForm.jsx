@@ -10,19 +10,24 @@ import wait from 'utils/wait'
 
 const styles = {
   root: {
-    marginBottom: 15,
+    marginBottom: 60,
   },
+
+  container: {
+    paddingTop: 0,
+  }
 }
 
 const PasswordForm = ({ classes }) =>
   <div className={classes.root}>
     <Form>
-      <CardContent>
+      <CardContent className={classes.container}>
         <Field
           name="password"
           label="Введите старый пароль"
           margin="normal"
           type="password"
+          fullWidth
           placeholder="********"
           component={TextField}
         />
@@ -32,6 +37,7 @@ const PasswordForm = ({ classes }) =>
           margin="normal"
           type="password"
           placeholder="********"
+          fullWidth
           component={TextField}
         />
         <Field
@@ -39,6 +45,7 @@ const PasswordForm = ({ classes }) =>
           label="Повторите новый пароль"
           margin="normal"
           type="password"
+          fullWidth
           placeholder="********"
           component={TextField}
         />

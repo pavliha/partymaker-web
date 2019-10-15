@@ -1,116 +1,106 @@
 import React, { Component } from 'react'
 import { object, string, func } from 'prop-types'
-import Asset from 'api/asset'
-import userShape from 'shapes/user'
-import { CircularProgress, withStyles } from '@material-ui/core'
-import { UserAvatar } from 'components'
-import InsertPhotoIcon from 'mdi-react/CameraAltIcon'
+import api from 'api'
+import { Typography, withStyles } from '@material-ui/core'
+import UserAvatar from 'components/zzz/UserAvatar'
+import transformValidationApi from 'utils/transformValidationApi'
 
 const styles = {
   root: {
     position: 'relative',
-  },
-  avatar: {
-    width: 200,
-    height: 200,
-    marginBottom: 20,
-  },
-  cover: {
-    position: 'absolute',
-    borderRadius: '100%',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    color: 'rgba(255,255,255,0.7)',
-    cursor: 'pointer',
-    '&:focus,&:hover': {
-      backgroundColor: 'rgba(0,0,0,0.6)',
-      color: 'rgba(255,255,255,1)',
-    }
   },
+
   fileInput: {
     position: 'absolute',
     top: 0,
     left: 0,
     opacity: 0,
   },
-  circular: {
-    position: 'absolute',
-    top: 0,
+  accountIcon: {
+    marginRight: 15,
+    width: 80,
+    height: 80,
   },
+  label: {
+    cursor: 'pointer',
+    fontFamily: 'Google Sans',
+  }
 }
 
 class AvatarField extends Component {
+  fileInput = React.createRef()
 
   state = {
     loading: 0,
-    avatar_url: ''
+    url: '',
   }
 
-  preview = (file) => {
-    const reader = new FileReader()
-    reader.onload = () => {
-      this.setState({ avatar_url: reader.result })
-    }
-    try {
-      reader.readAsDataURL(file)
-    } catch (e) {
-      console.warn(e)
-    }
+  findSomePicture = (clipboardItems) =>
+    Array.from(clipboardItems).find(item => item.type.includes('image'))
+
+  handleChange = (e) => {
+    this.setState({ url: e.target.value })
+    this.setError(null)
   }
 
-  handleProgress = (progressEvent) => {
-    const loading = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-    this.setState({ loading: loading === 100 ? 0 : loading })
+  handlePaste = async ({ clipboardData }) => {
+    const file = this.findSomePicture(clipboardData.files)
+    if (file) await this.uploadFile(file)
   }
 
-  upload = async (e) => {
+  handleFileInput = e =>
+    this.uploadFile(e.target.files[0])
+
+  setError = (error) => {
+    const { onError } = this.props
+    if (!error) return onError(null)
+    const { file, url } = transformValidationApi(error)
+    onError(file || url)
+  }
+
+  clickFileInput = () =>
+    this.fileInput.current.click()
+
+  watchProgress = (progress) =>
+    this.setState({ loading: progress === 100 ? 0 : progress })
+
+  uploadFile = async file =>
+    this.upload(() => api.asset.create(file, this.watchProgress))
+
+  upload = async (callback) => {
     const { name, onChange } = this.props
-    const file = e.target.files[0]
-    this.preview(file)
-
     try {
-      const asset = await Asset.create(file, { onUploadProgress: this.handleProgress })
+      const asset = await callback()
+      this.setState({ url: '' })
       onChange(name, asset.url)
     } catch (error) {
-      console.error(error)
+      this.setError(error)
     }
   }
 
   render() {
-    const { classes, user, value } = this.props
-    const { loading, avatar_url } = this.state
+    const { classes, value: avatar_url, username: name } = this.props
+
     return (
       <div className={classes.root}>
         <UserAvatar
-          user={{ ...user, avatar_url: avatar_url || value, }}
-          className={classes.avatar}
+          user={{ name, avatar_url }}
+          className={classes.accountIcon}
+          clickable
+          onClick={this.clickFileInput}
         />
+        <Typography className={classes.label} onClick={this.clickFileInput}>Сменить аватар</Typography>
         <input
+          ref={this.fileInput}
           accept="image/*"
           className={classes.fileInput}
           id="upload-avatar"
           multiple
           type="file"
-          onChange={this.upload}
+          onChange={this.handleFileInput}
         />
-        <label htmlFor="upload-avatar" className={classes.cover}>
-          <label style={{ display: 'flex' }} htmlFor="upload-avatar">
-            <InsertPhotoIcon />
-          </label>
-        </label>
-        {Boolean(loading) && (
-          <CircularProgress
-            variant="static"
-            value={loading}
-            size={200}
-            className={classes.circular}
-          />
-        )}
       </div>
     )
   }
@@ -118,10 +108,11 @@ class AvatarField extends Component {
 
 AvatarField.propTypes = {
   classes: object.isRequired,
-  user: userShape.isRequired,
+  username: string.isRequired,
   value: string.isRequired,
   name: string.isRequired,
   onChange: func.isRequired,
+  onError: func,
 }
 
 export default withStyles(styles)(AvatarField)

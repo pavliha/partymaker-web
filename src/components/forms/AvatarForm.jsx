@@ -1,35 +1,35 @@
 import React, { Component } from 'react'
-import { object, func } from 'prop-types'
-import userShape from 'shapes/user'
+import { object, func, shape, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { AvatarField } from 'components'
 
 const styles = {
-  root: {},
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+  },
 }
 
 class AvatarForm extends Component {
 
-  state = {
-    value: ''
-  }
+  updateAvatar = (name, value) => {
+    const { formik: { setFieldValue, submitForm } } = this.props
 
-  updateAvatar = (name, avatar_url) => {
-    const { onSubmit } = this.props
-
-    onSubmit({ avatar_url })
+    setFieldValue('avatar_url', value)
+    setTimeout(submitForm, 0)
   }
 
   render() {
-    const { classes, user } = this.props
-    const { value } = this.state
+    const { classes, username, formik: { values: { avatar_url } } } = this.props
 
     return (
       <div className={classes.root}>
         <AvatarField
           name="avatar_url"
-          user={user}
-          value={value || user.avatar_url}
+          username={username}
+          value={avatar_url}
           onChange={this.updateAvatar}
         />
       </div>
@@ -39,8 +39,15 @@ class AvatarForm extends Component {
 
 AvatarForm.propTypes = {
   classes: object.isRequired,
-  user: userShape.isRequired,
-  onSubmit: func.isRequired,
+  username: string.isRequired,
+  formik: shape({
+    setFieldValue: func,
+    submitForm: func,
+  })
 }
+
+AvatarForm.mapPropsToValues = ({ user }) => ({
+  avatar_url: user?.avatar_url || ''
+})
 
 export default withStyles(styles)(AvatarForm)

@@ -10,14 +10,18 @@ import wait from 'utils/wait'
 
 const styles = {
   root: {
-    marginBottom: 15,
+    marginBottom: 60,
   },
+
+  container: {
+    paddingTop: 0,
+  }
 }
 
 const ProfileForm = ({ classes }) =>
   <div className={classes.root}>
     <Form>
-      <CardContent>
+      <CardContent className={classes.container}>
         <Field
           name="name"
           label="Имя и фамилия"

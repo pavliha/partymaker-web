@@ -7,13 +7,17 @@ import * as Yup from 'yup'
 
 const styles = {
   root: {
-    marginBottom: 15,
+    marginBottom: 60,
   },
+
+  container: {
+    paddingTop: 0,
+  }
 }
 
 const ContactForm = ({ classes }) =>
   <Form className={classes.root}>
-    <CardContent>
+    <CardContent className={classes.container}>
       <Field
         type="text"
         name="facebook"
