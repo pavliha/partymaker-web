@@ -19,11 +19,13 @@ const styles = () => ({
 
   place: {
     display: 'flex',
+    alignItems: 'center',
+    paddingBottom: 30,
+    paddingLeft: 5,
   },
 
   placeTitle: {
     fontFamily: 'Google Sans',
-    paddingBottom: 30,
     paddingRight: 5,
   },
 
@@ -93,9 +95,7 @@ class Place extends Component {
     return (
       <section className={classNames(classes.root, className)}>
         <div className={classes.place}>
-          <div>
-            <BackButton />
-          </div>
+          <BackButton />
           <PlaceTitle className={classes.placeTitle} full place={place} />
         </div>
         <PlaceStatus className={classes.status} place={place} />

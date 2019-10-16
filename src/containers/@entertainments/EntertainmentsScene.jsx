@@ -55,7 +55,7 @@ const styles = theme => ({
     backgroundColor: 'white',
     [theme.breakpoints.up('md')]: {
       left: 300,
-      width: 'calc(100% - 600px)',
+      width: 'calc(100% - 330px)',
     }
   },
 
