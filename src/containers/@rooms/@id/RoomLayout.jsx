@@ -3,7 +3,7 @@ import { object, shape, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { actions, select, connect } from 'src/redux'
 import { RoomLoader, Route, LeftNavigation } from 'components'
-import AuthScene from './@auth/AuthScene'
+import AuthScene from './@auth/RoomAuthScene'
 
 const styles = () => ({
   root: {

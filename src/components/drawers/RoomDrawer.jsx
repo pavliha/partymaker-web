@@ -1,10 +1,11 @@
-import React from 'react'
-import { bool, func, object } from 'prop-types'
+import React, { Component } from 'react'
+import { bool, func, object, shape } from 'prop-types'
 import { withStyles, Button, IconButton, Typography, Drawer } from '@material-ui/core'
-import { GuestList, PlaceCard } from 'components'
+import { GuestList, PlaceCard, EntertainmentsDrawer } from 'components'
 import roomShape from 'shapes/room'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 import PersonAddIcon from 'mdi-react/PersonAddIcon'
+import { actions, connect } from 'src/redux'
 
 const styles = {
   root: {
@@ -50,41 +51,78 @@ const styles = {
   }
 }
 
-const RoomDrawer = ({ classes, room, isOpen, onClose }) =>
-  <Drawer
-    variant="persistent"
-    anchor="right"
-    open={isOpen}
-    className={classes.root}
-  >
-    <IconButton className={classes.hideIcon} onClick={onClose}>
-      <KeyboardArrowRightIcon />
-    </IconButton>
-    <section className={classes.place}>
-      <PlaceCard
-        place={room?.place}
-        action={room?.place && <Button>Сменить</Button>}
-      />
-    </section>
-    <section className={classes.actions}>
-      <Button className={classes.action}>Выбрать другое место</Button>
-      <Button className={classes.action}>Покинуть компанию</Button>
-    </section>
-    {room?.guests && (
-      <section className={classes.guests}>
-        <div className={classes.addGuest}>
-          <PersonAddIcon /><Typography className={classes.addPerson}>Добавить участника</Typography>
-        </div>
-        <GuestList guests={room?.guests} />
-      </section>
-    )}
-  </Drawer>
+class RoomDrawer extends Component {
+
+  state = {
+    isEntertainmentsDrawerOpen: false
+  }
+
+  openEntertainmentsDrawer = () =>
+    this.setState({ isEntertainmentsDrawerOpen: true })
+
+  closeEntertainmentsDrawer = () =>
+    this.setState({ isEntertainmentsDrawerOpen: false })
+
+  updateRoomPlace = place => {
+    const { room, redux: { updateRoom } } = this.props
+    updateRoom(room.id, { place_id: place.id })
+    this.closeEntertainmentsDrawer()
+  }
+
+  render() {
+    const { classes, room, isOpen, onClose } = this.props
+    const { isEntertainmentsDrawerOpen } = this.state
+
+    return (
+      <Drawer
+        variant="persistent"
+        anchor="right"
+        open={isOpen}
+        className={classes.root}
+      >
+        <IconButton className={classes.hideIcon} onClick={onClose}>
+          <KeyboardArrowRightIcon />
+        </IconButton>
+        <section className={classes.place}>
+          <PlaceCard
+            place={room?.place}
+            action={room?.place && <Button>Сменить</Button>}
+          />
+        </section>
+        <section className={classes.actions}>
+          <Button className={classes.action} onClick={this.openEntertainmentsDrawer}>Выбрать другое место</Button>
+          <Button className={classes.action}>Покинуть компанию</Button>
+        </section>
+        {room?.guests && (
+          <section className={classes.guests}>
+            <div className={classes.addGuest}>
+              <PersonAddIcon /><Typography className={classes.addPerson}>Добавить участника</Typography>
+            </div>
+            <GuestList guests={room?.guests} />
+          </section>
+        )}
+        <EntertainmentsDrawer
+          isOpen={isEntertainmentsDrawerOpen}
+          onSelect={this.updateRoomPlace}
+          onClose={this.closeEntertainmentsDrawer}
+        />
+      </Drawer>
+    )
+  }
+}
 
 RoomDrawer.propTypes = {
   classes: object.isRequired,
   isOpen: bool,
   onClose: func,
-  room: roomShape
+  room: roomShape,
+  redux: shape({
+    updateRoom: func
+  })
 }
 
-export default withStyles(styles)(RoomDrawer)
+const redux = () => ({
+  updateRoom: actions.rooms.update,
+})
+
+export default withStyles(styles)(connect(redux)(RoomDrawer))

@@ -30,7 +30,7 @@ const styles = {
   }
 }
 
-class AuthScene extends Component {
+class RoomAuthScene extends Component {
 
   state = {
     current: 'Авторизация'
@@ -87,7 +87,7 @@ class AuthScene extends Component {
   }
 }
 
-AuthScene.propTypes = {
+RoomAuthScene.propTypes = {
   classes: object.isRequired,
   onAuth: func,
   onClose: func,
@@ -100,4 +100,4 @@ const redux = () => ({
   login: actions.auth.login,
   register: actions.auth.register,
 })
-export default withStyles(styles)(connect(redux)(AuthScene))
+export default withStyles(styles)(connect(redux)(RoomAuthScene))
