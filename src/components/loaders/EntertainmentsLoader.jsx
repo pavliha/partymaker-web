@@ -9,7 +9,7 @@ const options = {
   keys: ['title', 'places.title']
 }
 
-const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainments, loadEntertainments } }) => {
+const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { entertainments, loadEntertainments } }) => {
   const fuse = new Fuse(entertainments, options)
   const results = fuse.search(search || '')
   const array = isEmpty(results) ? entertainments : results
@@ -23,6 +23,7 @@ const EntertainmentsLoader = ({ onSelect, onLoad, search, redux: { entertainment
             search={search}
             key={entertainment.id}
             entertainment={entertainment}
+            onExpand={onExpand}
             onSelect={onSelect}
           />
         )}
@@ -34,6 +35,7 @@ EntertainmentsLoader.propTypes = {
   search: string,
   onLoad: func,
   onSelect: func,
+  onExpand: func.isRequired,
   redux: shape({
     entertainments: array,
     loadEntertainments: func.isRequired,

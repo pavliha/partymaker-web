@@ -92,6 +92,7 @@ class EntertainmentsScene extends Component {
           <div className={classes.list}>
             <EntertainmentsLoader
               search={search}
+              onExpand={entertainment => history.push(`/entertainments/${entertainment.id}`)}
               onSelect={place => history.push(`/places/${place.id}`)}
             />
           </div>

@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { object, func, string } from 'prop-types'
 import { IconButton, Typography, withStyles } from '@material-ui/core'
 import KeyboardArrowRightIcon from 'mdi-react/ArrowRightIcon'
-import { Link } from 'react-router-dom'
 import { entertainmentShape } from 'shapes'
 import { PlacesList } from 'components'
 import Fuse from 'fuse.js'
 import isEmpty from 'lodash/isEmpty'
 
-const styles = () => ({
+const styles = theme => ({
   root: {
     borderTop: '1px solid rgba(0,0,0,0.1)',
     marginBottom: 15,
@@ -30,7 +29,13 @@ const styles = () => ({
   },
 
   places: {
+    display: 'flex',
     overflow: 'auto',
+    justifyContent: 'center',
+    padding: '0 10px',
+    [theme.breakpoints.up('xs')]: {
+      justifyContent: 'flex-start'
+    }
   }
 
 })
@@ -39,7 +44,7 @@ const options = {
   keys: ['title']
 }
 
-const Entertainment = ({ classes, entertainment, search, onSelect }) => {
+const Entertainment = ({ classes, entertainment, search, onSelect, onExpand }) => {
 
   const fuse = new Fuse(entertainment.places, options)
   const results = fuse.search(search || '')
@@ -47,18 +52,14 @@ const Entertainment = ({ classes, entertainment, search, onSelect }) => {
 
   return (
     <div className={classes.root}>
-      <Link
-        to={`/entertainments/${entertainment.id}`}
-        component="div"
-        className={classes.expand}
-      >
+      <div className={classes.expand} onClick={useCallback(() => onExpand(entertainment))}>
         <Typography component="div" className={classes.title}>
           {entertainment.title}
         </Typography>
         <IconButton>
           <KeyboardArrowRightIcon />
         </IconButton>
-      </Link>
+      </div>
       {entertainment.places && (
         <PlacesList
           className={classes.places}
@@ -75,6 +76,7 @@ Entertainment.propTypes = {
   search: string,
   entertainment: entertainmentShape.isRequired,
   onSelect: func,
+  onExpand: func,
 }
 
 export default withStyles(styles)(Entertainment)

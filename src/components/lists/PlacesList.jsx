@@ -7,18 +7,11 @@ import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    overflow: 'auto',
-    justifyContent: 'center',
-    padding: '0 10px',
-    [theme.breakpoints.up('xs')]: {
-      justifyContent: 'flex-start'
-    }
   },
 })
 
 const PlacesList = ({ classes, className, places, onSelect }) =>
-  <div className={classNames([className, classes.root])}>
+  <div className={classNames([classes.root, className])}>
     {places.map(place =>
       <PlaceCard
         key={place.id}

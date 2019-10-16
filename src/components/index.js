@@ -24,6 +24,7 @@ export Route from './zzz/Route'
 
 export RoomDrawer from './drawers/RoomDrawer'
 export EntertainmentsDrawer from './drawers/EntertainmentsDrawer'
+export EntertainmentDrawer from './drawers/EntertainmentDrawer'
 
 /**
  * Gates

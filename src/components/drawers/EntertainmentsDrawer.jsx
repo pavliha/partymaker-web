@@ -69,7 +69,7 @@ class EntertainmentsDrawer extends Component {
     this.setState({ search: e.target.value })
 
   render() {
-    const { classes, isOpen, onClose, onSelect } = this.props
+    const { classes, isOpen, onClose, onExpand, onSelect } = this.props
     const { search } = this.state
 
     return (
@@ -85,6 +85,7 @@ class EntertainmentsDrawer extends Component {
           <div className={classes.list}>
             <EntertainmentsLoader
               search={search}
+              onExpand={onExpand}
               onSelect={onSelect}
             />
           </div>
@@ -99,6 +100,7 @@ EntertainmentsDrawer.propTypes = {
   isOpen: bool.isRequired,
   onSelect: func.isRequired,
   onClose: func.isRequired,
+  onExpand: func.isRequired,
 }
 
 export default withStyles(styles)(EntertainmentsDrawer)

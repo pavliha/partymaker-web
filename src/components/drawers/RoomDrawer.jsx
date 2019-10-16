@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bool, func, object, shape } from 'prop-types'
 import { withStyles, Button, IconButton, Typography, Drawer } from '@material-ui/core'
-import { GuestList, PlaceCard, EntertainmentsDrawer } from 'components'
+import { GuestList, PlaceCard, EntertainmentsDrawer, EntertainmentDrawer } from 'components'
 import roomShape from 'shapes/room'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 import PersonAddIcon from 'mdi-react/PersonAddIcon'
@@ -54,7 +54,9 @@ const styles = {
 class RoomDrawer extends Component {
 
   state = {
-    isEntertainmentsDrawerOpen: false
+    isEntertainmentDrawerOpen: true,
+    isEntertainmentsDrawerOpen: false,
+    entertainment: null,
   }
 
   openEntertainmentsDrawer = () =>
@@ -63,15 +65,22 @@ class RoomDrawer extends Component {
   closeEntertainmentsDrawer = () =>
     this.setState({ isEntertainmentsDrawerOpen: false })
 
+  openEntertainmentDrawer = entertainment =>
+    this.setState({ isEntertainmentDrawerOpen: true, entertainment })
+
+  closeEntertainmentDrawer = () =>
+    this.setState({ isEntertainmentDrawerOpen: false, entertainment: null })
+
   updateRoomPlace = place => {
     const { room, redux: { updateRoom } } = this.props
     updateRoom(room.id, { place_id: place.id })
     this.closeEntertainmentsDrawer()
+    this.closeEntertainmentDrawer()
   }
 
   render() {
     const { classes, room, isOpen, onClose } = this.props
-    const { isEntertainmentsDrawerOpen } = this.state
+    const { isEntertainmentsDrawerOpen, isEntertainmentDrawerOpen, entertainment } = this.state
 
     return (
       <Drawer
@@ -104,8 +113,17 @@ class RoomDrawer extends Component {
         <EntertainmentsDrawer
           isOpen={isEntertainmentsDrawerOpen}
           onSelect={this.updateRoomPlace}
+          onExpand={this.openEntertainmentDrawer}
           onClose={this.closeEntertainmentsDrawer}
         />
+        {entertainment && (
+          <EntertainmentDrawer
+            entertainment={entertainment}
+            isOpen={isEntertainmentDrawerOpen}
+            onSelect={this.updateRoomPlace}
+            onClose={this.closeEntertainmentDrawer}
+          />
+        )}
       </Drawer>
     )
   }
