@@ -17,7 +17,7 @@ export Logo from './zzz/Logo'
 export Room from './zzz/Room'
 export Chat from './zzz/Chat'
 export Route from './zzz/Route'
-export RoomAside from './zzz/RoomAside'
+export RoomDrawer from './drawers/RoomDrawer'
 
 /**
  * Gates

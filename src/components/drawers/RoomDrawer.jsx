@@ -1,16 +1,14 @@
 import React from 'react'
-import { object } from 'prop-types'
-import { withStyles, Button, IconButton, Typography } from '@material-ui/core'
-import { GuestList } from 'components'
+import { bool, func, object } from 'prop-types'
+import { withStyles, Button, IconButton, Typography, Drawer } from '@material-ui/core'
+import { GuestList, PlaceCard } from 'components'
 import roomShape from 'shapes/room'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
-import PlaceCard from 'components/cards/PlaceCard'
 import PersonAddIcon from 'mdi-react/PersonAddIcon'
 
 const styles = {
   root: {
     position: 'relative',
-    width: 350,
     borderLeft: '1px solid rgba(0,0,0,0.1)',
     paddingTop: 10,
   },
@@ -31,6 +29,7 @@ const styles = {
     width: '100%',
   },
   hideIcon: {
+    marginTop: 10,
     left: 5,
     position: 'absolute',
   },
@@ -51,9 +50,14 @@ const styles = {
   }
 }
 
-const RoomAside = ({ classes, room }) => {
-  return <div className={classes.root}>
-    <IconButton className={classes.hideIcon}>
+const RoomDrawer = ({ classes, room, isOpen, onClose }) =>
+  <Drawer
+    variant="persistent"
+    anchor="right"
+    open={isOpen}
+    className={classes.root}
+  >
+    <IconButton className={classes.hideIcon} onClick={onClose}>
       <KeyboardArrowRightIcon />
     </IconButton>
     <section className={classes.place}>
@@ -74,12 +78,13 @@ const RoomAside = ({ classes, room }) => {
         <GuestList guests={room?.guests} />
       </section>
     )}
-  </div>
-}
+  </Drawer>
 
-RoomAside.propTypes = {
+RoomDrawer.propTypes = {
   classes: object.isRequired,
+  isOpen: bool,
+  onClose: func,
   room: roomShape
 }
 
-export default withStyles(styles)(RoomAside)
+export default withStyles(styles)(RoomDrawer)

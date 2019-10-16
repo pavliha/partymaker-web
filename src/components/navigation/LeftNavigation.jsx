@@ -9,11 +9,15 @@ import LocationIcon from 'mdi-react/LocationIcon'
 import SettingsIcon from 'mdi-react/SettingsIcon'
 import AccountIcon from 'mdi-react/AccountIcon'
 
-const styles = {
+const styles = (theme) => ({
   root: {
+    display: 'none',
     width: 300,
     borderRight: '1px solid rgba(0,0,0,0.1)',
-    height: '100%'
+    height: '100%',
+    [theme.breakpoints.up('md')]: {
+      display: 'block'
+    }
   },
 
   logo: {
@@ -24,7 +28,7 @@ const styles = {
     marginTop: 30,
     marginRight: 30,
   }
-}
+})
 
 const LeftNavigation = ({ classes, className }) =>
   <div className={classNames([classes.root, className])}>

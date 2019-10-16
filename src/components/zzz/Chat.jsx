@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import { object, func, bool, shape } from 'prop-types'
+import { object, func, bool, shape, string, node } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import userShape from 'shapes/user'
 import roomShape from 'shapes/room'
 import { Loading, Messages, ChatForm, RoomNavigation, ScrollableBody, Form } from 'components'
 import { actions, connect, select } from 'src/redux'
 import background from 'assets/images/chat-background.jpg'
+import classNames from 'classnames'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1,
     display: 'flex',
@@ -30,10 +31,6 @@ const styles = theme => ({
   header: {
     borderBottom: 'solid 1px rgba(0, 0, 0, 0.12)',
     padding: '5px 0',
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'inherit'
-    }
   },
   navigation: {
     flex: 1,
@@ -87,14 +84,15 @@ class Chat extends Component {
     this.chatBody.current.scrollToBottom()
 
   render() {
-    const { classes, room, onLeave, onJoin, redux: { auth, isGuest, orderPlace }, } = this.props
+    const { classes, action, className, room, onLeave, onJoin, redux: { auth, isGuest, orderPlace }, } = this.props
     const { isLoading } = this.state
 
     return (
-      <div className={classes.root}>
+      <div className={classNames([classes.root, className])}>
         <header className={classes.header}>
           <RoomNavigation
             className={classes.navigation}
+            action={action}
             room={room}
             isGuest={isGuest}
             onLeave={onLeave}
@@ -127,8 +125,10 @@ class Chat extends Component {
 
 Chat.propTypes = {
   classes: object.isRequired,
+  className: string,
   socket: shape({ on: func }),
   room: roomShape.isRequired,
+  action: node,
   onLoad: func.isRequired,
   onSend: func.isRequired,
   onJoin: func.isRequired,

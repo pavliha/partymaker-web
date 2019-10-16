@@ -6,20 +6,28 @@ import { Switch, Route } from 'react-router-dom'
 import ProfileScene from './ProfileScene'
 import SettingsScene from './@settings/SettingsScene'
 
-const styles = {
+const styles = theme => ({
 
   root: {
     display: 'flex',
-    height: '100%',
+    flexDirection: 'column',
+    height: '100%'
   },
   routes: {
-    marginLeft: 315,
+    [theme.breakpoints.up('md')]: {
+      marginLeft: 315,
+    },
     flex: 1,
   },
   nav: {
     position: 'fixed',
+  },
+  bottomNavigation: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
   }
-}
+})
 
 const ProfileLayout = ({ classes }) =>
   <div className={classes.root}>
@@ -30,7 +38,7 @@ const ProfileLayout = ({ classes }) =>
         <Route exact path="/profile/settings" component={SettingsScene} />
       </Switch>
     </div>
-    <AppBottomNavigation />
+    <AppBottomNavigation className={classes.bottomNavigation} />
   </div>
 
 ProfileLayout.propTypes = {

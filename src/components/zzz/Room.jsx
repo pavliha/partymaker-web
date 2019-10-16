@@ -1,17 +1,37 @@
 import React, { Component } from 'react'
 import { object, func, shape } from 'prop-types'
 import { withStyles } from '@material-ui/core'
-import { Chat, RoomAside } from 'components'
+import { Chat, RoomDrawer } from 'components'
 import roomShape from 'shapes/room'
 import userShape from 'shapes/user'
 import { actions, connect, select } from 'src/redux'
+import classNames from 'classnames'
+import IconButton from '@material-ui/core/IconButton'
+import InformationIcon from 'mdi-react/InformationIcon'
 
-const styles = () => ({
+const styles = (theme) => ({
   root: {
     display: 'flex',
     maxHeight: '100%',
     flexGrow: 1,
   },
+  content: {
+    flexGrow: 1,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginRight: 378,
+  },
+  infoIcon: {
+    color: 'rgba(0,0,0,0.8)'
+  }
 })
 
 class Room extends Component {
@@ -20,6 +40,7 @@ class Room extends Component {
 
   state = {
     socket: null,
+    isRoomDrawerOpen: true,
   }
 
   constructor(props) {
@@ -40,21 +61,42 @@ class Room extends Component {
     this.topic = null
   }
 
+  showRoomDrawer = () =>
+    this.setState({ isRoomDrawerOpen: true })
+
+  hideRoomDrawer = () =>
+    this.setState({ isRoomDrawerOpen: false })
+
   render() {
     const { classes, room, onJoin, onLeave, redux, } = this.props
-    const { socket } = this.state
+    const { socket, isRoomDrawerOpen } = this.state
+
+    const chatStyle = classNames({
+      [classes.content]: true,
+      [classes.contentShift]: isRoomDrawerOpen
+    })
 
     return (
       <section className={classes.root}>
         <Chat
+          className={chatStyle}
           socket={socket}
           room={room}
           onLoad={redux.loadMessages}
           onSend={redux.sendMessage}
           onJoin={onJoin}
           onLeave={onLeave}
+          action={!isRoomDrawerOpen && (
+            <IconButton className={classes.infoIcon} onClick={this.showRoomDrawer}>
+              <InformationIcon />
+            </IconButton>
+          )}
         />
-        <RoomAside room={room} />
+        <RoomDrawer
+          room={room}
+          isOpen={isRoomDrawerOpen}
+          onClose={this.hideRoomDrawer}
+        />
       </section>
     )
   }
