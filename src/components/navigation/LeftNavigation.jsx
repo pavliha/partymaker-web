@@ -21,7 +21,7 @@ const styles = (theme) => ({
   },
 
   logo: {
-    marginTop: 27,
+    marginTop: 19,
   },
 
   nav: {

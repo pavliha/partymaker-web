@@ -10,10 +10,10 @@ const styles = {
   root: {
     position: 'relative',
     borderLeft: '1px solid rgba(0,0,0,0.1)',
-    paddingTop: 10,
   },
 
   place: {
+    paddingTop: 25,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
