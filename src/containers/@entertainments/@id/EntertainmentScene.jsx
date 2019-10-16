@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { object, shape, func } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
@@ -85,19 +85,21 @@ class EntertainmentScene extends Component {
         </Helmet>
         <LeftNavigation className={classes.leftNavigation} />
         <section className={classes.container}>
-          <Loader load={loadEntertainment}> {entertainment && [
-            <div className={classes.heading}>
-              <BackButton />
-              <Typography component="div" className={classes.title}>
-                {entertainment.title}
-              </Typography>
-            </div>,
-            <PlacesList
-              className={classes.places}
-              places={entertainment.places}
-              onSelect={this.selectPlace}
-            />
-          ]}</Loader>
+          <Loader load={loadEntertainment}> {entertainment && (
+            <Fragment>
+              <div className={classes.heading}>
+                <BackButton />
+                <Typography component="div" className={classes.title}>
+                  {entertainment.title}
+                </Typography>
+              </div>
+              <PlacesList
+                className={classes.places}
+                places={entertainment.places}
+                onSelect={this.selectPlace}
+              />
+            </Fragment>
+          )}</Loader>
         </section>
       </div>
     )

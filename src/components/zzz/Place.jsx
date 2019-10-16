@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { node, object, shape, func, string } from 'prop-types'
 import { ListItemText, Typography, withStyles } from '@material-ui/core'
-import { PhotosSlider, PlaceContacts, PlaceTitle, Comments, PlaceStatus, BackButton } from 'components'
+import { PhotosSlider, PlaceContacts, Comments, PlaceStatus, BackButton } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Rating from '@material-ui/lab/Rating'
 import { placeShape, userShape } from 'shapes'
 import wait from 'utils/wait'
 import { connect, actions, select } from 'src/redux'
 import classNames from 'classnames'
+import PlaceCard from 'components/cards/PlaceCard'
 
 const styles = () => ({
   root: {
@@ -96,7 +97,7 @@ class Place extends Component {
       <section className={classNames(classes.root, className)}>
         <div className={classes.place}>
           <BackButton />
-          <PlaceTitle className={classes.placeTitle} full place={place} />
+          <PlaceCard className={classes.placeTitle} inline place={place} />
         </div>
         <PlaceStatus className={classes.status} place={place} />
         <section className={classes.container}>
