@@ -68,8 +68,10 @@ class SearchField extends Component {
     isFocused: false,
   }
 
-  focus = () =>
+  focus = () => {
     this.setState({ isFocused: true })
+    this.input.current.focus()
+  }
 
   blur = () =>
     this.setState({ isFocused: false })

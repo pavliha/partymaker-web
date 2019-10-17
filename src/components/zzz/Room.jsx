@@ -34,13 +34,15 @@ const styles = (theme) => ({
   }
 })
 
+const isMobile = window.matchMedia('(max-width: 920px)').matches
+
 class Room extends Component {
 
   topic = null
 
   state = {
     socket: null,
-    isRoomDrawerOpen: true,
+    isRoomDrawerOpen: !isMobile,
   }
 
   constructor(props) {

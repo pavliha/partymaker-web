@@ -73,10 +73,10 @@ class PlaceCard extends Component {
 
     return (
       <div className={rootStyle} onClick={this.select}>
-        <Picture src={place.picture_url} className={pictureStyle} />
+        <Picture src={place?.picture_url} className={pictureStyle} />
         <div className={containerStyle}>
-          <Typography className={classes.title}>{place.title}</Typography>
-          <Typography className={classes.subtitle} color="textSecondary">{place.price}</Typography>
+          <Typography className={classes.title}>{place?.title}</Typography>
+          <Typography className={classes.subtitle} color="textSecondary">{place?.price}</Typography>
           {inline && <Typography className={classes.subtitle} color="textSecondary">
             {place?.contacts?.directions}
           </Typography>

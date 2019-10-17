@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { withStyles, BottomNavigation, BottomNavigationAction, Paper } from '@material-ui/core'
 import AccountIcon from 'mdi-react/AccountIcon'
-import HomeIcon from 'mdi-react/HomeIcon'
+import LocationIcon from 'mdi-react/LocationIcon'
 import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon'
 import BellIcon from 'mdi-react/BellIcon'
-import SearchIcon from 'mdi-react/SearchIcon'
+import PeopleGroupIcon from 'mdi-react/PeopleGroupIcon'
 import { withRouter, Link } from 'react-router-dom'
 import { func, object, shape, string } from 'prop-types'
 import { actions, connect } from 'src/redux'
@@ -48,13 +48,13 @@ class AppBottomNavigation extends Component {
             to="/entertainments"
             label="Куда сходить"
             value="/entertainments"
-            icon={<HomeIcon />}
+            icon={<LocationIcon />}
           />
           <BottomNavigationAction
             classes={{ label: classes.label }}
             label="Поиск"
             value="/search"
-            icon={<SearchIcon />}
+            icon={<PeopleGroupIcon />}
           />
           <BottomNavigationAction
             classes={{ label: classes.label }}
