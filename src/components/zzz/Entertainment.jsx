@@ -26,6 +26,7 @@ const styles = theme => ({
     cursor: 'pointer',
     paddingLeft: 5,
     fontSize: 20,
+    fontFamily: 'Google Sans',
   },
 
   places: {

@@ -11,6 +11,8 @@ import AccountIcon from 'mdi-react/AccountIcon'
 
 const styles = (theme) => ({
   root: {
+    boxSizing: 'border-box',
+    paddingTop: 10,
     display: 'none',
     width: 300,
     borderRight: '1px solid rgba(0,0,0,0.1)',

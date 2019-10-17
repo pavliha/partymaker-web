@@ -14,6 +14,7 @@ const styles = () => ({
   },
   container: {
     flex: 1,
+    display: 'flex',
   },
 })
 
@@ -21,7 +22,9 @@ const RoomNavigation = ({ classes, className, room, action }) =>
   <div className={classNames(classes.root, className)}>
     <BackButton />
     <div className={classes.container}>
-      <RoomTitle room={room} />
+      <div>
+        <RoomTitle room={room} />
+      </div>
     </div>
     {action}
   </div>

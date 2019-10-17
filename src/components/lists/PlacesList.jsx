@@ -5,7 +5,7 @@ import placeShape from 'shapes/place'
 import { PlaceCard } from 'components'
 import classNames from 'classnames'
 
-const styles = theme => ({
+const styles = () => ({
   root: {
   },
 })

@@ -11,7 +11,8 @@ import classNames from 'classnames'
 
 const styles = {
   root: {
-    color: 'white',
+    flex: 1,
+    color: 'rgba(59,89,152,1)',
     display: 'flex',
     justifyContent: 'space-evenly',
   },
@@ -22,7 +23,7 @@ const styles = {
     borderColor: 'inherit',
     padding: 7,
     '&:hover': {
-      backgroundColor: 'rgba(255,255,255,0.1)'
+      backgroundColor: 'rgba(59,89,152,0.15)'
     }
   },
   text: {
@@ -31,6 +32,12 @@ const styles = {
     fontWeight: 550,
     fontSize: 15,
   },
+  google: {
+    color: 'rgba(199,0,38,1)',
+    '&:hover': {
+      backgroundColor: 'rgba(199,0,38,0.11)'
+    }
+  }
 }
 
 class SocialLoginActions extends Component {
@@ -97,13 +104,13 @@ class SocialLoginActions extends Component {
           onSuccess={this.loginGoogle}
           render={props => (
             <Button
+              style={{ color: '#c70026' }}
               variant="outlined"
-              color="inherit"
               onClick={props.onClick}
-              className={classes.button}
+              className={classNames(([classes.button, classes.google]))}
             >
               <GoogleIcon />
-              <div className={classes.text}>Google</div>
+              <div style={{ color: '#c70026' }} className={classes.text}>Google</div>
             </Button>
           )}
         />

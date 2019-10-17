@@ -1,28 +1,14 @@
-import React, { Component, Fragment } from 'react'
-import { object, shape, func } from 'prop-types'
+import React, { useCallback } from 'react'
+import { func, object, shape } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { entertainmentShape } from 'shapes'
-import { PlacesList, Loader, LeftNavigation, BackButton } from 'components'
+import { BackButton, Loader, PlacesList } from 'components'
 import { actions, connect, select } from 'src/redux'
 import { Helmet } from 'react-helmet'
 
 const styles = (theme) => ({
   root: {
-    height: '100%',
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column'
-  },
-
-  container: {
-    position: 'relative',
-    width: '100%',
     maxWidth: 1050,
-    height: '100%',
-    [theme.breakpoints.up('md')]: {
-      marginLeft: 300,
-      width: 'calc(100% - 330px)',
-    },
   },
 
   header: {
@@ -41,15 +27,6 @@ const styles = (theme) => ({
       paddingLeft: 30,
     }
   },
-
-  leftNavigation: {
-    position: 'fixed',
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block'
-    }
-  },
-
   title: {
     paddingLeft: 5,
     fontSize: 20,
@@ -64,47 +41,25 @@ const styles = (theme) => ({
 
 })
 
-class EntertainmentScene extends Component {
-
-  state = {
-    place_id: null,
-  }
-
-  selectPlace = place => {
-    const { history } = this.props
-    history.push(`/places/${place.id}`)
-  }
-
-  render() {
-    const { classes, redux: { entertainment, loadEntertainment } } = this.props
-
-    return (
-      <div>
-        <Helmet>
-          <title>Partymaker - {entertainment.title}</title>
-        </Helmet>
-        <LeftNavigation className={classes.leftNavigation} />
-        <section className={classes.container}>
-          <Loader load={loadEntertainment}> {entertainment && (
-            <Fragment>
-              <div className={classes.heading}>
-                <BackButton />
-                <Typography component="div" className={classes.title}>
-                  {entertainment.title}
-                </Typography>
-              </div>
-              <PlacesList
-                className={classes.places}
-                places={entertainment.places}
-                onSelect={this.selectPlace}
-              />
-            </Fragment>
-          )}</Loader>
-        </section>
+const EntertainmentScene = ({ classes, history, redux: { entertainment, loadEntertainment } }) =>
+  <section className={classes.root}>
+    <Helmet>
+      <title>Partymaker - {entertainment.title}</title>
+    </Helmet>
+    <Loader load={loadEntertainment}>
+      <div className={classes.heading}>
+        <BackButton />
+        <Typography component="div" className={classes.title}>
+          {entertainment?.title}
+        </Typography>
       </div>
-    )
-  }
-}
+      <PlacesList
+        className={classes.places}
+        places={entertainment?.places || []}
+        onSelect={useCallback(place => history.push(`/places/${place.id}`))}
+      />
+    </Loader>
+  </section>
 
 EntertainmentScene.propTypes = {
   classes: object.isRequired,

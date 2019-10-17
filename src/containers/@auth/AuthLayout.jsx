@@ -1,9 +1,8 @@
 import React, { Component, lazy, Suspense } from 'react'
 import { object, func, shape } from 'prop-types'
-import { withStyles, Typography } from '@material-ui/core'
-import { Redirect, Route, Switch } from 'react-router-dom'
-import { Loading, SocialLoginActions } from 'components'
-import sparks from '../IndexScene/nightZP.png'
+import { withStyles, Typography, Button } from '@material-ui/core'
+import { Link, Redirect, Route, Switch } from 'react-router-dom'
+import { Loading, SocialLoginActions, NavigationContainer, BackButton } from 'components'
 import Storage from 'services/Storage'
 
 const LoginScene = lazy(() => import('./@login/LoginScene'))
@@ -13,33 +12,35 @@ const ActivateScene = lazy(() => import('./@activate/ActivateScene'))
 const PasswordLayout = lazy(() => import('./@password/PasswordLayout'))
 
 const styles = () => ({
+
   root: {
-    height: '100vh',
-    background: `url(${sparks})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  },
-  container: {
-    height: '100%',
+    flex: 1,
     display: 'flex',
+    flexDirection: 'column',
+  },
+
+  header: {
+    height: 80,
+    boxSizing: 'borderBox',
+    display: 'flex',
+    padding: '0 25px',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
+  container: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
-    justifyContent: 'center',
-  },
-  scene: {
-    height: '70%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
     padding: 15,
   },
   divider: {
-    color: 'white',
-  },
-  header: {
-    position: 'absolute',
-    background: 'transparent',
-    boxShadow: 'none',
+    marginTop: 30,
+    marginBottom: 30,
+    fontFamily: 'Google Sans',
+    color: 'rgba(0,0,0,0.8)',
   },
 
   dividerChild: {
@@ -65,38 +66,47 @@ class AuthLayout extends Component {
   render() {
     const { classes } = this.props
     return (
-      <div className={classes.root} id="AuthLayout">
-        <div className={classes.container}>
-          <div className={classes.scene}>
+      <NavigationContainer>
+        <div className={classes.root}>
+          <header className={classes.header}>
+            <BackButton />
             <div>
-              <Suspense fallback={<Loading center />}>
-                <Switch>
-                  <Route exact path="/auth/register" component={RegisterScene} />
-                  <Route exact path="/auth/login" component={LoginScene} />
-                  <Route exact path="/auth/activate/:hash" component={ActivateScene} />
-                  <Route exact path="/auth/logout" component={LogoutScene} />
-                  <Route path="/auth/password" component={PasswordLayout} />
-                  <Redirect to="/auth/login" />
-                </Switch>
-              </Suspense>
+              <Link to="/auth/login"><Button>ВОЙТИ</Button></Link>
+              <Link to="/auth/register"><Button>РЕГИСТРАЦИЯ</Button></Link>
             </div>
-            <div className={classes.divider}>
-              <div className={classes.dividerChild}>
-                <div className={classes.takeAllSpace}>
-                  <hr />
-                </div>
-                <Typography variant="subtitle1" color="inherit">ИЛИ</Typography>
-                <div className={classes.takeAllSpace}>
-                  <hr />
+          </header>
+          <div className={classes.container}>
+            <div>
+              <div>
+                <Suspense fallback={<Loading center />}>
+                  <Switch>
+                    <Route exact path="/auth/register" component={RegisterScene} />
+                    <Route exact path="/auth/login" component={LoginScene} />
+                    <Route exact path="/auth/activate/:hash" component={ActivateScene} />
+                    <Route exact path="/auth/logout" component={LogoutScene} />
+                    <Route path="/auth/password" component={PasswordLayout} />
+                    <Redirect to="/auth/login" />
+                  </Switch>
+                </Suspense>
+              </div>
+              <div className={classes.divider}>
+                <div className={classes.dividerChild}>
+                  <div className={classes.takeAllSpace}>
+                    <hr />
+                  </div>
+                  <Typography variant="subtitle1" color="inherit">ИЛИ</Typography>
+                  <div className={classes.takeAllSpace}>
+                    <hr />
+                  </div>
                 </div>
               </div>
+              <Suspense fallback={<Loading center />}>
+                <SocialLoginActions onLogin={this.loginWithSocial} />
+              </Suspense>
             </div>
-            <Suspense fallback={<Loading center />}>
-              <SocialLoginActions onLogin={this.loginWithSocial} />
-            </Suspense>
           </div>
         </div>
-      </div>
+      </NavigationContainer>
     )
   }
 }

@@ -142,7 +142,7 @@ export AppBottomNavigation from './navigation/AppBottomNavigation'
 export RoomNavigation from './navigation/RoomNavigation'
 export LeftNavigation from './navigation/LeftNavigation'
 export LeftNavigationItem from './navigation/LeftNavigationItem'
-
+export NavigationContainer from './navigation/NavigationContainer'
 /**
  * Overlays
  */
