@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withStyles, BottomNavigation, BottomNavigationAction, Paper } from '@material-ui/core'
 import AccountIcon from 'mdi-react/AccountIcon'
 import LocationIcon from 'mdi-react/LocationIcon'
-import PlusBoxOutlineIcon from 'mdi-react/PlusBoxOutlineIcon'
 import BellIcon from 'mdi-react/BellIcon'
 import PeopleGroupIcon from 'mdi-react/PeopleGroupIcon'
 import { withRouter, Link } from 'react-router-dom'
@@ -55,13 +54,6 @@ class AppBottomNavigation extends Component {
             label="Поиск"
             value="/search"
             icon={<PeopleGroupIcon />}
-          />
-          <BottomNavigationAction
-            classes={{ label: classes.label }}
-            label="Собрать компанию"
-            value="/rooms/create"
-            onClick={this.createRoom}
-            icon={<PlusBoxOutlineIcon />}
           />
           <BottomNavigationAction
             classes={{ label: classes.label }}

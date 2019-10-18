@@ -69,8 +69,9 @@ class SearchField extends Component {
   }
 
   focus = () => {
-    this.setState({ isFocused: true })
-    this.input.current.focus()
+    this.setState({ isFocused: true }, () => {
+      this.input.current.focus()
+    })
   }
 
   blur = () =>
@@ -87,10 +88,12 @@ class SearchField extends Component {
       <ClickAwayListener onClickAway={this.blur}>
         <Paper className={classNames([classes.root, className])} onClick={this.focus}>
           <InputBase
-            ref={this.input}
             className={inputStyle}
             placeholder="Искать развлечения"
-            inputProps={{ 'aria-label': 'Искать развлечения' }}
+            inputProps={{
+              ref: this.input,
+              'aria-label': 'Искать развлечения'
+            }}
             onChange={onChange}
             onBlur={this.blur}
           />

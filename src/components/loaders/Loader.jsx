@@ -10,10 +10,18 @@ const styles = theme => ({
   root: {},
 
   loading: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
     flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.1)',
+    zIndex: 10,
   },
 
   errorContainer: {
@@ -81,9 +89,13 @@ class Loader extends Component {
 
     if (isLoading) {
       return (
-        <div className={classes.loading}>
-          <Loading />
+        <div className={className}>
+          <div className={classes.loading}>
+            <Loading />
+          </div>
+          {children}
         </div>
+
       )
     }
 

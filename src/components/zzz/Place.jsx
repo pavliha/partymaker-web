@@ -77,6 +77,13 @@ class Place extends Component {
     rateTimeout: false,
   }
 
+  componentDidMount() {
+    window.scrollTo({
+      top: 0,
+      left: 100,
+    })
+  }
+
   ratePlace = async (e, value) => {
     this.setState({ rated: value, rateTimeout: true })
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { func, node, number, oneOfType, shape, string } from 'prop-types'
 import placeShape from 'shapes/place'
 import { Loader, Place } from 'components'
@@ -7,16 +7,16 @@ import { Helmet } from 'react-helmet'
 
 const PlaceLoader = ({ className, id, actions, redux: { place, loadPlace } }) =>
   <Loader params={id} load={loadPlace}>
-    {place && [
-      <Helmet>
-        <title>{place.title}</title>
-      </Helmet>,
-      <Place
-        className={className}
-        place={place}
-        actions={actions}
-      />
-    ]}
+    {place && (
+      <Fragment>
+        <Helmet><title>{place.title}</title></Helmet>
+        <Place
+          className={className}
+          place={place}
+          actions={actions}
+        />
+      </Fragment>
+    )}
   </Loader>
 
 PlaceLoader.propTypes = {
