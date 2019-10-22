@@ -34,7 +34,6 @@ const styles = (theme) => ({
 
 const LeftNavigationItem = ({ location, classes, icon: Icon, url, children }) =>
   <Link
-    component="div"
     to={url}
     className={classNames({
       [classes.root]: true,
