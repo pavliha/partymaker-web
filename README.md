@@ -1,6 +1,6 @@
-# User Managment React.js Application
+# Partymaker
 
-This app displays list of users and and edit them
+This is pet project where I and my friend experiment with new technologies and try new approaches in frontend development
 
 1. React.js
 2. Redux
@@ -8,6 +8,7 @@ This app displays list of users and and edit them
 4. Manual webpack configuration
 5. Selectors
 6. React router
+7. WebSockets
 
 ## Setup
 
