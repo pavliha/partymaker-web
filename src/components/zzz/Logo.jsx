@@ -23,7 +23,7 @@ const styles = theme => ({
 })
 
 const Logo = ({ classes, className, }) =>
-  <Link to="/" component="div" className={classNames(classes.root, className)}>
+  <Link to="/" className={classNames(classes.root, className)}>
     <Typography className={classes.title} variant="h6" color="inherit">
       Partymaker
     </Typography>
