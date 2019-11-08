@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { node, object, shape, func, string } from 'prop-types'
+import { node, object, string } from 'prop-types'
 import { ListItemText, Typography, withStyles } from '@material-ui/core'
-import { PhotosSlider, PlaceContacts, Comments, PlaceStatus, BackButton } from 'components'
+import { PhotosSlider, PlaceContacts, PlaceStatus, BackButton, PlaceCard } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import Rating from '@material-ui/lab/Rating'
-import { placeShape, userShape } from 'shapes'
+import { placeShape } from 'shapes'
 import wait from 'utils/wait'
-import { connect, actions, select } from 'src/redux'
 import classNames from 'classnames'
-import PlaceCard from 'components/cards/PlaceCard'
 
 const styles = () => ({
   root: {
@@ -91,13 +89,8 @@ class Place extends Component {
     this.setState({ rateTimeout: false })
   }
 
-  comment = async (form) => {
-    const { place, redux: { createComment } } = this.props
-    return createComment(place.id, form)
-  }
-
   render() {
-    const { classes, className, place, actions, redux: { auth } } = this.props
+    const { classes, className, place, actions } = this.props
     const { rated, rateTimeout } = this.state
 
     return (
@@ -137,11 +130,6 @@ class Place extends Component {
               <Typography className={classes.descriptionText} dangerouslySetInnerHTML={{ __html: place.description }} />
             </div>
           )}
-          <Comments
-            user={auth}
-            comments={place.comments}
-            onComment={this.comment}
-          />
         </section>
       </section>
     )
@@ -153,15 +141,5 @@ Place.propTypes = {
   className: string,
   place: placeShape,
   actions: node,
-  redux: shape({
-    auth: userShape,
-    createComment: func.isRequired,
-  })
 }
-
-const redux = state => ({
-  auth: select.auth.user(state),
-  createComment: actions.places.comments.create,
-})
-
-export default withStyles(styles)(connect(redux)(Place))
+export default withStyles(styles)(Place)

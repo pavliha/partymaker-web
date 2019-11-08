@@ -7,6 +7,7 @@ import { Helmet } from 'react-helmet'
 const styles = theme => ({
 
   root: {
+    margin: '0 auto',
     maxWidth: 1050,
   },
 
@@ -22,6 +23,8 @@ const styles = theme => ({
   },
 
   searchArea: {
+    width: '100%',
+    backgroundColor: 'white',
     position: 'fixed',
     padding: '15px 10px 0 10px',
     boxSizing: 'border-box',
@@ -29,14 +32,13 @@ const styles = theme => ({
     left: 0,
     zIndex: 1,
     height: 60,
-    marginLeft: 1,
-    maxWidth: 1050,
-    backgroundColor: 'white',
-    [theme.breakpoints.up('md')]: {
-      left: 300,
-      width: 'calc(100% - 330px)',
-    }
+
   },
+
+  searchField: {
+    margin: '0 auto',
+    maxWidth: 1015,
+  }
 })
 
 const EntertainmentsScene = ({ classes, history }) => {
@@ -48,7 +50,10 @@ const EntertainmentsScene = ({ classes, history }) => {
         <title>Поиск мест</title>
       </Helmet>
       <div className={classes.searchArea}>
-        <SearchField onChange={useCallback(e => setSearch(e.target.value))} />
+        <SearchField
+          className={classes.searchField}
+          onChange={useCallback(e => setSearch(e.target.value))}
+        />
       </div>
       <div className={classes.list}>
         <EntertainmentsLoader

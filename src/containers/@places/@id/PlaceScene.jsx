@@ -1,6 +1,6 @@
 import React from 'react'
 import { object, shape, string } from 'prop-types'
-import { PlaceActions, PlaceLoader, LeftNavigation, AppBottomNavigation } from 'components'
+import { PlaceActions, PlaceLoader } from 'components'
 import { withStyles } from '@material-ui/core'
 
 const styles = theme => ({
@@ -16,32 +16,15 @@ const styles = theme => ({
       width: 'calc(100% - 330px)',
     },
   },
-
-  leftNavigation: {
-    position: 'fixed',
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block'
-    }
-  },
-
-  bottomNavigation: {
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
-  }
-
 })
 
 const PlaceScene = ({ match, classes }) =>
   <div className={classes.root}>
-    <LeftNavigation className={classes.leftNavigation} />
     <PlaceLoader
       className={classes.container}
       id={match.params.id}
       actions={<PlaceActions place_id={match.params.id} />}
     />
-    <AppBottomNavigation className={classes.bottomNavigation} />
   </div>
 
 PlaceScene.propTypes = {

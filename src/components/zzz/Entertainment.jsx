@@ -19,12 +19,14 @@ const styles = theme => ({
     paddingBottom: 5,
     paddingLeft: 15,
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('xs')]: {
+      paddingLeft: 0,
+    }
   },
 
   title: {
     cursor: 'pointer',
-    paddingLeft: 5,
     fontSize: 20,
     fontFamily: 'Google Sans',
   },
@@ -35,7 +37,8 @@ const styles = theme => ({
     justifyContent: 'center',
     padding: '0 10px',
     [theme.breakpoints.up('xs')]: {
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      padding: 0,
     }
   }
 

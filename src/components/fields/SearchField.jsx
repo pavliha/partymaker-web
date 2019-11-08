@@ -17,9 +17,6 @@ const styles = theme => ({
     marginLeft: theme.spacing(1),
     flex: 1,
     display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'block',
-    }
   },
   iconButton: {
     padding: 10,
@@ -46,9 +43,6 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     margin: '0 15px',
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    }
   },
 
   inputFocused: {
