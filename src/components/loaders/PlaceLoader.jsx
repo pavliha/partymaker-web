@@ -1,28 +1,17 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { func, node, number, oneOfType, shape, string } from 'prop-types'
 import placeShape from 'shapes/place'
-import { Loader, Place } from 'components'
+import { Loader } from 'components'
 import { actions, connect, select } from 'src/redux'
-import { Helmet } from 'react-helmet'
 
-const PlaceLoader = ({ className, id, actions, redux: { place, loadPlace } }) =>
+const PlaceLoader = ({ id, children, redux: { place, loadPlace } }) =>
   <Loader params={id} load={loadPlace}>
-    {place && (
-      <Fragment>
-        <Helmet><title>{place.title}</title></Helmet>
-        <Place
-          className={className}
-          place={place}
-          actions={actions}
-        />
-      </Fragment>
-    )}
+    {place && children}
   </Loader>
 
 PlaceLoader.propTypes = {
   id: oneOfType([string, number]).isRequired,
-  className: string,
-  actions: node,
+  children: node,
   redux: shape({
     place: placeShape,
     loadPlace: func.isRequired,

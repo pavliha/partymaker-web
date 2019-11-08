@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet'
 const styles = (theme) => ({
   root: {
     maxWidth: 1050,
+    margin: '0 auto',
   },
 
   header: {
