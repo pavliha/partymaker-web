@@ -26,14 +26,12 @@ PlaceLoader.propTypes = {
   redux: shape({
     place: placeShape,
     loadPlace: func.isRequired,
-    createRoom: func.isRequired,
   })
 }
 
 const redux = (state, { id }) => ({
   place: select.places.current(state, id),
   loadPlace: actions.places.load,
-  createRoom: actions.rooms.create,
 })
 
 export default connect(redux)(PlaceLoader)

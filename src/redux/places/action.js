@@ -1,6 +1,5 @@
 import place from 'api/place'
 import photos from './photos/action'
-import comments from './comments/action'
 import contacts from './contacts/action'
 
 export const LOAD_PLACE = 'LOAD_PLACE'
@@ -41,7 +40,6 @@ const remove = place_id => ({
 export default {
   contacts,
   photos,
-  comments,
   load,
   set,
   setMany,

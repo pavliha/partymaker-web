@@ -7,19 +7,16 @@ import saga from './saga'
 import actions from './action'
 import select from './select'
 import reducers from './reducer'
-import createSocketMiddleware from './middleware/socketMiddleware'
-import sockets from './sockets'
 
 const initialState = {}
 
 const sagaMiddleware = createSagaMiddleware()
-const socketMiddleware = createSocketMiddleware(sockets)
 
 const store = createStore(
   reducers,
   initialState,
   composeWithDevTools(
-    applyMiddleware(promise, socketMiddleware, sagaMiddleware),
+    applyMiddleware(promise, sagaMiddleware),
   ),
 )
 

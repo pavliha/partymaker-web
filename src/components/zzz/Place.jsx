@@ -64,7 +64,7 @@ const styles = () => ({
   },
 
   descriptionText: {
-    fontSize: 14,
+    fontSize: 17,
   }
 })
 

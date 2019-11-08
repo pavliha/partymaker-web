@@ -1,5 +1,5 @@
 import { SET_ENTERTAINMENT, SET_ENTERTAINMENTS, REMOVE_ENTERTAINMENT } from '../action'
-import arrayToObject from 'utils/arrayToObject'
+import { arrayToObject } from 'utils'
 
 export default (state = {}, { type, payload }) => {
   switch (type) {

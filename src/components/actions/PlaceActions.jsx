@@ -16,7 +16,7 @@ const PlaceActions = ({ classes }) =>
       color="primary"
       variant="contained"
     >
-      Заказать
+      Позвонить
     </Button>
   </div>
 

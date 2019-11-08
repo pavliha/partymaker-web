@@ -1,7 +1,3 @@
-export userShape from './user'
-export roomShape from './room'
-export messageShape from './message'
 export entertainmentShape from './entertainment'
 export placeShape from './place'
-export commentShape from './comment'
 export photoShape from './photo'
