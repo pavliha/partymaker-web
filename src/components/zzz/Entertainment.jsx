@@ -20,7 +20,7 @@ const styles = theme => ({
     paddingLeft: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.up('md')]: {
       paddingLeft: 0,
     }
   },

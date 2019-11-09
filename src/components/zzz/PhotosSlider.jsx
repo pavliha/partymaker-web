@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { object, arrayOf } from 'prop-types'
+import { object, arrayOf, string } from 'prop-types'
 import { withStyles } from '@material-ui/core'
 import { photoShape } from 'shapes'
 import { PictureDialog } from 'components'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -37,11 +38,11 @@ class PhotosSlider extends Component {
     this.setState({ photo: null })
 
   render() {
-    const { classes, photos } = this.props
+    const { classes, photos, className } = this.props
     const { photo } = this.state
 
     return (
-      <div className={classes.root}>
+      <div className={classNames([classes.root, className])}>
         {photos.map(photo =>
           <img
             key={photo.id}
@@ -62,6 +63,7 @@ class PhotosSlider extends Component {
 
 PhotosSlider.propTypes = {
   classes: object.isRequired,
+  className: string,
   photos: arrayOf(photoShape),
 }
 

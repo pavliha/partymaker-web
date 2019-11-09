@@ -7,8 +7,10 @@ import { Helmet } from 'react-helmet'
 const styles = theme => ({
 
   root: {
-    margin: '0 auto',
     maxWidth: 1050,
+    [theme.breakpoints.up('md')]: {
+      margin: '0 auto',
+    }
   },
 
   list: {

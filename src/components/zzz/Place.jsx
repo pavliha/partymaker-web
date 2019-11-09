@@ -41,6 +41,10 @@ const styles = () => ({
     padding: '0 20px',
   },
 
+  slider: {
+    marginBottom: 30,
+  },
+
   contacts: {
     fontFamily: 'Google Sans',
     marginBottom: 30,
@@ -73,21 +77,51 @@ class Place extends Component {
       <section className={classNames(classes.root, className)}>
         <div className={classes.place}>
           <BackButton />
-          <PlaceCard className={classes.placeTitle} inline place={place} />
+          <PlaceCard
+            className={classes.placeTitle}
+            inline
+            place={place}
+          />
         </div>
-        <PlaceStatus className={classes.status} place={place} />
+        <PlaceStatus
+          className={classes.status}
+          place={place}
+        />
         <section className={classes.container}>
-          <div className={classes.actions}>{actions}</div>
-          {!isEmpty(place.photos) && <PhotosSlider photos={place.photos} />}
+          <div className={classes.actions}>
+            {actions}
+          </div>
+          {!isEmpty(place.photos) && (
+            <PhotosSlider
+              className={classes.slider}
+              photos={place.photos}
+            />
+          )}
           <div className={classes.contacts}>
-            <Typography className={classes.contactsTitle} gutterBottom variant="subtitle1">Контакты</Typography>
-            {place.contacts && <PlaceContacts contacts={place.contacts} />}
+            <Typography
+              className={classes.contactsTitle}
+              gutterBottom
+              variant="subtitle1"
+            >
+              Контакты
+            </Typography>
+            {place.contacts && (
+              <PlaceContacts contacts={place.contacts} />
+            )}
           </div>
 
           {place.description && (
             <div className={classes.description}>
-              <Typography gutterBottom variant="subtitle1">Описание</Typography>
-              <Typography className={classes.descriptionText} dangerouslySetInnerHTML={{ __html: place.description }} />
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+              >
+                Описание
+              </Typography>
+              <Typography
+                className={classes.descriptionText}
+                dangerouslySetInnerHTML={{ __html: place.description }}
+              />
             </div>
           )}
         </section>
