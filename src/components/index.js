@@ -26,6 +26,7 @@ export PlacesList from './lists/PlacesList'
  */
 export BackButton from './buttons/BackButton'
 export CloseButton from './buttons/CloseButton'
+export ShareButton from './buttons/ShareButton'
 
 /**
  * Cards

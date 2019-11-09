@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { node, object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
-import { PhotosSlider, PlaceContacts, PlaceStatus, BackButton, PlaceCard } from 'components'
+import { PhotosSlider, PlaceContacts, PlaceStatus, BackButton, ShareButton, PlaceCard } from 'components'
 import isEmpty from 'lodash/isEmpty'
 import { placeShape } from 'shapes'
 import classNames from 'classnames'
@@ -15,11 +15,18 @@ const styles = () => ({
     paddingTop: 20,
   },
 
+  flex: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 30,
+    paddingRight: 5,
+    paddingLeft: 5,
+  },
+
   place: {
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 30,
-    paddingLeft: 5,
   },
 
   placeTitle: {
@@ -61,7 +68,7 @@ const styles = () => ({
 
   descriptionText: {
     fontSize: 17,
-  }
+  },
 })
 
 class Place extends Component {
@@ -70,23 +77,47 @@ class Place extends Component {
     window.scrollTo({ top: 0 })
   }
 
+  shareApi = async () => {
+    const { place } = this.props
+
+    let url = document.location.href
+    const canonicalElement = document.querySelector('link[rel=canonical]')
+
+    if (canonicalElement !== null) {
+      url = canonicalElement.href
+    }
+
+    if (navigator.share) {
+      await navigator.share({
+        url,
+        text: place.title,
+        title: place.title,
+      })
+    }
+  }
+
   render() {
     const { classes, className, place, actions } = this.props
 
     return (
       <section className={classNames(classes.root, className)}>
-        <div className={classes.place}>
-          <BackButton />
-          <PlaceCard
-            className={classes.placeTitle}
-            inline
-            place={place}
-          />
+        <div className={classes.flex}>
+          <div className={classes.place}>
+            <BackButton />
+            <PlaceCard
+              className={classes.placeTitle}
+              inline
+              place={place}
+            />
+          </div>
+          <ShareButton onClick={this.shareApi} />
         </div>
+
         <PlaceStatus
           className={classes.status}
           place={place}
         />
+
         <section className={classes.container}>
           <div className={classes.actions}>
             {actions}
