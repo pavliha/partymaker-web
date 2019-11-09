@@ -10,13 +10,10 @@ const styles = theme => ({
   container: {
     position: 'relative',
     width: '100%',
-    maxWidth: 850,
     height: '100%',
     marginBottom: 60,
     [theme.breakpoints.up('md')]: {
-      marginBottom: 0,
-      marginLeft: 300,
-      width: 'calc(100% - 330px)',
+      margin: '0 auto'
     },
   },
 })
