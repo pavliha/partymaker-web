@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import classNames from 'classnames'
 import { node, object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { PhotosSlider, PlaceContacts, PlaceStatus, BackButton, ShareButton, PlaceCard } from 'components'
 import isEmpty from 'lodash/isEmpty'
+import { isShareLink } from 'utils'
 import { placeShape } from 'shapes'
-import classNames from 'classnames'
 
-const styles = () => ({
+const styles = {
   root: {
     margin: '0 auto',
     flex: 1,
@@ -69,7 +70,7 @@ const styles = () => ({
   descriptionText: {
     fontSize: 17,
   },
-})
+}
 
 class Place extends Component {
 
@@ -110,7 +111,7 @@ class Place extends Component {
               place={place}
             />
           </div>
-          <ShareButton onClick={this.shareApi} />
+          {isShareLink && <ShareButton onClick={this.shareApi} />}
         </div>
 
         <PlaceStatus
