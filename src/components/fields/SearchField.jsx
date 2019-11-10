@@ -60,6 +60,7 @@ class SearchField extends Component {
 
   state = {
     isFocused: false,
+    value: ''
   }
 
   focus = () => {
@@ -68,15 +69,21 @@ class SearchField extends Component {
     })
   }
 
+  change = (e) => {
+    const { onChange } = this.props
+    onChange(e)
+    this.setState({ value: e.target.value })
+  }
+
   blur = () =>
     this.setState({ isFocused: false })
 
   render() {
-    const { classes, className, onChange } = this.props
-    const { isFocused } = this.state
+    const { classes, className } = this.props
+    const { isFocused, value } = this.state
 
-    const inputStyle = classNames({ [classes.input]: true, [classes.inputFocused]: isFocused })
-    const logoStyle = classNames({ [classes.logo]: true, [classes.logoFocused]: isFocused })
+    const inputStyle = classNames({ [classes.input]: true, [classes.inputFocused]: isFocused || value })
+    const logoStyle = classNames({ [classes.logo]: true, [classes.logoFocused]: isFocused || value })
 
     return (
       <ClickAwayListener onClickAway={this.blur}>
@@ -88,7 +95,7 @@ class SearchField extends Component {
               ref: this.input,
               'aria-label': 'Искать развлечения'
             }}
-            onChange={onChange}
+            onChange={this.change}
             onBlur={this.blur}
           />
           <div className={logoStyle}>
