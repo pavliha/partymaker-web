@@ -12,7 +12,10 @@ const styles = {
     margin: 10,
     width: 150,
     display: 'inline-flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    '@media only screen and (max-width: 325px)': {
+      margin: 5,
+    },
   },
 
   picture: {

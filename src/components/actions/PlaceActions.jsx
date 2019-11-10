@@ -1,5 +1,5 @@
 import React from 'react'
-import { object } from 'prop-types'
+import { object, string } from 'prop-types'
 import { Button, withStyles } from '@material-ui/core'
 
 const styles = {
@@ -9,19 +9,23 @@ const styles = {
   }
 }
 
-const PlaceActions = ({ classes }) =>
-  <div className={classes.root}>
-    <Button
-      className={classes.primary}
-      color="primary"
-      variant="contained"
-    >
-      Позвонить
-    </Button>
+const PlaceActions = ({ classes, phone }) => phone
+  ? <div className={classes.root}>
+    <a href={`tel:${phone}`}>
+      <Button
+        className={classes.primary}
+        color="primary"
+        variant="contained"
+      >
+        Позвонить
+      </Button>
+    </a>
   </div>
+  : null
 
 PlaceActions.propTypes = {
   classes: object.isRequired,
+  phone: string,
 }
 
 export default withStyles(styles)(PlaceActions)
