@@ -1,9 +1,9 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { object, shape, string, func } from 'prop-types'
 import { IconButton, withStyles } from '@material-ui/core'
-import classNames from 'classnames'
 import ArrowBackIcon from 'mdi-react/ArrowBackIcon'
-import { withRouter } from 'react-router-dom'
+import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
@@ -11,9 +11,6 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       marginRight: 5,
     }
-  },
-  backIcon: {
-    color: 'white',
   },
 })
 

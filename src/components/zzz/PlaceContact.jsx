@@ -14,7 +14,9 @@ const styles = {
     marginRight: 15,
     marginLeft: 5,
   },
-  label: {}
+  label: {
+    wordBreak: 'break-word',
+  },
 }
 
 const PlaceContact = ({ classes, link, icon: Icon, label }) => {

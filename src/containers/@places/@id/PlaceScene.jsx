@@ -23,7 +23,7 @@ const PlaceScene = ({ match, classes, redux: { place } }) =>
     <div className={classes.container}>
       <PlaceLoader id={match.params.id}>
         {place && <Helmet><title>{place.title}</title></Helmet>}
-        {place && <Place place={place} actions={<PlaceActions />} />}
+        {place && <Place place={place} actions={<PlaceActions phone={place.contacts?.phone} />} />}
       </PlaceLoader>
     </div>
   </div>
