@@ -32,6 +32,7 @@ async function cacheOrNetwork(request) {
 async function update(request) {
   const cache = await caches.open(CACHE)
   const response = await fetch(request)
+  if (!request.url.includes('http')) return response
   await cache.put(request, response.clone())
   return response
 }
