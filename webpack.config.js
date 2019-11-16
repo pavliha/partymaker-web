@@ -71,7 +71,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: `[name].[hash:3].js`,
+    filename: `[name].js`,
   },
 
   target: 'web',
@@ -115,14 +115,11 @@ module.exports = {
     new Dotenv(),
     new Clean('./dist', { root: path.resolve(__dirname, './') }),
     new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
+    new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      minify: {
-        removeComments: true,
-        // collapseWhitespace: true,
-      },
+      minify: { removeComments: true },
       inject: true,
     }),
   ],
