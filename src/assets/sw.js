@@ -39,8 +39,7 @@ async function update(request) {
 
 self.addEventListener('fetch', async e => {
   e.respondWith(cacheOrNetwork(e.request))
-  e.waitUntil(update(e.request))
-    .then(refresh)
+  e.waitUntil(update(e.request).then(refresh))
 })
 
 async function refresh(response) {
