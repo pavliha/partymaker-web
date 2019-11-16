@@ -1,6 +1,7 @@
 import React from 'react'
 import { object, string } from 'prop-types'
-import { Button, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { Button } from '@material-ui/core'
 
 const styles = {
   root: {},

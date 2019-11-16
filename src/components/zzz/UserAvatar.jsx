@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bool, object, oneOfType, number, shape, string, func } from 'prop-types'
-import { Avatar, withStyles } from '@material-ui/core'
+import { Avatar } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
 import classNames from 'classnames'
 import initials from 'name-initials'
 import { PictureDialog, OnlineIndicator } from 'components'

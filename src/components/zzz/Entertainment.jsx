@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react'
 import { object, func, string } from 'prop-types'
-import { IconButton, Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { IconButton, Typography } from '@material-ui/core'
 import KeyboardArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { entertainmentShape } from 'shapes'
 import { PlacesList } from 'components'
 import Fuse from 'fuse.js'
-import isEmpty from 'lodash-es/isEmpty'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = theme => ({
   root: {

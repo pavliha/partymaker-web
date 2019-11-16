@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, bool } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { Typography } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'

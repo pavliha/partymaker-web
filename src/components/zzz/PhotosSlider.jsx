@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { object, arrayOf, string } from 'prop-types'
-import { withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
 import { photoShape } from 'shapes'
 import { PictureDialog } from 'components'
 import classNames from 'classnames'

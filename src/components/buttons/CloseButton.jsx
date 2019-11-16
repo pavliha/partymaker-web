@@ -1,6 +1,7 @@
 import React from 'react'
 import { object, func, string } from 'prop-types'
-import { IconButton, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { IconButton } from '@material-ui/core'
 import CloseIcon from 'mdi-react/CloseIcon'
 import classNames from 'classnames'
 

@@ -1,4 +1,4 @@
-import isEmpty from 'lodash-es/isEmpty'
+import isEmpty from 'lodash/isEmpty'
 import { all, put } from 'redux-saga/effects'
 
 function * putRelationsToStore(models, relations) {

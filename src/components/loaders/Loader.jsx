@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { func, node, object, string, any } from 'prop-types'
-import { Typography, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { Typography } from '@material-ui/core'
 import { Loading } from 'components'
 import ErrorIcon from 'mdi-react/ErrorIcon'
-import isEqual from 'lodash-es/isEqual'
+import isEqual from 'lodash/isEqual'
 
 const styles = theme => ({
 

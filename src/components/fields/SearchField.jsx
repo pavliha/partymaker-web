@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { object, func, string } from 'prop-types'
-import { withStyles, IconButton, InputBase, Divider, Paper, Typography, ClickAwayListener } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { IconButton, InputBase, Divider, Paper, Typography, ClickAwayListener } from '@material-ui/core'
 import SearchIcon from 'mdi-react/SearchIcon'
 import classNames from 'classnames'
 

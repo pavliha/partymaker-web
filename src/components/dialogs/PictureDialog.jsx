@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { object, func, bool, string } from 'prop-types'
-import { withStyles, Dialog } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import Loading from 'components/loaders/Loading'
+
+const Dialog = lazy(() => import('@material-ui/core/Dialog'))
 
 const styles = {
   root: {
@@ -10,13 +13,15 @@ const styles = {
 }
 
 const PictureDialog = ({ classes, url, isOpen, onClose }) =>
-  <Dialog
-    open={isOpen}
-    classes={{ paperWidthSm: classes.root }}
-    onClose={onClose}
-  >
-    <img alt={url} src={url} width="100%" height="100%" onClick={onClose} />
-  </Dialog>
+  <Suspense fallback={<Loading />}>
+    <Dialog
+      open={isOpen}
+      classes={{ paperWidthSm: classes.root }}
+      onClose={onClose}
+    >
+      <img alt={url} src={url} width="100%" height="100%" onClick={onClose} />
+    </Dialog>
+  </Suspense>
 
 PictureDialog.propTypes = {
   classes: object.isRequired,

@@ -1,7 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 import { object, string, func } from 'prop-types'
-import { IconButton, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { IconButton } from '@material-ui/core'
 import ShareIcon from 'mdi-react/ShareVariantIcon'
 
 const styles = theme => ({

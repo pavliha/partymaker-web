@@ -1,6 +1,5 @@
 require('dotenv').config()
 const path = require('path')
-const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -9,6 +8,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const Clean = require('clean-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 const analyze = process.argv.find(a => a === '--analyze')
 
@@ -114,9 +114,9 @@ module.exports = {
     ...(analyze ? [new BundleAnalyzerPlugin()] : []),
     new Dotenv(),
     new Clean('./dist', { root: path.resolve(__dirname, './') }),
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|ru|ua)$/),
     new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
+    new LodashModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: { removeComments: true },

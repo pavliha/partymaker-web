@@ -1,6 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
-import { IconButton, SvgIcon, withStyles } from '@material-ui/core'
+import { withStyles } from '@material-ui/styles'
+import { IconButton, SvgIcon } from '@material-ui/core'
 import LogoIcon from 'assets/images/logo-filled.svg'
 
 const styles = {

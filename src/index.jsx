@@ -3,17 +3,12 @@ import ReactDOM from 'react-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
 import { BrowserRouter } from 'react-router-dom'
-import 'moment/locale/es.js'
-import 'moment/locale/en-gb.js'
-import moment from 'moment'
 import Layout from './containers/Layout'
 import { ThemeProvider } from '@material-ui/styles'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import theme from 'config/theme'
 import { store } from 'src/redux'
 import './index.css'
-
-moment.locale('ru')
 
 const App = () =>
   <ThemeProvider theme={createMuiTheme(theme)}>

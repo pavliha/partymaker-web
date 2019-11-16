@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
-import isEmpty from 'lodash-es/isEmpty'
+import isEmpty from 'lodash/isEmpty'
 import Fuse from 'fuse.js'
 import Loading from 'components/loaders/Loading'
 import Loader from 'components/loaders/Loader'
