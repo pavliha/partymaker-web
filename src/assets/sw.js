@@ -32,11 +32,26 @@ async function cacheOrNetwork(request) {
 async function update(request) {
   const cache = await caches.open(CACHE)
   const response = await fetch(request)
-  if (!request.url.includes('http')) return
-  return cache.put(request, response)
+  await cache.put(request, response.clone())
+  return response
 }
 
 self.addEventListener('fetch', async e => {
   e.respondWith(cacheOrNetwork(e.request))
   e.waitUntil(update(e.request))
+    .then(refresh)
 })
+
+async function refresh(response) {
+  const clients = await self.clients.matchAll()
+  clients.forEach(client => {
+
+    const message = {
+      type: 'refresh',
+      url: response.url,
+      eTag: response.headers.get('ETag')
+    }
+
+    client.postMessage(JSON.stringify(message))
+  })
+}
