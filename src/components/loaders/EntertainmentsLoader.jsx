@@ -19,18 +19,19 @@ const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { ent
 
   return (
     <Loader load={loadEntertainments} onLoad={onLoad}>
-      {array
-        .filter(e => !isEmpty(e.places))
-        .map(entertainment =>
-          <Suspense key={entertainment.id} fallback={<Loading />}>
+      <Suspense fallback={<Loading />}>
+        {array
+          .filter(e => !isEmpty(e.places))
+          .map(entertainment =>
             <Entertainment
+              key={entertainment.id}
               search={search}
               entertainment={entertainment}
               onExpand={onExpand}
               onSelect={onSelect}
             />
-          </Suspense>
-        )}
+          )}
+      </Suspense>
     </Loader>
   )
 }
