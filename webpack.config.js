@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -15,7 +16,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   devServer: {
     hot: true,
-    port: 3000,
+    port: process.env.PORT,
     host: '0.0.0.0',
     historyApiFallback: true,
     disableHostCheck: true,
