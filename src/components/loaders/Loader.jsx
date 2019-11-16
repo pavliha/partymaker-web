@@ -3,7 +3,7 @@ import { func, node, object, string, any } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { Loading } from 'components'
 import ErrorIcon from 'mdi-react/ErrorIcon'
-import isEqual from 'lodash/isEqual'
+import isEqual from 'lodash-es/isEqual'
 
 const styles = theme => ({
 

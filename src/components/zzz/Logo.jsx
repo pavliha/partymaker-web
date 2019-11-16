@@ -12,11 +12,11 @@ const styles = theme => ({
     margin: 15,
   },
   title: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans,Arial,sans-serif',
     color: theme.palette.primary.main,
   },
   city: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans,Arial,sans-serif',
     fontWeight: '100',
     paddingLeft: '15px',
   },

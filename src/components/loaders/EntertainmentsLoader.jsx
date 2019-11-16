@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
-import { Entertainment, Loader } from 'components'
-import isEmpty from 'lodash/isEmpty'
+import isEmpty from 'lodash-es/isEmpty'
 import Fuse from 'fuse.js'
+import Loading from 'components/loaders/Loading'
+import Loader from 'components/loaders/Loader'
+
+const Entertainment = lazy(() => import('components/zzz/Entertainment'))
 
 const options = {
   keys: ['title', 'places.title']
@@ -19,13 +22,14 @@ const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { ent
       {array
         .filter(e => !isEmpty(e.places))
         .map(entertainment =>
-          <Entertainment
-            search={search}
-            key={entertainment.id}
-            entertainment={entertainment}
-            onExpand={onExpand}
-            onSelect={onSelect}
-          />
+          <Suspense key={entertainment.id} fallback={<Loading />}>
+            <Entertainment
+              search={search}
+              entertainment={entertainment}
+              onExpand={onExpand}
+              onSelect={onSelect}
+            />
+          </Suspense>
         )}
     </Loader>
   )

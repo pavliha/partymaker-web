@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { node, object, string } from 'prop-types'
 import { Typography, withStyles } from '@material-ui/core'
 import { PhotosSlider, PlaceContacts, PlaceStatus, BackButton, ShareButton, PlaceCard } from 'components'
-import isEmpty from 'lodash/isEmpty'
+import isEmpty from 'lodash-es/isEmpty'
 import { isShareLink } from 'utils'
 import { placeShape } from 'shapes'
 

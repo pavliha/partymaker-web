@@ -5,7 +5,7 @@ import KeyboardArrowRightIcon from 'mdi-react/ArrowRightIcon'
 import { entertainmentShape } from 'shapes'
 import { PlacesList } from 'components'
 import Fuse from 'fuse.js'
-import isEmpty from 'lodash/isEmpty'
+import isEmpty from 'lodash-es/isEmpty'
 
 const styles = theme => ({
   root: {
