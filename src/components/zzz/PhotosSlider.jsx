@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core'
 import { photoShape } from 'shapes'
 import { PictureDialog } from 'components'
 import classNames from 'classnames'
+import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 
 const styles = theme => ({
   root: {
@@ -47,7 +48,7 @@ class PhotosSlider extends Component {
           <img
             key={photo.id}
             alt={photo.url}
-            src={photo.url}
+            src={appendFileNameSuffix(photo.url, '-slide')}
             onClick={this.open(photo)}
             className={classes.photo} />
         )}

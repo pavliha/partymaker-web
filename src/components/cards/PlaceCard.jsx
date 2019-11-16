@@ -4,6 +4,7 @@ import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'
+import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 
 const styles = {
   root: {
@@ -73,7 +74,7 @@ class PlaceCard extends Component {
 
     return (
       <div className={rootStyle} onClick={this.select}>
-        <Picture src={place?.picture_url} className={pictureStyle} />
+        <Picture src={appendFileNameSuffix(place?.picture_url, '-thumbnail')} className={pictureStyle} />
         <div className={containerStyle}>
           <Typography className={classes.title}>{place?.title}</Typography>
           <Typography className={classes.subtitle} color="textSecondary">{place?.price}</Typography>

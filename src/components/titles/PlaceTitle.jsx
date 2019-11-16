@@ -4,6 +4,7 @@ import { Typography, withStyles } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'
+import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 
 const styles = theme => ({
   root: {
@@ -43,7 +44,7 @@ const styles = theme => ({
 const PlaceTitle = ({ classes, className, place, action, onClick }) =>
   <div className={classNames(classes.root, className)}>
     <Picture
-      src={place?.picture_url}
+      src={appendFileNameSuffix(place?.picture_url, '-thumbnail')}
       className={classes.picture}
       onClick={onClick}
     />
