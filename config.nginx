@@ -102,6 +102,7 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
     location / {
+        expires 130s;
         try_files $uri /index.html;
     }
 }
