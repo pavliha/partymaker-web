@@ -72,6 +72,7 @@ server {
     }
 
     location / {
+        expires 120s;
         proxy_pass http://0.0.0.0:3333;
     }
 }
@@ -102,7 +103,6 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
     location / {
-        expires 130s;
         try_files $uri /index.html;
     }
 }
