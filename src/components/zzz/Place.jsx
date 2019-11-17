@@ -32,7 +32,7 @@ const styles = {
   },
 
   placeTitle: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans, Arial, sans-serif',
     paddingRight: 5,
   },
 
@@ -55,17 +55,17 @@ const styles = {
   },
 
   contacts: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans, Arial, sans-serif',
     marginBottom: 30,
   },
 
   description: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans, Arial, sans-serif',
     marginBottom: 30,
   },
 
   contactsTitle: {
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans, Arial, sans-serif',
   },
 
   descriptionText: {

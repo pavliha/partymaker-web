@@ -29,7 +29,7 @@ const styles = theme => ({
   title: {
     cursor: 'pointer',
     fontSize: 20,
-    fontFamily: 'Google Sans',
+    fontFamily: 'Google Sans, Arial, sans-serif',
   },
 
   places: {
