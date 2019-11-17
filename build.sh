@@ -9,6 +9,6 @@ yarn install
 yarn build
 echo 'Start mysql service'
 sudo service mysql start
-sudo cp ./config.nginx /etc/nginx/sites-available/partymaker.zp.u
+sudo cp ./config.nginx /etc/nginx/sites-available/partymaker.zp.ua
 echo 'Start nginx service'
 sudo service nginx start
