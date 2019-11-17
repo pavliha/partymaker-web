@@ -106,7 +106,7 @@ class SearchField extends Component {
             <Typography className={classes.city}>Запорожье</Typography>
           </div>
           <Divider className={classes.divider} orientation="vertical" />
-          <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+          <IconButton aria-label="Search" color="primary" className={classes.iconButton}>
             <SearchIcon />
           </IconButton>
         </Paper>

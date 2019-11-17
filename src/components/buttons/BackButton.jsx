@@ -17,7 +17,7 @@ const styles = theme => ({
 
 const BackButton = ({ classes, className, history, onClick }) =>
   <div className={classNames(classes.root, className)}>
-    <IconButton color="inherit" onClick={onClick || history.goBack}><ArrowBackIcon /></IconButton>
+    <IconButton aria-label="Arrow Back" color="inherit" onClick={onClick || history.goBack}><ArrowBackIcon /></IconButton>
   </div>
 
 BackButton.propTypes = {

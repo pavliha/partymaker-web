@@ -12,7 +12,7 @@ const styles = {
 }
 
 const LogoButton = ({ classes }) =>
-  <IconButton className={classes.root}>
+  <IconButton className={classes.root} aria-label="Logo">
     <SvgIcon>
       <LogoIcon className={classes.logoIcon} />
     </SvgIcon>

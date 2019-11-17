@@ -61,7 +61,7 @@ const Entertainment = ({ classes, entertainment, search, onSelect, onExpand }) =
         <Typography component="div" className={classes.title}>
           {entertainment.title}
         </Typography>
-        <IconButton>
+        <IconButton aria-label="Arrow Right">
           <KeyboardArrowRightIcon />
         </IconButton>
       </div>

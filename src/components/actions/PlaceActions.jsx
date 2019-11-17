@@ -14,6 +14,7 @@ const PlaceActions = ({ classes, phone }) => phone
   ? <div className={classes.root}>
     <a href={`tel:${phone}`}>
       <Button
+        aria-label="call via phone"
         className={classes.primary}
         color="primary"
         variant="contained"
