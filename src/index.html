@@ -4,6 +4,7 @@
 <head>
   <title>Partymaker</title>
   <meta charset="utf-8">
+  <link rel="preconnect" href="https://www.google-analytics.com">
   <meta content="width=device-width, minimum-scale=1, shrink-to-fit=no" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -14,6 +15,9 @@
   <base href="/">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/partymaker-favicon.png" type="image/x-icon">
+  <link rel="preload" as="script" href="vendor.js">
+  <link rel="preload" as="script" href="client.js">
+  <link rel="preload" as="style" href="client.css">
 </head>
 <body>
 
@@ -21,11 +25,12 @@
 
 <!-- Google Analytics -->
 <script>
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-  ga('create', 'UA-147646131-1', 'auto');
-  ga('send', 'pageview');
+  window.ga = window.ga || function() {(ga.q = ga.q || []).push(arguments)}
+  ga.l = +new Date
+  ga('create', 'UA-147646131-1', 'auto')
+  ga('send', 'pageview')
 </script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
 <!-- End Google Analytics -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
