@@ -68,9 +68,6 @@ server {
         alias /home/dev/partymaker-api/public/uploads/;
         autoindex off;
         try_files $uri $uri/ $uri.html =404;
-    }
-
-    location ~*  \.(jpg|jpeg|png|gif|ico)$ {
         expires 365d;
     }
 
