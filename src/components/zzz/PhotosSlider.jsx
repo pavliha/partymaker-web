@@ -5,6 +5,7 @@ import { photoShape } from 'shapes'
 import { PhotosModal } from 'components'
 import classNames from 'classnames'
 import appendFileNameSuffix from 'utils/appendFileNameSuffix'
+import isNull from 'lodash/isNull'
 
 const styles = theme => ({
   root: {
@@ -29,33 +30,34 @@ const styles = theme => ({
 class PhotosSlider extends PureComponent {
 
   state = {
-    photo: null
+    index: null
   }
 
-  open = photo => () =>
-    this.setState({ photo })
+  open = index => () =>
+    this.setState({ index })
 
   close = () => {
-    this.setState({ photo: null })
+    this.setState({ index: null })
   }
 
   render() {
     const { classes, photos, className } = this.props
-    const { photo } = this.state
+    const { index } = this.state
 
     return (
       <div className={classNames([classes.root, className])}>
-        {photos.map(photo =>
+        {photos.map((photo, index) =>
           <img
             key={photo.id}
             alt={photo.url}
             src={appendFileNameSuffix(photo.url, '-slide')}
-            onClick={this.open(photo)}
+            onClick={this.open(index)}
             className={classes.photo} />
         )}
         <PhotosModal
+          index={index}
           photos={photos}
-          isOpen={!!photo}
+          isOpen={!isNull(index)}
           onClose={this.close}
         />
       </div>

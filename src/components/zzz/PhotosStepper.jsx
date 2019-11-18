@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { arrayOf, object } from 'prop-types'
+import { arrayOf, number, object } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Button, MobileStepper } from '@material-ui/core'
 import KeyboardArrowLeftIcon from 'mdi-react/KeyboardArrowLeftIcon'
@@ -28,7 +28,7 @@ const styles = () => ({
 class PhotosStepper extends Component {
 
   state = {
-    activeStep: 0,
+    activeStep: this.props.index || 0,
   }
 
   next = () =>
@@ -47,14 +47,22 @@ class PhotosStepper extends Component {
     const maxSteps = photos.length
 
     const nextButton = (
-      <Button size="small" onClick={this.next} disabled={activeStep === maxSteps - 1}>
+      <Button
+        size="small"
+        disabled={activeStep === maxSteps - 1}
+        onClick={this.next}
+      >
         Вперед
         <KeyboardArrowRightIcon />
       </Button>
     )
 
     const backButton = (
-      <Button size="small" onClick={this.back} disabled={activeStep === 0}>
+      <Button
+        size="small"
+        disabled={activeStep === 0}
+        onClick={this.back}
+      >
         <KeyboardArrowLeftIcon />
         Назад
       </Button>
@@ -86,6 +94,7 @@ class PhotosStepper extends Component {
 
 PhotosStepper.propTypes = {
   classes: object.isRequired,
+  index: number,
   photos: arrayOf(photoShape).isRequired
 }
 

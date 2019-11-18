@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react'
-import { func, bool, arrayOf, object } from 'prop-types'
+import { func, bool, arrayOf, object, number } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import Loading from 'components/loaders/Loading'
 import PhotosStepper from 'components/zzz/PhotosStepper'
@@ -24,20 +24,21 @@ const styles = {
   }
 }
 
-const PhotosModal = ({ classes, photos, isOpen, onClose }) =>
+const PhotosModal = ({ classes, index, photos, isOpen, onClose }) =>
   <Suspense fallback={<Loading />}>
     <Modal
       className={classes.root}
       open={isOpen}
       onClose={onClose}
     >
-      <PhotosStepper photos={photos} />
+      {isOpen ? <PhotosStepper index={index} photos={photos} /> : <div>.</div>}
     </Modal>
     {isOpen && <CloseButton className={classes.close} onClick={onClose} />}
   </Suspense>
 
 PhotosModal.propTypes = {
   classes: object.isRequired,
+  index: number,
   photos: arrayOf(photoShape),
   isOpen: bool.isRequired,
   onClose: func.isRequired,

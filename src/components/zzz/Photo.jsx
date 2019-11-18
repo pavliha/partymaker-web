@@ -61,7 +61,6 @@ class Photo extends Component {
           [classes.portrait]: orientation === 'portrait',
         })}
         src={photo.url}
-        loading="lazy"
         alt={photo.url}
         onLoad={this.detectOrientation}
       />
