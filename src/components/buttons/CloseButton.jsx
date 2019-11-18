@@ -16,7 +16,11 @@ const styles = theme => ({
 
 const CloseButton = ({ classes, color, onClick, className }) =>
   <div className={classNames(classes.root, className)}>
-    <IconButton aria-label="Close Button" color={color} onClick={onClick}>
+    <IconButton
+      aria-label="Close Button"
+      color={color}
+      onClick={onClick}
+    >
       <CloseIcon />
     </IconButton>
   </div>

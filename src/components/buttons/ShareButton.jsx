@@ -16,7 +16,11 @@ const styles = theme => ({
 
 const ShareButton = ({ classes, className, onClick }) =>
   <div className={classNames(classes.root, className)}>
-    <IconButton aria-label="Share Button" color="inherit" onClick={onClick}>
+    <IconButton
+      aria-label="Share Button"
+      color="inherit"
+      onClick={onClick}
+    >
       <ShareIcon />
     </IconButton>
   </div>
