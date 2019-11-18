@@ -118,11 +118,14 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new LodashModuleReplacementPlugin(),
-    new PreloadWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: { removeComments: true, collapseWhitespace: true, },
       inject: true,
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      include: ['client', 'vendor']
     }),
   ],
 }
