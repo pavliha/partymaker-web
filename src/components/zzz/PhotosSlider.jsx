@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { object, arrayOf, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { photoShape } from 'shapes'
@@ -26,7 +26,7 @@ const styles = theme => ({
   },
 })
 
-class PhotosSlider extends Component {
+class PhotosSlider extends PureComponent {
 
   state = {
     photo: null

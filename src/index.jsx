@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
@@ -10,7 +10,7 @@ import theme from 'config/theme'
 import { store } from 'src/redux'
 import './index.css'
 
-class App extends Component {
+class App extends PureComponent {
 
   componentDidMount() {
     const loader = document.querySelector('.partymaker-loader')

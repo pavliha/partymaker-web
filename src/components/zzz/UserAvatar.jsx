@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { bool, object, oneOfType, number, shape, string, func } from 'prop-types'
+import React, { PureComponent } from 'react'
+import { bool, object, shape, string, func } from 'prop-types'
 import { Avatar } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
 import classNames from 'classnames'
 import initials from 'name-initials'
-import { PictureDialog, OnlineIndicator } from 'components'
+import { PictureDialog } from 'components'
 
 const styles = () => ({
   avatar: {
@@ -23,7 +23,7 @@ const styles = () => ({
   },
 })
 
-class UserAvatar extends Component {
+class UserAvatar extends PureComponent {
 
   state = {
     isModalOpen: false,
@@ -48,7 +48,7 @@ class UserAvatar extends Component {
   }
 
   render() {
-    const { classes, user, is_online, clickable, onClick } = this.props
+    const { classes, user, clickable, onClick } = this.props
     const { isModalOpen } = this.state
 
     if (!user) return null
@@ -62,7 +62,6 @@ class UserAvatar extends Component {
         >
           {user.avatar_url ? null : initials(user.name)}
         </Avatar>
-        <OnlineIndicator isVisible={is_online} />
         <PictureDialog
           url={user.avatar_url}
           isOpen={isModalOpen}
@@ -77,7 +76,6 @@ UserAvatar.propTypes = {
   classes: object.isRequired,
   className: string,
   small: bool,
-  is_online: oneOfType([bool, number]),
   user: shape({
     name: string,
     avatar_url: string,

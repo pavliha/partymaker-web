@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { object, func, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { IconButton, InputBase, Divider, Paper, Typography, ClickAwayListener } from '@material-ui/core'
@@ -55,7 +55,7 @@ const styles = theme => ({
   }
 })
 
-class SearchField extends Component {
+class SearchField extends PureComponent {
 
   input = React.createRef()
 

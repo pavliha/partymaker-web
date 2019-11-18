@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classNames from 'classnames'
 import { node, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
@@ -73,7 +73,7 @@ const styles = {
   },
 }
 
-class Place extends Component {
+class Place extends PureComponent {
 
   componentDidMount() {
     window.scrollTo({ top: 0 })

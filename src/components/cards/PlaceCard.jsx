@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { object, func, bool } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
@@ -62,7 +62,7 @@ const styles = {
   }
 }
 
-class PlaceCard extends Component {
+class PlaceCard extends PureComponent {
 
   select = () => {
     const { place, onSelect } = this.props
