@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { Provider as ReduxProvider } from 'react-redux'
 import { hot } from 'react-hot-loader/root'
@@ -10,14 +10,26 @@ import theme from 'config/theme'
 import { store } from 'src/redux'
 import './index.css'
 
-const App = () =>
-  <ThemeProvider theme={createMuiTheme(theme)}>
-    <ReduxProvider store={store}>
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
-    </ReduxProvider>
-  </ThemeProvider>
+class App extends Component {
+
+  componentDidMount() {
+    const loader = document.querySelector('.partymaker-loader')
+    loader.remove()
+    console.log('loaded')
+  }
+
+  render() {
+    return (
+      <ThemeProvider theme={createMuiTheme(theme)}>
+        <ReduxProvider store={store}>
+          <BrowserRouter>
+            <Layout />
+          </BrowserRouter>
+        </ReduxProvider>
+      </ThemeProvider>
+    )
+  }
+}
 
 const HotApp = hot(App)
 
