@@ -45,11 +45,8 @@ const styles = (theme) => ({
 
 })
 
-const EntertainmentScene = ({ classes, history, redux: { entertainment, loadEntertainment } }) => {
-
-  if (!entertainment) return null
-
-  return <section className={classes.root}>
+const EntertainmentScene = ({ classes, history, redux: { entertainment, loadEntertainment } }) =>
+  <section className={classes.root}>
     <Helmet>
       {entertainment && <title>Partymaker - {entertainment.title}</title>}
     </Helmet>
@@ -67,7 +64,6 @@ const EntertainmentScene = ({ classes, history, redux: { entertainment, loadEnte
       />
     </Loader>
   </section>
-}
 
 EntertainmentScene.propTypes = {
   classes: object.isRequired,
