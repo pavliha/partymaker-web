@@ -4,7 +4,7 @@ import { Avatar } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
 import classNames from 'classnames'
 import initials from 'name-initials'
-import { PictureDialog } from 'components'
+import { PhotosDialog } from 'components'
 
 const styles = () => ({
   avatar: {
@@ -62,7 +62,7 @@ class UserAvatar extends PureComponent {
         >
           {user.avatar_url ? null : initials(user.name)}
         </Avatar>
-        <PictureDialog
+        <PhotosDialog
           url={user.avatar_url}
           isOpen={isModalOpen}
           onClose={this.close}

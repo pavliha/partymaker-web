@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { object, arrayOf, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { photoShape } from 'shapes'
-import { PictureDialog } from 'components'
+import { PhotosModal } from 'components'
 import classNames from 'classnames'
 import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 
@@ -52,8 +52,8 @@ class PhotosSlider extends PureComponent {
             onClick={this.open(photo)}
             className={classes.photo} />
         )}
-        <PictureDialog
-          url={photo?.url}
+        <PhotosModal
+          photos={photos}
           isOpen={!!photo}
           onClose={this.close}
         />

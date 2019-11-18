@@ -34,7 +34,7 @@ export PlaceCard from './cards/PlaceCard'
 /**
  * Dialogs
  */
-export PictureDialog from './dialogs/PictureDialog'
+export PhotosModal from './dialogs/PhotosModal'
 
 /**
  * Fields
