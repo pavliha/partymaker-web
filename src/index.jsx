@@ -15,7 +15,6 @@ class App extends PureComponent {
   componentDidMount() {
     const loader = document.querySelector('.partymaker-loader')
     loader.remove()
-    console.log('loaded')
   }
 
   render() {
