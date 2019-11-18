@@ -11,8 +11,6 @@ import Photo from 'components/zzz/Photo'
 const styles = () => ({
 
   root: {
-    width: '100%',
-    height: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -63,7 +61,7 @@ class PhotosStepper extends Component {
     )
 
     return (
-      <div className={classes.root}>
+      <div className={classes.root} tabIndex={0}>
         <SwipeableViews
           index={activeStep}
           onChangeIndex={this.change}

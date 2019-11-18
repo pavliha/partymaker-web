@@ -4,9 +4,11 @@ import { withStyles } from '@material-ui/styles'
 import photoShape from 'shapes/photo'
 import classNames from 'classnames'
 
-const styles = {
+const styles = theme => ({
 
   root: {
+    width: '100%',
+    height: 'auto',
     userDrag: 'none',
     userSelect: 'none',
     display: 'block',
@@ -14,16 +16,22 @@ const styles = {
   },
 
   landscape: {
-    width: 'calc(100% - 40px)',
-    maxWidth: 1000,
+    height: 'auto',
+    maxWidth: 'calc(100vw - 30px)',
+    [theme.breakpoints.up('md')]: {
+      maxWidth: 1000,
+    }
   },
 
   portrait: {
-    height: '100%',
-    maxHeight: 800,
+    width: 'auto',
+    maxWidth: 'calc(100vw - 30px)',
+    [theme.breakpoints.up('md')]: {
+      maxHeight: 800,
+    }
   }
 
-}
+})
 
 class Photo extends Component {
 

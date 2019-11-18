@@ -35,8 +35,9 @@ class PhotosSlider extends PureComponent {
   open = photo => () =>
     this.setState({ photo })
 
-  close = () =>
+  close = () => {
     this.setState({ photo: null })
+  }
 
   render() {
     const { classes, photos, className } = this.props
