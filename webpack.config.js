@@ -71,7 +71,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    filename: `[name].js`,
+    filename: `[name].[hash:3].js`,
   },
 
   target: 'web',
@@ -114,12 +114,12 @@ module.exports = {
     ...(analyze ? [new BundleAnalyzerPlugin()] : []),
     new Dotenv(),
     new Clean('./dist', { root: path.resolve(__dirname, './') }),
-    new MiniCssExtractPlugin({ filename: '[name].css', chunkFilename: '[id].css' }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new LodashModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
-      minify: { removeComments: true },
+      minify: { removeComments: true, collapseWhitespace: true, },
       inject: true,
     }),
   ],

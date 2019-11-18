@@ -2,9 +2,6 @@ const CACHE = 'cache-and-update'
 
 const assets = [
   './index.html',
-  './client.css',
-  './client.js',
-  './vendor.js',
   './fonts/GoogleSans-Bold.ttf',
   './fonts/GoogleSans-BoldItalic.ttf',
   './fonts/GoogleSans-Italic.ttf',
