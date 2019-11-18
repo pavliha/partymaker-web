@@ -9,6 +9,7 @@ const Dotenv = require('dotenv-webpack')
 const Clean = require('clean-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+const PreloadWebpackPlugin = require('preload-webpack-plugin')
 
 const analyze = process.argv.find(a => a === '--analyze')
 
@@ -117,6 +118,7 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
     new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
     new LodashModuleReplacementPlugin(),
+    new PreloadWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       minify: { removeComments: true, collapseWhitespace: true, },
