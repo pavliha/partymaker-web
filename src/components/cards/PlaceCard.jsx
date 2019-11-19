@@ -22,12 +22,13 @@ const styles = theme => ({
   },
 
   picture: {
-    borderRadius: 25,
+    borderRadius: 20,
     width: 100,
     height: 100,
     [theme.breakpoints.up('md')]: {
       height: 150,
       width: 150,
+      borderRadius: 25,
     }
   },
 
