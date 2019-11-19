@@ -6,6 +6,7 @@ import { PhotosModal } from 'components'
 import classNames from 'classnames'
 import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 import isNull from 'lodash/isNull'
+import isEmpty from 'lodash/isEmpty'
 
 const styles = theme => ({
   root: {
@@ -27,7 +28,7 @@ const styles = theme => ({
   },
 })
 
-class PhotosSlider extends PureComponent {
+class PhotosList extends PureComponent {
 
   state = {
     index: null
@@ -43,6 +44,8 @@ class PhotosSlider extends PureComponent {
   render() {
     const { classes, photos, className } = this.props
     const { index } = this.state
+
+    if (isEmpty(photos)) return null
 
     return (
       <div className={classNames([classes.root, className])}>
@@ -65,10 +68,10 @@ class PhotosSlider extends PureComponent {
   }
 }
 
-PhotosSlider.propTypes = {
+PhotosList.propTypes = {
   classes: object.isRequired,
   className: string,
   photos: arrayOf(photoShape),
 }
 
-export default withStyles(styles)(PhotosSlider)
+export default withStyles(styles)(PhotosList)

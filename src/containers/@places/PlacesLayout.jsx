@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Loading from 'components/loaders/Loading'
+import Loading from 'components/Loading'
 
 const PlaceScene = lazy(() => import('./@id/PlaceScene'))
 

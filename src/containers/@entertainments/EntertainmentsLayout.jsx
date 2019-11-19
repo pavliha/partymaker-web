@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import EntertainmentsScene from './EntertainmentsScene'
 import { withStyles } from '@material-ui/styles'
-import Loading from 'components/loaders/Loading'
+import Loading from 'components/Loading'
 
 const EntertainmentScene = lazy(() => import('./@id/EntertainmentScene'))
 

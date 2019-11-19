@@ -3,10 +3,10 @@ import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
 import isEmpty from 'lodash/isEmpty'
 import Fuse from 'fuse.js'
-import Loading from 'components/loaders/Loading'
-import Loader from 'components/loaders/Loader'
+import Loading from 'components/Loading'
+import Loader from 'components/Loader'
 
-const Entertainment = lazy(() => import('components/zzz/Entertainment'))
+const Entertainment = lazy(() => import('components/Entertainment'))
 
 const options = {
   keys: ['title', 'places.title']

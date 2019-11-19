@@ -1,55 +1,57 @@
-export PlaceContacts from './zzz/PlaceContacts'
-export Entertainment from './zzz/Entertainment'
-export PlaceContact from './zzz/PlaceContact'
-export PhotosSlider from './zzz/PhotosSlider'
-export Picture from './zzz/Picture'
-export Place from './zzz/Place'
-export Logo from './zzz/Logo'
+export PlaceContacts from './PlaceContacts'
+export Entertainment from './Entertainment'
+export PlaceContact from './PlaceContact'
+export PhotosList from './PhotosSlider'
+export Picture from './Picture'
+export Place from './Place'
+export Logo from './Logo'
+export PlaceSubtitle from './PlaceSubtitle'
+export PlaceHeader from './PlaceHeader'
 
 /**
  * Loaders
  */
-export Loader from './loaders/Loader'
-export Loading from './loaders/Loading'
-export PlaceLoader from './loaders/PlaceLoader'
-export EntertainmentsLoader from './loaders/EntertainmentsLoader'
+export Loader from './Loader'
+export Loading from './Loading'
+export PlaceLoader from './PlaceLoader'
+export EntertainmentsLoader from './EntertainmentsLoader'
 
 /**
  * Lists
  */
-export PlacesList from './lists/PlacesList'
+export PlacesList from './PlacesList'
 
 /**
  * Buttons
  */
-export BackButton from './buttons/BackButton'
-export CloseButton from './buttons/CloseButton'
-export ShareButton from './buttons/ShareButton'
+export BackButton from './BackButton'
+export CloseButton from './CloseButton'
+export SharePlaceButton from './SharePlaceButton'
 
 /**
  * Cards
  */
-export PlaceCard from './cards/PlaceCard'
+export PlaceCard from './PlaceCard'
 
 /**
  * Dialogs
  */
-export PhotosModal from './dialogs/PhotosModal'
+export PhotosModal from './PhotosModal'
 
 /**
  * Fields
  */
-export SearchField from './fields/SearchField'
+export SearchField from './SearchField'
 
 /**
  * Actions
  */
-export PlaceActions from './actions/PlaceActions'
+export PlaceActions from './PlaceActions'
 
 /**
  * Status
  */
-export PlaceStatus from './status/PlaceStatus'
-export StatusItem from './status/StatusItem'
-export RatingStatusItem from './status/RatingStatusItem'
-export PlayersStatusItem from './status/PlayersStatusItem'
+export PlaceStatus from './PlaceStatus'
+export StatusItem from './StatusItem'
+export RatingStatusItem from './RatingStatusItem'
+export PlayersStatusItem from './PlayersStatusItem'

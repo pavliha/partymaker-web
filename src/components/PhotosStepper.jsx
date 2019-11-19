@@ -6,7 +6,7 @@ import KeyboardArrowLeftIcon from 'mdi-react/KeyboardArrowLeftIcon'
 import KeyboardArrowRightIcon from 'mdi-react/KeyboardArrowRightIcon'
 import SwipeableViews from 'react-swipeable-views'
 import photoShape from 'shapes/photo'
-import Photo from 'components/zzz/Photo'
+import Photo from 'components/Photo'
 
 const styles = () => ({
 

@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from 'react'
 import { func, bool, arrayOf, object, number } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
-import Loading from 'components/loaders/Loading'
-import PhotosStepper from 'components/zzz/PhotosStepper'
+import Loading from 'components/Loading'
+import PhotosStepper from 'components/PhotosStepper'
 import photoShape from 'shapes/photo'
-import CloseButton from 'components/buttons/CloseButton'
+import CloseButton from 'components/CloseButton'
 
 const Modal = lazy(() => import('@material-ui/core/Modal'))
 
