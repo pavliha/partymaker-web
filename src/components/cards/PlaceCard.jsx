@@ -12,13 +12,15 @@ const styles = theme => ({
     cursor: 'pointer',
     position: 'relative',
     margin: 10,
-    width: 150,
+    width: 100,
     display: 'inline-flex',
     flexDirection: 'column',
     '@media only screen and (max-width: 325px)': {
       margin: 5,
     },
-
+    [theme.breakpoints.up('md')]: {
+      width: 150,
+    }
   },
 
   picture: {
