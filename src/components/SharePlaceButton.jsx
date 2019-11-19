@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/styles'
 import { IconButton } from '@material-ui/core'
 import ShareIcon from 'mdi-react/ShareVariantIcon'
 import placeShape from 'shapes/place'
+import { FRONTEND_URL } from 'config/app'
 
 const styles = theme => ({
   root: {
@@ -19,12 +20,7 @@ class SharePlaceButton extends Component {
 
   shareApi = () => {
     const { place } = this.props
-
-    navigator.share({
-      url: window.location.href,
-      text: place.title,
-      title: place.title,
-    })
+    navigator.share({ url: `${FRONTEND_URL}/place/${place.id}` })
   }
 
   render() {
