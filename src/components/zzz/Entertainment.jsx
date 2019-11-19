@@ -28,8 +28,11 @@ const styles = theme => ({
 
   title: {
     cursor: 'pointer',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Google Sans, Arial, sans-serif',
+    [theme.breakpoints.up('md')]: {
+      fontSize: 20,
+    },
   },
 
   places: {

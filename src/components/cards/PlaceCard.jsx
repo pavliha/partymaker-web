@@ -7,7 +7,7 @@ import { Picture } from 'components'
 import classNames from 'classnames'
 import appendFileNameSuffix from 'utils/appendFileNameSuffix'
 
-const styles = {
+const styles = theme => ({
   root: {
     cursor: 'pointer',
     position: 'relative',
@@ -18,16 +18,24 @@ const styles = {
     '@media only screen and (max-width: 325px)': {
       margin: 5,
     },
+
   },
 
   picture: {
     borderRadius: 25,
     width: 100,
     height: 100,
+    [theme.breakpoints.up('md')]: {
+      height: 150,
+      width: 150,
+    }
   },
 
   title: {
     fontSize: 13,
+    [theme.breakpoints.up('md')]: {
+      fontSize: 16,
+    }
   },
 
   container: {
@@ -42,6 +50,9 @@ const styles = {
 
   subtitle: {
     fontSize: 13,
+    [theme.breakpoints.up('md')]: {
+      fontSize: 14,
+    }
   },
 
   inline: {
@@ -60,7 +71,7 @@ const styles = {
     paddingTop: 0,
     paddingLeft: 15,
   }
-}
+})
 
 class PlaceCard extends PureComponent {
 
