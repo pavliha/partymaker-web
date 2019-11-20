@@ -22,7 +22,15 @@ const PlaceScene = ({ match, classes, redux: { place } }) =>
   <div className={classes.root}>
     <div className={classes.container}>
       <PlaceLoader id={match.params.id}>
-        {place && <Helmet><title>{place.title}</title></Helmet>}
+        {place && (
+          <Helmet>
+            <title>{place.title} - Partymaker</title>
+            <meta
+              name="description"
+              content={place.description}
+            />
+          </Helmet>
+        )}
         {place && <Place place={place} actions={<PlaceActions phone={place.contacts?.phone} />} />}
       </PlaceLoader>
     </div>

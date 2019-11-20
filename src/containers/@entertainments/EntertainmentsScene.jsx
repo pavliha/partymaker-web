@@ -49,7 +49,11 @@ const EntertainmentsScene = ({ classes, history }) => {
   return (
     <section className={classes.root}>
       <Helmet>
-        <title>Поиск мест</title>
+        <title>Partymaker - Найти где погулять в Запорожье</title>
+        <meta
+          name="description"
+          content="Найди где хорошо провести время с друзьями в Запорожье. Список хорошо отобраных мест с ценами, услугами и описанием"
+        />
       </Helmet>
       <div className={classes.searchArea}>
         <SearchField
