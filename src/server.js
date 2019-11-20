@@ -15,6 +15,7 @@ const htmlTemplate = (html, assets) => `
         <link rel="manifest" href="/site.webmanifest">
         <link rel="mask-icon" href="/partymaker-favicon.svg" color="#9306BC">
         <meta name="msapplication-TileColor" content="#9306BC">
+        <meta name="description" content="Найди где хорошо провести время с друзьями в Запорожье. Список хорошо отобраных мест с ценами, услугами и описанием">
         <meta name="theme-color" content="#9306BC">
         <base href="/">
         <link rel="icon" href="favicon.ico" type="image/x-icon">
