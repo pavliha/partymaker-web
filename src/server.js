@@ -4,6 +4,7 @@ import Template from 'lib/Template'
 import App from './App'
 
 const htmlTemplate = (html, assets) => `
+      <!DOCTYPE html>
       <html lang="ru">
       <head>
         <link rel="preconnect" href="https://api.partymaker.zp.ua">
