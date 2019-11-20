@@ -20,7 +20,10 @@ class SharePlaceButton extends Component {
 
   shareApi = () => {
     const { place } = this.props
-    navigator.share({ url: `${FRONTEND_URL}/places/${place.id}` })
+    navigator.share({
+      title: place.title,
+      url: `${FRONTEND_URL}/places/${place.id}`
+    })
   }
 
   render() {
