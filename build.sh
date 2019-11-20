@@ -10,9 +10,9 @@ sudo service mysql stop
 sudo service nginx stop
 echo 'Stop nginx service'
 
-echo 'Build project'
+echo 'Start project'
 yarn install
-yarn prod:pm2
+pm2 restart index.js -- --prod
 
 echo 'Start mysql service'
 sudo service mysql start

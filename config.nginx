@@ -16,7 +16,7 @@ server {
     listen [::]:443 ssl http2 default_server;
     server_name partymaker.zp.ua;
 
-    root /home/dev/partymaker-web/dist;
+    root /home/dev/partymaker-web/dist/public;
     ssl on;
     ssl_certificate /etc/letsencrypt/live/api.partymaker.zp.ua/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/api.partymaker.zp.ua/privkey.pem; # managed by Certbot
