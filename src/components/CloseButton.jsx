@@ -10,7 +10,7 @@ const styles = theme => ({
     marginRight: 0,
     [theme.breakpoints.up('md')]: {
       marginRight: 5,
-    }
+    },
   },
 })
 
@@ -33,7 +33,7 @@ CloseButton.propTypes = {
 }
 
 CloseButton.defaultProps = {
-  color: 'primary'
+  color: 'primary',
 }
 
 export default withStyles(styles)(CloseButton)

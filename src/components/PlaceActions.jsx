@@ -7,7 +7,7 @@ const styles = {
   root: {},
   primary: {
     marginRight: 20,
-  }
+  },
 }
 
 const PlaceActions = ({ classes, phone }) => phone

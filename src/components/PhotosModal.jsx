@@ -1,12 +1,10 @@
-import React, { lazy, Suspense } from 'react'
+import React, { Fragment } from 'react'
 import { func, bool, arrayOf, object, number } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
-import Loading from 'components/Loading'
 import PhotosStepper from 'components/PhotosStepper'
 import photoShape from 'shapes/photo'
 import CloseButton from 'components/CloseButton'
-
-const Modal = lazy(() => import('@material-ui/core/Modal'))
+import Modal from '@material-ui/core/Modal'
 
 const styles = {
   root: {
@@ -21,11 +19,11 @@ const styles = {
     top: 5,
     right: 5,
     zIndex: 1500,
-  }
+  },
 }
 
 const PhotosModal = ({ classes, index, photos, isOpen, onClose }) =>
-  <Suspense fallback={<Loading />}>
+  <Fragment>
     <Modal
       className={classes.root}
       open={isOpen}
@@ -34,7 +32,7 @@ const PhotosModal = ({ classes, index, photos, isOpen, onClose }) =>
       {isOpen ? <PhotosStepper index={index} photos={photos} /> : <div>.</div>}
     </Modal>
     {isOpen && <CloseButton className={classes.close} onClick={onClose} />}
-  </Suspense>
+  </Fragment>
 
 PhotosModal.propTypes = {
   classes: object.isRequired,

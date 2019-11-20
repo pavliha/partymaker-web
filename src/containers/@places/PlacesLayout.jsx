@@ -1,14 +1,10 @@
-import React, { Suspense, lazy } from 'react'
+import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Loading from 'components/Loading'
-
-const PlaceScene = lazy(() => import('./@id/PlaceScene'))
+import PlaceScene from './@id/PlaceScene'
 
 const PlacesLayout = () =>
-  <Suspense fallback={<Loading />}>
-    <Switch>
-      <Route exact path="/places/:id" component={PlaceScene} />
-    </Switch>
-  </Suspense>
+  <Switch>
+    <Route exact path="/places/:id" component={PlaceScene} />
+  </Switch>
 
 export default PlacesLayout

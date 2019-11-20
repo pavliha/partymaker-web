@@ -29,7 +29,7 @@ const styles = (theme) => ({
     display: 'inline-block',
     [theme.breakpoints.up('xs')]: {
       paddingLeft: 30,
-    }
+    },
   },
   title: {
     paddingLeft: 5,
@@ -41,7 +41,7 @@ const styles = (theme) => ({
     marginTop: 20,
     display: 'flex',
     alignItems: 'center',
-  }
+  },
 
 })
 
@@ -71,12 +71,12 @@ EntertainmentScene.propTypes = {
   redux: shape({
     entertainment: entertainmentShape,
     loadEntertainment: func,
-  })
+  }),
 }
 
 const redux = (state, { match: { params: { id } } }) => ({
   entertainment: select.entertainments.current(state, id),
-  loadEntertainment: () => actions.entertainments.load(id)
+  loadEntertainment: () => actions.entertainments.load(id),
 })
 
 export default withStyles(styles)(connect(redux)(EntertainmentScene))

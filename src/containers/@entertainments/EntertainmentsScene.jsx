@@ -10,7 +10,7 @@ const styles = theme => ({
     maxWidth: 1050,
     [theme.breakpoints.up('md')]: {
       margin: '0 auto',
-    }
+    },
   },
 
   list: {
@@ -21,7 +21,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       display: 'block',
       marginBottom: 0,
-    }
+    },
   },
 
   searchArea: {
@@ -40,7 +40,7 @@ const styles = theme => ({
   searchField: {
     margin: '0 auto',
     maxWidth: 1015,
-  }
+  },
 })
 
 const EntertainmentsScene = ({ classes, history }) => {

@@ -1,15 +1,13 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
 import isEmpty from 'lodash/isEmpty'
 import Fuse from 'fuse.js'
-import Loading from 'components/Loading'
 import Loader from 'components/Loader'
-
-const Entertainment = lazy(() => import('components/Entertainment'))
+import Entertainment from 'components/Entertainment'
 
 const options = {
-  keys: ['title', 'places.title']
+  keys: ['title', 'places.title'],
 }
 
 const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { entertainments, loadEntertainments } }) => {
@@ -19,19 +17,17 @@ const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { ent
 
   return (
     <Loader load={loadEntertainments} onLoad={onLoad}>
-      <Suspense fallback={<Loading />}>
-        {array
-          .filter(e => !isEmpty(e.places))
-          .map(entertainment =>
-            <Entertainment
-              key={entertainment.id}
-              search={search}
-              entertainment={entertainment}
-              onExpand={onExpand}
-              onSelect={onSelect}
-            />
-          )}
-      </Suspense>
+      {array
+        .filter(e => !isEmpty(e.places))
+        .map(entertainment =>
+          <Entertainment
+            key={entertainment.id}
+            search={search}
+            entertainment={entertainment}
+            onExpand={onExpand}
+            onSelect={onSelect}
+          />,
+        )}
     </Loader>
   )
 }
@@ -44,7 +40,7 @@ EntertainmentsLoader.propTypes = {
   redux: shape({
     entertainments: array,
     loadEntertainments: func.isRequired,
-  })
+  }),
 }
 
 const redux = state => ({

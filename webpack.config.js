@@ -1,32 +1,34 @@
-require('dotenv').config()
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const webpack = require('webpack')
+const merge = require('webpack-merge')
 const Dotenv = require('dotenv-webpack')
 const Clean = require('clean-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const { isDevelop, isTesting } = require('./lib/Stage')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const LoadableWebpackPlugin = require('@loadable/webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const PreloadWebpackPlugin = require('preload-webpack-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
-const analyze = process.argv.find(a => a === '--analyze')
+const universal = {
+  devtool: false,
+  mode: isDevelop ? 'development' : 'production',
 
-module.exports = {
-  devtool: 'cheap-module-eval-source-map',
-  devServer: {
-    hot: true,
-    port: process.env.PORT,
-    host: '0.0.0.0',
-    historyApiFallback: true,
-    disableHostCheck: true,
+  stats: {
+    chunks: false, // Makes the build much quieter
+    colors: true, // Shows colors in the console
+    chunkGroups: false,
+    chunkModules: false,
+    modules: false,
   },
 
   resolve: {
     extensions: ['*', '.js', '.jsx', '.json'],
     modules: ['node_modules'],
     alias: {
+      lib: path.resolve(__dirname, './lib'),
       src: path.resolve(__dirname, './src'),
       api: path.resolve(__dirname, './src/api'),
       assets: path.resolve(__dirname, './src/assets'),
@@ -39,18 +41,13 @@ module.exports = {
       utils: path.resolve(__dirname, './src/utils'),
     },
   },
-
-  entry: {
-    client: path.resolve(__dirname, 'src/index.jsx'),
-  },
-
   context: __dirname,
-
   performance: {
     maxEntrypointSize: 500000,
     hints: false,
   },
   optimization: {
+    minimize: false,
     namedModules: true,
     namedChunks: true,
     splitChunks: {
@@ -68,33 +65,84 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({}),
     ],
   },
+  module: {
+    rules: [
+      { test: /\.jsx?$/, exclude: /node_modules/, use: ['babel-loader'] },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'react-icon-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'image/svg+xml',
+            },
+          },
+        ],
+      },
+    ],
+  },
+  plugins: [
+    new LodashModuleReplacementPlugin({
+      shorthands: true,
+    }),
+  ],
+}
 
+const server = merge(universal, {
+  name: 'server',
+  target: 'node',
+  entry: './src/server',
   output: {
     path: path.resolve(__dirname, './dist'),
+    filename: 'server.js',
+    libraryTarget: 'commonjs2',
+  },
+  module: {
+    rules: [
+      { test: /\.css$/, loader: 'ignore-loader' },
+      { test: /\.(jpe?g|png|gif|ico)$/i, loader: 'ignore-loader' },
+      { test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/, loader: 'ignore-loader' },
+    ],
+  },
+  plugins: [
+    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+  ],
+})
+
+const client = merge(universal, {
+  name: 'client',
+  target: 'web',
+  entry: {
+    client: [
+      ...(isDevelop ? ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'] : []),
+      './src/client.js',
+    ],
+  },
+  output: {
+    path: path.resolve(__dirname, './dist/public'),
     publicPath: '/',
     filename: `[name].[hash:3].js`,
   },
-
-  target: 'web',
-
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
+        sideEffects: true,
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [{ loader: 'file-loader', options: { name: '[path][name].[ext]' } }],
-      },
-      {
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [{ loader: 'react-icon-loader', options: { limit: 10000, mimetype: 'image/svg+xml' } }],
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name() {
+                return '[path][name].[ext]'
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -103,29 +151,22 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: 'fonts/'
-            }
-          }
-        ]
-      }
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
     ],
   },
-
   plugins: [
-    ...(analyze ? [new BundleAnalyzerPlugin()] : []),
     new Dotenv(),
-    new Clean('./dist', { root: path.resolve(__dirname, './') }),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css', chunkFilename: '[id].[contenthash].css' }),
-    new CopyWebpackPlugin([{ from: 'src/assets', to: './' }]),
-    new LodashModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: 'src/index.html',
-      minify: { removeComments: true, collapseWhitespace: true, },
-      inject: true,
-    }),
-    new PreloadWebpackPlugin({
-      rel: 'preload',
-      include: ['client', 'vendor']
-    }),
+    new Clean('./public', { root: path.resolve(__dirname, './dist') }),
+    new MiniCssExtractPlugin({ filename: '[name].[hash:3].css', chunkFilename: '[id].[hash:3].css' }),
+    ...(isDevelop ? [new webpack.HotModuleReplacementPlugin()] : []),
+    ...(isTesting ? [new BundleAnalyzerPlugin()] : []),
+    new CopyWebpackPlugin([{ from: './src/assets', to: './' }]),
+    new LoadableWebpackPlugin({ writeToDisk: true }),
   ],
-}
+})
+
+module.exports = [server, client]

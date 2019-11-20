@@ -13,7 +13,7 @@ const styles = theme => ({
     height: '100%',
     marginBottom: 60,
     [theme.breakpoints.up('md')]: {
-      margin: '0 auto'
+      margin: '0 auto',
     },
   },
 })
@@ -33,11 +33,11 @@ PlaceScene.propTypes = {
   match: shape({ params: shape({ id: string }) }),
   redux: shape({
     place: placeShape,
-  })
+  }),
 }
 
 const redux = (state, { match }) => ({
-  place: select.places.current(state, match.params.id)
+  place: select.places.current(state, match.params.id),
 })
 
 export default withStyles(styles)(connect(redux)(PlaceScene))

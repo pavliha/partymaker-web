@@ -2,7 +2,6 @@ import React from 'react'
 import { object, node } from 'prop-types'
 import { Typography } from '@material-ui/core'
 import { withStyles } from '@material-ui/styles'
-
 const styles = {
   root: {
     fontSize: 18,

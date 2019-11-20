@@ -12,7 +12,7 @@ echo 'Stop nginx service'
 
 echo 'Build project'
 yarn install
-yarn build
+yarn prod:pm2
 
 echo 'Start mysql service'
 sudo service mysql start
