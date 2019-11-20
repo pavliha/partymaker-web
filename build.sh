@@ -12,7 +12,7 @@ echo 'Stop nginx service'
 
 echo 'Start project'
 yarn install
-/home/dev/.npm-global/bin/pm2 restart index.js -- --prod
+/home/dev/.npm-global/bin/pm2 restart index.js -- --stage=prod
 
 echo 'Start mysql service'
 sudo service mysql start
