@@ -47,7 +47,6 @@ const universal = {
     hints: false,
   },
   optimization: {
-    minimize: false,
     namedModules: true,
     namedChunks: true,
     splitChunks: {
