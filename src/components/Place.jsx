@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { node, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
-import { PhotosList, Contacts, PlaceStatus, PlaceSubtitle, PlaceHeader,PricesList } from 'components'
+import { PhotosList, Contacts, PlaceStatus, PlaceSubtitle, PlaceHeader, PricesList } from 'components'
 import { placeShape } from 'shapes'
 
 const styles = {
@@ -34,6 +34,11 @@ const styles = {
   },
 
   contacts: {
+    fontFamily: 'Google Sans, Arial, sans-serif',
+    marginBottom: 30,
+  },
+
+  prices: {
     fontFamily: 'Google Sans, Arial, sans-serif',
     marginBottom: 30,
   },
@@ -72,10 +77,9 @@ class Place extends PureComponent {
             photos={place.photos}
           />
           <div className={classes.prices}>
-            <div className={classes.contacts}>
-              <PlaceSubtitle>Цены</PlaceSubtitle>
-              {place.prices && <PricesList prices={place.contacts} />}
-            </div>
+            <PlaceSubtitle>Цены</PlaceSubtitle>
+            <PricesList prices={place.prices} />
+            <Typography color="textSecondary">{place.about_prices}</Typography>
           </div>
           <div className={classes.contacts}>
             <PlaceSubtitle>Контакты</PlaceSubtitle>

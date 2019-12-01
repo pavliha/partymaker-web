@@ -1,5 +1,5 @@
 {
-  "name": "ssr-app",
+  "name": "partymaker-web",
   "sideEffects": false,
   "version": "0.1.0",
   "private": true,
@@ -86,5 +86,8 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-middleware": "^3.7.0",
     "webpack-hot-middleware": "^2.25.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.1.2"
   }
 }

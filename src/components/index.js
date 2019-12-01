@@ -1,5 +1,4 @@
 export Contacts from './Contacts'
-export EntertainmentListItem from './EntertainmentListItem'
 export PlaceContact from './Contact'
 export PhotosList from './PhotosSlider'
 export Picture from './Picture'
@@ -20,8 +19,14 @@ export EntertainmentsLoader from './EntertainmentsLoader'
  * Lists
  */
 export PlacesList from './PlacesList'
-export PlaceListItem from './PlaceListItem'
 export PricesList from './PricesList'
+
+/**
+ * List Items
+ */
+export PriceListItem from './PriceListItem'
+export PlaceListItem from './PlaceListItem'
+export EntertainmentListItem from './EntertainmentListItem'
 
 /**
  * Buttons

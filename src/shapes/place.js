@@ -1,5 +1,4 @@
 import { number, shape, string } from 'prop-types'
-import contactShape from 'shapes/contact'
 
 const placeShape = shape({
   id: number.isRequired,
@@ -7,12 +6,9 @@ const placeShape = shape({
   picture_url: string.isRequired,
   price: string,
   entertainment_id: number,
-  rating: number,
-  rating_count: number,
-  order_count: number,
+  about_prices: string,
   created_at: string,
   updated_at: string,
-  contacts: contactShape,
 })
 
 export default placeShape

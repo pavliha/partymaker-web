@@ -114,7 +114,10 @@ const client = merge(universal, {
   target: 'web',
   entry: {
     client: [
-      ...(isDevelop ? ['webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000'] : []),
+      ...(isDevelop ? [
+        'react-hot-loader/patch',
+        'webpack-hot-middleware/client'
+      ] : []),
       './src/client.js',
     ],
   },
