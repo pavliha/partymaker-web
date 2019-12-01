@@ -10,7 +10,7 @@ const styles = {
 
 const PricesList = ({ classes, prices }) =>
   <div className={classes.root}>
-    {prices.map(price => <PriceListItem price={price} />)}
+    {prices.map(price => <PriceListItem key={price.id} price={price} />)}
   </div>
 
 PricesList.propTypes = {
