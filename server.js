@@ -16,6 +16,7 @@ const options = {
   setHeaders(res) {
     res.set('x-timestamp', Date.now())
     res.header('Cache-Control', 'public, max-age=1d')
+    res.header('Set-Cookie', 'HttpOnly;Secure;SameSite=Strict')
   },
 }
 

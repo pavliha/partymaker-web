@@ -116,7 +116,7 @@ const client = merge(universal, {
     client: [
       ...(isDevelop ? [
         'react-hot-loader/patch',
-        'webpack-hot-middleware/client'
+        'webpack-hot-middleware/client?reload=true'
       ] : []),
       './src/client.js',
     ],
