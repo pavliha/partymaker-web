@@ -20,6 +20,7 @@ export EntertainmentsLoader from './EntertainmentsLoader'
  * Lists
  */
 export PlacesList from './PlacesList'
+export PlaceListItem from './PlaceListItem'
 
 /**
  * Buttons
@@ -27,11 +28,6 @@ export PlacesList from './PlacesList'
 export BackButton from './BackButton'
 export CloseButton from './CloseButton'
 export SharePlaceButton from './SharePlaceButton'
-
-/**
- * Cards
- */
-export PlaceCard from './PlaceCard'
 
 /**
  * Dialogs

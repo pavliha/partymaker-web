@@ -10,8 +10,8 @@ const placeShape = shape({
   rating: number,
   rating_count: number,
   order_count: number,
-  created_at: string.isRequired,
-  updated_at: string.isRequired,
+  created_at: string,
+  updated_at: string,
   contacts: contactShape,
 })
 

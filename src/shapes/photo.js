@@ -4,8 +4,8 @@ const photoShape = shape({
   id: number.isRequired,
   url: string.isRequired,
   place_id: number.isRequired,
-  created_at: string.isRequired,
-  updated_at: string.isRequired,
+  created_at: string,
+  updated_at: string,
 })
 
 export default photoShape

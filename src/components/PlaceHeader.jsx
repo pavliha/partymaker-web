@@ -1,7 +1,7 @@
 import React from 'react'
 import { object } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
-import { BackButton, PlaceCard, SharePlaceButton } from 'components'
+import { BackButton, PlaceListItem, SharePlaceButton } from 'components'
 import placeShape from 'shapes/place'
 
 const styles = {
@@ -29,7 +29,7 @@ const PlaceHeader = ({ classes, place }) =>
   <div className={classes.root}>
     <div className={classes.container}>
       <BackButton />
-      <PlaceCard
+      <PlaceListItem
         className={classes.card}
         inline
         place={place}

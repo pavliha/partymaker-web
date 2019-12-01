@@ -1,29 +1,18 @@
 import Http from 'services/Http'
-import comments from './comments'
+import normalize from 'normalize-api'
 
 const place = {
 
-  comments,
-
-  loadMany() {
-    return Http.get(`/places`)
+  async loadMany() {
+    const places = await Http.get(`/places`)
+    return normalize(places, 'places')
   },
 
-  load(place_id) {
-    return Http.get(`/places/${place_id}`)
+  async load(place_id) {
+    const place = await Http.get(`/places/${place_id}`)
+    return normalize(place, 'places')
   },
 
-  create(form) {
-    return Http.post(`/places`, form)
-  },
-
-  update(place_id, form) {
-    return Http.put(`/places/${place_id}`, form)
-  },
-
-  destroy(place_id) {
-    return Http.delete(`places/${place_id}`)
-  },
 }
 
 export default place

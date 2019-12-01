@@ -76,7 +76,7 @@ const styles = theme => ({
   }
 })
 
-class PlaceCard extends PureComponent {
+class PlaceListItem extends PureComponent {
 
   select = () => {
     const { place, onSelect } = this.props
@@ -106,15 +106,15 @@ class PlaceCard extends PureComponent {
   }
 }
 
-PlaceCard.propTypes = {
+PlaceListItem.propTypes = {
   classes: object.isRequired,
   place: placeShape.isRequired,
   inline: bool,
   onSelect: func,
 }
 
-PlaceCard.defaultProps = {
+PlaceListItem.defaultProps = {
   onSelect: () => {}
 }
 
-export default withStyles(styles)(PlaceCard)
+export default withStyles(styles)(PlaceListItem)

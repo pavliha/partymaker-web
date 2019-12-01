@@ -1,12 +1,15 @@
-import { all, fork } from 'redux-saga/effects'
-import places from './places/saga'
-import assets from './assets/saga'
-import entertainments from './entertainments/saga'
+import { all, takeEvery, put } from 'redux-saga/effects'
+import actions from 'src/redux/action'
+import c from './constants'
 
-export default function* rootSaga() {
+function * setEntities({ payload }) {
+  yield put(actions.setEntities(payload))
+}
+
+export default function * rootSaga() {
   yield all([
-    fork(places),
-    fork(assets),
-    fork(entertainments),
+    takeEvery(c.LOAD_PLACE_FULFILLED, setEntities),
+    takeEvery(c.LOAD_ENTERTAINMENT_FULFILLED, setEntities),
+    takeEvery(c.LOAD_ENTERTAINMENTS_FULFILLED, setEntities),
   ])
 }

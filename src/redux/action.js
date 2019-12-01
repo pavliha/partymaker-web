@@ -1,9 +1,14 @@
 import places from './places/action'
-import assets from './assets/action'
 import entertainments from './entertainments/action'
+import c from 'src/redux/constants'
+
+const setEntities = entities => ({
+  type: c.SET_ENTITIES,
+  payload: entities,
+})
 
 export default {
   places,
-  assets,
   entertainments,
+  setEntities,
 }
