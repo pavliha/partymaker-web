@@ -3,8 +3,7 @@ import { array, func, shape, string } from 'prop-types'
 import { actions, connect, select } from 'src/redux'
 import isEmpty from 'lodash/isEmpty'
 import Fuse from 'fuse.js'
-import Loader from 'components/Loader'
-import Entertainment from 'components/Entertainment'
+import { Loader, EntertainmentListItem } from 'components'
 
 const options = {
   keys: ['title', 'places.title'],
@@ -20,7 +19,7 @@ const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { ent
       {array
         .filter(e => !isEmpty(e.places))
         .map(entertainment =>
-          <Entertainment
+          <EntertainmentListItem
             key={entertainment.id}
             search={search}
             entertainment={entertainment}

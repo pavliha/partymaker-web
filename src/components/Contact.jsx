@@ -18,7 +18,7 @@ const styles = {
   },
 }
 
-const PlaceContact = ({ classes, link, icon: Icon, label }) => {
+const Contact = ({ classes, link, icon: Icon, label }) => {
 
   const content = (
     <Fragment>
@@ -32,11 +32,11 @@ const PlaceContact = ({ classes, link, icon: Icon, label }) => {
     : <div className={classes.root}>{content}</div>
 }
 
-PlaceContact.propTypes = {
+Contact.propTypes = {
   classes: object.isRequired,
   icon: object,
   label: string,
   link: string
 }
 
-export default withStyles(styles)(PlaceContact)
+export default withStyles(styles)(Contact)

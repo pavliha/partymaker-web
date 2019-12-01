@@ -52,7 +52,7 @@ const options = {
   keys: ['title']
 }
 
-const Entertainment = ({ classes, entertainment, search, onSelect, onExpand }) => {
+const EntertainmentListItem = ({ classes, entertainment, search, onSelect, onExpand }) => {
 
   const fuse = new Fuse(entertainment.places, options)
   const results = fuse.search(search || '')
@@ -79,7 +79,7 @@ const Entertainment = ({ classes, entertainment, search, onSelect, onExpand }) =
   )
 }
 
-Entertainment.propTypes = {
+EntertainmentListItem.propTypes = {
   classes: object.isRequired,
   search: string,
   entertainment: entertainmentShape.isRequired,
@@ -87,4 +87,4 @@ Entertainment.propTypes = {
   onExpand: func,
 }
 
-export default withStyles(styles)(Entertainment)
+export default withStyles(styles)(EntertainmentListItem)

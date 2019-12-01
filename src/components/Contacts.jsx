@@ -13,7 +13,7 @@ const styles = {
   root: {},
 }
 
-const PlaceContacts = ({ classes, contacts: { website_url, email, instagram_url, phone, address, directions } }) =>
+const Contacts = ({ classes, contacts: { website_url, email, instagram_url, phone, address, directions } }) =>
   <div className={classes.root}>
     {website_url && <PlaceContact link={website_url} icon={GlobeIcon} label="Website" />}
     {email && <PlaceContact icon={MailIcon} label={email} />}
@@ -23,7 +23,7 @@ const PlaceContacts = ({ classes, contacts: { website_url, email, instagram_url,
     {directions && <PlaceContact icon={SignDirectionIcon} label={directions} />}
   </div>
 
-PlaceContacts.propTypes = {
+Contacts.propTypes = {
   classes: object.isRequired,
   contacts: shape({
     website_url: string,
@@ -35,4 +35,4 @@ PlaceContacts.propTypes = {
   })
 }
 
-export default withStyles(styles)(PlaceContacts)
+export default withStyles(styles)(Contacts)
