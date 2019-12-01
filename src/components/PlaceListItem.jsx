@@ -1,5 +1,5 @@
-import React, { PureComponent } from 'react'
-import { object, func, bool } from 'prop-types'
+import React from 'react'
+import { bool, func, object } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
 import placeShape from 'shapes/place'
@@ -18,7 +18,7 @@ const styles = theme => ({
     '@media only screen and (max-width: 325px)': {
       margin: 5,
     },
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       width: 150,
     }
   },
@@ -76,34 +76,24 @@ const styles = theme => ({
   }
 })
 
-class PlaceListItem extends PureComponent {
+const PlaceListItem = ({ classes, place, inline, onSelect }) => {
+  const rootStyle = classNames({ [classes.root]: true, [classes.inline]: inline })
+  const pictureStyle = classNames({ [classes.picture]: true, [classes.inlinePicture]: inline })
+  const containerStyle = classNames({ [classes.container]: true, [classes.inlineContainer]: inline })
 
-  select = () => {
-    const { place, onSelect } = this.props
-    onSelect(place)
-  }
-
-  render() {
-    const { classes, place, inline } = this.props
-
-    const rootStyle = classNames({ [classes.root]: true, [classes.inline]: inline })
-    const pictureStyle = classNames({ [classes.picture]: true, [classes.inlinePicture]: inline })
-    const containerStyle = classNames({ [classes.container]: true, [classes.inlineContainer]: inline })
-
-    return (
-      <div className={rootStyle} onClick={this.select}>
-        <Picture src={appendFileNameSuffix(place?.picture_url, '-thumbnail')} className={pictureStyle} />
-        <div className={containerStyle}>
-          <Typography className={classes.title}>{place?.title}</Typography>
-          <Typography className={classes.subtitle} color="textSecondary">{place?.price}</Typography>
-          {inline && <Typography className={classes.subtitle} color="textSecondary">
-            {place?.contacts?.directions}
-          </Typography>
-          }
-        </div>
+  return (
+    <div className={rootStyle} onClick={() => onSelect(place)}>
+      <Picture src={appendFileNameSuffix(place?.picture_url, '-thumbnail')} className={pictureStyle} />
+      <div className={containerStyle}>
+        <Typography className={classes.title}>{place?.title}</Typography>
+        <Typography className={classes.subtitle} color="textSecondary">{place?.price}</Typography>
+        {inline && <Typography className={classes.subtitle} color="textSecondary">
+          {place?.contacts?.directions}
+        </Typography>
+        }
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 PlaceListItem.propTypes = {
