@@ -13,7 +13,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const universal = {
-  devtool: false,
+  devtool: 'source-map',
   mode: isDevelop ? 'development' : 'production',
 
   stats: {
