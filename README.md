@@ -1,5 +1,5 @@
 # Partymaker
-[working example](https://pattymaker.zp.ua)
+[working example](https://partymaker.zp.ua)
 
 This is a pet project where I and my friend experiment with new technologies and try new approaches in frontend development
 
