@@ -76,19 +76,21 @@ class Place extends PureComponent {
             className={classes.photosList}
             photos={place.photos}
           />
-          <div className={classes.prices}>
-            <PlaceSubtitle>Цены</PlaceSubtitle>
-            <PricesList prices={place.prices} />
-            <Typography color="textSecondary">{place.about_prices}</Typography>
-          </div>
-          <div className={classes.contacts}>
-            <PlaceSubtitle>Контакты</PlaceSubtitle>
-            {place.contacts && <Contacts contacts={place.contacts} />}
-          </div>
-
+          {place.prices && (
+            <div className={classes.prices}>
+              <PlaceSubtitle>Цены</PlaceSubtitle>
+              <PricesList prices={place.prices} />
+              <Typography color="textSecondary">{place.about_prices}</Typography>
+            </div>
+          )}
+          {place.contacts && (
+            <div className={classes.contacts}>
+              <PlaceSubtitle>Контакты</PlaceSubtitle>
+              <Contacts contacts={place.contacts} />
+            </div>
+          )}
           {place.description && (
             <div className={classes.description}>
-              <PlaceSubtitle>Описание</PlaceSubtitle>
               <Typography
                 className={classes.descriptionText}
                 dangerouslySetInnerHTML={{ __html: place.description }}
