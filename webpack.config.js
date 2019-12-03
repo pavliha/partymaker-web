@@ -47,18 +47,6 @@ const universal = {
     hints: false,
   },
   optimization: {
-    namedModules: true,
-    namedChunks: true,
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          chunks: 'initial',
-          name: 'vendor',
-          enforce: true,
-        },
-      },
-    },
     minimizer: [
       new TerserPlugin({ cache: true, parallel: true, sourceMap: true }),
       new OptimizeCSSAssetsPlugin({}),
@@ -120,6 +108,21 @@ const client = merge(universal, {
       ] : []),
       './src/client.js',
     ],
+  },
+  optimization: {
+    namedModules: true,
+    runtimeChunk: { name: 'runtime' },
+    namedChunks: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          enforce: true,
+        },
+      },
+    },
   },
   output: {
     path: path.resolve(__dirname, './dist/public'),
