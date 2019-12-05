@@ -1,9 +1,8 @@
 import React from 'react'
-import { StaticRouter } from 'react-router-dom'
-import Template from 'lib/Template'
+import SSR from 'lib/SSR'
 import App from './App'
 
-const htmlTemplate = (html, assets) => `
+const template = (html, assets) => `
       <!DOCTYPE html>
       <html lang="ru">
       <head>
@@ -47,10 +46,9 @@ const htmlTemplate = (html, assets) => `
   `
 
 const render = async (request, response) => {
-  const context = {}
-  const template = new Template(<StaticRouter context={context} location={request.url}><App /></StaticRouter>)
-  const html = template.render(htmlTemplate)
-  response.send(html)
+  const ssr = new SSR({ url: request.url, stats: response.locals.webpackStats?.toJson() })
+  const [html, assets] = ssr.render(<App />)
+  response.send(template(html, assets))
 }
 
 export default () => render
