@@ -1,12 +1,12 @@
 import React from 'react'
-import SSR from 'lib/SSR'
-import App from './App'
+import renderServer from 'lib/renderServer'
+import App from 'src/App'
 
 const template = (html, assets) => `
       <!DOCTYPE html>
       <html lang="ru">
       <head>
-        <link rel="preconnect" href="https://api.partymaker.zp.ua">
+        <link rel="preconnect" href="${process.env.BACKEND_URL}">
         <link rel="preconnect" crossorigin="anonymous" href="https://www.google-analytics.com">
         <meta content="width=device-width, minimum-scale=1, shrink-to-fit=no" name="viewport">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -43,12 +43,6 @@ const template = (html, assets) => `
         </script>
       </body>
       </html>
-  `
+`
 
-const render = async (request, response) => {
-  const ssr = new SSR({ url: request.url, stats: response.locals.webpackStats?.toJson() })
-  const [html, assets] = ssr.render(<App />)
-  response.send(template(html, assets))
-}
-
-export default () => render
+export default () => renderServer(<App />, template)
