@@ -31,7 +31,7 @@ const PlaceScene = ({ match, classes, redux: { place } }) =>
             />
           </Helmet>
         )}
-        {place && <Place place={place} actions={<PlaceActions phone={place.contacts?.phone} />} />}
+        {place && <Place place={place} />}
       </PlaceLoader>
     </div>
   </div>

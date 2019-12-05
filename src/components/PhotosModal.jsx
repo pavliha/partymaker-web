@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 import { func, bool, arrayOf, object, number } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
-import PhotosStepper from 'components/PhotosStepper'
 import photoShape from 'shapes/photo'
-import CloseButton from 'components/CloseButton'
+import { CloseButton, PhotosStepper } from 'components'
 import Modal from '@material-ui/core/Modal'
 
 const styles = {

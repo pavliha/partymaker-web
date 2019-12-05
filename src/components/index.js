@@ -20,6 +20,7 @@ export EntertainmentsLoader from './EntertainmentsLoader'
  */
 export PlacesList from './PlacesList'
 export PricesList from './PricesList'
+export AdditionalServicesList from './AdditionalServicesList'
 
 /**
  * List Items
@@ -27,6 +28,7 @@ export PricesList from './PricesList'
 export PriceListItem from './PriceListItem'
 export PlaceListItem from './PlaceListItem'
 export EntertainmentListItem from './EntertainmentListItem'
+export AdditionalServiceListItem from './AdditionalServiceListItem'
 
 /**
  * Buttons
@@ -57,3 +59,8 @@ export PlaceStatus from './PlaceStatus'
 export StatusItem from './StatusItem'
 export RatingStatusItem from './RatingStatusItem'
 export PlayersStatusItem from './PlayersStatusItem'
+
+/**
+ * Steppers
+ */
+export PhotosStepper from './PhotosStepper'

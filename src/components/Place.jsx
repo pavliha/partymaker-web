@@ -3,8 +3,17 @@ import classNames from 'classnames'
 import { node, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
-import { PhotosList, Contacts, PlaceStatus, PlaceSubtitle, PlaceHeader, PricesList } from 'components'
 import { placeShape } from 'shapes'
+import {
+  PhotosList,
+  Contacts,
+  PlaceStatus,
+  PlaceSubtitle,
+  PlaceHeader,
+  PricesList,
+  AdditionalServicesList,
+  PlaceActions
+} from 'components'
 
 const styles = {
   root: {
@@ -29,17 +38,12 @@ const styles = {
     padding: '0 20px',
   },
 
+  section: {
+    fontFamily: 'Google Sans, Arial, sans-serif',
+    marginBottom: 30,
+  },
+
   photosList: {
-    marginBottom: 30,
-  },
-
-  contacts: {
-    fontFamily: 'Google Sans, Arial, sans-serif',
-    marginBottom: 30,
-  },
-
-  prices: {
-    fontFamily: 'Google Sans, Arial, sans-serif',
     marginBottom: 30,
   },
 
@@ -70,21 +74,27 @@ class Place extends PureComponent {
         <PlaceStatus className={classes.status} place={place} />
         <section className={classes.container}>
           <div className={classes.actions}>
-            {actions}
+            <PlaceActions phone={place.contacts?.phone} />
           </div>
           <PhotosList
             className={classes.photosList}
             photos={place.photos}
           />
           {place.prices && (
-            <div className={classes.prices}>
+            <div className={classes.section}>
               <PlaceSubtitle>Цены</PlaceSubtitle>
               <PricesList prices={place.prices} />
               <Typography color="textSecondary">{place.about_prices}</Typography>
             </div>
           )}
+          {place.additional_services && (
+            <div className={classes.section}>
+              <PlaceSubtitle>Дополнительные услуги</PlaceSubtitle>
+              <AdditionalServicesList additional_services={place.additional_services} />
+            </div>
+          )}
           {place.contacts && (
-            <div className={classes.contacts}>
+            <div className={classes.section}>
               <PlaceSubtitle>Контакты</PlaceSubtitle>
               <Contacts contacts={place.contacts} />
             </div>
