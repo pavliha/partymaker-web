@@ -4,6 +4,7 @@ import { node, object, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
 import { placeShape } from 'shapes'
+import isEmpty from 'lodash/isEmpty'
 import {
   PhotosList,
   Contacts,
@@ -71,7 +72,7 @@ class Place extends PureComponent {
     return (
       <section className={classNames(classes.root, className)}>
         <PlaceHeader place={place} />
-        <PlaceStatus className={classes.status} place={place} />
+        <PlaceStatus className={classes.status} requirements={place.requirements} />
         <section className={classes.container}>
           <div className={classes.actions}>
             <PlaceActions phone={place.contacts?.phone} />
@@ -80,20 +81,20 @@ class Place extends PureComponent {
             className={classes.photosList}
             photos={place.photos}
           />
-          {place.prices && (
+          {isEmpty(place.prices) || (
             <div className={classes.section}>
               <PlaceSubtitle>Цены</PlaceSubtitle>
               <PricesList prices={place.prices} />
               <Typography color="textSecondary">{place.about_prices}</Typography>
             </div>
           )}
-          {place.additional_services && (
+          {isEmpty(place.additional_services) || (
             <div className={classes.section}>
               <PlaceSubtitle>Дополнительные услуги</PlaceSubtitle>
               <AdditionalServicesList additional_services={place.additional_services} />
             </div>
           )}
-          {place.contacts && (
+          {isEmpty(place.contacts) || (
             <div className={classes.section}>
               <PlaceSubtitle>Контакты</PlaceSubtitle>
               <Contacts contacts={place.contacts} />
