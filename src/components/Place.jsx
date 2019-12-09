@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import classNames from 'classnames'
-import { node, object, string } from 'prop-types'
+import { object, string } from 'prop-types'
 import { withStyles } from '@material-ui/styles'
 import { Typography } from '@material-ui/core'
 import { placeShape } from 'shapes'
@@ -67,12 +67,12 @@ class Place extends PureComponent {
   }
 
   render() {
-    const { classes, className, place, actions } = this.props
+    const { classes, className, place } = this.props
 
     return (
       <section className={classNames(classes.root, className)}>
         <PlaceHeader place={place} />
-        <PlaceStatus className={classes.status} requirements={place.requirements} />
+        {place.requirements && <PlaceStatus className={classes.status} requirements={place.requirements} />}
         <section className={classes.container}>
           <div className={classes.actions}>
             <PlaceActions phone={place.contacts?.phone} />
@@ -118,6 +118,5 @@ Place.propTypes = {
   classes: object.isRequired,
   className: string,
   place: placeShape,
-  actions: node,
 }
 export default withStyles(styles)(Place)
