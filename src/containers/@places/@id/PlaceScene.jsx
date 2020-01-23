@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { object, shape, string } from 'prop-types'
-import { Place, PlaceActions, PlaceLoader } from 'components'
+import { Place, PlaceLoader } from 'components'
 import { Helmet } from 'react-helmet'
 import placeShape from 'shapes/place'
 import { withStyles } from '@material-ui/styles'
@@ -11,10 +11,27 @@ const styles = theme => ({
     position: 'relative',
     width: '100%',
     height: '100%',
-    marginBottom: 60,
-    [theme.breakpoints.up('md')]: {
-      margin: '0 auto',
-    },
+    display: 'flex',
+  },
+
+  place: {
+    paddingTop: 20,
+    boxSizing: 'border-box',
+    flex: 1,
+    overflow: 'scroll',
+    maxWidth: 450,
+    width: '100%',
+    height: '100vh',
+  },
+
+  iframe: {
+    height: '99vh',
+    flex: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    }
+
   },
 })
 
@@ -31,7 +48,12 @@ const PlaceScene = ({ match, classes, redux: { place } }) =>
             />
           </Helmet>
         )}
-        {place && <Place place={place} />}
+        {place && (
+          <Fragment>
+            <Place className={classes.place} place={place} />
+            <iframe className={classes.iframe} src={place?.contacts?.website_url} />
+          </Fragment>
+        )}
       </PlaceLoader>
     </div>
   </div>

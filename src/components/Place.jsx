@@ -17,13 +17,7 @@ import {
 } from 'components'
 
 const styles = {
-  root: {
-    margin: '0 auto',
-    flex: 1,
-    maxWidth: 900,
-    width: '100%',
-    paddingTop: 20,
-  },
+  root: {},
 
   actions: {
     display: 'flex',
@@ -75,7 +69,10 @@ class Place extends PureComponent {
         {place.requirements && <PlaceStatus className={classes.status} requirements={place.requirements} />}
         <section className={classes.container}>
           <div className={classes.actions}>
-            <PlaceActions phone={place.contacts?.phone} />
+            <PlaceActions
+              phone={place.contacts?.phone}
+              website_url={place.contacts?.website_url}
+            />
           </div>
           <PhotosList
             className={classes.photosList}
