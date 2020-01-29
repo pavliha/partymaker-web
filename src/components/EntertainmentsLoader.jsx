@@ -9,27 +9,26 @@ const options = {
   keys: ['title', 'places.title'],
 }
 
-const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux: { entertainments, loadEntertainments } }) => {
+const useFuseSearch = (search, entertainments) => {
   const fuse = new Fuse(entertainments, options)
   const results = fuse.search(search || '')
-  const array = isEmpty(results) ? entertainments : results
-
-  return (
-    <Loader load={loadEntertainments} onLoad={onLoad}>
-      {array
-        .filter(e => !isEmpty(e.places))
-        .map(entertainment =>
-          <EntertainmentListItem
-            key={entertainment.id}
-            search={search}
-            entertainment={entertainment}
-            onExpand={onExpand}
-            onSelect={onSelect}
-          />,
-        )}
-    </Loader>
-  )
+  return isEmpty(results) ? entertainments : results
 }
+
+const EntertainmentsLoader = ({ onSelect, onExpand, onLoad, search, redux }) =>
+  <Loader load={redux.loadEntertainments} onLoad={onLoad}>
+    {useFuseSearch(search, redux.entertainments)
+      .filter(e => !isEmpty(e.places))
+      .map(entertainment =>
+        <EntertainmentListItem
+          key={entertainment.id}
+          search={search}
+          entertainment={entertainment}
+          onExpand={onExpand}
+          onSelect={onSelect}
+        />,
+      )}
+  </Loader>
 
 EntertainmentsLoader.propTypes = {
   search: string,
