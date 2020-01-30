@@ -34,10 +34,18 @@ const styles = {
 const AdditionalServiceListItem = ({ classes, additional_service }) =>
   <div className={classes.root}>
     <div className={classes.container}>
-      <Typography className={classes.title}>{additional_service.title}</Typography>
-      <Typography color="textSecondary" className={classes.description}>{additional_service.description}</Typography>
+      <Typography className={classes.title}>
+        {additional_service.title}
+      </Typography>
+      <Typography color="textSecondary" className={classes.description}>
+        {additional_service.description}
+      </Typography>
     </div>
-    <Typography className={classes.cost}>{additional_service.price} грн</Typography>
+    {additional_service.price && (
+      <Typography className={classes.cost}>
+        {additional_service.price} грн
+      </Typography>
+    )}
   </div>
 
 AdditionalServiceListItem.propTypes = {
