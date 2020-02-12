@@ -65,7 +65,7 @@
     "prop-types": "latest",
     "react": "^16.8.6",
     "react-dom": "npm:@hot-loader/react-dom",
-    "react-helmet": "6.0.0-beta",
+    "react-helmet": "6.0.0-beta.2",
     "react-hot-loader": "^4.9.0",
     "react-icon-loader": "^16.6.0",
     "react-redux": "^7.1.0",

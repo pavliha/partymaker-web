@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-const Dotenv = require('dotenv-webpack')
+const DotEnv = require('dotenv-webpack')
 const Clean = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const { isDevelop, isTesting } = require('./lib/Stage')
@@ -13,7 +13,7 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const universal = {
-  devtool: 'source-map',
+  devtool: 'eval-cheap-module-source-map',
   mode: isDevelop ? 'development' : 'production',
 
   stats: {
@@ -164,7 +164,7 @@ const client = merge(universal, {
     ],
   },
   plugins: [
-    new Dotenv(),
+    new DotEnv(),
     new Clean('./public', { root: path.resolve(__dirname, './dist') }),
     new MiniCssExtractPlugin({ filename: '[name].[hash:3].css', chunkFilename: '[id].[hash:3].css' }),
     ...(isDevelop ? [new webpack.HotModuleReplacementPlugin()] : []),
