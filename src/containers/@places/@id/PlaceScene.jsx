@@ -51,7 +51,7 @@ const PlaceScene = ({ match, classes, redux: { place } }) =>
         {place && (
           <Fragment>
             <Place className={classes.place} place={place} />
-            <iframe className={classes.iframe} src={place?.contacts?.website_url} />
+            <iframe className={classes.iframe} frameBorder={0} src={place?.contacts?.website_url} />
           </Fragment>
         )}
       </PlaceLoader>
