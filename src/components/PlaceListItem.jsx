@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core'
 import placeShape from 'shapes/place'
 import { Picture } from 'components'
 import classNames from 'classnames'
-import appendFileNameSuffix from 'utils/appendFileNameSuffix'
+import { appendFileNameSuffix } from 'utils'
 
 const styles = theme => ({
   root: {

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import c from 'src/redux/constants'
-import arrayToObject from 'utils/arrayToObject'
+import {arrayToObject} from 'src/utils'
 
 const entities = (state = {}, { type, payload }) => {
   switch (type) {
